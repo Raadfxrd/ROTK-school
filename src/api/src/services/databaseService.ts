@@ -22,7 +22,7 @@ export function queryDatabase<T = any>(
     connection: Connection,
     query: string,
     ...values: any[]
-): Promise<T> {
+): T {
     const queryResult: any = connection.query(query, values);
 
     return queryResult[0] as T;
