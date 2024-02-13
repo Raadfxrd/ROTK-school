@@ -27,4 +27,4 @@ Mathijs helpt Joas door toegewijd te zijn want hij is oppervlakkig.
 
 Jay doet veel planning en zorgt ervoor dat alles op voor de groep op een rijtje is voor wat er gedaan moet worden.
 Joas gaat er voor zorgen dat we eens per week een stand up gaan doen zodat we gaan kijken hoe het met iedereen gaat en om een update te krijgen waar iedereen mee bezig is.
-Mathijs
+Mathijs zorgt ervoor dat alles goed verloopt en zoekt voor eventuele zwakheden in onze aanpak.
