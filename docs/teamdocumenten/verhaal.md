@@ -33,6 +33,11 @@ On your way to the next village you stumble upon a bear with feathers, also know
 
 
 ### Kara's Vale
+After traveling south towards the lowlands the main characters first come across a village named Kara's Vale. While in the town the characters can ask around if anybody has seen the group of kidnappers. After some investigation the main characters find out that some people in the village did see a group of people riding horses around the village ==> (leads to tracks which lead to the lowlands?)
+
+Idea: A certain group in Kara's vale are conspiring with the lowlands, by defeating / interrogating members of this group some type of key can be found to open something important within the lowlands 
+
+They also discover nobody has ever been to the Low Lands and that they have only heard of the place. Somewhere in the village a clue is found that it is neccesary to visit Volo's village in order to find access to the lowlands. 
 After traveling south towards the lowlands the main characters first come across a village named Kara's Vale. While in the town the characters can ask around if anybody has seen the group of kidnappers. After some investigation the main characters find out that some people in the village did see a group of people riding horses around the village. They also discover nobody has ever been to the Low Lands and that they have only heard of the place.
 
 
