@@ -15,6 +15,8 @@ Arthur and the rest of the kingsguard are present at the crowning of the new que
 
 Running after the kidnappers, the main characters find out their horses have been stolen, and therefore they cannot chase the kidnappers quickly. However during the kidnappers' hurry to escape, one of them dropped a ring with the seal of the Low Lands, which after some investigation gives our characters a lead to follow.
 
+![Flowchart start](../assets/image-1.png)
+
 
 ### The map
 ![Kaseon Map](../assets/Kaseon.jpg)
@@ -23,6 +25,8 @@ Running after the kidnappers, the main characters find out their horses have bee
 In the city Wolburg you make your way to the Lowlands, you can visit some shops or maybe go to the tavern to regenerate your health. The shops you can visit are not only in this city but across all towns in the world.
 
 ![Shop Wireframe](../assets/Magic-item-shop.png)
+
+![Inventory Wireframe](../assets/inventory-wireframe.png)
 
 
 On your way to the next village you stumble upon a bear with feathers, also known as an Owlbear. You fight him to make your way further to the next village.
