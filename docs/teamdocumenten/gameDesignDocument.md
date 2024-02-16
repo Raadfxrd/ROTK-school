@@ -11,4 +11,12 @@ Nadat de user de ring heeft bekeken moet hij naar de kaart gaan om te kijken waa
 
 ## Scene 2: The city, Wolburg
 
-De speler komt buiten de throne room en kan zo in meerdere gebouwen gaan. Hij weet al welke richting hij op moet gaan. 
+De speler komt buiten de throne room en kan zo in meerdere gebouwen gaan. Hij weet al welke richting hij op moet gaan of hij gaat nog meer praten met de mensen rondom de stad.
+De enige kamers waar de user hier in kan gaan zijn de shop, blacksmith, de horse stable, de throne room en de tavern.
+Als de user verder met het verhaal wilt gaan kan hij alleen richting het zuiden lopen want daar moet hij naar toe. Dit krijgt hij ook van andere dorpelingen te horen dat ze te paard richting het zuiden zijn gereden. Daar komt de user in een fight met een owlbear.
+
+## Scene 3: Kara's Vale
+
+## Scene 4: Volo's Village
+
+## Scene 5: 
