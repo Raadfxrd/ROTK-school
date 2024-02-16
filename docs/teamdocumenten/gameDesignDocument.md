@@ -11,4 +11,4 @@ Nadat de user de ring heeft bekeken moet hij naar de kaart gaan om te kijken waa
 
 ## Scene 2: The city, Wolburg
 
-De speler komt buiten de throne room en kan zo in meerdere gebouwen gaan. Hij weet al welke richting hij op moet gaan. 
+De speler komt buiten de throne room en kan zo in meerdere gebouwen gaan. Hij weet al welke richting hij op moet gaan of hij gaat nog meer praten met de mensen rondom de stad.
