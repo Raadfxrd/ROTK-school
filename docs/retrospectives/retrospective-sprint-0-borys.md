@@ -4,6 +4,8 @@
 
 -   Goede samenwerking
 -   Veel ideeen
+-   Veel overleggen
+-   Samen oplossen van coding problems (Discord, irl)
 
 ## Start
 
