@@ -9,7 +9,7 @@
 }
 
 /* BUGFIX: Prevent navigation items from right-aligning in some situations */
-[dir=ltr] .md-nav__link .md-icon:last-child {
+[dir="ltr"] .md-nav__link .md-icon:last-child {
     margin-left: inherit;
 }
 

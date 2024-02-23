@@ -18,11 +18,7 @@ export function getConnection(): Promise<PoolConnection> {
     return connectionPool.getConnection();
 }
 
-export function queryDatabase<T = any>(
-    connection: Connection,
-    query: string,
-    ...values: any[]
-): T {
+export function queryDatabase<T = any>(connection: Connection, query: string, ...values: any[]): T {
     const queryResult: any = connection.query(query, values);
 
     return queryResult[0] as T;
