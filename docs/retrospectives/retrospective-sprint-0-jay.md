@@ -25,3 +25,7 @@ Ik vond het heel jammer om te beginnen met weinig informatie over "The game" en 
 Daarnaast vond ik het ook jammer dat we soms met maar 3 mensen van het groepje op school zitten. Ik wil het liefst met zijn allen in de klas zitten zodat we gezamenlijk kunnen werken aan het project, zeker in het aankomende sprint.
 
 Tot slot vind ik het wel leuk als iedereen er is en ik vind het ook fijn om met mijn team samen te werken.
+
+## Retrespective feedback
+
+Als groep zeinde de start stop continue in een gezamenlijke document zetten en je eigen doel en terugblik kan in een eigen document.
