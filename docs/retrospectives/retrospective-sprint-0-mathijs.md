@@ -18,4 +18,10 @@
 
 ## Eigen mening
 
-test
+zeer productieve sprint waarin ik en mijn team veel geleerd hebben.
+
+## Leerdoelen
+
+-   Beter overweg met Express.
+-   beter overweg met LIT.
+-   probeer formatted databases te begrijpen en toe te passen.
