@@ -16,5 +16,10 @@
 -   Samen oplossen van code problems(doormiddel van discord/ IRL).
 -   Het schrijven van OOP gericht code.
 
+
 ## Eigen mening
 zeer productieve sprint waarin ik en mijn team veel geleerd hebben.
+## Leerdoelen
+- Beter overweg met Express.
+- beter overweg met LIT.
+- probeer formatted databases te begrijpen en toe te passen.
