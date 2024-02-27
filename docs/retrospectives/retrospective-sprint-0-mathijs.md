@@ -13,4 +13,4 @@
 - Het schrijven van OOP gericht code.
 
 ## Eigen mening
-test
+zeer productieve sprint waarin ik en mijn team veel geleerd hebben.
