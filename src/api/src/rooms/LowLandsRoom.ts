@@ -5,6 +5,7 @@ import { CustomAction } from "../base/actions/CustomAction";
 import { ExamineAction } from "../base/actions/ExamineAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
+import { Torch1Item } from "../items/Torch1Item";
 
 export const LowLandsRoomAlias: string = "lowlands";
 
@@ -25,24 +26,27 @@ export class LowLandsRoom extends Room {
         return [
             new ExamineAction(),
             new CustomAction("inside", "Go inside", false),
-            new CustomAction("bushes", "Look in the bushes", false),
+            new CustomAction("trees", "Look at the trees", false),
         ];
     }
 
     public objects(): GameObject[] {
-        return [this];
+        return [this, new Torch1Item()];
     }
 
     public examine = (): ActionResult | undefined => {
-        return new TextActionResult(["You are in the LowLands.", "It is a empty and gloomy place."]);
+        return new TextActionResult(["You are in the LowLands.", "It is a dark and gloomy place."]);
     };
 
     public custom(alias: string, _gameObjects: GameObject[] | undefined): ActionResult | undefined {
         if (alias === "inside") {
             return new TextActionResult(["You try to go inside the tunnel, but it's too dark."]);
         }
-        if (alias === "bushes") {
-            return new TextActionResult(["You look in the bushes and find a puzzle."]);
+        if (alias === "trees") {
+            return new TextActionResult([
+                "You take a closer look at the trees.",
+                "There is something written on them...",
+            ]);
         }
         return undefined;
     }

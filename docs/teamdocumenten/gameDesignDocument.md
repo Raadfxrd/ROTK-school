@@ -19,4 +19,16 @@ Als de user verder met het verhaal wilt gaan kan hij alleen richting het zuiden 
 
 ## Scene 4: Volo's Village
 
-## Scene 5:
+## Scene 5: LowLands
+
+Welkom in het mysterieuze en onheilspellende oude bos, waar elke schaduw geheimen verbergt en elke stap je dichter bij het ontrafelen van zijn raadselachtige puzzels brengt. Terwijl je dieper het sombere duister van het bos in trekt, zul je een reeks uitdagende puzzels tegenkomen die de geheimen van dit troosteloze rijk bewaken. Hier is wat een speler kan verwachten en doen:
+
+### Puzzel:
+
+#### Beschrijving:
+
+#### Doel:
+
+#### Oplossing:
+
+#### Actie:
