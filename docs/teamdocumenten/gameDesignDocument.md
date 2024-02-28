@@ -19,4 +19,20 @@ Als de user verder met het verhaal wilt gaan kan hij alleen richting het zuiden 
 
 ## Scene 4: Volo's Village
 
-## Scene 5:
+## Scene 5: LowLands
+
+Welkom in het mysterieuze en onheilspellende oude bos, waar elke schaduw geheimen verbergt en elke stap je dichter bij het ontrafelen van zijn raadselachtige puzzels brengt. Terwijl je dieper het sombere duister van het bos in trekt, zul je een reeks uitdagende puzzels tegenkomen die de geheimen van dit troosteloze rijk bewaken. Hier is wat een speler kan verwachten en doen:
+
+### Puzzel
+
+#### Beschrijving
+
+Het idee is om de player door heel de game fakkels laten vinden, en deze te implementeren in elk level. De speler moet alle fakkels in de LowLands op de correct genummerde plek steken. Als dit gebeurd, wordt de spreuk op de deur geaunnuleerd en zie je deze ook worden belicht door een zeer fel, maar aangenaam licht.
+
+#### Doel
+
+Alle fakkels door het spel heen vinden, deze op de correcte plek te plaatsen in de LowLands zodat je door de tunnel heen kan gaan en door kan gaan naar de bossfight.
+
+#### Oplossing
+
+Er is een torch verstopt achter een boom in de LowLands, en nog meerdere andere in de rest van de kamers in de game. (Uitleg volgt nog)
