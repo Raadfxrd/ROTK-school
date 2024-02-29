@@ -76,7 +76,7 @@ export class ThroneRoom extends Room {
         return new TextActionResult([
             "You look around in the spot where the princess was last seen",
             "You see a ring laying on the floor that you have never seen before",
-            "The ring is made of silver and has been ingraved with the image of an cave",
+            "The ring is made of silver and has been engraved with the image of an cave",
         ]);
     }
 
