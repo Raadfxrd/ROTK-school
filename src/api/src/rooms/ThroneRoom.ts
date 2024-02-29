@@ -6,6 +6,8 @@ import { ExamineAction } from "../base/actions/ExamineAction";
 import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
+import { EleonorCharacter } from "../characters/EleonorCharacter";
+import { HenryCharacter } from "../characters/HenryCharacter";
 
 export const ThroneRoomAlias: string = "Throne-Room";
 
@@ -20,6 +22,7 @@ let clickedContinue4: boolean = false;
 let clickedContinue5: boolean = false;
 let clickedContinue6: boolean = false;
 let clickedContinue7: boolean = false;
+let title: string = "Kaseon";
 
 //exported consts used in other files
 export const pickedRingUp: boolean = true;
@@ -29,7 +32,7 @@ export class ThroneRoom extends Room {
         super(ThroneRoomAlias);
     }
     public name(): string {
-        return "Throne Room";
+        return title;
     }
 
     public images(): string[] {
@@ -73,17 +76,19 @@ export class ThroneRoom extends Room {
         return new TextActionResult([
             "You look around in the spot where the princess was last seen",
             "You see a ring laying on the floor that you have never seen before",
-            "The ring has an ingraved cave on the top of it",
+            "The ring is made of silver and has been ingraved with the image of an cave",
         ]);
     }
 
     public objects(): GameObject[] {
-        return [this];
+        return [this, new HenryCharacter(), new EleonorCharacter()];
     }
 
     public custom(alias: string, _gameObjects?: GameObject[]): TextActionResult | undefined {
         if (alias === "continue-1") {
             picture = "Wolburg";
+            title = "Wolburg";
+            this.name();
             this.images();
             clickedContinue1 = true;
             return new TextActionResult([
@@ -95,6 +100,8 @@ export class ThroneRoom extends Room {
             clickedContinue2 = true;
             clickedContinue1 = false;
             picture = "throneroom";
+            title = "Throne Room";
+            this.name();
             this.images();
             return new TextActionResult([
                 "When a new king or queen gets crowned it is tradition to let the old king or queen give the crown over to the new king or queen",
@@ -123,7 +130,7 @@ export class ThroneRoom extends Room {
             picture = "queenenteringthroneroom";
             this.images();
             return new TextActionResult([
-                "You see the queen entering the room, all the people stand up for the queen.",
+                "You see the princess entering the room, all the people stand up for the princess.",
                 "Suddenly, all you can see is total darkness...",
             ]);
         }
@@ -133,7 +140,7 @@ export class ThroneRoom extends Room {
             picture = "darkness";
             this.images();
             return new TextActionResult([
-                "You hear the screaming of someone, a woman screem. Was it the queen?",
+                "You hear the screaming of someone, a woman scream. Was it the princess?",
                 "You hurry your way through the chaos of all the folk panicking.",
             ]);
         }
@@ -141,9 +148,10 @@ export class ThroneRoom extends Room {
             clickedContinue6 = false;
             clickedContinue7 = true;
             picture = "throneroomentrance";
+            this.objects();
             this.images();
             return new TextActionResult([
-                "The darkness vanishes and you see some people running away with the queen tied up.",
+                "The darkness vanishes and you see some people running away with the princess tied up.",
                 "You think about going after them but they are already too far gone...",
             ]);
         }

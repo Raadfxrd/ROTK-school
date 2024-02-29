@@ -39,7 +39,7 @@ export class EleonorCharacter extends Character implements Examine {
             return new TextActionResult(["Eleonor: Please, let me know if you have something..."]);
         } else if (_choiceId === 4) {
             return new TextActionResult([
-                "Eleonor: This ingraved caved reminds me of something, something i have not seen in a while...",
+                "Eleonor: This ingraved cave reminds me of something, something i have not seen in a while...",
                 "Maybe you can find something on the map. it is on the right side of the entrance.",
             ]);
         }
