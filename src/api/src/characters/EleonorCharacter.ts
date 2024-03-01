@@ -4,13 +4,12 @@ import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
-import { pickedRingUp } from "../rooms/ThroneRoom";
 
-export const EleonorAlias: string = "Eleonor-character";
+export const eleonorAlias: string = "Eleonor-character";
 
 export class EleonorCharacter extends Character implements Examine {
     public constructor() {
-        super(EleonorAlias, ExamineActionAlias);
+        super(eleonorAlias, ExamineActionAlias);
     }
 
     public name(): string {
@@ -43,29 +42,14 @@ export class EleonorCharacter extends Character implements Examine {
                 "Maybe you can find something on the map. it is on the right side of the entrance.",
             ]);
         }
-
-        if (pickedRingUp === false) {
-            return new TalkActionResult(
-                this,
-                ["Eleonor: Please, how could this have happened..."],
-                [
-                    new TalkChoiceAction(1, "There were a few bandits in the croud that took her."),
-                    new TalkChoiceAction(2, "I have got no clue."),
-                    new TalkChoiceAction(3, "Bye!"),
-                ]
-            );
-        }
-        if (pickedRingUp === true) {
-            return new TalkActionResult(
-                this,
-                ["Eleonor: Have you found something that could help us?"],
-                [
-                    new TalkChoiceAction(1, "There were a few bandits in the croud that took her."),
-                    new TalkChoiceAction(4, "I found a ring."),
-                    new TalkChoiceAction(3, "Bye!"),
-                ]
-            );
-        }
-        return undefined;
+        return new TalkActionResult(
+            this,
+            ["Eleonor: Please, how could this have happened..."],
+            [
+                new TalkChoiceAction(1, "There were a few bandits in the croud that took her."),
+                new TalkChoiceAction(2, "I have got no clue."),
+                new TalkChoiceAction(3, "Bye!"),
+            ]
+        );
     }
 }

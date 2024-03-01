@@ -1,3 +1,4 @@
+import { PickupAction } from "../actions/PickupAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
@@ -8,6 +9,7 @@ import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { EleonorCharacter } from "../characters/EleonorCharacter";
 import { HenryCharacter } from "../characters/HenryCharacter";
+import { RingItem } from "../items/RingItem";
 
 export const ThroneRoomAlias: string = "Throne-Room";
 
@@ -56,13 +58,13 @@ export class ThroneRoom extends Room {
             return [new CustomAction("continue-7", "Continue", false)];
         }
         if (clickedContinue7 === true) {
-            return [new ExamineAction(), new TalkAction()];
+            return [new ExamineAction(), new TalkAction(), new PickupAction()];
         }
         return [new CustomAction("continue-1", "Continue", false)];
     }
 
     public objects(): GameObject[] {
-        return [this, new HenryCharacter(), new EleonorCharacter()];
+        return [this, new HenryCharacter(), new EleonorCharacter(), new RingItem()];
     }
 
     public examine(): ActionResult | undefined {
@@ -74,12 +76,7 @@ export class ThroneRoom extends Room {
                 "In the province, 'Kaseon', There will be the crowning in the city 'Wolburg' of a new queen, queen 'Eleonora'",
             ]);
         } else {
-            export const pickedRingUp: boolean = true;
-            return new TextActionResult([
-                "You look around in the spot where the princess was last seen",
-                "You see a ring laying on the floor that you have never seen before",
-                "The ring is made of silver and has been engraved with the image of an cave",
-            ]);
+            return new TextActionResult(["You look around in the spot where the princess was last seen"]);
         }
     }
 

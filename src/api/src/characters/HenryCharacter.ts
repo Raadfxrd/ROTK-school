@@ -4,7 +4,6 @@ import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
-import { pickedRingUp } from "../rooms/ThroneRoom";
 
 export const HenryAlias: string = "Henry-character";
 
@@ -40,29 +39,14 @@ export class HenryCharacter extends Character implements Examine {
                 "Henry: I've never seen this ring before, you might ask the king, he knows a lot more than i do.",
             ]);
         }
-
-        if (pickedRingUp === false) {
-            return new TalkActionResult(
-                this,
-                ["What happend?"],
-                [
-                    new TalkChoiceAction(1, "Have you seen the queen?"),
-                    new TalkChoiceAction(2, "I have got no clue."),
-                    new TalkChoiceAction(3, "Bye!"),
-                ]
-            );
-        }
-        if (pickedRingUp === true) {
-            return new TalkActionResult(
-                this,
-                ["What happend?"],
-                [
-                    new TalkChoiceAction(1, "Have you seen the queen?"),
-                    new TalkChoiceAction(4, "I found a ring."),
-                    new TalkChoiceAction(3, "Bye!"),
-                ]
-            );
-        }
-        return undefined;
+        return new TalkActionResult(
+            this,
+            ["Henry: What happend?"],
+            [
+                new TalkChoiceAction(1, "Have you seen the queen?"),
+                new TalkChoiceAction(2, "I have got no clue."),
+                new TalkChoiceAction(3, "Bye!"),
+            ]
+        );
     }
 }
