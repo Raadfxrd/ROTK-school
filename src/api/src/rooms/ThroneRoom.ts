@@ -24,9 +24,6 @@ let clickedContinue6: boolean = false;
 let clickedContinue7: boolean = false;
 let title: string = "Kaseon";
 
-//exported consts used in other files
-export const pickedRingUp: boolean = true;
-
 export class ThroneRoom extends Room {
     public constructor() {
         super(ThroneRoomAlias);
@@ -64,6 +61,10 @@ export class ThroneRoom extends Room {
         return [new CustomAction("continue-1", "Continue", false)];
     }
 
+    public objects(): GameObject[] {
+        return [this, new HenryCharacter(), new EleonorCharacter()];
+    }
+
     public examine(): ActionResult | undefined {
         if (!clickedContinue7) {
             picture = "Kaseon";
@@ -72,16 +73,14 @@ export class ThroneRoom extends Room {
                 "You enter the world of 'Realm of the Kings'",
                 "In the province, 'Kaseon', There will be the crowning in the city 'Wolburg' of a new queen, queen 'Eleonora'",
             ]);
+        } else {
+            export const pickedRingUp: boolean = true;
+            return new TextActionResult([
+                "You look around in the spot where the princess was last seen",
+                "You see a ring laying on the floor that you have never seen before",
+                "The ring is made of silver and has been engraved with the image of an cave",
+            ]);
         }
-        return new TextActionResult([
-            "You look around in the spot where the princess was last seen",
-            "You see a ring laying on the floor that you have never seen before",
-            "The ring is made of silver and has been engraved with the image of an cave",
-        ]);
-    }
-
-    public objects(): GameObject[] {
-        return [this, new HenryCharacter(), new EleonorCharacter()];
     }
 
     public custom(alias: string, _gameObjects?: GameObject[]): TextActionResult | undefined {
