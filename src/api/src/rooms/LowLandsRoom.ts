@@ -7,7 +7,7 @@ import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { Torch1Item } from "../items/Torch1Item";
 
-export const LowLandsRoomAlias: string = "lowlands";
+export const LowLandsRoomAlias: string = "lowlands-room";
 
 export class LowLandsRoom extends Room {
     public constructor() {
