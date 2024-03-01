@@ -55,25 +55,25 @@ export class GameCanvas extends LitElement {
         }
 
         .footer {
-            border-radius: 10px 10px 0 0;
-            background-color: #52478b;
-            border: 1px solid #332c57;
             margin-top: 10px;
             display: flex;
+            justify-content: space-around;
             height: 105px;
         }
 
         .footer .buttons {
             display: flex;
             flex-direction: column;
+            justify-content: space-around;
+            align-items: end;
             overflow: auto;
             padding: 10px 10px 0 10px;
         }
 
         .footer .button {
-            background-color: #7f6ed7;
-            border: 1px solid #332c57;
-            padding: 5px 10px;
+            background-color: #9988ee;
+            border-radius: 2px;
+            padding: 20px 20px;
             margin: 0 0 10px 10px;
             text-transform: uppercase;
             cursor: pointer;
