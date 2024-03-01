@@ -127,7 +127,7 @@ export class ThroneRoom extends Room {
         if (alias === "continue-5") {
             clickedContinue4 = false;
             clickedContinue5 = true;
-            picture = "queenenteringthroneroom";
+            picture = "princessenteringthroneroom";
             this.images();
             return new TextActionResult([
                 "You see the princess entering the room, all the people stand up for the princess.",
