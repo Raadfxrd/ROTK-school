@@ -1,10 +1,12 @@
 import { ActionReference, GameObjectReference, GameState } from "@shared/types";
 import { LitElement, TemplateResult, css, html, nothing } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import { getState, performAction } from "../services/routeService";
 
 @customElement("game-canvas")
 export class GameCanvas extends LitElement {
+    @property({ type: Boolean }) public isButtonClicked = false;
+
     public static styles = css`
         .game {
             height: 100%;
@@ -81,10 +83,9 @@ export class GameCanvas extends LitElement {
         }
 
         .action-buttons {
-            display: none;
             margin-top: 20px;
             display: flex;
-            justify-content: center;
+            justify-content: start;
             flex-wrap: wrap;
             -webkit-animation-duration: 0.5s;
             animation-duration: 0.5s;
@@ -164,9 +165,18 @@ export class GameCanvas extends LitElement {
     }
 
     private async handleClickAction(button: ActionReference): Promise<void> {
+        this.isButtonClicked = true;
+
         if (button.needsObject) {
             this.selectedActionButton = button;
             this.selectedGameObjectButtons.clear();
+
+            const actionButtonsContainer: any = this.shadowRoot?.querySelector(".action-buttons");
+            if (actionButtonsContainer) {
+                actionButtonsContainer.classList.remove("fadeInDown");
+                void actionButtonsContainer.offsetWidth;
+                actionButtonsContainer.classList.add("fadeInDown");
+            }
         } else {
             const state: any = await performAction(button.alias);
 
@@ -244,21 +254,16 @@ export class GameCanvas extends LitElement {
                         >${button.label}</a
                     >`
                 )}
-            </div>
-            ${this.selectedActionButton ? this.renderActionButtons() : nothing}
-        `;
-    }
-
-    private renderActionButtons(): TemplateResult {
-        return html`
-            <div class="action-buttons ${this.selectedActionButton ? "fadeInDown" : ""}">
-                ${this.gameObjectButtons?.map(
-                    (button) => html`<a
-                        class="action-button ${this.selectedGameObjectButtons.has(button) ? "active" : ""}"
-                        @click=${(): void => void this.handleClickObject(button)}
-                        >${button.name}</a
-                    >`
-                )}
+                ${this.isButtonClicked && this.selectedActionButton
+                    ? this.gameObjectButtons?.map(
+                          (button) => html` <div class="action-buttons">
+                        <a class="action-button ${
+                            this.selectedGameObjectButtons.has(button) ? "active" : ""
+                        }" @click=${(): void => void this.handleClickObject(button)} >${
+                              button.name
+                          }</a> </div> </div>`
+                      )
+                    : nothing}
             </div>
         `;
     }

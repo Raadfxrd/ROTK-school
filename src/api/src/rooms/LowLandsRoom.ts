@@ -27,9 +27,9 @@ export class LowLandsRoom extends Room {
 
     public actions(): Action[] {
         return [
+            new CustomAction("storage", "Inventory", false),
             new ExamineAction(),
-            new CustomAction("inside", "Go inside the tunnel", false),
-            new CustomAction("inside", "Go inside the tunnel", false),
+            new CustomAction("back", "Go back", false),
         ];
     }
 
