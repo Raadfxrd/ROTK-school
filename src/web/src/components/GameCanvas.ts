@@ -30,7 +30,7 @@ export class GameCanvas extends LitElement {
         }
 
         .header img {
-            width: 100%;
+            width: 90%;
             height: auto;
             image-rendering: pixelated;
         }
@@ -54,26 +54,19 @@ export class GameCanvas extends LitElement {
             margin: 0;
         }
 
-        .footer {
-            margin-top: 10px;
+        .buttons {
             display: flex;
             justify-content: space-around;
-            height: 105px;
-        }
-
-        .footer .buttons {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: end;
+            flex-wrap: wrap;
             overflow: auto;
-            padding: 10px 10px 0 10px;
+            margin-top: 10px;
         }
 
-        .footer .button {
+        .button {
             background-color: #9988ee;
             border-radius: 2px;
             padding: 20px 20px;
+            height: 2rem;
             margin: 0 0 10px 10px;
             text-transform: uppercase;
             cursor: pointer;
@@ -81,8 +74,8 @@ export class GameCanvas extends LitElement {
             user-select: none;
         }
 
-        .footer .button.active,
-        .footer .button:hover {
+        .button.active,
+        .button:hover {
             background-color: #332c57;
         }
     `;
@@ -199,30 +192,26 @@ export class GameCanvas extends LitElement {
 
     private renderFooter(): TemplateResult {
         return html`
-            <div class="footer">
-                <div class="buttons">
-                    <div>
-                        ${this.actionButtons?.map(
-                            (button) => html`<a
-                                class="button ${this.selectedActionButton === button ? "active" : ""}"
-                                @click=${(): void => void this.handleClickAction(button)}
-                                >${button.label}</a
-                            >`
-                        )}
-                    </div>
-                    <div>
-                        ${this.selectedActionButton
-                            ? this.gameObjectButtons?.map(
-                                  (button) => html`<a
-                                      class="button ${this.selectedGameObjectButtons.has(button)
-                                          ? "active"
-                                          : ""}"
-                                      @click=${(): void => void this.handleClickObject(button)}
-                                      >${button.name}</a
-                                  >`
-                              )
-                            : nothing}
-                    </div>
+            <div class="buttons">
+                <div>
+                    ${this.actionButtons?.map(
+                        (button) => html`<a
+                            class="button ${this.selectedActionButton === button ? "active" : ""}"
+                            @click=${(): void => void this.handleClickAction(button)}
+                            >${button.label}</a
+                        >`
+                    )}
+                </div>
+                <div>
+                    ${this.selectedActionButton
+                        ? this.gameObjectButtons?.map(
+                              (button) => html`<a
+                                  class="button ${this.selectedGameObjectButtons.has(button) ? "active" : ""}"
+                                  @click=${(): void => void this.handleClickObject(button)}
+                                  >${button.name}</a
+                              >`
+                          )
+                        : nothing}
                 </div>
             </div>
         `;

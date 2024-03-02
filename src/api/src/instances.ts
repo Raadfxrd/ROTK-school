@@ -18,7 +18,7 @@ import { tunnelItem, tunnelItemAlias } from "./items/TunnelItem";
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "startup",
+        currentRoom: "lowlands-room",
         inventory: [],
     };
 }
