@@ -16,7 +16,8 @@ export class tunnelItem extends Item implements Examine {
     public examine(): ActionResult | undefined {
         return new TextActionResult([
             "You try going inside the tunnel, but there is a mysterious force stopping you.",
-            "It is also very dark inside. You need a light source.",
+            "It is also very dark inside. ",
+            "You need a light source.",
         ]);
     }
 }

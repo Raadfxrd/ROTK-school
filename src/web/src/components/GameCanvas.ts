@@ -66,7 +66,6 @@ export class GameCanvas extends LitElement {
             background-color: #9988ee;
             border-radius: 2px;
             padding: 20px 20px;
-            height: 2rem;
             margin-bottom: 10px;
             text-transform: uppercase;
             cursor: pointer;
@@ -94,8 +93,7 @@ export class GameCanvas extends LitElement {
             background-color: #b07dc9;
             transition-duration: 0.2s;
             border-radius: 2px;
-            padding: 10px 20px;
-            height: 2rem;
+            padding: 20px 20px;
             margin: 0 0 10px 10px;
             text-transform: uppercase;
             cursor: pointer;
