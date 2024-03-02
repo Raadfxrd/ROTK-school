@@ -29,7 +29,7 @@ export class LowLandsRoom extends Room {
         return [
             new CustomAction("storage", "Inventory", false),
             new ExamineAction(),
-            new CustomAction("back", "Go back", false),
+            new CustomAction("back", "Navigate", false),
         ];
     }
 
