@@ -7,31 +7,36 @@ import { getState, performAction } from "../services/routeService";
 export class GameCanvas extends LitElement {
     public static styles = css`
         .game {
-            height: 100%;
+            margin-top: 20px;
+            height: calc(100vh - 40px);
+            width: calc(100vw - 40px);
             display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: auto auto 1fr auto;
-            grid-column-gap: 0px;
-            grid-row-gap: 0px;
+            grid-template-columns: 1fr 1.5fr 0.5fr;
+            grid-template-rows: 0.1fr 2fr 0.9fr;
+            gap: 20px 20px;
+            grid-template-areas:
+                "title title ."
+                "header header sidebar"
+                "buttons buttons sidebar";
         }
 
         .title {
             text-align: center;
-            margin-top: 10px;
+            grid-area: title;
         }
 
         .header {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            flex-grow: 1;
+            justify-content: center;
             position: relative;
-            margin-top: 10px;
+            overflow: hidden;
+            grid-area: header;
         }
 
         .header img {
-            width: 90%;
-            height: auto;
+            max-width: 100%;
+            max-height: 100%;
             image-rendering: pixelated;
         }
 
@@ -39,19 +44,16 @@ export class GameCanvas extends LitElement {
             position: absolute;
         }
 
-        .content {
-            flex-grow: 1;
-            overflow: auto;
-            margin-top: 10px;
-            padding: 0 10px;
+        .sidebar {
+            border: 2px solid #c0c0c0;
+            background-color: #000;
+            padding: 0px 20px 0px 20px;
+            color: #fff;
+            grid-area: sidebar;
         }
 
-        .content p {
-            margin: 0 0 10px 0;
-        }
-
-        .content p:last-of-type {
-            margin: 0;
+        .sidebar p {
+            margin: 20px 0px 0px 0px;
         }
 
         .buttons {
@@ -59,18 +61,23 @@ export class GameCanvas extends LitElement {
             justify-content: space-around;
             flex-wrap: wrap;
             overflow: auto;
-            margin-top: 10px;
+            justify-self: center;
+            align-self: start;
+            grid-area: buttons;
+            width: 70%;
         }
 
-        .button {
+        .button,
+        .action-button {
             background-color: #9988ee;
-            border-radius: 2px;
-            padding: 20px 20px;
+            border-radius: var(--button-radius);
+            padding: var(--button-padding);
             margin-bottom: 10px;
-            text-transform: uppercase;
-            cursor: pointer;
-            display: inline-block;
-            user-select: none;
+            text-transform: var(--button-text-transform);
+            cursor: var(--button-cursor);
+            display: var(--button-display);
+            user-select: var(--button-user-select);
+            max-height: 1.5rem;
         }
 
         .button.active,
@@ -82,23 +89,34 @@ export class GameCanvas extends LitElement {
         .action-buttons {
             display: none;
             margin-top: 20px;
-            display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            -webkit-animation-duration: 0.5s;
-            animation-duration: 0.5s;
+            gap: 10px;
+            animation: fadeInDown 0.5s;
         }
 
         .action-button {
             background-color: #b07dc9;
-            transition-duration: 0.2s;
-            border-radius: 2px;
-            padding: 20px 20px;
-            margin: 0 0 10px 10px;
-            text-transform: uppercase;
-            cursor: pointer;
-            display: inline-block;
-            user-select: none;
+            transition: 0.2s;
+            margin: 0;
+        }
+
+        .center,
+        .left,
+        .right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .left {
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+
+        .right {
+            align-items: flex-end;
+            justify-content: flex-end;
         }
 
         @keyframes fadeInDown {
@@ -111,18 +129,8 @@ export class GameCanvas extends LitElement {
                 transform: translateY(0);
             }
         }
-        @-webkit-keyframes fadeInDown {
-            0% {
-                opacity: 0;
-                -webkit-transform: translateY(-90px);
-            }
-            100% {
-                opacity: 1;
-                -webkit-transform: translateY(0);
-            }
-        }
+
         .fadeInDown {
-            -webkit-animation-name: fadeInDown;
             animation-name: fadeInDown;
         }
     `;
@@ -203,7 +211,10 @@ export class GameCanvas extends LitElement {
     protected render(): TemplateResult {
         return html`
             <div class="game">
-                ${this.renderTitle()} ${this.renderHeader()} ${this.renderContent()} ${this.renderFooter()}
+                <div class="title">${this.renderTitle()}</div>
+                <div class="header">${this.renderHeader()}</div>
+                <div class="sidebar">${this.renderSidebar()}</div>
+                <div class="buttons">${this.renderFooter()}</div>
             </div>
         `;
     }
@@ -228,8 +239,8 @@ export class GameCanvas extends LitElement {
         return html`${nothing}`;
     }
 
-    private renderContent(): TemplateResult {
-        return html`<div class="content">${this.contentText?.map((text) => html`<p>${text}</p>`)}</div>`;
+    private renderSidebar(): TemplateResult {
+        return html`${this.contentText?.map((text) => html`<p>${text}</p>`)}`;
     }
 
     private renderFooter(): TemplateResult {
@@ -249,7 +260,7 @@ export class GameCanvas extends LitElement {
 
     private renderActionButtons(): TemplateResult {
         return html`
-            <div class="action-buttons ${this.selectedActionButton ? "fadeInDown" : ""}">
+            <div class="action-buttons ${this.selectedActionButton ? "fadeInDown center" : ""}">
                 ${this.gameObjectButtons?.map(
                     (button) => html`<a
                         class="action-button ${this.selectedGameObjectButtons.has(button) ? "active" : ""}"
