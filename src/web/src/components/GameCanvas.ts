@@ -20,30 +20,9 @@ export class GameCanvas extends LitElement {
                 "buttons buttons sidebar";
         }
 
-        .titlefront,
-        .titlecenter,
-        .titleback {
+        .title {
             text-align: center;
             grid-area: title;
-            position: absolute;
-            display: flex;
-            top: 20;
-            left: 38%;
-        }
-
-        .titlefront {
-            font-family: var(--fontfront), sans-serif;
-            z-index: 3;
-        }
-
-        .titlecenter {
-            font-family: var(--fontcenter), sans-serif;
-            z-index: 2;
-        }
-
-        .titleback {
-            font-family: var(--fontback), sans-serif;
-            z-index: 1;
         }
 
         .header {
@@ -85,7 +64,7 @@ export class GameCanvas extends LitElement {
             justify-self: center;
             align-self: start;
             grid-area: buttons;
-            width: 70%;
+            width: 90%;
         }
 
         .button,
@@ -242,11 +221,7 @@ export class GameCanvas extends LitElement {
 
     private renderTitle(): TemplateResult {
         if (this.roomTitle) {
-            return html`
-                <div class="titlefront">${this.roomTitle}</div>
-                <div class="titlecenter">${this.roomTitle}</div>
-                <div class="titleback">${this.roomTitle}</div>
-            `;
+            return html` <div class="title">${this.roomTitle}</div> `;
         }
 
         return html`${nothing}`;

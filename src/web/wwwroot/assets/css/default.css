@@ -1,13 +1,9 @@
 @font-face {
-    font-family: "Onesize";
-    src: url("/assets/fonts/Onesize.eot");
-    src: url("/assets/fonts/Onesize.eot?#iefix") format("embedded-opentype"),
-        url("/assets/fonts/Onesize.woff2") format("woff2"), url("/assets/fonts/Onesize.woff") format("woff"),
-        url("/assets/fonts/Onesize.ttf") format("truetype"),
-        url("/assets/fonts/MonsterFriend2Back") format("otf"),
-        url("/assets/fonts/MonsterFriend2Center") format("otf"),
-        url("/assets/fonts/MonsterFriend2Fore") format("otf"),
-        url(src/web/wwwroot/assets/fonts/MonsterFriend2Fore.otf) format("otf");
+    font-family: "MonsterFriend";
+    src: url("../fonts/monsterfriendfore-webfont.woff2") format("woff2"),
+        url("../fonts/monsterfriendfore-webfont.svg") format("svg"),
+        url("../fonts/monsterfriendfore-webfont.ttf") format("truetype"),
+        url("../fonts/monsterfriendfore-webfont.woff") format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -23,9 +19,7 @@
     --margin-top: 10px;
     --sidebar-width: 300px;
     --spacing: -2px;
-    --fontfront: url("/assets/fonts/MonsterFriend2Fore");
-    --fontcenter: url("/assets/fonts/MonsterFriend2Center");
-    --fontback: url("/assets/fonts/MonsterFriend2Back");
+    --font: "MonsterFriend";
 }
 
 html,
@@ -40,14 +34,14 @@ game-canvas {
 
 body {
     font-family: "Open Sans", sans-serif;
-    font-size: 1.5em;
+    font-size: 1em;
     background-color: #0b0b0b;
     display: flex;
     justify-content: center;
 }
 
 game-canvas {
-    font-family: "Onesize";
+    font-family: var(--font);
+    font-size: 1.3rem;
     color: white;
-    letter-spacing: var(--spacing);
 }
