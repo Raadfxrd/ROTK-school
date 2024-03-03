@@ -3,7 +3,11 @@
     src: url("/assets/fonts/Onesize.eot");
     src: url("/assets/fonts/Onesize.eot?#iefix") format("embedded-opentype"),
         url("/assets/fonts/Onesize.woff2") format("woff2"), url("/assets/fonts/Onesize.woff") format("woff"),
-        url("/assets/fonts/Onesize.ttf") format("truetype");
+        url("/assets/fonts/Onesize.ttf") format("truetype"),
+        url("/assets/fonts/MonsterFriend2Back") format("otf"),
+        url("/assets/fonts/MonsterFriend2Center") format("otf"),
+        url("/assets/fonts/MonsterFriend2Fore") format("otf"),
+        url(src/web/wwwroot/assets/fonts/MonsterFriend2Fore.otf) format("otf");
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -19,6 +23,9 @@
     --margin-top: 10px;
     --sidebar-width: 300px;
     --spacing: -2px;
+    --fontfront: url("/assets/fonts/MonsterFriend2Fore");
+    --fontcenter: url("/assets/fonts/MonsterFriend2Center");
+    --fontback: url("/assets/fonts/MonsterFriend2Back");
 }
 
 html,
