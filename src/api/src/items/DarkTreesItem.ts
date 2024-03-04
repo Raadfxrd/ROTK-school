@@ -13,7 +13,9 @@ export class darkTreesItem extends Item implements Examine {
         return "A cluster of ominious trees";
     }
 
-    public images(): string[] {}
+    public images(): string[] {
+        return ["darktree"];
+    }
 
     public examine(): ActionResult | undefined {
         return new TextActionResult([

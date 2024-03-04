@@ -6,10 +6,15 @@ import { getState, performAction } from "../services/routeService";
 @customElement("game-canvas")
 export class GameCanvas extends LitElement {
     public static styles = css`
+        /** Maken van nieuwe grid layout voor nieuwe custom layout **/
         .game {
             margin-top: 20px;
-            height: calc(100vh - 40px);
-            width: calc(100vw - 40px);
+            height: calc(
+                100vh - 40px
+            ); /** Limiteren van display van website door viewheight - 40px doen, zorgt voor "claustrofobische" retro vibe **/
+            width: calc(
+                100vw - 40px
+            ); /** Limiteren van display van website door viewwidth - 40px doen, zorgt voor "claustrofobische" retro vibe **/
             display: grid;
             grid-template-columns: 1fr 1.5fr 0.5fr;
             grid-template-rows: 0.1fr 2fr 0.9fr;
@@ -44,6 +49,7 @@ export class GameCanvas extends LitElement {
             position: absolute;
         }
 
+        /** Sidebar class voor displayen van text op leukere manier **/
         .sidebar {
             border: 2px solid #c0c0c0;
             background-color: #000;
@@ -56,6 +62,7 @@ export class GameCanvas extends LitElement {
             margin: 20px 0px 0px 0px;
         }
 
+        /** Class voor altijd zichtbare buttons **/
         .buttons {
             display: flex;
             justify-content: space-around;
@@ -72,11 +79,10 @@ export class GameCanvas extends LitElement {
             background-color: #9988ee;
             border-radius: var(--button-radius);
             padding: var(--button-padding);
-            margin-bottom: 10px;
-            text-transform: var(--button-text-transform);
             cursor: var(--button-cursor);
-            display: var(--button-display);
             user-select: var(--button-user-select);
+            display: inline-block;
+            margin-bottom: 10px;
             max-height: 1.5rem;
         }
 
@@ -86,6 +92,7 @@ export class GameCanvas extends LitElement {
             background-color: #332c57;
         }
 
+        /** Class voor uitvouwbare buttons **/
         .action-buttons {
             display: none;
             margin-top: 20px;
@@ -93,6 +100,10 @@ export class GameCanvas extends LitElement {
             flex-wrap: wrap;
             gap: 10px;
             animation: fadeInDown 0.5s;
+            border-radius: var(--button-radius);
+            padding: var(--button-padding);
+            cursor: var(--button-cursor);
+            user-select: var(--button-user-select);
         }
 
         .action-button {
@@ -101,6 +112,7 @@ export class GameCanvas extends LitElement {
             margin: 0;
         }
 
+        /** Classes voor definieren of ".action-buttons" links, rechts of gecentreerd moeten zijn **/
         .center,
         .left,
         .right {
@@ -119,6 +131,7 @@ export class GameCanvas extends LitElement {
             justify-content: flex-end;
         }
 
+        /** Animation keyframes voor ".action-buttons" **/
         @keyframes fadeInDown {
             0% {
                 opacity: 0;
@@ -130,6 +143,7 @@ export class GameCanvas extends LitElement {
             }
         }
 
+        /** Animation class voor ".action-buttons" **/
         .fadeInDown {
             animation-name: fadeInDown;
         }
@@ -261,6 +275,7 @@ export class GameCanvas extends LitElement {
     private renderActionButtons(): TemplateResult {
         return html`
             <div class="action-buttons ${this.selectedActionButton ? "fadeInDown center" : ""}">
+                <!-- Verander de center hier voor juiste uitlijning -->
                 ${this.gameObjectButtons?.map(
                     (button) => html`<a
                         class="action-button ${this.selectedGameObjectButtons.has(button) ? "active" : ""}"

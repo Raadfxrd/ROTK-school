@@ -3,11 +3,11 @@ import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { Item } from "../base/gameObjects/Item";
 
-export const tunnelItemAlias: string = "tunnelItem";
+export const TunnelItemAlias: string = "tunnelItem";
 
 export class tunnelItem extends Item implements Examine {
     public constructor() {
-        super(tunnelItemAlias, ExamineActionAlias);
+        super(TunnelItemAlias, ExamineActionAlias);
     }
     public name(): string {
         return "A dark tunnel in the middle of nowhere";

@@ -12,13 +12,8 @@
 :root {
     --button-padding: 20px;
     --button-radius: 2px;
-    --button-text-transform: uppercase;
     --button-cursor: pointer;
-    --button-display: inline-block;
     --button-user-select: none;
-    --margin-top: 10px;
-    --sidebar-width: 300px;
-    --spacing: -2px;
     --font: "MonsterFriend";
 }
 

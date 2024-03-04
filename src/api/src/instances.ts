@@ -4,12 +4,12 @@ import { getPlayerSessionFromContext, resetPlayerSessionInContext } from "./base
 import { ExampleCharacter, ExampleCharacterAlias } from "./characters/ExampleCharacter";
 import { ExampleItem, ExampleItemAlias } from "./items/ExampleItem";
 import { Torch1Item, Torch1ItemAlias } from "./items/Torch1Item";
-import { darkTreesItemAlias, darkTreesItem } from "./items/DarkTreesItem";
+import { DarkTreesItemAlias, darkTreesItem } from "./items/DarkTreesItem";
 import { ExampleRoom, ExampleRoomAlias } from "./rooms/ExampleRoom";
 import { LowLandsRoom, LowLandsRoomAlias } from "./rooms/LowLandsRoom";
 import { StartupRoom, StartupRoomAlias } from "./rooms/StartupRoom";
 import { PlayerSession } from "./types";
-import { tunnelItem, tunnelItemAlias } from "./items/TunnelItem";
+import { tunnelItem, TunnelItemAlias } from "./items/TunnelItem";
 
 /**
  * Create a new player session object
@@ -79,10 +79,10 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
         case Torch1ItemAlias:
             return new Torch1Item();
 
-        case darkTreesItemAlias:
+        case DarkTreesItemAlias:
             return new darkTreesItem();
 
-        case tunnelItemAlias:
+        case TunnelItemAlias:
             return new tunnelItem();
 
         //NOTE: Fall back to rooms, since those are game objects too.
