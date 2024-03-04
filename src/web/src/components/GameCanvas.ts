@@ -16,7 +16,7 @@ export class GameCanvas extends LitElement {
                 100vw - 40px
             ); /** Limiteren van display van website door viewwidth - 40px doen, zorgt voor "claustrofobische" retro vibe **/
             display: grid;
-            grid-template-columns: 1fr 1.5fr 0.5fr;
+            grid-template-columns: 0.5fr 1.5fr 0.5fr;
             grid-template-rows: 0.1fr 2fr 0.9fr;
             gap: 20px 20px;
             grid-template-areas:
@@ -42,7 +42,6 @@ export class GameCanvas extends LitElement {
         .header img {
             max-width: 100%;
             max-height: 100%;
-            image-rendering: pixelated;
         }
 
         .header img:nth-child(n + 2) {
