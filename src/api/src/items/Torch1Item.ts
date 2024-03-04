@@ -3,7 +3,7 @@ import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { Item } from "../base/gameObjects/Item";
 
-export const Torch1ItemAlias: string = "Torch1Item";
+export const Torch1ItemAlias: string = "Torch1";
 
 export class Torch1Item extends Item implements Examine {
     public constructor() {

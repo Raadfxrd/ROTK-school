@@ -3,7 +3,7 @@ import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { Item } from "../base/gameObjects/Item";
 
-export const TunnelItemAlias: string = "TunnelItem";
+export const TunnelItemAlias: string = "Tunnel";
 
 export class TunnelItem extends Item implements Examine {
     public constructor() {
