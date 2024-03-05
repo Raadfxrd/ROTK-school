@@ -29,7 +29,7 @@ export class KarasValeTownSquareRoom extends Room {
     }
 
     public custom(alias: string, _gameObjects?: GameObject[]): ActionResult | undefined {
-        if (alias === "Navigate-North") {
+        if (alias === "NavigateAction") {
             return new TextActionResult([
                 "You move to the center of the town, and see there is a small tavern and a blacksmith.",
             ]);

@@ -7,7 +7,7 @@ import { Action } from "../base/actions/Action";
 export const NavigationActionsAlias: string = "NavigateAction";
 
 export interface Navigate {
-    navigate(navigateId?: number): ActionResult | undefined;
+    navigate("Navigate-North", gameObjects: GameObject[] | undefined) ActionResult | undefined;
 }
 export class NavigationActions extends Action {
     public constructor() {
