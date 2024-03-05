@@ -17,6 +17,16 @@ Als de user verder met het verhaal wilt gaan kan hij alleen richting het zuiden 
 
 ## Scene 3: Kara's Vale
 
+De speler komt aan in het dorpje Kara's Vale. In dit dorp zijn de standaard kamers aanwezig waar de speler items kan kopen.
+Als de speler met mensen in het dorp of in de standaard kamers praat, komen ze erachter dat er een grote kraai genaamd "Kara de wijze" (naam kan veranderd worden) leeft in de buurt waar het dorp haar naam aan ontleent. De speler moet naar deze kraai opzoeken om erachter te komen dat ze een medaillon nodig hebben, waarvan Kara 1 helft bezit en ook van weet waar de andere helft te vinden is. De speler moet drie raadsels van Kara oplossen om het medaillon en de benodigde informatie te krijgen.
+
+Raadsel consequenties:
+
+0/3 goed: De speler moet iets waardevols inleveren aan Kara in ruil voor het medaillon.
+1/3 goed: De speler krijgt Kara's heflt van het medaillon en weet niets over de andere helft.
+2/3 goed: De speler krijgt Kara's heflt van het medaillon en een aanwijzing over in welke plek het medaillon ligt
+3/3 goed: De speler krijgt Kara's heflt van het medaillon en een aanwijzing over in welke plek het medaillon ligt en een bonus item uit de opslag van Kara zelf.
+
 ## Scene 4: Volo's Village
 
 ## Scene 5:
