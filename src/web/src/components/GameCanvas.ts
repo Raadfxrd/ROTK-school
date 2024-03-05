@@ -30,9 +30,9 @@ export class GameCanvas extends LitElement {
         }
 
         .header img {
-            width: 100%;
             height: auto;
             image-rendering: pixelated;
+            width: 100%;
         }
 
         .header img:nth-child(n + 2) {
