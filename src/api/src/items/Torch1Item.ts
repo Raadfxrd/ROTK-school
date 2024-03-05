@@ -1,5 +1,5 @@
 import { ActionResult } from "../base/actionResults/ActionResult";
-import { TextActionResult } from "../base/actionResults/TextActionResult";
+import { TextAndImageActionResult } from "../base/actionResults/TextAndImageActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { Item } from "../base/gameObjects/Item";
 
@@ -11,11 +11,14 @@ export class Torch1Item extends Item implements Examine {
     }
 
     public examine(): ActionResult | undefined {
-        return new TextActionResult([
-            "The torch flickers, casting shadows on the walls.",
-            "It appears to be the only source of light around here.",
-            "You feel a little safer with it in your hand.",
-        ]);
+        return new TextAndImageActionResult(
+            [
+                "The torch flickers, casting shadows on the walls.",
+                "It appears to be the only source of light around here.",
+                "You feel a little safer with it in your hand.",
+            ],
+            ["items/torches.png"]
+        );
     }
 
     public name(): string {

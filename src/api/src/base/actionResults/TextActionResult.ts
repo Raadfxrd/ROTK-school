@@ -4,11 +4,11 @@ import { ActionResult } from "./ActionResult";
  * Class used the represent the textual result of an action
  */
 export class TextActionResult extends ActionResult {
-    private _text: string[];
+    public _text: string[];
 
     /**
      * Create a new instance of this action result
-     * 
+     *
      * @param text Text to show
      */
     public constructor(text: string[]) {

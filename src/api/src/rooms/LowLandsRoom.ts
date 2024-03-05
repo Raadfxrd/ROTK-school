@@ -22,7 +22,7 @@ export class LowLandsRoom extends Room {
     }
 
     public images(): string[] {
-        return [picture, "darktree", "tunnel"];
+        return [picture];
     }
 
     public actions(): Action[] {
@@ -38,7 +38,12 @@ export class LowLandsRoom extends Room {
     }
 
     public examine = (): ActionResult | undefined => {
-        picture = "lowlands";
-        return new TextActionResult(["You are in the LowLands.", "It is a dark and gloomy place."]);
+        picture = "rooms/lowlands.png";
+        return new TextActionResult([
+            "You are in the LowLands.",
+            "The trees are dark and the air is heavy.",
+            "You can see a small tunnel in the middle.",
+            "You can see a torch on the ground a bit further away.",
+        ]);
     };
 }

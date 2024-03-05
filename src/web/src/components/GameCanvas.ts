@@ -16,7 +16,7 @@ export class GameCanvas extends LitElement {
                 100vw - 40px
             ); /** Limiteren van display van website door viewwidth - 40px doen, zorgt voor "claustrofobische" retro vibe **/
             display: grid;
-            grid-template-columns: 0.5fr 1.5fr 0.5fr;
+            grid-template-columns: 0.5fr 1.5fr 0.7fr;
             grid-template-rows: 0.1fr 2fr 0.9fr;
             gap: 20px 20px;
             grid-template-areas:
@@ -42,6 +42,7 @@ export class GameCanvas extends LitElement {
         .header img {
             max-width: 100%;
             max-height: 100%;
+            image-rendering: crisp-edges;
         }
 
         .header img:nth-child(n + 2) {
@@ -75,7 +76,7 @@ export class GameCanvas extends LitElement {
             justify-self: center;
             align-self: start;
             grid-area: buttons;
-            width: 90%;
+            width: 100%;
         }
 
         .button,
@@ -111,7 +112,7 @@ export class GameCanvas extends LitElement {
         }
 
         .action-button {
-            background-color: #b07dc9;
+            background-color: #7f68c1;
             transition: 0.2s;
             margin: 0;
         }
@@ -249,7 +250,7 @@ export class GameCanvas extends LitElement {
         if (this.roomImages && this.roomImages.length > 0) {
             return html`
                 <div class="header">
-                    ${this.roomImages?.map((url) => html`<img src="/assets/img/rooms/${url}.png" />`)}
+                    ${this.roomImages?.map((url) => html`<img src="/assets/img/${url}" />`)}
                 </div>
             `;
         }
