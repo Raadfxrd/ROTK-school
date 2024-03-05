@@ -12,6 +12,7 @@ import { HenryAlias, HenryCharacter } from "./characters/HenryCharacter";
 import { eleonorAlias, EleonorCharacter } from "./characters/EleonorCharacter";
 import { Torch1Item, Torch1ItemAlias } from "./items/Torch1Item";
 import { PlayerSession } from "./types";
+import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
 
 /**
  * Create a new player session object

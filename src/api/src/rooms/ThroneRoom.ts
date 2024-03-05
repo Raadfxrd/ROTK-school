@@ -69,7 +69,7 @@ export class ThroneRoom extends Room {
 
     public examine(): ActionResult | undefined {
         if (!clickedContinue7) {
-            picture = "Kaseon";
+            picture = "rooms/Kaseon.png";
             this.images();
             return new TextActionResult([
                 "You enter the world of 'Realm of the Kings'",
@@ -82,7 +82,7 @@ export class ThroneRoom extends Room {
 
     public custom(alias: string, _gameObjects?: GameObject[]): TextActionResult | undefined {
         if (alias === "continue-1") {
-            picture = "Wolburg";
+            picture = "rooms/Wolburg.png";
             title = "Wolburg";
             this.name();
             this.images();
@@ -95,7 +95,7 @@ export class ThroneRoom extends Room {
         if (alias === "continue-2") {
             clickedContinue2 = true;
             clickedContinue1 = false;
-            picture = "throneroom";
+            picture = "rooms/throneroom.png";
             title = "Throne Room";
             this.name();
             this.images();
@@ -123,7 +123,7 @@ export class ThroneRoom extends Room {
         if (alias === "continue-5") {
             clickedContinue4 = false;
             clickedContinue5 = true;
-            picture = "princessenteringthroneroom";
+            picture = "rooms/princessenteringthroneroom.png";
             this.images();
             return new TextActionResult([
                 "You see the princess entering the room, all the people stand up for the princess.",
@@ -133,7 +133,7 @@ export class ThroneRoom extends Room {
         if (alias === "continue-6") {
             clickedContinue5 = false;
             clickedContinue6 = true;
-            picture = "darkness";
+            picture = "rooms/darkness.png";
             this.images();
             return new TextActionResult([
                 "You hear the screaming of someone, a woman scream. Was it the princess?",
@@ -143,7 +143,7 @@ export class ThroneRoom extends Room {
         if (alias === "continue-7") {
             clickedContinue6 = false;
             clickedContinue7 = true;
-            picture = "throneroomentrance";
+            picture = "rooms/throneroomentrance.png";
             this.objects();
             this.images();
             return new TextActionResult([
