@@ -4,6 +4,9 @@ import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
+import { getPlayerSession } from "../instances";
+import { RingItemAlias } from "../items/RingItem";
+import { PlayerSession } from "../types";
 
 export const HenryAlias: string = "Henry-character";
 
@@ -39,14 +42,19 @@ export class HenryCharacter extends Character implements Examine {
                 "Henry: I've never seen this ring before, you might ask the king, he knows a lot more than i do.",
             ]);
         }
-        return new TalkActionResult(
-            this,
-            ["Henry: What happend?"],
-            [
-                new TalkChoiceAction(1, "Have you seen the queen?"),
-                new TalkChoiceAction(2, "I have got no clue."),
-                new TalkChoiceAction(3, "Bye!"),
-            ]
-        );
+
+        const playerSession: PlayerSession = getPlayerSession();
+
+        const choiceActions: TalkChoiceAction[] = [
+            new TalkChoiceAction(1, "Have you seen the queen?"),
+            new TalkChoiceAction(2, "I have got no clue."),
+            new TalkChoiceAction(3, "Bye!"),
+        ];
+
+        if (playerSession.inventory.includes(RingItemAlias)) {
+            choiceActions.push(new TalkChoiceAction(4, "I have found a ring."));
+        }
+
+        return new TalkActionResult(this, ["Henry: What happend?"], choiceActions);
     }
 }

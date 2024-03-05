@@ -7,14 +7,19 @@ import { ExamineAction } from "../base/actions/ExamineAction";
 import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
+import { AlexandraCharacter } from "../characters/AlexandraCharacter";
+import { CharlesCharacter } from "../characters/CharlesCharacter";
 import { EleonorCharacter } from "../characters/EleonorCharacter";
 import { HenryCharacter } from "../characters/HenryCharacter";
-import { RingItem } from "../items/RingItem";
+import { getPlayerSession } from "../instances";
+import { RingItem, RingItemAlias } from "../items/RingItem";
+import { MapItem } from "../items/mapItem";
+import { PlayerSession } from "../types";
 
-export const ThroneRoomAlias: string = "Throne-Room";
+export const ThroneRoomAlias: string = "throne-room";
 
 //Picture string so that i can change the scene in the file
-let picture: string = "Kaseon";
+let picture: string = "rooms/Kaseon.png";
 
 //continue buttons to get to the next line
 let clickedContinue1: boolean = false;
@@ -27,6 +32,8 @@ let clickedContinue7: boolean = false;
 let title: string = "Kaseon";
 
 export class ThroneRoom extends Room {
+    public picture?: string;
+
     public constructor() {
         super(ThroneRoomAlias);
     }
@@ -64,12 +71,30 @@ export class ThroneRoom extends Room {
     }
 
     public objects(): GameObject[] {
-        return [this, new HenryCharacter(), new EleonorCharacter(), new RingItem()];
+        const playerSession: PlayerSession = getPlayerSession();
+
+        const objects: GameObject[] = [this];
+
+        if (!playerSession.inventory.includes(RingItemAlias)) {
+            objects.push(new RingItem());
+        }
+
+        if (playerSession.knowWhereMapIs === true) {
+            objects.push(new MapItem());
+        }
+
+        objects.push(
+            new HenryCharacter(),
+            new EleonorCharacter(),
+            new AlexandraCharacter(),
+            new CharlesCharacter()
+        );
+        return objects;
     }
 
     public examine(): ActionResult | undefined {
         if (!clickedContinue7) {
-            picture = "Kaseon";
+            picture = "rooms/Kaseon.png";
             this.images();
             return new TextActionResult([
                 "You enter the world of 'Realm of the Kings'",
@@ -82,7 +107,7 @@ export class ThroneRoom extends Room {
 
     public custom(alias: string, _gameObjects?: GameObject[]): TextActionResult | undefined {
         if (alias === "continue-1") {
-            picture = "Wolburg";
+            picture = "rooms/Wolburg.png";
             title = "Wolburg";
             this.name();
             this.images();
@@ -95,7 +120,7 @@ export class ThroneRoom extends Room {
         if (alias === "continue-2") {
             clickedContinue2 = true;
             clickedContinue1 = false;
-            picture = "throneroom";
+            picture = "rooms/throneroom.png";
             title = "Throne Room";
             this.name();
             this.images();
@@ -123,7 +148,7 @@ export class ThroneRoom extends Room {
         if (alias === "continue-5") {
             clickedContinue4 = false;
             clickedContinue5 = true;
-            picture = "princessenteringthroneroom";
+            picture = "rooms/princessenteringthroneroom.png";
             this.images();
             return new TextActionResult([
                 "You see the princess entering the room, all the people stand up for the princess.",
@@ -133,7 +158,7 @@ export class ThroneRoom extends Room {
         if (alias === "continue-6") {
             clickedContinue5 = false;
             clickedContinue6 = true;
-            picture = "darkness";
+            picture = "rooms/darkness.png";
             this.images();
             return new TextActionResult([
                 "You hear the screaming of someone, a woman scream. Was it the princess?",
@@ -143,7 +168,7 @@ export class ThroneRoom extends Room {
         if (alias === "continue-7") {
             clickedContinue6 = false;
             clickedContinue7 = true;
-            picture = "throneroomentrance";
+            picture = "rooms/throneroomentrance.png";
             this.objects();
             this.images();
             return new TextActionResult([
