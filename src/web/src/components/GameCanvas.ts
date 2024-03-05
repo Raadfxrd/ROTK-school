@@ -55,6 +55,11 @@ export class GameCanvas extends LitElement {
             padding: 0px 20px 0px 20px;
             color: #fff;
             grid-area: sidebar;
+            font-family: var(--font2);
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: -2px;
+            line-height: 1;
         }
 
         .sidebar p {
