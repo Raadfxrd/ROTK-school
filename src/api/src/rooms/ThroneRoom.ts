@@ -7,14 +7,19 @@ import { ExamineAction } from "../base/actions/ExamineAction";
 import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
+import { AlexandraCharacter } from "../characters/AlexandraCharacter";
+import { CharlesCharacter } from "../characters/CharlesCharacter";
 import { EleonorCharacter } from "../characters/EleonorCharacter";
 import { HenryCharacter } from "../characters/HenryCharacter";
-import { RingItem } from "../items/RingItem";
+import { getPlayerSession } from "../instances";
+import { RingItem, RingItemAlias } from "../items/RingItem";
+import { MapItem } from "../items/mapItem";
+import { PlayerSession } from "../types";
 
-export const ThroneRoomAlias: string = "Throne-Room";
+export const ThroneRoomAlias: string = "throne-room";
 
 //Picture string so that i can change the scene in the file
-let picture: string = "Kaseon";
+let picture: string = "rooms/Kaseon.png";
 
 //continue buttons to get to the next line
 let clickedContinue1: boolean = false;
@@ -27,6 +32,8 @@ let clickedContinue7: boolean = false;
 let title: string = "Kaseon";
 
 export class ThroneRoom extends Room {
+    public picture?: string;
+
     public constructor() {
         super(ThroneRoomAlias);
     }
@@ -64,7 +71,25 @@ export class ThroneRoom extends Room {
     }
 
     public objects(): GameObject[] {
-        return [this, new HenryCharacter(), new EleonorCharacter(), new RingItem()];
+        const playerSession: PlayerSession = getPlayerSession();
+
+        const objects: GameObject[] = [this];
+
+        if (!playerSession.inventory.includes(RingItemAlias)) {
+            objects.push(new RingItem());
+        }
+
+        if (playerSession.knowWhereMapIs === true) {
+            objects.push(new MapItem());
+        }
+
+        objects.push(
+            new HenryCharacter(),
+            new EleonorCharacter(),
+            new AlexandraCharacter(),
+            new CharlesCharacter()
+        );
+        return objects;
     }
 
     public examine(): ActionResult | undefined {

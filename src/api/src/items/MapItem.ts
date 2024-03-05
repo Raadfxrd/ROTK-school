@@ -6,33 +6,31 @@ import { Item } from "../base/gameObjects/Item";
 import { getPlayerSession } from "../instances";
 import { PlayerSession } from "../types";
 
-export const RingItemAlias: string = "ring-item";
+export const MapItemAlias: string = "map-item";
 
-export class RingItem extends Item implements Examine, Pickup {
+export class MapItem extends Item implements Examine, Pickup {
     public constructor() {
-        super(RingItemAlias, ExamineActionAlias, PickupActionAlias);
+        super(MapItemAlias, ExamineActionAlias, PickupActionAlias);
     }
 
     public name(): string {
-        return "Ring";
+        return "Map";
     }
 
     public examine(): ActionResult | undefined {
         return new TextActionResult([
-            "You see a ring laying on the floor that you have never seen before",
-            "The ring is made of silver and has been engraved with the image of an cave",
+            "This looks like the map of Kaseon, you see all the different cities and towns in the region",
+            "You see that some towns don't have a name included on them",
         ]);
     }
 
     public pickup(): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
 
-        if (!playerSession.inventory.includes(RingItemAlias) && playerSession.pickedUpRing === false) {
-            playerSession.inventory.push(RingItemAlias);
-            playerSession.pickedUpRing = true;
-            return new TextActionResult(["You picked up the ring"]);
-        } else {
-            return undefined;
+        if (!playerSession.inventory.includes(MapItemAlias)) {
+            playerSession.inventory.push(MapItemAlias);
+            return new TextActionResult(["You picked up the map"]);
         }
+        return undefined;
     }
 }
