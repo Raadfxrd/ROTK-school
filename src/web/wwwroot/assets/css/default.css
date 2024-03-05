@@ -30,6 +30,8 @@ game-canvas {
 body {
     font-family: "Open Sans", sans-serif;
     font-size: 1em;
+    line-height: 1.15;
+    letter-spacing: 2px;
     background-color: #0b0b0b;
     display: flex;
     justify-content: center;
