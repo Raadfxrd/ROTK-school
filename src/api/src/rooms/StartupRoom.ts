@@ -36,7 +36,6 @@ export class StartupRoom extends Room {
 
             //Set the current room to the example room
             getPlayerSession().currentRoom = room.alias;
-
             return room.examine();
         }
 

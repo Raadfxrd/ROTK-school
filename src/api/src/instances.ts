@@ -1,14 +1,16 @@
 import { GameObject } from "./base/gameObjects/GameObject";
 import { Room } from "./base/gameObjects/Room";
 import { getPlayerSessionFromContext, resetPlayerSessionInContext } from "./base/playerSessionMiddleware";
-import { eleonorAlias, EleonorCharacter } from "./characters/EleonorCharacter";
 import { ExampleCharacter, ExampleCharacterAlias } from "./characters/ExampleCharacter";
-import { HenryAlias, HenryCharacter } from "./characters/HenryCharacter";
 import { ExampleItem, ExampleItemAlias } from "./items/ExampleItem";
 import { ExampleRoom, ExampleRoomAlias } from "./rooms/ExampleRoom";
 import { StartupRoom, StartupRoomAlias } from "./rooms/StartupRoom";
+import { LowLandsRoom, LowLandsRoomAlias } from "./rooms/LowLandsRoom";
+import { TunnelItem, TunnelItemAlias } from "./items/TunnelItem";
 import { ThroneRoom, ThroneRoomAlias } from "./rooms/ThroneRoom";
-import { ThroneRoomTest, ThroneRoomTestAlias } from "./rooms/ThroneRoomTest";
+import { HenryAlias, HenryCharacter } from "./characters/HenryCharacter";
+import { eleonorAlias, EleonorCharacter } from "./characters/EleonorCharacter";
+import { Torch1Item, Torch1ItemAlias } from "./items/Torch1Item";
 import { PlayerSession } from "./types";
 
 /**
@@ -18,7 +20,7 @@ import { PlayerSession } from "./types";
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "startup",
+        currentRoom: "lowlands-room",
         inventory: [],
     };
 }
@@ -54,11 +56,11 @@ export function getRoomByAlias(alias: string): Room | undefined {
         case ExampleRoomAlias:
             return new ExampleRoom();
 
+        case LowLandsRoomAlias:
+            return new LowLandsRoom();
+
         case ThroneRoomAlias:
             return new ThroneRoom();
-
-        case ThroneRoomTestAlias:
-            return new ThroneRoomTest();
     }
 
     return undefined;
@@ -78,6 +80,15 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case ExampleCharacterAlias:
             return new ExampleCharacter();
+
+        case Torch1ItemAlias:
+            return new Torch1Item();
+
+        case DarkTreesItemAlias:
+            return new DarkTreesItem();
+
+        case TunnelItemAlias:
+            return new TunnelItem();
 
         case eleonorAlias:
             return new EleonorCharacter();

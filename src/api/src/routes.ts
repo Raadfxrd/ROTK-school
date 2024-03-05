@@ -18,6 +18,7 @@ import {
 } from "./instances";
 import { PlayerSession } from "./types";
 import { ExampleAction, ExampleActionAlias } from "./actions/ExampleAction";
+import { TextAndImageActionResult } from "./base/actionResults/TextAndImageActionResult";
 import { PickupAction, PickupActionAlias } from "./actions/PickupAction";
 
 export const router: Router = Router();
@@ -148,8 +149,8 @@ function convertActionResultToGameState(actionResult?: ActionResult): GameState 
     return {
         roomAlias: room.alias,
         roomTitle: room.name(),
-        roomImages: room.images(),
-        text: (actionResult as TextActionResult)?.text || ["That doesn't make any sense."],
+        roomImages: (actionResult as TextAndImageActionResult)?.images || room.images(),
+        text: (actionResult as TextActionResult)?.text || ["You have no interest in that."],
         actions: actions,
         objects: room.objects().map((e) => e.toReference()),
     };
