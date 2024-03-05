@@ -22,7 +22,7 @@ export class LowLandsRoom extends Room {
     }
 
     public images(): string[] {
-        return [picture];
+        return [picture, "darktree", "tunnel"];
     }
 
     public actions(): Action[] {

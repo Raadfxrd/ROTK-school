@@ -20,6 +20,7 @@ export function createNewPlayerSession(): PlayerSession {
     return {
         currentRoom: "lowlands-room",
         inventory: [],
+        images: [],
     };
 }
 
