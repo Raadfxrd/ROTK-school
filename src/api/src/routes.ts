@@ -145,7 +145,7 @@ function convertActionResultToGameState(actionResult?: ActionResult): GameState 
         roomAlias: room.alias,
         roomTitle: room.name(),
         roomImages: room.images(),
-        text: (actionResult as TextActionResult)?.text || ["That doesn't make any sense."],
+        text: (actionResult as TextActionResult)?.text || ["You have no interest in that."],
         actions: actions,
         objects: room.objects().map((e) => e.toReference()),
     };
