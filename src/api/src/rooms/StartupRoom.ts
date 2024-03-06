@@ -5,7 +5,7 @@ import { CustomAction } from "../base/actions/CustomAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { getPlayerSession } from "../instances";
-import { LowLandsRoom } from "./LowLandsRoom";
+import { ThroneRoom } from "./ThroneRoom";
 
 export const StartupRoomAlias: string = "startup";
 
@@ -15,11 +15,11 @@ export class StartupRoom extends Room {
     }
 
     public name(): string {
-        return "Example Game";
+        return "Realm of the Kings";
     }
 
     public images(): string[] {
-        return ["startup"];
+        return ["ROTK"];
     }
 
     public actions(): Action[] {
@@ -32,7 +32,8 @@ export class StartupRoom extends Room {
 
     public custom(alias: string, _gameObjects?: GameObject[]): ActionResult | undefined {
         if (alias === "start-game") {
-            const room: LowLandsRoom = new LowLandsRoom();
+            const room: ThroneRoom = new ThroneRoom();
+
             //Set the current room to the example room
             getPlayerSession().currentRoom = room.alias;
             return room.examine();
