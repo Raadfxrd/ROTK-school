@@ -5,6 +5,7 @@ export const NavigateEastAlias: string = "NavigateEast";
 export const NavigateSouthAlias: string = "NavigateSouth";
 export const NavigateWestAlias: string = "NavigateWest";
 export const NavigateBlacksmithAlias: string = "KVBlacksmith";
+export const NavigateTownSquareAlias: string = "KVTownSquare";
 // class om naar het noorden te navigeren
 export class NavigationNorth extends Action {
     public constructor() {
@@ -38,5 +39,11 @@ export class NavigationWest extends Action {
 export class NavigationBlacksmith extends Action {
     public constructor() {
         super(NavigateBlacksmithAlias, "Blacksmith", false);
+    }
+}
+
+export class NavigationTownSquare extends Action {
+    public constructor() {
+        super(NavigateTownSquareAlias, "Town Square", false);
     }
 }
