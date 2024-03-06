@@ -13,15 +13,16 @@ export class Torch1Item extends Item implements Examine {
     public examine(): ActionResult | undefined {
         return new TextAndImageActionResult(
             [
-                "The torch flickers, casting shadows on the walls.",
+                "The torch flickers, casting shadows on the bark of the trees.",
                 "It appears to be the only source of light around here.",
+                "It is a weak, green light, but it is better than nothing",
                 "You feel a little safer with it in your hand.",
             ],
-            ["items/torches.png"]
+            ["rooms/lowlands.png", "items/torch-lowlands.png"]
         );
     }
 
     public name(): string {
-        return "The first torch";
+        return "A weak, green torch";
     }
 }
