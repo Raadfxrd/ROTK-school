@@ -4,6 +4,7 @@ import { getPlayerSessionFromContext, resetPlayerSessionInContext } from "./base
 import { ExampleCharacter, ExampleCharacterAlias } from "./characters/ExampleCharacter";
 import { ExampleItem, ExampleItemAlias } from "./items/ExampleItem";
 import { ExampleRoom, ExampleRoomAlias } from "./rooms/ExampleRoom";
+import { KarasValeBlacksmithRoom, KarasValeBlacksmithRoomAlias } from "./rooms/KarasValeBlacksmithRoom";
 import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./rooms/KarasValeTownSquareRoom";
 import { StartupRoom, StartupRoomAlias } from "./rooms/StartupRoom";
 import { PlayerSession } from "./types";
@@ -53,6 +54,9 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case KarasValeTownSquareRoomAlias:
             return new KarasValeTownSquareRoom();
+
+        case KarasValeBlacksmithRoomAlias:
+            return new KarasValeBlacksmithRoom();
     }
 
     return undefined;
