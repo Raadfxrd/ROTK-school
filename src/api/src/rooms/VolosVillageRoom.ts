@@ -2,6 +2,7 @@ import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
 import { ExamineAction } from "../base/actions/ExamineAction";
+import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 //import { Action } from "../base/actions/Action";
 //import { CustomAction } from "../base/actions/CustomAction";
@@ -26,10 +27,10 @@ export class VolosVillageRoom extends Room {
     }
 
     public images(): string[] {
-        return ["volodrake"];
+        return ["rooms/volodrake.png"];
     }
     public actions(): Action[] {
-        return [new ExamineAction()];
+        return [new ExamineAction(), new TalkAction()];
     }
     public objects(): GameObject[] {
         return [new Drakecharacter()];

@@ -131,6 +131,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
         case CharlesAlias:
             return new CharlesCharacter();
 
+        case DrakecharacterAlias:
+            return new Drakecharacter();
+
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
             return getRoomByAlias(alias);
