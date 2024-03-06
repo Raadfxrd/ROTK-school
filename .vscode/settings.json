@@ -1,8 +1,4 @@
 {
     "npm.packageManager": "npm",
-    "npm.scriptExplorerExclude": [
-        "dev:",
-        "build:",
-        "preview:"
-    ]
+    "npm.scriptExplorerExclude": ["dev:", "build:", "preview:"]
 }

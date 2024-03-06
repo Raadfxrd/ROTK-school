@@ -10,7 +10,7 @@ export abstract class GameObject implements HasInterfaces {
 
     /**
      * Create a new instance of this game object
-     * 
+     *
      * @param alias Alias of this game object
      * @param interfaces List of interfaces this game object implements
      */

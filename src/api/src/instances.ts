@@ -1,11 +1,22 @@
 import { GameObject } from "./base/gameObjects/GameObject";
 import { Room } from "./base/gameObjects/Room";
 import { getPlayerSessionFromContext, resetPlayerSessionInContext } from "./base/playerSessionMiddleware";
+import { AlexandraAlias, AlexandraCharacter } from "./characters/AlexandraCharacter";
+import { CharlesAlias, CharlesCharacter } from "./characters/CharlesCharacter";
+import { eleonorAlias, EleonorCharacter } from "./characters/EleonorCharacter";
 import { ExampleCharacter, ExampleCharacterAlias } from "./characters/ExampleCharacter";
 import { ExampleItem, ExampleItemAlias } from "./items/ExampleItem";
+import { RingItem, RingItemAlias } from "./items/RingItem";
+import { MapItem, MapItemAlias } from "./items/mapItem";
 import { ExampleRoom, ExampleRoomAlias } from "./rooms/ExampleRoom";
 import { StartupRoom, StartupRoomAlias } from "./rooms/StartupRoom";
+import { LowLandsRoom, LowLandsRoomAlias } from "./rooms/LowLandsRoom";
+import { TunnelItem, TunnelItemAlias } from "./items/TunnelItem";
+import { ThroneRoom, ThroneRoomAlias } from "./rooms/ThroneRoom";
+import { HenryAlias, HenryCharacter } from "./characters/HenryCharacter";
+import { Torch1Item, Torch1ItemAlias } from "./items/Torch1Item";
 import { PlayerSession } from "./types";
+import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
 
 /**
  * Create a new player session object
@@ -14,8 +25,11 @@ import { PlayerSession } from "./types";
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "startup",
+        currentRoom: "lowlands-room",
         inventory: [],
+        pickedUpRing: false,
+        knowWhereMapIs: false,
+        image: "",
     };
 }
 
@@ -49,6 +63,12 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case ExampleRoomAlias:
             return new ExampleRoom();
+
+        case LowLandsRoomAlias:
+            return new LowLandsRoom();
+
+        case ThroneRoomAlias:
+            return new ThroneRoom();
     }
 
     return undefined;
@@ -68,6 +88,33 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case ExampleCharacterAlias:
             return new ExampleCharacter();
+
+        case Torch1ItemAlias:
+            return new Torch1Item();
+
+        case DarkTreesItemAlias:
+            return new DarkTreesItem();
+
+        case TunnelItemAlias:
+            return new TunnelItem();
+
+        case eleonorAlias:
+            return new EleonorCharacter();
+
+        case HenryAlias:
+            return new HenryCharacter();
+
+        case RingItemAlias:
+            return new RingItem();
+
+        case MapItemAlias:
+            return new MapItem();
+
+        case AlexandraAlias:
+            return new AlexandraCharacter();
+
+        case CharlesAlias:
+            return new CharlesCharacter();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
