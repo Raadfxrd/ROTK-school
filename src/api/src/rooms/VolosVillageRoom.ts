@@ -9,6 +9,7 @@ import { GameObject } from "../base/gameObjects/GameObject";
 //import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { Drakecharacter } from "../characters/DrakeCharacter";
+
 export const VolosVillageRoomAlias: string = "Volo's Village";
 
 export class VolosVillageRoom extends Room {
