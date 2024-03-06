@@ -7,8 +7,10 @@ import { eleonorAlias, EleonorCharacter } from "./characters/EleonorCharacter";
 import { ExampleCharacter, ExampleCharacterAlias } from "./characters/ExampleCharacter";
 import { ExampleItem, ExampleItemAlias } from "./items/ExampleItem";
 import { RingItem, RingItemAlias } from "./items/RingItem";
-import { MapItem, MapItemAlias } from "./items/mapItem";
+import { MapItem, MapItemAlias } from "./items/MapItem";
 import { ExampleRoom, ExampleRoomAlias } from "./rooms/ExampleRoom";
+import { KarasValeBlacksmithRoom, KarasValeBlacksmithRoomAlias } from "./rooms/KarasValeBlacksmithRoom";
+import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./rooms/KarasValeTownSquareRoom";
 import { StartupRoom, StartupRoomAlias } from "./rooms/StartupRoom";
 import { LowLandsRoom, LowLandsRoomAlias } from "./rooms/LowLandsRoom";
 import { TunnelItem, TunnelItemAlias } from "./items/TunnelItem";
@@ -30,6 +32,7 @@ export function createNewPlayerSession(): PlayerSession {
         pickedUpRing: false,
         knowWhereMapIs: false,
         image: "",
+        wentNorth: false,
     };
 }
 
@@ -63,6 +66,12 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case ExampleRoomAlias:
             return new ExampleRoom();
+
+        case KarasValeTownSquareRoomAlias:
+            return new KarasValeTownSquareRoom();
+
+        case KarasValeBlacksmithRoomAlias:
+            return new KarasValeBlacksmithRoom();
 
         case LowLandsRoomAlias:
             return new LowLandsRoom();

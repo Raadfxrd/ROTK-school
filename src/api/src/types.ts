@@ -4,4 +4,5 @@ export type PlayerSession = {
     pickedUpRing: boolean;
     knowWhereMapIs: boolean;
     image: string;
+    wentNorth: boolean;
 };
