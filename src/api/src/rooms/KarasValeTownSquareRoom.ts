@@ -8,6 +8,7 @@ import { getPlayerSession } from "../instances";
 import { KarasValeBlacksmithRoom } from "./KarasValeBlacksmithRoom";
 import { ExamineAction } from "../base/actions/ExamineAction";
 import { PlayerSession } from "../types";
+import { AureliusCharacter } from "../characters/AureliusCharacter";
 
 export const KarasValeTownSquareRoomAlias: string = "KVTownSquare";
 
@@ -21,19 +22,19 @@ export class KarasValeTownSquareRoom extends Room {
     }
 
     public images(): string[] {
-        return ["KVTownSquare1"];
+        return ["rooms/KVTownSquare1.png"];
     }
 
     public actions(): Action[] {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.wentNorth === true) {
-            return [new NavigationBlacksmith(), new NavigationSouth()];
+            return [new ExamineAction(), new NavigationBlacksmith(), new NavigationSouth()];
         }
-        return [new ExamineAction(), new NavigationNorth()];
+        return [new NavigationNorth()];
     }
 
     public objects(): GameObject[] {
-        return [this];
+        return [new AureliusCharacter()];
     }
 
     public examine(): ActionResult | undefined {
@@ -47,6 +48,7 @@ export class KarasValeTownSquareRoom extends Room {
 
             return new TextActionResult([
                 "You move to the center of the town, and see there is a small tavern and a blacksmith.",
+                "There is also someone sitting on a bench.",
             ]);
         }
 

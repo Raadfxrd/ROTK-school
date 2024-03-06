@@ -19,6 +19,7 @@ import { HenryAlias, HenryCharacter } from "./characters/HenryCharacter";
 import { Torch1Item, Torch1ItemAlias } from "./items/Torch1Item";
 import { PlayerSession } from "./types";
 import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
+import { AureliusCharacter, AureliusCharacterAlias } from "./characters/AureliusCharacter";
 
 /**
  * Create a new player session object
@@ -124,6 +125,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case CharlesAlias:
             return new CharlesCharacter();
+
+        case AureliusCharacterAlias:
+            return new AureliusCharacter();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
