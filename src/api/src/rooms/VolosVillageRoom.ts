@@ -29,6 +29,6 @@ export class VolosVillageRoom extends Room {
         return ["volodrake2"];
     }
     public actions(): Action[] {
-        return [new ExamineAction(), new ];
+        return [new ExamineAction()];
     }
 }
