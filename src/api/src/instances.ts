@@ -4,6 +4,7 @@ import { getPlayerSessionFromContext, resetPlayerSessionInContext } from "./base
 import { AlexandraAlias, AlexandraCharacter } from "./characters/AlexandraCharacter";
 import { CharlesAlias, CharlesCharacter } from "./characters/CharlesCharacter";
 import { eleonorAlias, EleonorCharacter } from "./characters/EleonorCharacter";
+import { Drakecharacter, DrakecharacterAlias } from "./characters/DrakeCharacter";
 import { ExampleCharacter, ExampleCharacterAlias } from "./characters/ExampleCharacter";
 import { ExampleItem, ExampleItemAlias } from "./items/ExampleItem";
 import { RingItem, RingItemAlias } from "./items/RingItem";
@@ -17,6 +18,7 @@ import { TunnelItem, TunnelItemAlias } from "./items/TunnelItem";
 import { ThroneRoom, ThroneRoomAlias } from "./rooms/ThroneRoom";
 import { HenryAlias, HenryCharacter } from "./characters/HenryCharacter";
 import { Torch1Item, Torch1ItemAlias } from "./items/Torch1Item";
+import { VolosVillageRoom, VolosVillageRoomAlias } from "./rooms/VolosVillageRoom";
 import { PlayerSession } from "./types";
 import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
 
@@ -78,6 +80,8 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case ThroneRoomAlias:
             return new ThroneRoom();
+        case VolosVillageRoomAlias:
+            return new VolosVillageRoom();
     }
 
     return undefined;
@@ -97,6 +101,8 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case ExampleCharacterAlias:
             return new ExampleCharacter();
+        case DrakecharacterAlias:
+            return new Drakecharacter();
 
         case Torch1ItemAlias:
             return new Torch1Item();
