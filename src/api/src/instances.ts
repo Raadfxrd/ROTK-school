@@ -18,6 +18,7 @@ export function createNewPlayerSession(): PlayerSession {
     return {
         currentRoom: "startup",
         inventory: [],
+        wentNorth: false,
     };
 }
 
