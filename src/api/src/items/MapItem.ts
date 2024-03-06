@@ -1,6 +1,7 @@
 import { Pickup, PickupActionAlias } from "../actions/PickupAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
+import { TextAndImageActionResult } from "../base/actionResults/TextAndImageActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { Item } from "../base/gameObjects/Item";
 import { getPlayerSession } from "../instances";
@@ -18,10 +19,13 @@ export class MapItem extends Item implements Examine, Pickup {
     }
 
     public examine(): ActionResult | undefined {
-        return new TextActionResult([
-            "This looks like the map of Kaseon, you see all the different cities and towns in the region",
-            "You see that some towns don't have a name included on them",
-        ]);
+        return new TextAndImageActionResult(
+            [
+                "This looks like the map of Kaseon, you see all the different cities and towns in the region",
+                "You see that some towns don't have a name included on them",
+            ],
+            ["rooms/Kaseon.png"]
+        );
     }
 
     public pickup(): ActionResult | undefined {

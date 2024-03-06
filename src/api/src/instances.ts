@@ -7,7 +7,6 @@ import { eleonorAlias, EleonorCharacter } from "./characters/EleonorCharacter";
 import { ExampleCharacter, ExampleCharacterAlias } from "./characters/ExampleCharacter";
 import { ExampleItem, ExampleItemAlias } from "./items/ExampleItem";
 import { RingItem, RingItemAlias } from "./items/RingItem";
-import { MapItem, MapItemAlias } from "./items/mapItem";
 import { ExampleRoom, ExampleRoomAlias } from "./rooms/ExampleRoom";
 import { StartupRoom, StartupRoomAlias } from "./rooms/StartupRoom";
 import { LowLandsRoom, LowLandsRoomAlias } from "./rooms/LowLandsRoom";
@@ -17,6 +16,7 @@ import { HenryAlias, HenryCharacter } from "./characters/HenryCharacter";
 import { Torch1Item, Torch1ItemAlias } from "./items/Torch1Item";
 import { PlayerSession } from "./types";
 import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
+import { MapItem, MapItemAlias } from "./items/MapItem";
 
 /**
  * Create a new player session object
@@ -25,7 +25,7 @@ import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "lowlands-room",
+        currentRoom: "startup",
         inventory: [],
         pickedUpRing: false,
         knowWhereMapIs: false,

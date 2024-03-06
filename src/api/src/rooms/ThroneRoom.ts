@@ -11,9 +11,9 @@ import { AlexandraCharacter } from "../characters/AlexandraCharacter";
 import { CharlesCharacter } from "../characters/CharlesCharacter";
 import { EleonorCharacter } from "../characters/EleonorCharacter";
 import { HenryCharacter } from "../characters/HenryCharacter";
-import { getPlayerSession } from "../instances";
+import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { RingItem, RingItemAlias } from "../items/RingItem";
-import { MapItem } from "../items/mapItem";
+import { MapItem } from "../items/MapItem";
 import { PlayerSession } from "../types";
 
 export const ThroneRoomAlias: string = "throne-room";
@@ -73,7 +73,7 @@ export class ThroneRoom extends Room {
     public objects(): GameObject[] {
         const playerSession: PlayerSession = getPlayerSession();
 
-        const objects: GameObject[] = [this];
+        const objects: GameObject[] = [this, ...getGameObjectsFromInventory()];
 
         if (!playerSession.inventory.includes(RingItemAlias)) {
             objects.push(new RingItem());
