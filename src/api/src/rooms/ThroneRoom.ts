@@ -11,10 +11,11 @@ import { AlexandraCharacter } from "../characters/AlexandraCharacter";
 import { CharlesCharacter } from "../characters/CharlesCharacter";
 import { EleonorCharacter } from "../characters/EleonorCharacter";
 import { HenryCharacter } from "../characters/HenryCharacter";
-import { getPlayerSession } from "../instances";
+import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { RingItem, RingItemAlias } from "../items/RingItem";
-import { MapItem } from "../items/MapItem";
+import { MapItem, MapItemAlias } from "../items/MapItem";
 import { PlayerSession } from "../types";
+import { WolburgRoom } from "./WolburgRoom";
 
 export const ThroneRoomAlias: string = "throne-room";
 
@@ -46,6 +47,9 @@ export class ThroneRoom extends Room {
     }
 
     public actions(): Action[] {
+        const playerSession: PlayerSession = getPlayerSession();
+
+        const actions: Action[] = [new ExamineAction(), new TalkAction(), new PickupAction()];
         if (clickedContinue1 === true) {
             return [new CustomAction("continue-2", "Continue", false)];
         }
@@ -64,8 +68,11 @@ export class ThroneRoom extends Room {
         if (clickedContinue6 === true) {
             return [new CustomAction("continue-7", "Continue", false)];
         }
+        if (playerSession.knowLocationLowlands === true) {
+            actions.push(new CustomAction("wolburg", "Wolburg", false));
+        }
         if (clickedContinue7 === true) {
-            return [new ExamineAction(), new TalkAction(), new PickupAction()];
+            return actions;
         }
         return [new CustomAction("continue-1", "Continue", false)];
     }
@@ -73,13 +80,13 @@ export class ThroneRoom extends Room {
     public objects(): GameObject[] {
         const playerSession: PlayerSession = getPlayerSession();
 
-        const objects: GameObject[] = [this];
+        const objects: GameObject[] = [this, ...getGameObjectsFromInventory()];
 
         if (!playerSession.inventory.includes(RingItemAlias)) {
             objects.push(new RingItem());
         }
 
-        if (playerSession.knowWhereMapIs === true) {
+        if (playerSession.knowWhereMapIs === true && !playerSession.inventory.includes(MapItemAlias)) {
             objects.push(new MapItem());
         }
 
@@ -105,7 +112,7 @@ export class ThroneRoom extends Room {
         }
     }
 
-    public custom(alias: string, _gameObjects?: GameObject[]): TextActionResult | undefined {
+    public custom(alias: string, _gameObjects?: GameObject[]): TextActionResult | ActionResult | undefined {
         if (alias === "continue-1") {
             picture = "rooms/Wolburg.png";
             title = "Wolburg";
@@ -176,8 +183,12 @@ export class ThroneRoom extends Room {
                 "You think about going after them but they are already too far gone...",
             ]);
         }
-        if (alias === "continue-8") {
-            clickedContinue7 = false;
+        if (alias === "wolburg") {
+            const room: WolburgRoom = new WolburgRoom();
+
+            //Set the current room to the example room
+            getPlayerSession().currentRoom = room.alias;
+            return room.examine();
         }
         return undefined;
     }

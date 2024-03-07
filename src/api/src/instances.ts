@@ -9,7 +9,6 @@ import { BobCharacter, BobCharacterAlias } from "./characters/BobCharacter";
 import { ExampleCharacter, ExampleCharacterAlias } from "./characters/ExampleCharacter";
 import { ExampleItem, ExampleItemAlias } from "./items/ExampleItem";
 import { RingItem, RingItemAlias } from "./items/RingItem";
-import { MapItem, MapItemAlias } from "./items/MapItem";
 import { ExampleRoom, ExampleRoomAlias } from "./rooms/ExampleRoom";
 import { KarasValeBlacksmithRoom, KarasValeBlacksmithRoomAlias } from "./rooms/KarasValeBlacksmithRoom";
 import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./rooms/KarasValeTownSquareRoom";
@@ -23,6 +22,8 @@ import { VolosVillageRoom, VolosVillageRoomAlias } from "./rooms/VolosVillageRoo
 import { TavernRoom, TavernRoomAlias } from "./rooms/TavernRoom";
 import { PlayerSession } from "./types";
 import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
+import { MapItem, MapItemAlias } from "./items/MapItem";
+import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
 
 /**
  * Create a new player session object
@@ -31,12 +32,13 @@ import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "lowlands-room",
+        currentRoom: "startup",
         inventory: [],
         pickedUpRing: false,
         knowWhereMapIs: false,
         image: "",
         wentNorth: false,
+        knowLocationLowlands: false,
     };
 }
 
@@ -86,6 +88,9 @@ export function getRoomByAlias(alias: string): Room | undefined {
             return new VolosVillageRoom();
         case TavernRoomAlias:
             return new TavernRoom();
+
+        case WolburgRoomAlias:
+            return new WolburgRoom();
     }
 
     return undefined;

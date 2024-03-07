@@ -41,11 +41,27 @@ export class HenryCharacter extends Character implements Examine {
             return new TextActionResult([
                 "Henry: I've never seen this ring before, you might ask the king, he knows a lot more than i do.",
             ]);
+        } else if (_choiceId === 5) {
+            return new TextActionResult([
+                "Henry: I unfortunately can't go with you on the mission.",
+                "The people here need my help more than the princess needs me. She needs your help and only you.",
+                "Take the princess home with you in one piece Arthur. Good luck.",
+            ]);
+        } else if (_choiceId === 6) {
+            return new TextActionResult([
+                "Henry: No problem kiddo, Good luck on your adventure and your mission.",
+            ]);
+        } else if (_choiceId === 7) {
+            return new TextActionResult([
+                "Henry: I got you a set of armour laying in the dust.",
+                "Take it with you on your adventure. Good luck kiddo.",
+                "You obtained 'chainmail armour of the great'",
+            ]);
         }
 
         const playerSession: PlayerSession = getPlayerSession();
 
-        const choiceActions: TalkChoiceAction[] = [
+        let choiceActions: TalkChoiceAction[] = [
             new TalkChoiceAction(1, "Have you seen the queen?"),
             new TalkChoiceAction(2, "I have got no clue."),
             new TalkChoiceAction(3, "Bye!"),
@@ -53,6 +69,14 @@ export class HenryCharacter extends Character implements Examine {
 
         if (playerSession.inventory.includes(RingItemAlias)) {
             choiceActions.push(new TalkChoiceAction(4, "I have found a ring."));
+        }
+
+        if (playerSession.knowLocationLowlands === true) {
+            choiceActions = [
+                new TalkChoiceAction(4, "Can't you go with us on the mission?"),
+                new TalkChoiceAction(5, "Thanks for your help Henry"),
+                new TalkChoiceAction(6, "Do you have any advice for me?"),
+            ];
         }
 
         return new TalkActionResult(this, ["Henry: What happend?"], choiceActions);
