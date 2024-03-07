@@ -42,20 +42,43 @@ export class CharlesCharacter extends Character implements Examine {
                 "Charles: Bandits are most of the time not the cleanest ones so they must have left something",
             ]);
         } else if (_choiceId === 3) {
-            playerSession.knowWhereMapIs = true;
             return new TextActionResult([
-                "Chalres: I am not an explorer myself and unforunately don't know what this sigil on the ring is...",
+                "Charles: I am not an explorer myself and unforunately don't know what this sigil on the ring is...",
                 "Ask Alexandra or Eleonor, they probably know more about this.",
+            ]);
+        } else if (_choiceId === 4) {
+            return new TextActionResult([
+                "Charles: I must stay here to protect the city for any more danger. You never what the enemy has in their plans",
+                "I wish you and Alexandra good fortune, go save that princess.",
+            ]);
+        } else if (_choiceId === 5) {
+            return new TextActionResult([
+                "Charles: No problem young traveler.",
+                "I wish you and Alexandra good fortune, go save that princess.",
+            ]);
+        } else if (_choiceId === 6) {
+            return new TextActionResult([
+                "Charles: I can give you this sword i have, I don't use it because I am a wizard of course.",
+                "Take good care of it and use it wisely.",
+                "*You obtained 'The sword of good fortune'*",
             ]);
         }
 
-        const choiceActions: TalkChoiceAction[] = [
+        let choiceActions: TalkChoiceAction[] = [
             new TalkChoiceAction(1, "Can I gain some of your wisdom of what is happening?"),
             new TalkChoiceAction(2, "Not yet, I'll look further"),
         ];
 
         if (playerSession.inventory.includes(RingItemAlias)) {
             choiceActions.push(new TalkChoiceAction(3, "I have found a ring."));
+        }
+
+        if (playerSession.knowLocationLowlands === true) {
+            choiceActions = [
+                new TalkChoiceAction(4, "Can't you join me on the mission?"),
+                new TalkChoiceAction(5, "Thanks for your help charles."),
+                new TalkChoiceAction(6, "Do you have any advice for the mission?"),
+            ];
         }
         return new TalkActionResult(
             this,
