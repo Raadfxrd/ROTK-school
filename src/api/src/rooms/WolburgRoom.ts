@@ -1,3 +1,4 @@
+import { NavigateStablesWolburgAlias, NavigationStablesWolburg } from "../actions/NavigateAction";
 import { PickupAction } from "../actions/PickupAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
@@ -7,8 +8,7 @@ import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { AlexandraCharacter } from "../characters/AlexandraCharacter";
-import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
-import { ThroneRoom } from "./ThroneRoom";
+import { getGameObjectsFromInventory } from "../instances";
 
 export const WolburgRoomAlias: string = "wolburg-room";
 
@@ -26,7 +26,7 @@ export class WolburgRoom extends Room {
     }
 
     public actions(): Action[] {
-        return [new ExamineAction(), new TalkAction(), new PickupAction()];
+        return [new ExamineAction(), new TalkAction(), new PickupAction(), new NavigationStablesWolburg()];
     }
 
     public examine(): ActionResult | undefined {
@@ -41,12 +41,12 @@ export class WolburgRoom extends Room {
     }
 
     public custom(alias: string, _gameObjects?: GameObject[]): ActionResult | undefined {
-        if (alias === "start-game") {
-            const room: ThroneRoom = new ThroneRoom();
+        if (alias === "blacksmith") {
+            return new TextActionResult(["blacksmith"]);
+        }
 
-            //Set the current room to the example room
-            getPlayerSession().currentRoom = room.alias;
-            return room.examine();
+        if (alias === NavigateStablesWolburgAlias){
+            return new TextActionResult(["stables"]);
         }
 
         return undefined;

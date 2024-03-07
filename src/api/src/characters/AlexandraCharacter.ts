@@ -33,7 +33,7 @@ export class AlexandraCharacter extends Character implements Examine {
 
         //Check to see if current room is throneroom for the dialogues
 
-        if ((playerSession.currentRoom = ThroneRoomAlias)) {
+        if ((playerSession.currentRoom === ThroneRoomAlias)) {
             if (_choiceId === 1) {
                 return new TextActionResult([
                     "Alexandra: Those bandits are the worst. I heard some rumours about them being here and took caution.",
@@ -61,7 +61,7 @@ export class AlexandraCharacter extends Character implements Examine {
                     ]
                 );
             } else if (_choiceId === 5) {
-                return new TextActionResult(["Alexandra: You need to look where the bandits have gone too."]);
+                return new TextActionResult(["Alexandra: You need to look where the bandits have gone to."]);
             } else if (_choiceId === 6) {
                 return new TextActionResult(["Alexandra: Let me know if you know it!"]);
             } else if (_choiceId === 7) {
@@ -124,7 +124,7 @@ export class AlexandraCharacter extends Character implements Examine {
                 return new TalkActionResult(
                     this,
                     [
-                        "Alexandra: Hey I know what it was again, I heard some stories of this.",
+                        "Alexandra: Hey I was thinking about the ring and I know what it was again. I've heard some stories of this.",
                         "It is widely known as a great mystery and not many people know about this.",
                         "Besides this i don't know much more sorry. But you wanted to say something?",
                     ],
@@ -143,11 +143,11 @@ export class AlexandraCharacter extends Character implements Examine {
 
         if (playerSession.currentRoom === WolburgRoomAlias) {
             if (_choiceId === 1) {
-                return new TextActionResult(["Alright lets go"]);
+                return new TextActionResult(["Alright lets go."]);
             } else if (_choiceId === 2) {
-                return new TextActionResult([""]);
+                return new TextActionResult(["Alright, do you thing."]);
             } else if (_choiceId === 3) {
-                return new TextActionResult([""]);
+                return new TextActionResult(["Bye!"]);
             }
 
             return new TalkActionResult(
@@ -155,7 +155,7 @@ export class AlexandraCharacter extends Character implements Examine {
                 ["Alexandra: Wow check out the stable, looks like they need some help."],
                 [
                     new TalkChoiceAction(1, "Lets check the stables out"),
-                    new TalkChoiceAction(2, "Not right now"),
+                    new TalkChoiceAction(2, "I'm checking out something else first"),
                     new TalkChoiceAction(2, "Bye!"),
                 ]
             );

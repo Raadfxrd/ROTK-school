@@ -69,7 +69,7 @@ export class ThroneRoom extends Room {
             return [new CustomAction("continue-7", "Continue", false)];
         }
         if (playerSession.knowLocationLowlands === true) {
-            actions.push(new CustomAction("wolburg", "Wolburg", false));
+            actions.push(new CustomAction("wolburg", "Go Outside", false));
         }
         if (clickedContinue7 === true) {
             return actions;

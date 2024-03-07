@@ -39,6 +39,7 @@ export function createNewPlayerSession(): PlayerSession {
         image: "",
         wentNorth: false,
         knowLocationLowlands: false,
+        gold: 0
     };
 }
 
@@ -84,8 +85,10 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case ThroneRoomAlias:
             return new ThroneRoom();
+
         case VolosVillageRoomAlias:
             return new VolosVillageRoom();
+
         case TavernRoomAlias:
             return new TavernRoom();
 
@@ -139,6 +142,7 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case CharlesAlias:
             return new CharlesCharacter();
+            
         case BobCharacterAlias:
             return new BobCharacter();
 
