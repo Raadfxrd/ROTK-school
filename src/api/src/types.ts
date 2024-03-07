@@ -3,5 +3,5 @@ export type PlayerSession = {
     inventory: string[];
     pickedUpRing: boolean;
     knowWhereMapIs: boolean;
-    image: string;
+    knowLocationLowlands: boolean;
 };

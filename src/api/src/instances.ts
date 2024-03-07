@@ -17,6 +17,7 @@ import { Torch1Item, Torch1ItemAlias } from "./items/Torch1Item";
 import { PlayerSession } from "./types";
 import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
 import { MapItem, MapItemAlias } from "./items/MapItem";
+import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
 
 /**
  * Create a new player session object
@@ -29,7 +30,7 @@ export function createNewPlayerSession(): PlayerSession {
         inventory: [],
         pickedUpRing: false,
         knowWhereMapIs: false,
-        image: "",
+        knowLocationLowlands: false,
     };
 }
 
@@ -69,6 +70,9 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case ThroneRoomAlias:
             return new ThroneRoom();
+
+        case WolburgRoomAlias:
+            return new WolburgRoom();
     }
 
     return undefined;
