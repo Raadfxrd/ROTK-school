@@ -19,8 +19,8 @@ export class RingItem extends Item implements Examine, Pickup {
 
     public examine(): ActionResult | undefined {
         return new TextActionResult([
-            "You see a ring laying on the floor that you have never seen before",
-            "The ring is made of silver and has been engraved with the image of an cave",
+            "You see a ring laying on the floor that you have never seen before. ",
+            "The ring is made of silver and has been engraved with the image of an cave.",
         ]);
     }
 

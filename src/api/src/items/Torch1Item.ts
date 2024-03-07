@@ -15,7 +15,7 @@ export class Torch1Item extends Item implements Examine {
             [
                 "The torch flickers, casting shadows on the bark of the trees.",
                 "It appears to be the only source of light around here.",
-                "It is a weak, green light, but it is better than nothing",
+                "It is a weak, green light, but it is better than nothing.",
                 "You feel a little safer with it in your hand.",
             ],
             ["rooms/lowlands.png", "items/torch-lowlands.png"]
