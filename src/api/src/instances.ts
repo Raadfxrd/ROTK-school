@@ -5,6 +5,7 @@ import { AlexandraAlias, AlexandraCharacter } from "./characters/AlexandraCharac
 import { CharlesAlias, CharlesCharacter } from "./characters/CharlesCharacter";
 import { eleonorAlias, EleonorCharacter } from "./characters/EleonorCharacter";
 import { Drakecharacter, DrakecharacterAlias } from "./characters/DrakeCharacter";
+import { BobCharacter, BobCharacterAlias } from "./characters/BobCharacter";
 import { ExampleCharacter, ExampleCharacterAlias } from "./characters/ExampleCharacter";
 import { ExampleItem, ExampleItemAlias } from "./items/ExampleItem";
 import { RingItem, RingItemAlias } from "./items/RingItem";
@@ -19,6 +20,7 @@ import { ThroneRoom, ThroneRoomAlias } from "./rooms/ThroneRoom";
 import { HenryAlias, HenryCharacter } from "./characters/HenryCharacter";
 import { Torch1Item, Torch1ItemAlias } from "./items/Torch1Item";
 import { VolosVillageRoom, VolosVillageRoomAlias } from "./rooms/VolosVillageRoom";
+import { TavernRoom, TavernRoomAlias } from "./rooms/TavernRoom";
 import { PlayerSession } from "./types";
 import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
 
@@ -82,6 +84,8 @@ export function getRoomByAlias(alias: string): Room | undefined {
             return new ThroneRoom();
         case VolosVillageRoomAlias:
             return new VolosVillageRoom();
+        case TavernRoomAlias:
+            return new TavernRoom();
     }
 
     return undefined;
@@ -130,6 +134,8 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case CharlesAlias:
             return new CharlesCharacter();
+        case BobCharacterAlias:
+            return new BobCharacter();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
