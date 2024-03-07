@@ -24,6 +24,7 @@ import { PlayerSession } from "./types";
 import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
 import { MapItem, MapItemAlias } from "./items/MapItem";
 import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
+import { BlackSmithRoom, BlacksmithAlias } from "./rooms/BlacksmithRoom";
 
 /**
  * Create a new player session object
@@ -32,7 +33,7 @@ import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "startup",
+        currentRoom: "BlackSmith-room",
         inventory: [],
         pickedUpRing: false,
         knowWhereMapIs: false,
@@ -91,6 +92,8 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case WolburgRoomAlias:
             return new WolburgRoom();
+        case BlacksmithAlias:
+            return new BlackSmithRoom();
     }
 
     return undefined;

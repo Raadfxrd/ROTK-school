@@ -6,6 +6,7 @@ import { BobCharacter } from "../characters/BobCharacter";
 import { Action } from "../base/actions/Action";
 import { TalkAction } from "../base/actions/TalkAction";
 import { ExamineAction } from "../base/actions/ExamineAction";
+
 export const TavernRoomAlias: string = "tavern-room";
 export class TavernRoom extends Room {
     public constructor() {
