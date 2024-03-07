@@ -1,10 +1,12 @@
 import { GameObject } from "./base/gameObjects/GameObject";
 import { Room } from "./base/gameObjects/Room";
 import { getPlayerSessionFromContext, resetPlayerSessionInContext } from "./base/playerSessionMiddleware";
+import { BobCharacter, BobCharacterAlias } from "./characters/BobCharacter";
 import { ExampleCharacter, ExampleCharacterAlias } from "./characters/ExampleCharacter";
 import { ExampleItem, ExampleItemAlias } from "./items/ExampleItem";
 import { ExampleRoom, ExampleRoomAlias } from "./rooms/ExampleRoom";
 import { StartupRoom, StartupRoomAlias } from "./rooms/StartupRoom";
+import { TavernRoom, TavernRoomAlias } from "./rooms/TavernRoom";
 import { PlayerSession } from "./types";
 
 /**
@@ -49,6 +51,8 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case ExampleRoomAlias:
             return new ExampleRoom();
+        case TavernRoomAlias:
+            return new TavernRoom();
     }
 
     return undefined;
@@ -68,6 +72,8 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case ExampleCharacterAlias:
             return new ExampleCharacter();
+        case BobCharacterAlias:
+            return new BobCharacter();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
