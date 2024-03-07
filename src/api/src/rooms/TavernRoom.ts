@@ -14,7 +14,7 @@ export class TavernRoom extends Room {
         return "tavern";
     }
     public images(): string[] {
-        return ["Tavern"];
+        return ["rooms/Tavern.png"];
     }
     public objects(): GameObject[] {
         return [this, new BobCharacter()];
