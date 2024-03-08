@@ -4,4 +4,5 @@ export type PlayerSession = {
     pickedUpRing: boolean;
     knowWhereMapIs: boolean;
     knowLocationLowlands: boolean;
+    gold: number;
 };

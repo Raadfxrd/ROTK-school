@@ -64,6 +64,7 @@ export class EleonorCharacter extends Character implements Examine {
             ]);
         } else if (_choiceId === 7) {
             playerSession.knowLocationLowlands = true;
+            playerSession.gold += 10;
             return new TextActionResult([
                 "Eleonor: I think that's not it. Quickpass is a neutral village whom are really kind to all people passing by.",
                 "I took some time thinking about this while you were looking at the map and I think the place you are looking for are the LowLands.",

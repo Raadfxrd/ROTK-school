@@ -31,6 +31,7 @@ export function createNewPlayerSession(): PlayerSession {
         pickedUpRing: false,
         knowWhereMapIs: false,
         knowLocationLowlands: false,
+        gold: 0,
     };
 }
 
