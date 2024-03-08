@@ -43,6 +43,7 @@ export class GameCanvas extends LitElement {
             max-width: 100%;
             max-height: 100%;
             image-rendering: crisp-edges;
+            image-resolution: from-image 10dpi;
         }
 
         .header img:nth-child(n + 2) {

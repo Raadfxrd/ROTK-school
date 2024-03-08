@@ -33,13 +33,14 @@ import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
 export function createNewPlayerSession(): PlayerSession {
     return {
         currentRoom: "startup",
+        lastRoom: "",
         inventory: [],
         pickedUpRing: false,
         knowWhereMapIs: false,
         image: "",
         wentNorth: false,
         knowLocationLowlands: false,
-        gold: 0
+        gold: 0,
     };
 }
 
@@ -142,7 +143,7 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case CharlesAlias:
             return new CharlesCharacter();
-            
+
         case BobCharacterAlias:
             return new BobCharacter();
 
