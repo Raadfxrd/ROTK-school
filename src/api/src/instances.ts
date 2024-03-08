@@ -28,7 +28,7 @@ import { AureliusCharacter, AureliusCharacterAlias } from "./characters/Aurelius
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "lowlands-room",
+        currentRoom: "KVTownSquare",
         inventory: [],
         pickedUpRing: false,
         knowWhereMapIs: false,
