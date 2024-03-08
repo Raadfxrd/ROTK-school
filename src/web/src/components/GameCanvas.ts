@@ -68,7 +68,8 @@ export class GameCanvas extends LitElement {
         }
 
         /** Class voor altijd zichtbare buttons **/
-        .buttons {
+        .buttons,
+        .interact-buttons {
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
@@ -263,10 +264,25 @@ export class GameCanvas extends LitElement {
     }
 
     private renderFooter(): TemplateResult {
+        const interactButtons: any = this.actionButtons?.filter((button) =>
+            ["Examine", "Talk to"].includes(button.label)
+        );
+        const otherButtons: any = this.actionButtons?.filter(
+            (button) => !["Examine", "Talk to"].includes(button.label)
+        );
+
         return html`
+            <div class="interact-buttons">
+                ${interactButtons?.map(
+                    (button: ActionReference) =>
+                        html`<a class="button" @click=${(): void => void this.handleClickAction(button)}
+                            >${button.label}</a
+                        >`
+                )}
+            </div>
             <div class="buttons">
-                ${this.actionButtons?.map(
-                    (button) => html`<a
+                ${otherButtons?.map(
+                    (button: ActionReference) => html`<a
                         class="button ${this.selectedActionButton === button ? "active" : ""}"
                         @click=${(): void => void this.handleClickAction(button)}
                         >${button.label}</a
