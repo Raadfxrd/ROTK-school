@@ -23,8 +23,8 @@ export class AlexandraCharacter extends Character implements Examine {
 
     public examine(): ActionResult | undefined {
         return new TextActionResult([
-            "A young woman, the only woman in the kingsguard. Known for her good deeds that she has done",
-            "She kind of reminds you of yourself. She has the same characteristics as you have",
+            "A young woman, the only woman in the kingsguard. Known for her good deeds that she has done.",
+            "She kind of reminds you of yourself. She has the same characteristics as you have.",
         ]);
     }
 
@@ -33,7 +33,7 @@ export class AlexandraCharacter extends Character implements Examine {
 
         //Check to see if current room is throneroom for the dialogues
 
-        if ((playerSession.currentRoom = ThroneRoomAlias)) {
+        if (playerSession.currentRoom === ThroneRoomAlias) {
             if (_choiceId === 1) {
                 return new TextActionResult([
                     "Alexandra: Those bandits are the worst. I heard some rumours about them being here and took caution.",
@@ -48,7 +48,7 @@ export class AlexandraCharacter extends Character implements Examine {
             } else if (_choiceId === 3) {
                 return new TextActionResult([
                     "Alexandra: I have seen this sigil somewhere, where was it again...",
-                    "Let me think about this for a minute. You can ask the king in the meantime",
+                    "Let me think about this for a minute. You can ask the king in the meantime.",
                 ]);
             } else if (_choiceId === 4) {
                 return new TalkActionResult(
@@ -77,7 +77,7 @@ export class AlexandraCharacter extends Character implements Examine {
                 return new TextActionResult(["Alexandra: Alright, let me know if you are ready though guy."]);
             } else if (_choiceId === 10) {
                 return new TextActionResult([
-                    "Alexandra: I knew it, I heard loads about it but wasn't too sure it was a thing",
+                    "Alexandra: I knew it, I heard loads about it but wasn't too sure it was a thing.",
                     "People only spoke of it as a legend, the Lowlands, but it must be real...",
                     "Tell the king that we need to head towards the Lowlands",
                 ]);
@@ -143,11 +143,11 @@ export class AlexandraCharacter extends Character implements Examine {
 
         if (playerSession.currentRoom === WolburgRoomAlias) {
             if (_choiceId === 1) {
-                return new TextActionResult(["Alright lets go"]);
+                return new TextActionResult(["Alright lets go."]);
             } else if (_choiceId === 2) {
-                return new TextActionResult([""]);
+                return new TextActionResult(["Do your thing boss."]);
             } else if (_choiceId === 3) {
-                return new TextActionResult([""]);
+                return new TextActionResult(["Oh, bye!"]);
             }
 
             return new TalkActionResult(
@@ -156,7 +156,7 @@ export class AlexandraCharacter extends Character implements Examine {
                 [
                     new TalkChoiceAction(1, "Lets check the stables out"),
                     new TalkChoiceAction(2, "Not right now"),
-                    new TalkChoiceAction(2, "Bye!"),
+                    new TalkChoiceAction(3, "Bye!"),
                 ]
             );
         }

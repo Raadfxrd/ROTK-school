@@ -7,6 +7,7 @@ import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { AlexandraCharacter } from "../characters/AlexandraCharacter";
+import { RichardCharacter } from "../characters/RichardCharacter";
 import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { ThroneRoom } from "./ThroneRoom";
 
@@ -37,7 +38,7 @@ export class WolburgRoom extends Room {
     }
 
     public objects(): GameObject[] {
-        return [this, ...getGameObjectsFromInventory(), new AlexandraCharacter()];
+        return [this, ...getGameObjectsFromInventory(), new AlexandraCharacter(), new RichardCharacter()];
     }
 
     public custom(alias: string, _gameObjects?: GameObject[]): ActionResult | undefined {

@@ -18,6 +18,7 @@ import { PlayerSession } from "./types";
 import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
 import { MapItem, MapItemAlias } from "./items/MapItem";
 import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
+import { RichardCharacter, RichardCharacterAlias } from "./characters/RichardCharacter";
 
 /**
  * Create a new player session object
@@ -121,6 +122,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case CharlesAlias:
             return new CharlesCharacter();
+
+        case RichardCharacterAlias:
+            return new RichardCharacter();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
