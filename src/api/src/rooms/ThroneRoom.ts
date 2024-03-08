@@ -16,7 +16,6 @@ import { RingItem, RingItemAlias } from "../items/RingItem";
 import { MapItem, MapItemAlias } from "../items/MapItem";
 import { PlayerSession } from "../types";
 import { WolburgRoom } from "./WolburgRoom";
-import { StartupRoom } from "./StartupRoom";
 
 export const ThroneRoomAlias: string = "throne-room";
 
@@ -185,7 +184,7 @@ export class ThroneRoom extends Room {
             ]);
         }
         if (alias === "wolburg") {
-            const lastroom: StartupRoom = new StartupRoom();
+            const lastroom: ThroneRoom = new ThroneRoom();
             const room: WolburgRoom = new WolburgRoom();
 
             //Set the current room to the example room
