@@ -51,6 +51,10 @@ export class WolburgRoom extends Room {
             inStables = true;
             image = "rooms/stableWolburg.png";
         }
+        if (alias === "back"){
+            inStables = false;
+            image = "rooms/WolburgCity.png";
+        }
 
         return undefined;
     }
