@@ -15,6 +15,7 @@ import { ExamineAction } from "../base/actions/ExamineAction";
 import { PlayerSession } from "../types";
 import { AureliusCharacter } from "../characters/AureliusCharacter";
 import { TalkAction } from "../base/actions/TalkAction";
+import { KarasValeForestRoom } from "./KarasValeForestRoom";
 
 export const KarasValeTownSquareRoomAlias: string = "KVTownSquare";
 
@@ -80,6 +81,14 @@ export class KarasValeTownSquareRoom extends Room {
         if (alias === "NavigateSouth") {
             this.playerSession.wentNorth = false;
             return new TextActionResult(["In front of you is a small town named Kara's Vale."]);
+        }
+
+        if (alias === "NavigateWest") {
+            const room: KarasValeForestRoom = new KarasValeForestRoom();
+
+            getPlayerSession().currentRoom = room.alias;
+
+            return room.examine();
         }
         return undefined;
     }

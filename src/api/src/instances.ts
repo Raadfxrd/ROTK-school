@@ -20,6 +20,9 @@ import { Torch1Item, Torch1ItemAlias } from "./items/Torch1Item";
 import { PlayerSession } from "./types";
 import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
 import { AureliusCharacter, AureliusCharacterAlias } from "./characters/AureliusCharacter";
+import { KarasValeForestRoom, KarasValeForestRoomAlias } from "./rooms/KarasValeForestRoom";
+import { KVFallenTreesItem, KVFallenTreesItemAlias } from "./items/KVFallenTreeItem";
+import { KVForestItem, KVForestItemAlias } from "./items/KVForestItem";
 
 /**
  * Create a new player session object
@@ -80,6 +83,9 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case ThroneRoomAlias:
             return new ThroneRoom();
+
+        case KarasValeForestRoomAlias:
+            return new KarasValeForestRoom();
     }
 
     return undefined;
@@ -130,6 +136,11 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
         case AureliusCharacterAlias:
             return new AureliusCharacter();
 
+        case KVFallenTreesItemAlias:
+            return new KVFallenTreesItem();
+
+        case KVForestItemAlias:
+            return new KVForestItem();
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
             return getRoomByAlias(alias);
