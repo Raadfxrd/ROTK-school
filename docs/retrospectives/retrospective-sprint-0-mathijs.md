@@ -16,9 +16,9 @@
 -   Samen oplossen van code problems(doormiddel van discord/ IRL).
 -   Het schrijven van OOP gericht code.
 
-## Eigen mening
+## Terugblik op srint 0
 
-zeer productieve sprint waarin ik en mijn team veel geleerd hebben.
+zeer productieve sprint waarin ik en mijn team veel geleerd hebben. Probeer voor volgende sprint meer te focussen op de technische aspecten zoals lit, express en SQL.
 
 ## Leerdoelen
 

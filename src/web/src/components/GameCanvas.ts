@@ -6,84 +6,152 @@ import { getState, performAction } from "../services/routeService";
 @customElement("game-canvas")
 export class GameCanvas extends LitElement {
     public static styles = css`
+        /** Maken van nieuwe grid layout voor nieuwe custom layout **/
         .game {
-            height: 100%;
+            margin-top: 20px;
+            height: calc(
+                100vh - 40px
+            ); /** Limiteren van display van website door viewheight - 40px doen, zorgt voor "claustrofobische" retro vibe **/
+            width: calc(
+                100vw - 40px
+            ); /** Limiteren van display van website door viewwidth - 40px doen, zorgt voor "claustrofobische" retro vibe **/
             display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: auto auto 1fr auto;
-            grid-column-gap: 0px;
-            grid-row-gap: 0px;
+            grid-template-columns: 0.5fr 1.5fr 0.7fr;
+            grid-template-rows: 0.1fr 2fr 0.9fr;
+            gap: 20px 20px;
+            grid-template-areas:
+                "title title ."
+                "header header sidebar"
+                "buttons buttons sidebar";
         }
 
         .title {
             text-align: center;
-            margin-top: 10px;
+            grid-area: title;
         }
 
         .header {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            flex-grow: 1;
+            justify-content: center;
             position: relative;
-            margin-top: 10px;
+            overflow: hidden;
+            grid-area: header;
         }
 
         .header img {
-            width: 100%;
-            height: auto;
-            image-rendering: pixelated;
+            max-width: 100%;
+            max-height: 100%;
+            image-rendering: crisp-edges;
+            image-resolution: from-image 10dpi;
         }
 
         .header img:nth-child(n + 2) {
             position: absolute;
         }
 
-        .content {
-            flex-grow: 1;
+        /** Sidebar class voor displayen van text op leukere manier **/
+        .sidebar {
+            border: 2px solid #c0c0c0;
+            background-color: #000;
+            padding: 0px 20px 0px 20px;
+            color: #fff;
+            grid-area: sidebar;
+            font-family: var(--font2);
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+
+        .sidebar p {
+            margin: 20px 0px 0px 0px;
+        }
+
+        /** Class voor altijd zichtbare buttons **/
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
             overflow: auto;
-            margin-top: 10px;
-            padding: 0 10px;
+            justify-self: center;
+            align-self: start;
+            grid-area: buttons;
+            width: 100%;
         }
 
-        .content p {
-            margin: 0 0 10px 0;
+        .button,
+        .action-button {
+            background-color: #9988ee;
+            border-radius: var(--button-radius);
+            padding: var(--button-padding);
+            cursor: var(--button-cursor);
+            user-select: var(--button-user-select);
+            display: inline-block;
+            margin-bottom: 10px;
+            max-height: 1.5rem;
         }
 
-        .content p:last-of-type {
+        .button.active,
+        .button:hover,
+        .action-button:hover {
+            background-color: #332c57;
+        }
+
+        /** Class voor uitvouwbare buttons **/
+        .action-buttons {
+            display: none;
+            margin-top: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            animation: fadeInDown 0.5s;
+            border-radius: var(--button-radius);
+            padding: var(--button-padding);
+            cursor: var(--button-cursor);
+            user-select: var(--button-user-select);
+        }
+
+        .action-button {
+            background-color: #7f68c1;
+            transition: 0.2s;
             margin: 0;
         }
 
-        .footer {
-            border-radius: 10px 10px 0 0;
-            background-color: #52478b;
-            border: 1px solid #332c57;
-            margin-top: 10px;
+        /** Classes voor definieren of ".action-buttons" links, rechts of gecentreerd moeten zijn **/
+        .center,
+        .left,
+        .right {
             display: flex;
-            height: 105px;
+            align-items: center;
+            justify-content: center;
         }
 
-        .footer .buttons {
-            display: flex;
-            flex-direction: column;
-            overflow: auto;
-            padding: 10px 10px 0 10px;
+        .left {
+            align-items: flex-start;
+            justify-content: flex-start;
         }
 
-        .footer .button {
-            background-color: #7f6ed7;
-            border: 1px solid #332c57;
-            padding: 5px 10px;
-            margin: 0 0 10px 10px;
-            text-transform: uppercase;
-            cursor: pointer;
-            display: inline-block;
-            user-select: none;
+        .right {
+            align-items: flex-end;
+            justify-content: flex-end;
         }
 
-        .footer .button.active,
-        .footer .button:hover {
-            background-color: #332c57;
+        /** Animation keyframes voor ".action-buttons" **/
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-90px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /** Animation class voor ".action-buttons" **/
+        .fadeInDown {
+            animation-name: fadeInDown;
         }
     `;
 
@@ -109,7 +177,6 @@ export class GameCanvas extends LitElement {
     }
 
     private updateState(state: GameState): void {
-        //Reset the component
         this.roomTitle = state.roomTitle;
         this.roomImages = state.roomImages;
         this.contentText = state.text;
@@ -126,17 +193,15 @@ export class GameCanvas extends LitElement {
         if (button.needsObject) {
             this.selectedActionButton = button;
             this.selectedGameObjectButtons.clear();
-
-            this.requestUpdate();
         } else {
             const state: any = await performAction(button.alias);
 
-            if (state === undefined) {
-                return;
+            if (state !== undefined) {
+                this.updateState(state);
             }
-
-            this.updateState(state);
         }
+
+        this.requestUpdate();
     }
 
     private async handleClickObject(button: GameObjectReference): Promise<void> {
@@ -148,7 +213,7 @@ export class GameCanvas extends LitElement {
 
         const state: GameState | undefined = await performAction(
             this.selectedActionButton.alias,
-            [...this.selectedGameObjectButtons].map((e) => e.alias)
+            Array.from(this.selectedGameObjectButtons, (e) => e.alias)
         );
 
         if (this.selectedGameObjectButtons.size >= 2) {
@@ -156,26 +221,27 @@ export class GameCanvas extends LitElement {
             this.selectedGameObjectButtons.clear();
         }
 
-        this.requestUpdate();
-
-        if (state === undefined) {
-            return;
+        if (state !== undefined) {
+            this.updateState(state);
         }
 
-        this.updateState(state);
+        this.requestUpdate();
     }
 
     protected render(): TemplateResult {
         return html`
             <div class="game">
-                ${this.renderTitle()} ${this.renderHeader()} ${this.renderContent()} ${this.renderFooter()}
+                <div class="title">${this.renderTitle()}</div>
+                <div class="header">${this.renderHeader()}</div>
+                <div class="sidebar">${this.renderSidebar()}</div>
+                <div class="buttons">${this.renderFooter()}</div>
             </div>
         `;
     }
 
     private renderTitle(): TemplateResult {
         if (this.roomTitle) {
-            return html`<div class="title">${this.roomTitle}</div>`;
+            return html` <div class="title">${this.roomTitle}</div> `;
         }
 
         return html`${nothing}`;
@@ -185,7 +251,7 @@ export class GameCanvas extends LitElement {
         if (this.roomImages && this.roomImages.length > 0) {
             return html`
                 <div class="header">
-                    ${this.roomImages?.map((url) => html`<img src="/assets/img/rooms/${url}.png" />`)}
+                    ${this.roomImages?.map((url) => html`<img src="/assets/img/${url}" />`)}
                 </div>
             `;
         }
@@ -193,37 +259,36 @@ export class GameCanvas extends LitElement {
         return html`${nothing}`;
     }
 
-    private renderContent(): TemplateResult {
-        return html`<div class="content">${this.contentText?.map((text) => html`<p>${text}</p>`)}</div>`;
+    private renderSidebar(): TemplateResult {
+        return html`${this.contentText?.map((text) => html`<p>${text}</p>`)}`;
     }
 
     private renderFooter(): TemplateResult {
         return html`
-            <div class="footer">
-                <div class="buttons">
-                    <div>
-                        ${this.actionButtons?.map(
-                            (button) => html`<a
-                                class="button ${this.selectedActionButton === button ? "active" : ""}"
-                                @click=${(): void => void this.handleClickAction(button)}
-                                >${button.label}</a
-                            >`
-                        )}
-                    </div>
-                    <div>
-                        ${this.selectedActionButton
-                            ? this.gameObjectButtons?.map(
-                                  (button) => html`<a
-                                      class="button ${this.selectedGameObjectButtons.has(button)
-                                          ? "active"
-                                          : ""}"
-                                      @click=${(): void => void this.handleClickObject(button)}
-                                      >${button.name}</a
-                                  >`
-                              )
-                            : nothing}
-                    </div>
-                </div>
+            <div class="buttons">
+                ${this.actionButtons?.map(
+                    (button) => html`<a
+                        class="button ${this.selectedActionButton === button ? "active" : ""}"
+                        @click=${(): void => void this.handleClickAction(button)}
+                        >${button.label}</a
+                    >`
+                )}
+            </div>
+            ${this.selectedActionButton ? this.renderActionButtons() : nothing}
+        `;
+    }
+
+    private renderActionButtons(): TemplateResult {
+        return html`
+            <div class="action-buttons ${this.selectedActionButton ? "fadeInDown center" : ""}">
+                <!-- Verander de center hier voor juiste uitlijning -->
+                ${this.gameObjectButtons?.map(
+                    (button) => html`<a
+                        class="action-button ${this.selectedGameObjectButtons.has(button) ? "active" : ""}"
+                        @click=${(): void => void this.handleClickObject(button)}
+                        >${button.name}</a
+                    >`
+                )}
             </div>
         `;
     }
