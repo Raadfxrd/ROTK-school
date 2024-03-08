@@ -9,6 +9,7 @@ import { KarasValeBlacksmithRoom } from "./KarasValeBlacksmithRoom";
 import { ExamineAction } from "../base/actions/ExamineAction";
 import { PlayerSession } from "../types";
 import { AureliusCharacter } from "../characters/AureliusCharacter";
+import { TalkAction } from "../base/actions/TalkAction";
 
 export const KarasValeTownSquareRoomAlias: string = "KVTownSquare";
 
@@ -16,19 +17,19 @@ export class KarasValeTownSquareRoom extends Room {
     public constructor() {
         super(KarasValeTownSquareRoomAlias);
     }
+    public playerSession: PlayerSession = getPlayerSession();
 
     public name(): string {
         return "Kara's Vale";
     }
 
     public images(): string[] {
-        return ["rooms/KVTownSquare1.png"];
+        return ["rooms/KVTownSquare.png"];
     }
 
     public actions(): Action[] {
-        const playerSession: PlayerSession = getPlayerSession();
-        if (playerSession.wentNorth === true) {
-            return [new ExamineAction(), new NavigationBlacksmith(), new NavigationSouth()];
+        if (this.playerSession.wentNorth === true) {
+            return [new ExamineAction(), new TalkAction(), new NavigationBlacksmith(), new NavigationSouth()];
         }
         return [new NavigationNorth()];
     }
@@ -41,7 +42,6 @@ export class KarasValeTownSquareRoom extends Room {
         return new TextActionResult(["In front of you is a small town named Kara's Vale."]);
     }
 
-    public playerSession: PlayerSession = getPlayerSession();
     public custom(alias: string, _gameObjects?: GameObject[]): ActionResult | undefined {
         if (alias === "NavigateNorth") {
             this.playerSession.wentNorth = true;
