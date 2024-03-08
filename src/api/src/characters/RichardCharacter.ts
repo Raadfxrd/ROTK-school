@@ -68,7 +68,7 @@ export class RichardCharacter extends Character implements Examine {
         } else if (_choiceId === 5) {
             return new TalkActionResult(
                 this,
-                ["They were going to the stables where all the commition is now."],
+                ["They were going to the stables where all the commotion is now."],
                 [new TalkChoiceAction(6, "Thanks, that's all i needed")]
             );
         } else if (_choiceId === 6) {

@@ -22,10 +22,22 @@ export class AlexandraCharacter extends Character implements Examine {
     }
 
     public examine(): ActionResult | undefined {
-        return new TextActionResult([
-            "A young woman, the only woman in the kingsguard. Known for her good deeds that she has done.",
-            "She kind of reminds you of yourself. She has the same characteristics as you have.",
-        ]);
+        const playerSession: PlayerSession = getPlayerSession();
+        if (playerSession.currentRoom === ThroneRoomAlias){
+            return new TextActionResult([
+                "A young woman, the only woman in the kingsguard. Known for her good deeds that she has done.",
+                "She kind of reminds you of yourself. She has the same characteristics as you have.",
+            ]);
+        }
+
+        if (playerSession.currentRoom === WolburgRoomAlias){
+            return new TextActionResult([
+                "She looks worried about the commotion happening at the stable.",
+                "Besides that she looks worried, she also has a look of relief, the bandits are probably closeby..."
+            ]);
+        }
+
+        return undefined;
     }
 
     public talk(_choiceId?: number): ActionResult | undefined {
