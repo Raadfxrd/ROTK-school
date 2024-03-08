@@ -49,28 +49,45 @@ export class EleonorCharacter extends Character implements Examine {
             ]);
         } else if (_choiceId === 5) {
             playerSession.knowLocationLowlands = true;
-            return new TextActionResult([
-                "Eleonor: I think that's it! They must bring her to there, it is known as the Lowlands. I've heard of all different kinds of mysteries going on there",
-                "I won't send you on your own to search for the princess. Take Alexandra with you, she knows a lot about what is happening too",
-                "Take care Arthur and Alexandra, come back in one piece.",
-            ]);
+            return new TalkActionResult(
+                this,
+                [
+                    "Eleonor: I think that's it! They must bring her to there, it is known as the Lowlands. I've heard of all different kinds of mysteries going on there",
+                    "I won't send you on your own to search for the princess. Take Alexandra with you, she knows a lot about what is happening too",
+                    "Take care Arthur and Alexandra, come back in one piece.",
+                ],
+                [
+                    new TalkChoiceAction(10, "Start Adventure")
+                ]
+            );
         } else if (_choiceId === 6) {
             playerSession.knowLocationLowlands = true;
-            return new TextActionResult([
-                "Eleonor: I think that's not it. Volo's village is a really friendly village with some darker type of people.",
-                "I took some time thinking about this while you were looking at the map and I think the place you are looking for are the LowLands.",
-                "I won't send you on your own to search for the princess. Take Alexandra with you, she knows a lot about what is happening too",
-                "Take care Arthur and Alexandra, come back in one piece.",
-            ]);
+            return new TalkActionResult(
+                this,
+                [
+                    "Eleonor: I think that's not it. Volo's village is a really friendly village with some darker type of people.",
+                    "I took some time thinking about this while you were looking at the map and I think the place you are looking for are the LowLands.",
+                    "I won't send you on your own to search for the princess. Take Alexandra with you, she knows a lot about what is happening too",
+                    "Take care Arthur and Alexandra, come back in one piece.",
+                ],
+                [
+                    new TalkChoiceAction(10, "Start Adventure")
+                ]
+            );
         } else if (_choiceId === 7) {
             playerSession.knowLocationLowlands = true;
-            playerSession.gold += 10;
-            return new TextActionResult([
-                "Eleonor: I think that's not it. Quickpass is a neutral village whom are really kind to all people passing by.",
-                "I took some time thinking about this while you were looking at the map and I think the place you are looking for are the LowLands.",
-                "I won't send you on your own to search for the princess. Take Alexandra with you, she knows a lot about what is happening too",
-                "Take care Arthur and Alexandra, come back in one piece.",
-            ]);
+            return new TalkActionResult(
+                this,
+                [
+                    "Eleonor: I think that's not it. Quickpass is a neutral village whom are really kind to all people passing by.",
+                    "I took some time thinking about this while you were looking at the map and I think the place you are looking for are the LowLands.",
+                    "I won't send you on your own to search for the princess. Take Alexandra with you, she knows a lot about what is happening too",
+                    "Take care Arthur and Alexandra, come back in one piece.",
+                ],
+                [
+                    new TalkChoiceAction(10, "Start Adventure")
+                ]
+                );
         } else if (_choiceId === 8) {
             return new TextActionResult([
                 "Eleonor: You'll have to go to the Lowlands, it is in the bottom left of the province Kaseon.",
@@ -78,6 +95,12 @@ export class EleonorCharacter extends Character implements Examine {
             ]);
         } else if (_choiceId === 9) {
             return new TextActionResult(["Eleonor: Good luck Arthur and Alexandra."]);
+        } else if (_choiceId === 10) {
+            playerSession.gold += 10;
+            return new TextActionResult([
+                "Eleonor: Here is some gold to help you around, take good care of yourself.",
+                "*You recieved 10 gold and a steel sword*",
+            ]);
         }
 
         let choiceActions: TalkChoiceAction[] = [
@@ -90,6 +113,14 @@ export class EleonorCharacter extends Character implements Examine {
             choiceActions.push(new TalkChoiceAction(4, "I have found a ring."));
         }
 
+        if (playerSession.knowLocationLowlands === true) {
+            choiceActions = [
+                new TalkChoiceAction(8, "So where do i need to go again?"),
+                new TalkChoiceAction(9, "Sorry for bothering, I'm going on my way!"),
+            ];
+            return new TalkActionResult(this, ["Eleonor: You need something?"], choiceActions);
+        }
+
         if (playerSession.knowWhereMapIs === true) {
             choiceActions = [
                 new TalkChoiceAction(5, "We need to go to the cave in the bottom left of the map"),
@@ -100,13 +131,6 @@ export class EleonorCharacter extends Character implements Examine {
             return new TalkActionResult(this, ["Eleonor: Where do we need to go to Arthur?"], choiceActions);
         }
 
-        if (playerSession.knowLocationLowlands === true) {
-            choiceActions = [
-                new TalkChoiceAction(8, "So where do i need to go again?"),
-                new TalkChoiceAction(9, "Sorry for bothering, I'm going on my way!"),
-            ];
-            return new TalkActionResult(this, ["Eleonor: You need something?"], choiceActions);
-        }
         return new TalkActionResult(
             this,
             ["Eleonor: Please, how could this have happened..."],
