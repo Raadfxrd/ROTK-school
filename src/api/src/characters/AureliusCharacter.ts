@@ -53,6 +53,7 @@ export class AureliusCharacter extends Character implements Examine {
         }
 
         if (choiceId === 4) {
+            this.playerSession.knowsOfKara = true;
             return new TextActionResult([""]);
         }
         if (choiceId === 10) {

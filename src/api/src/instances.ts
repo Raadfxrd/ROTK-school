@@ -34,6 +34,7 @@ export function createNewPlayerSession(): PlayerSession {
         knowWhereMapIs: false,
         image: "",
         wentNorth: false,
+        knowsOfKara: false,
     };
 }
 

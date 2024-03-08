@@ -5,4 +5,5 @@ export type PlayerSession = {
     knowWhereMapIs: boolean;
     image: string;
     wentNorth: boolean;
+    knowsOfKara: boolean;
 };

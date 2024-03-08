@@ -3,7 +3,12 @@ import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Room } from "../base/gameObjects/Room";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Action } from "../base/actions/Action";
-import { NavigationBlacksmith, NavigationNorth, NavigationSouth } from "../actions/NavigateAction";
+import {
+    NavigationBlacksmith,
+    NavigationNorth,
+    NavigationSouth,
+    NavigationWest,
+} from "../actions/NavigateAction";
 import { getPlayerSession } from "../instances";
 import { KarasValeBlacksmithRoom } from "./KarasValeBlacksmithRoom";
 import { ExamineAction } from "../base/actions/ExamineAction";
@@ -28,9 +33,20 @@ export class KarasValeTownSquareRoom extends Room {
     }
 
     public actions(): Action[] {
+        if (this.playerSession.knowsOfKara === true) {
+            return [
+                new ExamineAction(),
+                new TalkAction(),
+                new NavigationBlacksmith(),
+                new NavigationSouth(),
+                new NavigationWest(),
+            ];
+        }
+
         if (this.playerSession.wentNorth === true) {
             return [new ExamineAction(), new TalkAction(), new NavigationBlacksmith(), new NavigationSouth()];
         }
+
         return [new NavigationNorth()];
     }
 
