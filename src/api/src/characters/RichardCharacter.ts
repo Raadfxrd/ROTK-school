@@ -13,11 +13,15 @@ export class RichardCharacter extends Character implements Examine {
     }
 
     public name(): string {
-        return "Example Character";
+        return "Richard";
     }
 
     public examine(): ActionResult | undefined {
-        return new TextActionResult(["This is an example character."]);
+        return new TextActionResult([
+            "Richard looks like a man that is in total shock. Why is he in shock?",
+            "Maybe the bandits just came through and pushed him asside.",
+            "He looks ",
+        ]);
     }
 
     public talk(_choiceId?: number): ActionResult | undefined {

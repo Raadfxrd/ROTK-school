@@ -27,6 +27,7 @@ import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
 export function createNewPlayerSession(): PlayerSession {
     return {
         currentRoom: "startup",
+        lastRoom: "",
         inventory: [],
         pickedUpRing: false,
         knowWhereMapIs: false,
