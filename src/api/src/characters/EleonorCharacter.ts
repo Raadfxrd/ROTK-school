@@ -72,13 +72,16 @@ export class EleonorCharacter extends Character implements Examine {
             );
         } else if (_choiceId === 7) {
             playerSession.knowLocationLowlands = true;
-            playerSession.gold += 10;
-            return new TextActionResult([
-                "Eleonor: I think that's not it. Quickpass is a neutral village whom are really kind to all people passing by.",
-                "I took some time thinking about this while you were looking at the map and I think the place you are looking for are the LowLands.",
-                "I won't send you on your own to search for the princess. Take Alexandra with you, she knows a lot about what is happening too",
-                "Take care Arthur and Alexandra, come back in one piece.",
-            ]);
+            return new TalkActionResult(
+                this,
+                [
+                    "Eleonor: I think that's not it. Quickpass is a neutral village whom are really kind to all people passing by.",
+                    "I took some time thinking about this while you were looking at the map and I think the place you are looking for are the LowLands.",
+                    "I won't send you on your own to search for the princess. Take Alexandra with you, she knows a lot about what is happening too",
+                    "Take care Arthur and Alexandra, come back in one piece.",
+                ],
+                [new TalkChoiceAction(10, "Start Adventure")]
+            );
         } else if (_choiceId === 8) {
             return new TextActionResult([
                 "Eleonor: You'll have to go to the Lowlands, it is in the bottom left of the province Kaseon.",
@@ -88,7 +91,6 @@ export class EleonorCharacter extends Character implements Examine {
             return new TextActionResult(["Eleonor: Good luck Arthur and Alexandra."]);
         } else if (_choiceId === 10) {
             playerSession.gold += 10;
-            console.log(playerSession.gold);
             return new TextActionResult([
                 "Eleonor: Here is some gold to help you around, take good care of yourself.",
                 "*You recieved 10 gold and a steel sword*",
