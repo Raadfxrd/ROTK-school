@@ -26,4 +26,8 @@ export class DarkTreesItem extends Item implements Examine {
             ["rooms/darktree.png"]
         );
     }
+
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
+    }
 }

@@ -27,12 +27,15 @@ export class RingItem extends Item implements Examine, Pickup {
     public pickup(): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
 
-        if (!playerSession.inventory.includes(RingItemAlias) && playerSession.pickedUpRing === false) {
+        if (!playerSession.inventory.includes(RingItemAlias)) {
             playerSession.inventory.push(RingItemAlias);
-            playerSession.pickedUpRing = true;
             return new TextActionResult(["You picked up the ring"]);
         } else {
             return undefined;
         }
+    }
+
+    public objectActions(): string[] {
+        return [ExamineActionAlias, PickupActionAlias];
     }
 }

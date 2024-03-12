@@ -10,6 +10,7 @@ export type GameState = {
 export type GameObjectReference = {
     alias: string;
     name: string;
+    actions: string[];
 };
 
 export type ActionReference = {

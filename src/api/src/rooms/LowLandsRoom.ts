@@ -2,12 +2,15 @@ import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
 import { CustomAction } from "../base/actions/CustomAction";
-import { ExamineAction } from "../base/actions/ExamineAction";
+import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
-import { Torch1Item } from "../items/Torch1Item";
+import { LowlandsTorch, LowlandsTorchAlias } from "../items/LowlandsTorchItem";
 import { DarkTreesItem } from "../items/DarkTreesItem";
 import { TunnelItem } from "../items/TunnelItem";
+import { PickupAction, PickupActionAlias } from "../actions/PickupAction";
+import { getPlayerSession, getGameObjectsFromInventory } from "../instances";
+import { PlayerSession } from "../types";
 
 export const LowLandsRoomAlias: string = "lowlands-room";
 let picture: string = "lowlands";
@@ -30,11 +33,24 @@ export class LowLandsRoom extends Room {
             new CustomAction("storage", "Inventory", false),
             new ExamineAction(),
             new CustomAction("back", "Navigate", false),
+            new PickupAction(),
         ];
     }
 
     public objects(): GameObject[] {
-        return [this, new Torch1Item(), new DarkTreesItem(), new TunnelItem()];
+        const playerSession: PlayerSession = getPlayerSession();
+
+        const objects: GameObject[] = [this, ...getGameObjectsFromInventory()];
+
+        if (!playerSession.inventory.includes(LowlandsTorchAlias)) {
+            objects.push(new LowlandsTorch());
+        }
+
+        if (playerSession.clickedButton === PickupActionAlias) {
+            objects.push(new LowlandsTorch());
+        }
+
+        return [this, new LowlandsTorch(), new DarkTreesItem(), new TunnelItem()];
     }
 
     public examine = (): ActionResult | undefined => {
@@ -46,4 +62,8 @@ export class LowLandsRoom extends Room {
             "You can see a torch on the ground a bit further away.",
         ]);
     };
+
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
+    }
 }

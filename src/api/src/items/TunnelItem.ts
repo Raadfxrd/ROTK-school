@@ -25,4 +25,8 @@ export class TunnelItem extends Item implements Examine {
             ["rooms/tunnel.png"]
         );
     }
+
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
+    }
 }

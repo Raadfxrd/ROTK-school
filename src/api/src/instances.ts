@@ -14,7 +14,7 @@ import { LowLandsRoom, LowLandsRoomAlias } from "./rooms/LowLandsRoom";
 import { TunnelItem, TunnelItemAlias } from "./items/TunnelItem";
 import { ThroneRoom, ThroneRoomAlias } from "./rooms/ThroneRoom";
 import { HenryAlias, HenryCharacter } from "./characters/HenryCharacter";
-import { Torch1Item, Torch1ItemAlias } from "./items/Torch1Item";
+import { LowlandsTorch, LowlandsTorchAlias } from "./items/LowlandsTorchItem";
 import { PlayerSession } from "./types";
 import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
 
@@ -28,6 +28,11 @@ export function createNewPlayerSession(): PlayerSession {
         currentRoom: "lowlands-room",
         inventory: [],
         pickedUpRing: false,
+        pickedUpLowlandsTorch: false,
+        pickedUpThroneTorch: false,
+        pickedUpKarasValeTorch: false,
+        pickedUpVolosVillageTorch: false,
+        pickedUpForestTorch: false,
         knowWhereMapIs: false,
         image: "",
     };
@@ -89,8 +94,8 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
         case ExampleCharacterAlias:
             return new ExampleCharacter();
 
-        case Torch1ItemAlias:
-            return new Torch1Item();
+        case LowlandsTorchAlias:
+            return new LowlandsTorch();
 
         case DarkTreesItemAlias:
             return new DarkTreesItem();
