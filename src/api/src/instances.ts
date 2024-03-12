@@ -39,6 +39,7 @@ export function createNewPlayerSession(): PlayerSession {
         image: "",
         wentNorth: false,
         knowsOfKara: false,
+        summonedKara: false,
     };
 }
 

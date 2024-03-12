@@ -6,4 +6,5 @@ export type PlayerSession = {
     image: string;
     wentNorth: boolean;
     knowsOfKara: boolean;
+    summonedKara: boolean;
 };
