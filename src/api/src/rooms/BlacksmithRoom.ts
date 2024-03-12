@@ -8,9 +8,14 @@ import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { IgnisCharacter } from "../characters/IgnisCharacter";
 import { TalkAction } from "../base/actions/TalkAction";
 import { PlayerSession } from "../types";
+import { ExamineActionAlias } from "../base/actions/ExamineAction";
+import { PickupActionAlias } from "../actions/PickupAction";
 
 export const BlacksmithAlias: string = "BlackSmith-room";
 export class BlackSmithRoom extends Room {
+    public objectActions(): string[] {
+        return [ExamineActionAlias, PickupActionAlias];
+    }
     public constructor() {
         super(BlacksmithAlias);
     }
