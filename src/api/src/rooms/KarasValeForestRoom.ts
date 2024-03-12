@@ -3,9 +3,10 @@ import { useItemAction } from "../actions/UseItemAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
-import { ExamineAction } from "../base/actions/ExamineAction";
+import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
+import { KaraCharacter } from "../characters/KaraCharacter";
 import { getPlayerSession } from "../instances";
 import { KVFallenTreesItem } from "../items/KVFallenTreeItem";
 import { KVForestItem } from "../items/KVForestItem";
@@ -42,7 +43,7 @@ export class KarasValeForestRoom extends Room {
     }
 
     public objects(): GameObject[] {
-        return [new KVFallenTreesItem(), new KVForestItem(), new KaraWhistleItem()];
+        return [new KVFallenTreesItem(), new KVForestItem(), new KaraWhistleItem(), new KaraCharacter()];
     }
 
     public custom(alias: string, _gameObjects: GameObject[] | undefined): ActionResult | undefined {
@@ -54,5 +55,8 @@ export class KarasValeForestRoom extends Room {
             return room.examine();
         }
         return undefined;
+    }
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
     }
 }

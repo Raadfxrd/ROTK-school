@@ -41,4 +41,7 @@ export class KaraWhistleItem extends Item implements Examine, useItem {
             "*You blow the whistle, it creates a hard to hear high pitched sound.*",
         ]);
     }
+    public objectActions(): string[] {
+        return [ExamineActionAlias, UseItemActionAlias];
+    }
 }

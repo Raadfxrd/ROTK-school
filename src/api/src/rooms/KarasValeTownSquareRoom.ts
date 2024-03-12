@@ -11,7 +11,7 @@ import {
 } from "../actions/NavigateAction";
 import { getPlayerSession } from "../instances";
 import { KarasValeBlacksmithRoom } from "./KarasValeBlacksmithRoom";
-import { ExamineAction } from "../base/actions/ExamineAction";
+import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { PlayerSession } from "../types";
 import { AureliusCharacter } from "../characters/AureliusCharacter";
 import { TalkAction } from "../base/actions/TalkAction";
@@ -95,5 +95,8 @@ export class KarasValeTownSquareRoom extends Room {
             return room.examine();
         }
         return undefined;
+    }
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
     }
 }

@@ -19,4 +19,7 @@ export class KVForestItem extends Item implements Examine {
             "You look around the forest, but there are no signs of any humans living here.",
         ]);
     }
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
+    }
 }

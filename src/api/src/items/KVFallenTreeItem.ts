@@ -20,4 +20,7 @@ export class KVFallenTreesItem extends Item implements Examine {
             "you also see footprints of a very large birdlike creature",
         ]);
     }
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
+    }
 }
