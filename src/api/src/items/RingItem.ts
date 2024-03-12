@@ -37,7 +37,10 @@ export class RingItem extends Item implements Examine, Pickup, Talk {
 
         if (!playerSession.inventory.includes(RingItemAlias)) {
             playerSession.inventory.push(RingItemAlias);
-            return new TextActionResult(["You picked up the ring"]);
+            return new TextActionResult(["*You picked up the ring*"]);
+        }
+        if (!playerSession.inventory.includes(RingItemAlias)) {
+            return new TextActionResult(["*You already have the ring in your inventory*"]);
         } else {
             return undefined;
         }

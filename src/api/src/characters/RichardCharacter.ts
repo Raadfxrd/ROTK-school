@@ -2,7 +2,7 @@ import { ActionResult } from "../base/actionResults/ActionResult";
 import { TalkActionResult } from "../base/actionResults/TalkActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
-import { TalkChoiceAction } from "../base/actions/TalkAction";
+import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 
 export const RichardCharacterAlias: string = "richard-character";
@@ -48,7 +48,7 @@ export class RichardCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "Couldn't really take a good look, they were just really fast and hasty.",
+                    "Richard: Couldn't really take a good look, they were just really fast and hasty.",
                     "for me they just looked like normal peasants",
                 ],
                 [
@@ -59,7 +59,7 @@ export class RichardCharacter extends Character implements Examine {
         } else if (_choiceId === 4) {
             return new TalkActionResult(
                 this,
-                ["I indeed saw someone taken but didn't think much of it"],
+                ["Richard: I indeed saw someone taken but didn't think much of it"],
                 [
                     new TalkChoiceAction(5, "Where were they headed"),
                     new TalkChoiceAction(6, "Thanks i'll go look further"),
@@ -68,7 +68,7 @@ export class RichardCharacter extends Character implements Examine {
         } else if (_choiceId === 5) {
             return new TalkActionResult(
                 this,
-                ["They were going to the stables where all the commotion is now."],
+                ["Richard: They were going to the stables where all the commotion is now."],
                 [new TalkChoiceAction(6, "Thanks, that's all i needed")]
             );
         } else if (_choiceId === 6) {
@@ -76,7 +76,7 @@ export class RichardCharacter extends Character implements Examine {
         } else if (_choiceId === 7) {
             return new TalkActionResult(
                 this,
-                ["How? She can't just have dissapeared."],
+                ["Richard: How? She can't just have dissapeared."],
                 [
                     new TalkChoiceAction(8, "I can't give you more information"),
                     new TalkChoiceAction(9, "She got kidnapped"),
@@ -87,7 +87,7 @@ export class RichardCharacter extends Character implements Examine {
         } else if (_choiceId === 9) {
             return new TalkActionResult(
                 this,
-                ["By who?"],
+                ["Richard: By who?"],
                 [
                     new TalkChoiceAction(10, "We are trying to figure that out"),
                     new TalkChoiceAction(11, "By some bandits"),
@@ -97,7 +97,7 @@ export class RichardCharacter extends Character implements Examine {
         } else if (_choiceId === 10) {
             return new TalkActionResult(
                 this,
-                ["Figure it out quickly because she is our queen!"],
+                ["Richard: Figure it out quickly because she is our queen!"],
                 [
                     new TalkChoiceAction(5, "We think the people running away were it"),
                     new TalkChoiceAction(14, "Can you help me then?"),
@@ -107,7 +107,7 @@ export class RichardCharacter extends Character implements Examine {
         } else if (_choiceId === 11) {
             return new TalkActionResult(
                 this,
-                ["Bandits? They are here in town?"],
+                ["Richard: Bandits? They are here in town?"],
                 [
                     new TalkChoiceAction(12, "Apparently yeah"),
                     new TalkChoiceAction(5, "I think it were the people running"),
@@ -116,7 +116,7 @@ export class RichardCharacter extends Character implements Examine {
         } else if (_choiceId === 12) {
             return new TalkActionResult(
                 this,
-                ["Thats not great, take them down will ya"],
+                ["Richard: Thats not great, take them down will ya"],
                 [
                     new TalkChoiceAction(13, "have you seen something strange lately?"),
                     new TalkChoiceAction(6, "I will!"),
@@ -125,7 +125,7 @@ export class RichardCharacter extends Character implements Examine {
         } else if (_choiceId === 13) {
             return new TalkActionResult(
                 this,
-                ["Well besides those people running not much"],
+                ["Richard: Well besides those people running not much"],
                 [
                     new TalkChoiceAction(5, "Where were they headed?"),
                     new TalkChoiceAction(6, "We'll go after them"),
@@ -134,7 +134,7 @@ export class RichardCharacter extends Character implements Examine {
         } else if (_choiceId === 14) {
             return new TalkActionResult(
                 this,
-                ["Alrighty son, What can i do?"],
+                ["Richard: Alrighty son, What can i do?"],
                 [
                     new TalkChoiceAction(5, "Where did the people go to?"),
                     new TalkChoiceAction(3, "What do the people look like?"),
@@ -142,7 +142,7 @@ export class RichardCharacter extends Character implements Examine {
                 ]
             );
         } else if (_choiceId === 99) {
-            return new TextActionResult(["Bye stranger."]);
+            return new TextActionResult(["Richard: Bye stranger."]);
         }
 
         return new TalkActionResult(
@@ -157,5 +157,8 @@ export class RichardCharacter extends Character implements Examine {
                 new TalkChoiceAction(99, "Bye!"),
             ]
         );
+    }
+    public objectActions(): string[] {
+        return [ExamineActionAlias, TalkActionAlias];
     }
 }
