@@ -2,6 +2,7 @@ import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
 import { CustomAction } from "../base/actions/CustomAction";
+import { ExamineActionAlias } from "../base/actions/ExamineAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { getPlayerSession } from "../instances";
@@ -27,7 +28,7 @@ export class StartupRoom extends Room {
     }
 
     public examine(): ActionResult | undefined {
-        return new TextActionResult(["Welcome to our game, Realm of the Kings.", ""]);
+        return new TextActionResult(["Welcome to our game, Realm of the Kings."]);
     }
 
     public custom(alias: string, _gameObjects?: GameObject[]): ActionResult | undefined {
@@ -40,5 +41,9 @@ export class StartupRoom extends Room {
         }
 
         return undefined;
+    }
+
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
     }
 }
