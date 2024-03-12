@@ -1,4 +1,4 @@
-import { useItem } from "../actions/UseItemAction";
+import { UseItemActionAlias, useItem } from "../actions/UseItemAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
@@ -8,7 +8,7 @@ export const KaraWhistleItemAlias: string = "KaraWhistle";
 
 export class KaraWhistleItem extends Item implements Examine, useItem {
     public constructor() {
-        super(KaraWhistleItemAlias, ExamineActionAlias);
+        super(KaraWhistleItemAlias, ExamineActionAlias, UseItemActionAlias);
     }
 
     public name(): string {
