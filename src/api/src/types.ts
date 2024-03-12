@@ -2,10 +2,11 @@ export type PlayerSession = {
     currentRoom: string;
     lastRoom: string;
     inventory: string[];
-    pickedUpRing: boolean;
     knowWhereMapIs: boolean;
-    image: string;
     wentNorth: boolean;
     knowLocationLowlands: boolean;
+    horseMission30: boolean;
+    horseMission20: boolean;
+    horseMission10: boolean;
     gold: number;
 };

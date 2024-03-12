@@ -2,7 +2,7 @@ import { ActionResult } from "../base/actionResults/ActionResult";
 import { TalkActionResult } from "../base/actionResults/TalkActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
-import { TalkChoiceAction } from "../base/actions/TalkAction";
+import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
 import { RingItemAlias } from "../items/RingItem";
@@ -85,5 +85,9 @@ export class CharlesCharacter extends Character implements Examine {
             ["Charles: Things happened so quickly, have you found something?"],
             choiceActions
         );
+    }
+
+    public objectActions(): string[] {
+        return [ExamineActionAlias, TalkActionAlias];
     }
 }

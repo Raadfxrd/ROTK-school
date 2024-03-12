@@ -25,6 +25,7 @@ import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
 import { MapItem, MapItemAlias } from "./items/MapItem";
 import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
 import { RichardCharacter, RichardCharacterAlias } from "./characters/RichardCharacter";
+import { JohanCharacter, JohanCharacterAlias } from "./characters/JohanCharachter";
 
 /**
  * Create a new player session object
@@ -36,11 +37,12 @@ export function createNewPlayerSession(): PlayerSession {
         currentRoom: "startup",
         lastRoom: "",
         inventory: [],
-        pickedUpRing: false,
         knowWhereMapIs: false,
-        image: "",
         wentNorth: false,
         knowLocationLowlands: false,
+        horseMission10: false,
+        horseMission20: false,
+        horseMission30: false,
         gold: 0,
     };
 }
@@ -150,6 +152,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case BobCharacterAlias:
             return new BobCharacter();
+
+        case JohanCharacterAlias:
+            return new JohanCharacter();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
