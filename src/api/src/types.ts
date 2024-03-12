@@ -6,4 +6,6 @@ export type PlayerSession = {
     wentNorth: boolean;
     knowLocationLowlands: boolean;
     gold: number;
+    knowsOfKara: boolean;
+    summonedKara: boolean;
 };
