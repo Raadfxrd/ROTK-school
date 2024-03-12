@@ -23,6 +23,7 @@ import { AureliusCharacter, AureliusCharacterAlias } from "./characters/Aurelius
 import { KarasValeForestRoom, KarasValeForestRoomAlias } from "./rooms/KarasValeForestRoom";
 import { KVFallenTreesItem, KVFallenTreesItemAlias } from "./items/KVFallenTreeItem";
 import { KVForestItem, KVForestItemAlias } from "./items/KVForestItem";
+import { KaraWhistleItem, KaraWhistleItemAlias } from "./items/KaraWhistle";
 
 /**
  * Create a new player session object
@@ -141,6 +142,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case KVForestItemAlias:
             return new KVForestItem();
+
+        case KaraWhistleItemAlias:
+            return new KaraWhistleItem();
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
             return getRoomByAlias(alias);

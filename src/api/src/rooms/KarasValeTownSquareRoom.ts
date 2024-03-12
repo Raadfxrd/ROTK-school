@@ -16,6 +16,8 @@ import { PlayerSession } from "../types";
 import { AureliusCharacter } from "../characters/AureliusCharacter";
 import { TalkAction } from "../base/actions/TalkAction";
 import { KarasValeForestRoom } from "./KarasValeForestRoom";
+import { KaraWhistleItem } from "../items/KaraWhistle";
+import { useItemAction } from "../actions/UseItemAction";
 
 export const KarasValeTownSquareRoomAlias: string = "KVTownSquare";
 
@@ -34,13 +36,15 @@ export class KarasValeTownSquareRoom extends Room {
     }
 
     public actions(): Action[] {
-        if (this.playerSession.knowsOfKara === true) {
+        if (this.playerSession.knowsOfKara === true && this.playerSession.wentNorth === true) {
+            console.log(this.playerSession);
             return [
                 new ExamineAction(),
                 new TalkAction(),
                 new NavigationBlacksmith(),
                 new NavigationSouth(),
                 new NavigationWest(),
+                new useItemAction(),
             ];
         }
 
@@ -52,7 +56,7 @@ export class KarasValeTownSquareRoom extends Room {
     }
 
     public objects(): GameObject[] {
-        return [new AureliusCharacter()];
+        return [new AureliusCharacter(), new KaraWhistleItem()];
     }
 
     public examine(): ActionResult | undefined {

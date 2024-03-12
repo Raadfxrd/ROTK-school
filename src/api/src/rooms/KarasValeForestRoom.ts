@@ -44,6 +44,5 @@ export class KarasValeForestRoom extends Room {
         getPlayerSession().currentRoom = room.alias;
 
         return room.examine();
-        return undefined;
     }
 }

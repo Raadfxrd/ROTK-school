@@ -30,14 +30,14 @@ export class AureliusCharacter extends Character implements Examine {
         if (choiceId === 1) {
             return new TalkActionResult(
                 this,
-                ["And who might you be looking for?"],
+                ["Aurelius: And who might you be looking for?"],
                 [new TalkChoiceAction(2, "You do not need to know who it is.")]
             );
         }
         if (choiceId === 2) {
             return new TalkActionResult(
                 this,
-                ["Well i'm afraid I can't help you then, but I do know of someone who might."],
+                ["Aurelius: Well i'm afraid I can't help you then, but I do know of someone who might."],
                 [new TalkChoiceAction(3, "Please, where can i find this person.")]
             );
         }
@@ -45,8 +45,10 @@ export class AureliusCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "You will want to seek out Kara. She lives in the forest. ",
+                    "Aurelius: You will want to seek out Kara. She lives in the forest. ",
                     "But beware, for if you can not answer her riddles there will be a price to pay. ",
+                    "Take this aswell, you shall need it to summon her. ",
+                    "<He gives you a whistle.>",
                 ],
                 [new TalkChoiceAction(4, "Thank you.")]
             );
@@ -54,6 +56,7 @@ export class AureliusCharacter extends Character implements Examine {
 
         if (choiceId === 4) {
             this.playerSession.knowsOfKara = true;
+
             return new TextActionResult([""]);
         }
         if (choiceId === 10) {
