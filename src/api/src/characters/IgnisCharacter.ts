@@ -2,7 +2,7 @@ import { ActionResult } from "../base/actionResults/ActionResult";
 import { TalkActionResult } from "../base/actionResults/TalkActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
-import { TalkChoiceAction } from "../base/actions/TalkAction";
+import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
 import { ArmourItemAlias } from "../items/ArmourItem";
@@ -15,6 +15,9 @@ export const IgnisAlias: string = "Ignis";
 export class IgnisCharacter extends Character implements Examine {
     public constructor() {
         super(IgnisAlias, ExamineActionAlias);
+    }
+    public objectActions(): string[] {
+        return [TalkActionAlias];
     }
     public name(): string {
         return "Ignis";
