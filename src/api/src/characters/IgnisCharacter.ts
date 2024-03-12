@@ -4,6 +4,12 @@ import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
+import { getPlayerSession } from "../instances";
+import { ArmourItemAlias } from "../items/ArmourItem";
+import { SwordItemAlias } from "../items/SwordItem";
+import { battleAxeItemAlias } from "../items/battleAxeItem";
+import { maceItemAlias } from "../items/maceItem";
+import { PlayerSession } from "../types";
 
 export const IgnisAlias: string = "Ignis";
 export class IgnisCharacter extends Character implements Examine {
@@ -17,12 +23,14 @@ export class IgnisCharacter extends Character implements Examine {
         return new TextActionResult(["It's a smithy working on his crafts."]);
     }
     public talk(_choiceId?: number | undefined): ActionResult | undefined {
+        const playerSession: PlayerSession = getPlayerSession();
+
         if (_choiceId === 1) {
             return new TalkActionResult(
                 this,
                 ["Sure! What are you looking for exactly?"],
                 [
-                    new TalkChoiceAction(4, "I need armour, can you make this?"),
+                    new TalkChoiceAction(4, "I need armour(41G), can you make this?"),
                     new TalkChoiceAction(5, "Do you have any weaponry?"),
                 ]
             );
@@ -34,9 +42,13 @@ export class IgnisCharacter extends Character implements Examine {
             return new TextActionResult(["hmmm, I don't think you are ready for my methods yet..."]);
         }
         if (_choiceId === 4) {
-            return new TextActionResult([
-                "Yes, this is my specialty. I will make you a strong piece of armor made out off the most durable piece of iron.",
-            ]);
+            if (playerSession.gold >= 41) {
+                playerSession.gold -= 41;
+                playerSession.inventory.push(ArmourItemAlias);
+                return new TextActionResult([
+                    "Yes, this is my specialty. I will make you a strong piece of armor made out off the most durable piece of iron.",
+                ]);
+            }
         }
         if (_choiceId === 5) {
             return new TalkActionResult(
@@ -45,20 +57,32 @@ export class IgnisCharacter extends Character implements Examine {
                     "Yes, I make some of the sharpest blades in the region and my Axes are well known for their destructive capabilities. What will it be?",
                 ],
                 [
-                    new TalkChoiceAction(6, "Make me a sword"),
-                    new TalkChoiceAction(7, "Make me a battle-Axe"),
-                    new TalkChoiceAction(8, "Make me a mace"),
+                    new TalkChoiceAction(6, "Make me a sword(15G)"),
+                    new TalkChoiceAction(7, "Make me a battle-Axe(23G)"),
+                    new TalkChoiceAction(8, "Make me a mace(18G)"),
                 ]
             );
         }
         if (_choiceId === 6) {
-            return new TextActionResult(["Alright, here you go.<hands over sword>"]);
+            if (playerSession.gold >= 15) {
+                playerSession.gold -= 15;
+                playerSession.inventory.push(SwordItemAlias);
+                return new TextActionResult(["Alright, here you go.<hands over sword>"]);
+            }
         }
         if (_choiceId === 7) {
-            return new TextActionResult(["That should do it!<hands over battle-axe>"]);
+            if (playerSession.gold >= 23) {
+                playerSession.gold -= 23;
+                playerSession.inventory.push(battleAxeItemAlias);
+                return new TextActionResult(["That should do it!<hands over battle-axe>"]);
+            }
         }
         if (_choiceId === 8) {
-            return new TextActionResult(["Sure...<hands over mace>"]);
+            if (playerSession.gold >= 18) {
+                playerSession.gold -= 18;
+                playerSession.inventory.push(maceItemAlias);
+                return new TextActionResult(["Sure...<hands over mace>"]);
+            }
         }
 
         return new TalkActionResult(

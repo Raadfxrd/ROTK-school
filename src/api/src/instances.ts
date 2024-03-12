@@ -27,6 +27,11 @@ import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
 import { BlackSmithRoom, BlacksmithAlias } from "./rooms/BlacksmithRoom";
 import { IgnisCharacter, IgnisAlias } from "./characters/IgnisCharacter";
 import { SwordItemAlias, SwordItem } from "./items/SwordItem";
+import { ShopAlias, ShopRoom } from "./rooms/ShopRoom";
+import { BrannAlias, BrannCharacter } from "./characters/BrannCharacter";
+import { ArmourItem, ArmourItemAlias } from "./items/ArmourItem";
+import { battleAxeItem, battleAxeItemAlias } from "./items/battleAxeItem";
+import { maceItem, maceItemAlias } from "./items/maceItem";
 
 /**
  * Create a new player session object
@@ -97,6 +102,8 @@ export function getRoomByAlias(alias: string): Room | undefined {
             return new WolburgRoom();
         case BlacksmithAlias:
             return new BlackSmithRoom();
+        case ShopAlias:
+            return new ShopRoom();
     }
 
     return undefined;
@@ -151,6 +158,14 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
             return new IgnisCharacter();
         case SwordItemAlias:
             return new SwordItem();
+        case BrannAlias:
+            return new BrannCharacter();
+        case ArmourItemAlias:
+            return new ArmourItem();
+        case battleAxeItemAlias:
+            return new battleAxeItem();
+        case maceItemAlias:
+            return new maceItem();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
