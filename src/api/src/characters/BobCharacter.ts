@@ -2,7 +2,7 @@ import { ActionResult } from "../base/actionResults/ActionResult";
 import { TalkActionResult } from "../base/actionResults/TalkActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
-import { TalkChoiceAction } from "../base/actions/TalkAction";
+import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 
 function generateRandomNumber(): number {
@@ -16,6 +16,9 @@ export class BobCharacter extends Character implements Examine {
     }
     public name(): string {
         return "Bob";
+    }
+    public objectActions(): string[] {
+        return [TalkActionAlias, ExamineActionAlias];
     }
     public examine(): ActionResult | undefined {
         return new TextActionResult(["It's a friendly bartender"]);

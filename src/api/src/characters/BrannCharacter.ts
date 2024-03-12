@@ -2,7 +2,7 @@ import { ActionResult } from "../base/actionResults/ActionResult";
 import { TalkActionResult } from "../base/actionResults/TalkActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
-import { TalkChoiceAction } from "../base/actions/TalkAction";
+import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 
 export const BrannAlias: string = "Brann";
@@ -12,6 +12,9 @@ export class BrannCharacter extends Character implements Examine {
     }
     public name(): string {
         return "Brann";
+    }
+    public objectActions(): string[] {
+        return [ExamineActionAlias, TalkActionAlias];
     }
     public examine(): ActionResult | undefined {
         return new TextActionResult(["It's a storemanager in his element!"]);

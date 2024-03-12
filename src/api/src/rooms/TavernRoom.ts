@@ -5,7 +5,8 @@ import { GameObject } from "../base/gameObjects/GameObject";
 import { BobCharacter } from "../characters/BobCharacter";
 import { Action } from "../base/actions/Action";
 import { TalkAction } from "../base/actions/TalkAction";
-import { ExamineAction } from "../base/actions/ExamineAction";
+import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
+import { PickupActionAlias } from "../actions/PickupAction";
 
 export const TavernRoomAlias: string = "tavern-room";
 export class TavernRoom extends Room {
@@ -14,6 +15,9 @@ export class TavernRoom extends Room {
     }
     public name(): string {
         return "tavern";
+    }
+    public objectActions(): string[] {
+        return [ExamineActionAlias, PickupActionAlias];
     }
     public images(): string[] {
         return ["rooms/Tavern.png"];

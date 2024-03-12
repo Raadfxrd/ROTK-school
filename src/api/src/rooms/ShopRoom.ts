@@ -1,7 +1,9 @@
+import { PickupActionAlias } from "../actions/PickupAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
 import { CustomAction } from "../base/actions/CustomAction";
+import { ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
@@ -16,6 +18,9 @@ export class ShopRoom extends Room {
     }
     public name(): string {
         return "Shop";
+    }
+    public objectActions(): string[] {
+        return [ExamineActionAlias, PickupActionAlias];
     }
     public images(): string[] {
         return ["rooms/store.png"];

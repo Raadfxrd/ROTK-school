@@ -41,7 +41,7 @@ import { maceItem, maceItemAlias } from "./items/maceItem";
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "BlackSmith-room",
+        currentRoom: "Shop-room",
         lastRoom: "",
         inventory: [],
         knowWhereMapIs: false,
