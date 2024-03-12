@@ -43,6 +43,7 @@ export class GameCanvas extends LitElement {
             max-width: 100%;
             max-height: 100%;
             image-rendering: crisp-edges;
+            image-resolution: from-image 10dpi;
         }
 
         .header img:nth-child(n + 2) {
@@ -68,8 +69,7 @@ export class GameCanvas extends LitElement {
         }
 
         /** Class voor altijd zichtbare buttons **/
-        .buttons,
-        .interact-buttons {
+        .buttons {
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
@@ -264,25 +264,10 @@ export class GameCanvas extends LitElement {
     }
 
     private renderFooter(): TemplateResult {
-        const interactButtons: any = this.actionButtons?.filter((button) =>
-            ["Examine", "Talk to"].includes(button.label)
-        );
-        const otherButtons: any = this.actionButtons?.filter(
-            (button) => !["Examine", "Talk to"].includes(button.label)
-        );
-
         return html`
-            <div class="interact-buttons">
-                ${interactButtons?.map(
-                    (button: ActionReference) =>
-                        html`<a class="button" @click=${(): void => void this.handleClickAction(button)}
-                            >${button.label}</a
-                        >`
-                )}
-            </div>
             <div class="buttons">
-                ${otherButtons?.map(
-                    (button: ActionReference) => html`<a
+                ${this.actionButtons?.map(
+                    (button) => html`<a
                         class="button ${this.selectedActionButton === button ? "active" : ""}"
                         @click=${(): void => void this.handleClickAction(button)}
                         >${button.label}</a
