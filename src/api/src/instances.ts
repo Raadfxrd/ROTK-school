@@ -37,7 +37,6 @@ export function createNewPlayerSession(): PlayerSession {
         lastRoom: "",
         inventory: [],
         knowWhereMapIs: false,
-        image: "",
         wentNorth: false,
         knowLocationLowlands: false,
         gold: 0,

@@ -2,8 +2,6 @@ import { castTo, implementsInterface } from "../helpers";
 import { ActionResult } from "../actionResults/ActionResult";
 import { GameObject } from "../gameObjects/GameObject";
 import { Action } from "./Action";
-import { PlayerSession } from "../../types";
-import { getPlayerSession } from "../../instances";
 
 /** Alias used to identity the Examine action and interface */
 export const ExamineActionAlias: string = "examine";
@@ -39,11 +37,7 @@ export class ExamineAction extends Action {
      * @returns Result of the action
      */
     public static handle(gameObject: GameObject): ActionResult | undefined {
-        const playerSession: PlayerSession = getPlayerSession();
-
         if (implementsInterface(gameObject, ExamineActionAlias)) {
-            playerSession.clickedButton = ExamineActionAlias;
-
             return castTo<Examine>(gameObject).examine();
         }
 

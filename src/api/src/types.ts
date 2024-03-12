@@ -3,7 +3,6 @@ export type PlayerSession = {
     lastRoom: string;
     inventory: string[];
     knowWhereMapIs: boolean;
-    image: string;
     wentNorth: boolean;
     knowLocationLowlands: boolean;
     gold: number;
