@@ -5,12 +5,10 @@ import { CustomAction } from "../base/actions/CustomAction";
 import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
-import { LowlandsTorch, LowlandsTorchAlias } from "../items/LowlandsTorchItem";
+import { LowlandsTorch } from "../items/LowlandsTorchItem";
 import { DarkTreesItem } from "../items/DarkTreesItem";
 import { TunnelItem } from "../items/TunnelItem";
-import { PickupAction, PickupActionAlias } from "../actions/PickupAction";
-import { getPlayerSession, getGameObjectsFromInventory } from "../instances";
-import { PlayerSession } from "../types";
+import { PickupAction } from "../actions/PickupAction";
 
 export const LowLandsRoomAlias: string = "lowlands-room";
 let picture: string = "lowlands";
