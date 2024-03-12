@@ -4,19 +4,27 @@ import { getPlayerSessionFromContext, resetPlayerSessionInContext } from "./base
 import { AlexandraAlias, AlexandraCharacter } from "./characters/AlexandraCharacter";
 import { CharlesAlias, CharlesCharacter } from "./characters/CharlesCharacter";
 import { eleonorAlias, EleonorCharacter } from "./characters/EleonorCharacter";
+import { Drakecharacter, DrakecharacterAlias } from "./characters/DrakeCharacter";
+import { BobCharacter, BobCharacterAlias } from "./characters/BobCharacter";
 import { ExampleCharacter, ExampleCharacterAlias } from "./characters/ExampleCharacter";
 import { ExampleItem, ExampleItemAlias } from "./items/ExampleItem";
 import { RingItem, RingItemAlias } from "./items/RingItem";
-import { MapItem, MapItemAlias } from "./items/mapItem";
 import { ExampleRoom, ExampleRoomAlias } from "./rooms/ExampleRoom";
+import { KarasValeBlacksmithRoom, KarasValeBlacksmithRoomAlias } from "./rooms/KarasValeBlacksmithRoom";
+import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./rooms/KarasValeTownSquareRoom";
 import { StartupRoom, StartupRoomAlias } from "./rooms/StartupRoom";
 import { LowLandsRoom, LowLandsRoomAlias } from "./rooms/LowLandsRoom";
 import { TunnelItem, TunnelItemAlias } from "./items/TunnelItem";
 import { ThroneRoom, ThroneRoomAlias } from "./rooms/ThroneRoom";
 import { HenryAlias, HenryCharacter } from "./characters/HenryCharacter";
 import { LowlandsTorch, LowlandsTorchAlias } from "./items/LowlandsTorchItem";
+import { VolosVillageRoom, VolosVillageRoomAlias } from "./rooms/VolosVillageRoom";
+import { TavernRoom, TavernRoomAlias } from "./rooms/TavernRoom";
 import { PlayerSession } from "./types";
 import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
+import { MapItem, MapItemAlias } from "./items/MapItem";
+import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
+import { RichardCharacter, RichardCharacterAlias } from "./characters/RichardCharacter";
 
 /**
  * Create a new player session object
@@ -25,16 +33,14 @@ import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "lowlands-room",
+        currentRoom: "startup",
+        lastRoom: "",
         inventory: [],
-        pickedUpRing: false,
-        pickedUpLowlandsTorch: false,
-        pickedUpThroneTorch: false,
-        pickedUpKarasValeTorch: false,
-        pickedUpVolosVillageTorch: false,
-        pickedUpForestTorch: false,
         knowWhereMapIs: false,
         image: "",
+        wentNorth: false,
+        knowLocationLowlands: false,
+        gold: 0,
     };
 }
 
@@ -69,11 +75,26 @@ export function getRoomByAlias(alias: string): Room | undefined {
         case ExampleRoomAlias:
             return new ExampleRoom();
 
+        case KarasValeTownSquareRoomAlias:
+            return new KarasValeTownSquareRoom();
+
+        case KarasValeBlacksmithRoomAlias:
+            return new KarasValeBlacksmithRoom();
+
         case LowLandsRoomAlias:
             return new LowLandsRoom();
 
         case ThroneRoomAlias:
             return new ThroneRoom();
+
+        case VolosVillageRoomAlias:
+            return new VolosVillageRoom();
+
+        case TavernRoomAlias:
+            return new TavernRoom();
+
+        case WolburgRoomAlias:
+            return new WolburgRoom();
     }
 
     return undefined;
@@ -93,6 +114,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case ExampleCharacterAlias:
             return new ExampleCharacter();
+
+        case DrakecharacterAlias:
+            return new Drakecharacter();
 
         case LowlandsTorchAlias:
             return new LowlandsTorch();
@@ -120,6 +144,12 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case CharlesAlias:
             return new CharlesCharacter();
+
+        case RichardCharacterAlias:
+            return new RichardCharacter();
+
+        case BobCharacterAlias:
+            return new BobCharacter();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
