@@ -9,7 +9,7 @@ import { PlayerSession } from "../types";
 
 export const ShopTorchAlias: string = "ShopTorch";
 
-export class LowlandsTorch extends Item implements Examine, Pickup {
+export class ShopTorch extends Item implements Examine, Pickup {
     public constructor() {
         super(ShopTorchAlias, ExamineActionAlias, PickupActionAlias);
     }
