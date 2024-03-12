@@ -25,6 +25,8 @@ import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
 import { MapItem, MapItemAlias } from "./items/MapItem";
 import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
 import { BlackSmithRoom, BlacksmithAlias } from "./rooms/BlacksmithRoom";
+import { IgnisCharacter, IgnisAlias } from "./characters/IgnisCharacter";
+import { SwordItemAlias, SwordItem } from "./items/SwordItem";
 
 /**
  * Create a new player session object
@@ -40,6 +42,7 @@ export function createNewPlayerSession(): PlayerSession {
         image: "",
         wentNorth: false,
         knowLocationLowlands: false,
+        gold: 0,
     };
 }
 
@@ -144,6 +147,10 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
             return new CharlesCharacter();
         case BobCharacterAlias:
             return new BobCharacter();
+        case IgnisAlias:
+            return new IgnisCharacter();
+        case SwordItemAlias:
+            return new SwordItem();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:

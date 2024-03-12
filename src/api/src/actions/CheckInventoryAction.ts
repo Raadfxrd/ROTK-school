@@ -9,7 +9,7 @@ export interface CheckInventory {
 }
 export class CheckInventoryAction extends Action {
     public constructor() {
-        super(CheckInventoryActionAlias, "Check Inventory", true);
+        super(CheckInventoryActionAlias, "Check Inventory", false);
     }
     public static handle(gameObject: GameObject): ActionResult | undefined {
         if (implementsInterface(gameObject, ExampleActionAlias)) {
