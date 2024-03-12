@@ -6,7 +6,7 @@ import { Action } from "../base/actions/Action";
 import { NavigationBlacksmith, NavigationNorth, NavigationSouth } from "../actions/NavigateAction";
 import { getPlayerSession } from "../instances";
 import { KarasValeBlacksmithRoom } from "./KarasValeBlacksmithRoom";
-import { ExamineAction } from "../base/actions/ExamineAction";
+import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { PlayerSession } from "../types";
 
 export const KarasValeTownSquareRoomAlias: string = "KVTownSquare";
@@ -64,5 +64,9 @@ export class KarasValeTownSquareRoom extends Room {
             return new TextActionResult(["In front of you is a small town named Kara's Vale."]);
         }
         return undefined;
+    }
+
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
     }
 }

@@ -2,7 +2,7 @@ import { ActionResult } from "../base/actionResults/ActionResult";
 import { TalkActionResult } from "../base/actionResults/TalkActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
-import { TalkChoiceAction } from "../base/actions/TalkAction";
+import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
 import { RingItemAlias } from "../items/RingItem";
@@ -130,5 +130,9 @@ export class EleonorCharacter extends Character implements Examine {
             ["Eleonor: Please, how could this have happened..."],
             choiceActions
         );
+    }
+
+    public objectActions(): string[] {
+        return [ExamineActionAlias, TalkActionAlias];
     }
 }

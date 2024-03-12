@@ -3,7 +3,7 @@ import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
 import { CustomAction } from "../base/actions/CustomAction";
-import { ExamineAction } from "../base/actions/ExamineAction";
+import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
@@ -44,6 +44,10 @@ export class ThroneRoom extends Room {
 
     public images(): string[] {
         return [picture];
+    }
+
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
     }
 
     public actions(): Action[] {
