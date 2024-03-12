@@ -11,7 +11,7 @@ export class TunnelItem extends Item implements Examine {
     }
 
     public name(): string {
-        return "A dark tunnel in the middle of nowhere";
+        return "A dark tunnel";
     }
 
     public examine(): ActionResult | undefined {
@@ -24,5 +24,9 @@ export class TunnelItem extends Item implements Examine {
             ],
             ["rooms/tunnel.png"]
         );
+    }
+
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
     }
 }

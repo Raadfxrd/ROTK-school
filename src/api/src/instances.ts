@@ -17,13 +17,14 @@ import { LowLandsRoom, LowLandsRoomAlias } from "./rooms/LowLandsRoom";
 import { TunnelItem, TunnelItemAlias } from "./items/TunnelItem";
 import { ThroneRoom, ThroneRoomAlias } from "./rooms/ThroneRoom";
 import { HenryAlias, HenryCharacter } from "./characters/HenryCharacter";
-import { Torch1Item, Torch1ItemAlias } from "./items/Torch1Item";
+import { LowlandsTorch, LowlandsTorchAlias } from "./items/LowlandsTorchItem";
 import { VolosVillageRoom, VolosVillageRoomAlias } from "./rooms/VolosVillageRoom";
 import { TavernRoom, TavernRoomAlias } from "./rooms/TavernRoom";
 import { PlayerSession } from "./types";
 import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
 import { MapItem, MapItemAlias } from "./items/MapItem";
 import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
+import { RichardCharacter, RichardCharacterAlias } from "./characters/RichardCharacter";
 import { BlackSmithRoom, BlacksmithAlias } from "./rooms/BlacksmithRoom";
 import { IgnisCharacter, IgnisAlias } from "./characters/IgnisCharacter";
 import { SwordItemAlias, SwordItem } from "./items/SwordItem";
@@ -40,11 +41,10 @@ import { maceItem, maceItemAlias } from "./items/maceItem";
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "BlackSmith-room",
+        currentRoom: "startup",
+        lastRoom: "",
         inventory: [],
-        pickedUpRing: false,
         knowWhereMapIs: false,
-        image: "",
         wentNorth: false,
         knowLocationLowlands: false,
         gold: 0,
@@ -93,8 +93,10 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case ThroneRoomAlias:
             return new ThroneRoom();
+
         case VolosVillageRoomAlias:
             return new VolosVillageRoom();
+
         case TavernRoomAlias:
             return new TavernRoom();
 
@@ -123,11 +125,12 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case ExampleCharacterAlias:
             return new ExampleCharacter();
+
         case DrakecharacterAlias:
             return new Drakecharacter();
 
-        case Torch1ItemAlias:
-            return new Torch1Item();
+        case LowlandsTorchAlias:
+            return new LowlandsTorch();
 
         case DarkTreesItemAlias:
             return new DarkTreesItem();
@@ -152,6 +155,10 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case CharlesAlias:
             return new CharlesCharacter();
+
+        case RichardCharacterAlias:
+            return new RichardCharacter();
+
         case BobCharacterAlias:
             return new BobCharacter();
         case IgnisAlias:

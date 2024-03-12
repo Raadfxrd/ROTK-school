@@ -1,16 +1,19 @@
-import { PickupAction } from "../actions/PickupAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
+import { CustomAction } from "../base/actions/CustomAction";
 import { ExamineAction } from "../base/actions/ExamineAction";
 import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { AlexandraCharacter } from "../characters/AlexandraCharacter";
-import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
-import { ThroneRoom } from "./ThroneRoom";
+import { RichardCharacter } from "../characters/RichardCharacter";
+import { getGameObjectsFromInventory } from "../instances";
 
 export const WolburgRoomAlias: string = "wolburg-room";
+
+let image: string = "rooms/WolburgCity.png";
+let inStables: boolean = false;
 
 export class WolburgRoom extends Room {
     public constructor() {
@@ -22,11 +25,14 @@ export class WolburgRoom extends Room {
     }
 
     public images(): string[] {
-        return ["rooms/WolburgCity.png"];
+        return [image];
     }
 
     public actions(): Action[] {
-        return [new ExamineAction(), new TalkAction(), new PickupAction()];
+        if (inStables === true) {
+            return [new CustomAction("back", "Back", false), new ExamineAction(), new TalkAction()];
+        }
+        return [new ExamineAction(), new TalkAction(), new CustomAction("stablesAlias", "Stables", false)];
     }
 
     public examine(): ActionResult | undefined {
@@ -37,16 +43,17 @@ export class WolburgRoom extends Room {
     }
 
     public objects(): GameObject[] {
-        return [this, ...getGameObjectsFromInventory(), new AlexandraCharacter()];
+        return [this, ...getGameObjectsFromInventory(), new AlexandraCharacter(), new RichardCharacter()];
     }
 
     public custom(alias: string, _gameObjects?: GameObject[]): ActionResult | undefined {
-        if (alias === "start-game") {
-            const room: ThroneRoom = new ThroneRoom();
-
-            //Set the current room to the example room
-            getPlayerSession().currentRoom = room.alias;
-            return room.examine();
+        if (alias === "stablesAlias") {
+            inStables = true;
+            image = "rooms/stableWolburg.png";
+        }
+        if (alias === "back") {
+            inStables = false;
+            image = "rooms/WolburgCity.png";
         }
 
         return undefined;
