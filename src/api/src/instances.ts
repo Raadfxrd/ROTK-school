@@ -23,7 +23,7 @@ import { AureliusCharacter, AureliusCharacterAlias } from "./characters/Aurelius
 import { KarasValeForestRoom, KarasValeForestRoomAlias } from "./rooms/KarasValeForestRoom";
 import { KVFallenTreesItem, KVFallenTreesItemAlias } from "./items/KVFallenTreeItem";
 import { KVForestItem, KVForestItemAlias } from "./items/KVForestItem";
-import { KaraWhistleItem, KaraWhistleItemAlias } from "./items/KaraWhistle";
+import { KaraWhistleItem, KaraWhistleItemAlias } from "./items/KaraWhistleItem";
 
 /**
  * Create a new player session object

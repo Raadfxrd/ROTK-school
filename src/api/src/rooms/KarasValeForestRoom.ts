@@ -9,7 +9,7 @@ import { Room } from "../base/gameObjects/Room";
 import { getPlayerSession } from "../instances";
 import { KVFallenTreesItem } from "../items/KVFallenTreeItem";
 import { KVForestItem } from "../items/KVForestItem";
-import { KaraWhistleItem } from "../items/KaraWhistle";
+import { KaraWhistleItem } from "../items/KaraWhistleItem";
 import { PlayerSession } from "../types";
 import { KarasValeTownSquareRoom } from "./KarasValeTownSquareRoom";
 

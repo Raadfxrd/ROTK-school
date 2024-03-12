@@ -16,7 +16,7 @@ import { PlayerSession } from "../types";
 import { AureliusCharacter } from "../characters/AureliusCharacter";
 import { TalkAction } from "../base/actions/TalkAction";
 import { KarasValeForestRoom } from "./KarasValeForestRoom";
-import { KaraWhistleItem } from "../items/KaraWhistle";
+import { KaraWhistleItem } from "../items/KaraWhistleItem";
 import { useItemAction } from "../actions/UseItemAction";
 
 export const KarasValeTownSquareRoomAlias: string = "KVTownSquare";
