@@ -29,12 +29,13 @@ import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "lowlands-room",
+        currentRoom: "startup",
         inventory: [],
         pickedUpRing: false,
         knowWhereMapIs: false,
         image: "",
         wentNorth: false,
+        drakeIntro: false,
     };
 }
 

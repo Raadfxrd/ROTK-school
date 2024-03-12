@@ -13,7 +13,7 @@ import { EleonorCharacter } from "../characters/EleonorCharacter";
 import { HenryCharacter } from "../characters/HenryCharacter";
 import { getPlayerSession } from "../instances";
 import { RingItem, RingItemAlias } from "../items/RingItem";
-import { MapItem } from "../items/mapItem";
+import { MapItem } from "../items/MapItem";
 import { PlayerSession } from "../types";
 
 export const ThroneRoomAlias: string = "throne-room";
