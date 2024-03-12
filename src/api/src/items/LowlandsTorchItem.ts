@@ -33,6 +33,7 @@ export class LowlandsTorch extends Item implements Examine, Pickup {
         }
 
         if (!playerSession.inventory.includes(LowlandsTorchAlias)) {
+            playerSession.inventory.push(LowlandsTorchAlias);
             return new TextActionResult(["You picked up the torch."]);
         } else {
             return undefined;

@@ -38,18 +38,6 @@ export class LowLandsRoom extends Room {
     }
 
     public objects(): GameObject[] {
-        const playerSession: PlayerSession = getPlayerSession();
-
-        const objects: GameObject[] = [this, ...getGameObjectsFromInventory()];
-
-        if (!playerSession.inventory.includes(LowlandsTorchAlias)) {
-            objects.push(new LowlandsTorch());
-        }
-
-        if (playerSession.clickedButton === PickupActionAlias) {
-            objects.push(new LowlandsTorch());
-        }
-
         return [this, new LowlandsTorch(), new DarkTreesItem(), new TunnelItem()];
     }
 
