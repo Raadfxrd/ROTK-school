@@ -11,18 +11,18 @@ export class TunnelItem extends Item implements Examine {
     }
 
     public name(): string {
-        return "A dark tunnel";
+        return "The wall of the tunnel";
     }
 
     public examine(): ActionResult | undefined {
         return new TextAndImageActionResult(
             [
-                "The tunnel stretches into darkness, promising neither safety nor comfort.",
-                "It is a place of mystery and danger.",
-                "You try going inside the tunnel, but there is a mysterious force stopping you.",
-                "You should try finding a light source before venturing into the unknown.",
+                "The walls of the tunnel are made of stone and are covered in moss.",
+                "They are cold to the touch and the air is damp and musty. The tunnel seems to go on forever.",
+                "There is holsters on the wall, it seems like it was used to hold torches.",
+                "Maybe this means that there is a way to pass...",
             ],
-            ["rooms/tunnel.png"]
+            ["rooms/tunnel-wall.png"]
         );
     }
 

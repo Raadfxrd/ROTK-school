@@ -5,22 +5,22 @@ import { CustomAction } from "../base/actions/CustomAction";
 import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
-import { DarkTreeItem } from "../items/DarkTreeItem";
 import { PickupAction } from "../actions/PickupAction";
 import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { PlayerSession } from "../types";
 import { LowLandsRoom } from "./LowLandsRoom";
+import { TunnelItem } from "../items/TunnelItem";
 
-export const DarkTreesRoomAlias: string = "darktrees-room";
-let picture: string = "darktrees";
+export const TunnelRoomAlias: string = "tunnel-room";
+let picture: string = "tunnel";
 
-export class DarkTreesRoom extends Room {
+export class TunnelRoom extends Room {
     public constructor() {
-        super("darktrees-room");
+        super("tunnel-room");
     }
 
     public name(): string {
-        return "Ominous Trees";
+        return "A dark tunnel";
     }
 
     public images(): string[] {
@@ -37,17 +37,16 @@ export class DarkTreesRoom extends Room {
     }
 
     public objects(): GameObject[] {
-        return [this, new DarkTreeItem()];
+        return [this, new TunnelItem()];
     }
 
     public examine(): ActionResult | undefined {
-        picture = "rooms/darktree.png";
+        picture = "rooms/tunnel.png";
         return new TextActionResult([
-            "The trees loom ominously, their branches like twisted arms.",
-            "You take a closer look at the trees.",
-            "The bark is dark and rough, and the leaves are a sickly green.",
-            "You feel a shiver run down your spine, yet you can't look away.",
-            "You try reading what is written on the bark.",
+            "The tunnel stretches into darkness, promising neither safety nor comfort.",
+            "It is a place of mystery and danger.",
+            "You try going inside the tunnel, but there is a mysterious force stopping you.",
+            "You should try finding a light source before venturing into the unknown.",
         ]);
     }
 
@@ -63,7 +62,7 @@ export class DarkTreesRoom extends Room {
             return new TextActionResult(gameObjectArray);
         }
         if (alias === "go-back") {
-            const lastroom: DarkTreesRoom = new DarkTreesRoom();
+            const lastroom: TunnelRoom = new TunnelRoom();
             const room: LowLandsRoom = new LowLandsRoom();
 
             //Set the current room to the example room

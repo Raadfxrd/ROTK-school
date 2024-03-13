@@ -18,7 +18,7 @@ import { LowlandsTorch, LowlandsTorchAlias } from "./items/LowlandsTorchItem";
 import { VolosVillageRoom, VolosVillageRoomAlias } from "./rooms/VolosVillageRoom";
 import { TavernRoom, TavernRoomAlias } from "./rooms/TavernRoom";
 import { PlayerSession } from "./types";
-import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
+import { DarkTreesSwitcherAlias, DarkTreesSwitcher } from "./items/DarkTreesSwitcher";
 import { AureliusCharacter, AureliusCharacterAlias } from "./characters/AureliusCharacter";
 import { KarasValeForestRoom, KarasValeForestRoomAlias } from "./rooms/KarasValeForestRoom";
 import { KVFallenTreesItem, KVFallenTreesItemAlias } from "./items/KVFallenTreeItem";
@@ -28,6 +28,10 @@ import { MapItem, MapItemAlias } from "./items/MapItem";
 import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
 import { RichardCharacter, RichardCharacterAlias } from "./characters/RichardCharacter";
 import { JohanCharacter, JohanCharacterAlias } from "./characters/JohanCharachter";
+import { DarkTreesRoom, DarkTreesRoomAlias } from "./rooms/DarkTreesRoom";
+import { DarkTreeItemAlias, DarkTreeItem } from "./items/DarkTreeItem";
+import { TunnelRoom, TunnelRoomAlias } from "./rooms/TunnelRoom";
+import { TunnelSwitcher, TunnelSwitcherAlias } from "./items/TunnelSwitcher";
 
 /**
  * Create a new player session object
@@ -102,6 +106,12 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case WolburgRoomAlias:
             return new WolburgRoom();
+
+        case DarkTreesRoomAlias:
+            return new DarkTreesRoom();
+
+        case TunnelRoomAlias:
+            return new TunnelRoom();
     }
 
     return undefined;
@@ -122,8 +132,8 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
         case LowlandsTorchAlias:
             return new LowlandsTorch();
 
-        case DarkTreesItemAlias:
-            return new DarkTreesItem();
+        case DarkTreesSwitcherAlias:
+            return new DarkTreesSwitcher();
 
         case TunnelItemAlias:
             return new TunnelItem();
@@ -165,6 +175,12 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case JohanCharacterAlias:
             return new JohanCharacter();
+
+        case DarkTreeItemAlias:
+            return new DarkTreeItem();
+
+        case TunnelSwitcherAlias:
+            return new TunnelSwitcher();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
