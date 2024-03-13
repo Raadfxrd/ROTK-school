@@ -6,10 +6,7 @@ import { CharlesAlias, CharlesCharacter } from "./characters/CharlesCharacter";
 import { eleonorAlias, EleonorCharacter } from "./characters/EleonorCharacter";
 import { Drakecharacter, DrakecharacterAlias } from "./characters/DrakeCharacter";
 import { BobCharacter, BobCharacterAlias } from "./characters/BobCharacter";
-import { ExampleCharacter, ExampleCharacterAlias } from "./characters/ExampleCharacter";
-import { ExampleItem, ExampleItemAlias } from "./items/ExampleItem";
 import { RingItem, RingItemAlias } from "./items/RingItem";
-import { ExampleRoom, ExampleRoomAlias } from "./rooms/ExampleRoom";
 import { KarasValeBlacksmithRoom, KarasValeBlacksmithRoomAlias } from "./rooms/KarasValeBlacksmithRoom";
 import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./rooms/KarasValeTownSquareRoom";
 import { StartupRoom, StartupRoomAlias } from "./rooms/StartupRoom";
@@ -30,10 +27,18 @@ import { KaraWhistleItem, KaraWhistleItemAlias } from "./items/KaraWhistleItem";
 import { MapItem, MapItemAlias } from "./items/MapItem";
 import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
 import { RichardCharacter, RichardCharacterAlias } from "./characters/RichardCharacter";
+import { BlackSmithRoom, BlacksmithAlias } from "./rooms/BlacksmithRoom";
+import { IgnisCharacter, IgnisAlias } from "./characters/IgnisCharacter";
+import { SwordItemAlias, SwordItem } from "./items/SwordItem";
+import { ShopAlias, ShopRoom } from "./rooms/ShopRoom";
+import { BrannAlias, BrannCharacter } from "./characters/BrannCharacter";
+import { ArmourItem, ArmourItemAlias } from "./items/ArmourItem";
+import { battleAxeItem, battleAxeItemAlias } from "./items/battleAxeItem";
+import { maceItem, maceItemAlias } from "./items/maceItem";
 import { JohanCharacter, JohanCharacterAlias } from "./characters/JohanCharachter";
 import { ChurchWolburgRoom, ChurchWolburgRoomAlias } from "./rooms/ChurchWolburgRoom";
-import { MarkCharacter, MarkCharacterAlias } from "./characters/MarkCharacter";
 import { ChurchTorch, ChurchTorchAlias } from "./items/ThroneRoomTorchItem";
+import { MarkCharacter, MarkCharacterAlias } from "./characters/MarkCharacter";
 
 /**
  * Create a new player session object
@@ -57,7 +62,6 @@ export function createNewPlayerSession(): PlayerSession {
         blessing: false,
         shownRing: false,
         shownRingBadEnding: false,
-        image: "",
     };
 }
 
@@ -89,9 +93,6 @@ export function getRoomByAlias(alias: string): Room | undefined {
         case StartupRoomAlias:
             return new StartupRoom();
 
-        case ExampleRoomAlias:
-            return new ExampleRoom();
-
         case KarasValeTownSquareRoomAlias:
             return new KarasValeTownSquareRoom();
 
@@ -116,6 +117,12 @@ export function getRoomByAlias(alias: string): Room | undefined {
         case WolburgRoomAlias:
             return new WolburgRoom();
 
+        case BlacksmithAlias:
+            return new BlackSmithRoom();
+
+        case ShopAlias:
+            return new ShopRoom();
+
         case ChurchWolburgRoomAlias:
             return new ChurchWolburgRoom();
     }
@@ -132,12 +139,6 @@ export function getRoomByAlias(alias: string): Room | undefined {
  */
 export function getGameObjectByAlias(alias: string): GameObject | undefined {
     switch (alias) {
-        case ExampleItemAlias:
-            return new ExampleItem();
-
-        case ExampleCharacterAlias:
-            return new ExampleCharacter();
-
         case DrakecharacterAlias:
             return new Drakecharacter();
 
@@ -185,6 +186,24 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case BobCharacterAlias:
             return new BobCharacter();
+
+        case IgnisAlias:
+            return new IgnisCharacter();
+
+        case SwordItemAlias:
+            return new SwordItem();
+
+        case BrannAlias:
+            return new BrannCharacter();
+
+        case ArmourItemAlias:
+            return new ArmourItem();
+
+        case battleAxeItemAlias:
+            return new battleAxeItem();
+
+        case maceItemAlias:
+            return new maceItem();
 
         case JohanCharacterAlias:
             return new JohanCharacter();

@@ -5,21 +5,19 @@ import { CustomAction } from "../base/actions/CustomAction";
 import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
-import { LowlandsTorch } from "../items/LowlandsTorchItem";
 import { DarkTreesItem } from "../items/DarkTreesItem";
-import { TunnelItem } from "../items/TunnelItem";
 import { PickupAction } from "../actions/PickupAction";
 
-export const LowLandsRoomAlias: string = "lowlands-room";
-let picture: string = "lowlands";
+export const DarkTreesRoomAlias: string = "darktrees-room";
+let picture: string = "darktrees";
 
-export class LowLandsRoom extends Room {
+export class DarkTreesRoom extends Room {
     public constructor() {
-        super("lowlands");
+        super("darktrees");
     }
 
     public name(): string {
-        return "LowLands";
+        return "Ominous Trees";
     }
 
     public images(): string[] {
@@ -36,18 +34,19 @@ export class LowLandsRoom extends Room {
     }
 
     public objects(): GameObject[] {
-        return [this, new LowlandsTorch(), new DarkTreesItem(), new TunnelItem()];
+        return [this, new DarkTreesItem()];
     }
 
-    public examine = (): ActionResult | undefined => {
-        picture = "rooms/lowlands.png";
+    public examine(): ActionResult | undefined {
+        picture = "rooms/darktree.png";
         return new TextActionResult([
-            "You are in the LowLands.",
-            "The trees are dark and the air is heavy.",
-            "You can see a small tunnel in the middle.",
-            "You can see a torch on the ground a bit further away.",
+            "The trees loom ominously, their branches like twisted arms.",
+            "You take a closer look at the trees.",
+            "The bark is dark and rough, and the leaves are a sickly green.",
+            "You feel a shiver run down your spine, yet you can't look away.",
+            "You try reading what is written on the bark.",
         ]);
-    };
+    }
 
     public objectActions(): string[] {
         return [ExamineActionAlias];

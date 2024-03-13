@@ -206,8 +206,6 @@ export class ThroneRoom extends Room {
             //Set the current room to the example room
             getPlayerSession().lastRoom = lastroom.alias;
             getPlayerSession().currentRoom = room.alias;
-            getPlayerSession().image = picture;
-
             return room.examine();
         }
         if (alias === "inventory") {

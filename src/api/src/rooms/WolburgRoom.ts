@@ -133,7 +133,6 @@ export class WolburgRoom extends Room {
             //Set the current room to the example room
             getPlayerSession().lastRoom = lastroom.alias;
             getPlayerSession().currentRoom = room.alias;
-            getPlayerSession().image = image;
             return room.examine();
         }
         if (alias === "souther-gate") {
