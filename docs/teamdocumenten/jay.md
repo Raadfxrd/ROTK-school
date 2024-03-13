@@ -18,3 +18,7 @@
 
 -   de mensen laten zien met wie je interactie hebt
 -   Geluid toevoegen
+
+## Feedback Coert
+
+- Meer funny dingen
