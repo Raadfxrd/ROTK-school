@@ -56,6 +56,8 @@ export function createNewPlayerSession(): PlayerSession {
         horseMission20: false,
         horseMission30: false,
         gold: 0,
+        shownRing: false,
+        shownRingBadEnding: false,
     };
 }
 
