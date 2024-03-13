@@ -30,4 +30,10 @@
 
 ## Feedback Coert
 
-- Meer funny dingen
+-   Meer funny dingen
+
+## Feedback Marloes
+
+-   Reactive knopjes, zoals bij de ring dat aanpassen
+-   Pijltjes zoals dr layton
+-   Deuren open maken wanneer je naar buiten kan gaan
