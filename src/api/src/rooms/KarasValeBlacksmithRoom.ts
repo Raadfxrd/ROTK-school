@@ -20,7 +20,7 @@ export class KarasValeBlacksmithRoom extends Room {
         ]);
     }
     public images(): string[] {
-        return ["example"];
+        return ["rooms/example.png"];
     }
     public name(): string {
         return "Blacksmith";
@@ -41,6 +41,7 @@ export class KarasValeBlacksmithRoom extends Room {
         }
         return undefined;
     }
+
     public objectActions(): string[] {
         return [ExamineActionAlias];
     }

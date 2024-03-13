@@ -6,7 +6,6 @@ import { Examine, ExamineAction, ExamineActionAlias } from "../base/actions/Exam
 import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
-import { MarkCharacter } from "../characters/MarkCharacter";
 import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { WolburgRoom } from "./WolburgRoom";
 
@@ -22,7 +21,7 @@ export class ChurchWolburgRoom extends Room implements Examine {
     }
 
     public images(): string[] {
-        return ["rooms/churchwolburg.png"];
+        return ["example"];
     }
 
     public actions(): Action[] {
@@ -32,7 +31,7 @@ export class ChurchWolburgRoom extends Room implements Examine {
     public objects(): GameObject[] {
         const inventoryItems: GameObject[] = getGameObjectsFromInventory();
 
-        return [this, ...inventoryItems, new MarkCharacter()];
+        return [this, ...inventoryItems];
     }
 
     public examine(): ActionResult | undefined {
