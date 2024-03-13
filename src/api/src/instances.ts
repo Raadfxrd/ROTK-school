@@ -30,6 +30,7 @@ import { KaraWhistleItem, KaraWhistleItemAlias } from "./items/KaraWhistleItem";
 import { MapItem, MapItemAlias } from "./items/MapItem";
 import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
 import { RichardCharacter, RichardCharacterAlias } from "./characters/RichardCharacter";
+import { JohanCharacter, JohanCharacterAlias } from "./characters/JohanCharachter";
 import { KaraCharacter, KaraCharacterAlias } from "./characters/KaraCharacter";
 
 /**
@@ -47,6 +48,9 @@ export function createNewPlayerSession(): PlayerSession {
         knowsOfKara: false,
         summonedKara: false,
         knowLocationLowlands: false,
+        horseMission10: false,
+        horseMission20: false,
+        horseMission30: false,
         gold: 0,
     };
 }
@@ -78,9 +82,6 @@ export function getRoomByAlias(alias: string): Room | undefined {
     switch (alias) {
         case StartupRoomAlias:
             return new StartupRoom();
-
-        case ExampleRoomAlias:
-            return new ExampleRoom();
 
         case KarasValeTownSquareRoomAlias:
             return new KarasValeTownSquareRoom();
@@ -119,12 +120,6 @@ export function getRoomByAlias(alias: string): Room | undefined {
  */
 export function getGameObjectByAlias(alias: string): GameObject | undefined {
     switch (alias) {
-        case ExampleItemAlias:
-            return new ExampleItem();
-
-        case ExampleCharacterAlias:
-            return new ExampleCharacter();
-
         case DrakecharacterAlias:
             return new Drakecharacter();
 
@@ -172,6 +167,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case BobCharacterAlias:
             return new BobCharacter();
+
+        case JohanCharacterAlias:
+            return new JohanCharacter();
 
         case KaraCharacterAlias:
             return new KaraCharacter();

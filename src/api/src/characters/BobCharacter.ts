@@ -39,4 +39,8 @@ export class BobCharacter extends Character implements Examine {
             ]
         );
     }
+
+    public objectActions(): string[] {
+        return [ExamineActionAlias, TalkActionAlias];
+    }
 }

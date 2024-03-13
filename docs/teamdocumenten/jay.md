@@ -18,3 +18,12 @@
 
 -   de mensen laten zien met wie je interactie hebt
 -   Geluid toevoegen
+
+## Feedback Allessandro
+
+-   Text en knop andere kleur
+-   Go back in voice lines
+-   Knopjes duidelijker maken
+-   Duidelijker maken van wat je specifiek moet doen
+-   Start scherm een how to bij maken
+-   UI in design duidelijk
