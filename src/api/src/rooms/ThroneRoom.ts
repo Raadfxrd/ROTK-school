@@ -3,7 +3,7 @@ import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
 import { CustomAction } from "../base/actions/CustomAction";
-import { ExamineAction } from "../base/actions/ExamineAction";
+import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
@@ -46,10 +46,19 @@ export class ThroneRoom extends Room {
         return [picture];
     }
 
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
+    }
+
     public actions(): Action[] {
         const playerSession: PlayerSession = getPlayerSession();
 
-        const actions: Action[] = [new ExamineAction(), new TalkAction(), new PickupAction()];
+        const actions: Action[] = [
+            new ExamineAction(),
+            new TalkAction(),
+            new PickupAction(),
+            new CustomAction("inventory", "Inventory", false),
+        ];
         if (clickedContinue1 === true) {
             return [new CustomAction("continue-2", "Continue", false)];
         }
@@ -86,7 +95,7 @@ export class ThroneRoom extends Room {
             objects.push(new RingItem());
         }
 
-        if (playerSession.knowWhereMapIs === true && !playerSession.inventory.includes(MapItemAlias)) {
+        if (!playerSession.inventory.includes(MapItemAlias) && playerSession.knowWhereMapIs === true) {
             objects.push(new MapItem());
         }
 
@@ -100,15 +109,26 @@ export class ThroneRoom extends Room {
     }
 
     public examine(): ActionResult | undefined {
+        const playerSession: PlayerSession = getPlayerSession();
+
         if (!clickedContinue7) {
             picture = "rooms/Kaseon.png";
             this.images();
             return new TextActionResult([
-                "You enter the 'Realm of the Kings'",
-                "In the province 'Kaseon' a new queen is to be crowned in the capital city of 'Wolburg': Queen Eleonora",
+                "You enter the 'Realm of the Kings'.",
+                "In the province 'Kaseon' a new queen is to be crowned in the capital city of 'Wolburg': Queen Eleonora.",
+            ]);
+        } else if (playerSession.inventory.includes(RingItemAlias)) {
+            return new TextActionResult([
+                "The throne room of Wolburg in castle Ferdinand.",
+                "The people in the Throneroom have been calmed down now.",
+                "Besides of the ring laying on the ground before there is nothing more to see here.",
             ]);
         } else {
-            return new TextActionResult(["You look at the spot where the princess was last seen"]);
+            return new TextActionResult([
+                "You look at the spot where the princess was last seen, There is something shining on the ground.",
+                "It looks like a small circular object, maybe from the kidnappers that grabbed the princess.",
+            ]);
         }
     }
 
@@ -120,7 +140,7 @@ export class ThroneRoom extends Room {
             this.images();
             clickedContinue1 = true;
             return new TextActionResult([
-                "You are a member of the kingsguard named 'Arthur'. The other kingsguard members are 'Alexandra', 'Henry' and 'Charles'",
+                "You are 'Arthur', a member of the kingsguard. The other kingsguard members are 'Alexandra', 'Henry' and 'Charles'.",
                 "Your duty is to protect the king, and soon the queen.",
             ]);
         }
@@ -140,15 +160,15 @@ export class ThroneRoom extends Room {
             clickedContinue3 = true;
             clickedContinue2 = false;
             return new TextActionResult([
-                "You notice that it is starting to get really crowded in the throne room",
-                "You reckon it's almost time for the princess to enter the throne room",
+                "You notice that it is starting to get really crowded in the throne room.",
+                "You reckon it's almost time for the princess to enter the throne room.",
             ]);
         }
         if (alias === "continue-4") {
             clickedContinue3 = false;
             clickedContinue4 = true;
             return new TextActionResult([
-                "You spot some people making suspicious hand gestures in the crowd",
+                "You spot some people making suspicious hand gestures in the crowd.",
                 "You try to take a closer look at the hand signals, but your attention is drawn by the sound of trumpets announcing the princess' arrival.",
             ]);
         }
@@ -192,6 +212,20 @@ export class ThroneRoom extends Room {
             getPlayerSession().currentRoom = room.alias;
             return room.examine();
         }
+        if (alias === "inventory") {
+            const playerSession: PlayerSession = getPlayerSession();
+            const gameobject: GameObject[] = getGameObjectsFromInventory();
+            const gameObjectArray: any[] = [];
+            for (let i: number = 0; i < gameobject.length; i++) {
+                gameObjectArray.push(gameobject[i].name());
+            }
+            gameObjectArray.push("Gold amount: " + playerSession.gold);
+            return new TextActionResult(gameObjectArray);
+        }
         return undefined;
+    }
+
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
     }
 }

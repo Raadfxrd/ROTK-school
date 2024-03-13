@@ -2,6 +2,7 @@ import { NavigateBlacksmithAlias, NavigationTownSquare } from "../actions/Naviga
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
+import { ExamineActionAlias } from "../base/actions/ExamineAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { getPlayerSession } from "../instances";
@@ -39,5 +40,9 @@ export class KarasValeBlacksmithRoom extends Room {
             return room.examine();
         }
         return undefined;
+    }
+
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
     }
 }

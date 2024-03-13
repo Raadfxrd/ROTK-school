@@ -5,9 +5,6 @@ import { GameObject } from "../base/gameObjects/GameObject";
 import { BobCharacter } from "../characters/BobCharacter";
 import { Action } from "../base/actions/Action";
 import { TalkAction } from "../base/actions/TalkAction";
-import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
-import { PickupActionAlias } from "../actions/PickupAction";
-
 export const TavernRoomAlias: string = "tavern-room";
 export class TavernRoom extends Room {
     public constructor() {
@@ -30,6 +27,6 @@ export class TavernRoom extends Room {
         return new TextActionResult(["Welcome in the tavern, traveller!", "Have a look around."]);
     }
     public actions(): Action[] {
-        return [new TalkAction(), new ExamineAction()];
+        return [new TalkAction()];
     }
 }

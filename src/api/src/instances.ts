@@ -22,6 +22,11 @@ import { VolosVillageRoom, VolosVillageRoomAlias } from "./rooms/VolosVillageRoo
 import { TavernRoom, TavernRoomAlias } from "./rooms/TavernRoom";
 import { PlayerSession } from "./types";
 import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
+import { AureliusCharacter, AureliusCharacterAlias } from "./characters/AureliusCharacter";
+import { KarasValeForestRoom, KarasValeForestRoomAlias } from "./rooms/KarasValeForestRoom";
+import { KVFallenTreesItem, KVFallenTreesItemAlias } from "./items/KVFallenTreeItem";
+import { KVForestItem, KVForestItemAlias } from "./items/KVForestItem";
+import { KaraWhistleItem, KaraWhistleItemAlias } from "./items/KaraWhistleItem";
 import { MapItem, MapItemAlias } from "./items/MapItem";
 import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
 import { RichardCharacter, RichardCharacterAlias } from "./characters/RichardCharacter";
@@ -33,6 +38,7 @@ import { BrannAlias, BrannCharacter } from "./characters/BrannCharacter";
 import { ArmourItem, ArmourItemAlias } from "./items/ArmourItem";
 import { battleAxeItem, battleAxeItemAlias } from "./items/battleAxeItem";
 import { maceItem, maceItemAlias } from "./items/maceItem";
+import { JohanCharacter, JohanCharacterAlias } from "./characters/JohanCharachter";
 
 /**
  * Create a new player session object
@@ -46,7 +52,12 @@ export function createNewPlayerSession(): PlayerSession {
         inventory: [],
         knowWhereMapIs: false,
         wentNorth: false,
+        knowsOfKara: false,
+        summonedKara: false,
         knowLocationLowlands: false,
+        horseMission10: false,
+        horseMission20: false,
+        horseMission30: false,
         gold: 0,
     };
 }
@@ -79,9 +90,6 @@ export function getRoomByAlias(alias: string): Room | undefined {
         case StartupRoomAlias:
             return new StartupRoom();
 
-        case ExampleRoomAlias:
-            return new ExampleRoom();
-
         case KarasValeTownSquareRoomAlias:
             return new KarasValeTownSquareRoom();
 
@@ -93,6 +101,9 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case ThroneRoomAlias:
             return new ThroneRoom();
+
+        case KarasValeForestRoomAlias:
+            return new KarasValeForestRoom();
 
         case VolosVillageRoomAlias:
             return new VolosVillageRoom();
@@ -120,12 +131,6 @@ export function getRoomByAlias(alias: string): Room | undefined {
  */
 export function getGameObjectByAlias(alias: string): GameObject | undefined {
     switch (alias) {
-        case ExampleItemAlias:
-            return new ExampleItem();
-
-        case ExampleCharacterAlias:
-            return new ExampleCharacter();
-
         case DrakecharacterAlias:
             return new Drakecharacter();
 
@@ -156,6 +161,17 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
         case CharlesAlias:
             return new CharlesCharacter();
 
+        case AureliusCharacterAlias:
+            return new AureliusCharacter();
+
+        case KVFallenTreesItemAlias:
+            return new KVFallenTreesItem();
+
+        case KVForestItemAlias:
+            return new KVForestItem();
+
+        case KaraWhistleItemAlias:
+            return new KaraWhistleItem();
         case RichardCharacterAlias:
             return new RichardCharacter();
 
@@ -173,6 +189,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
             return new battleAxeItem();
         case maceItemAlias:
             return new maceItem();
+
+        case JohanCharacterAlias:
+            return new JohanCharacter();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:

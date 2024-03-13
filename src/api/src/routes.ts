@@ -22,6 +22,7 @@ import { TextAndImageActionResult } from "./base/actionResults/TextAndImageActio
 import { PickupAction, PickupActionAlias } from "./actions/PickupAction";
 import { CheckInventoryActionAlias } from "./actions/CheckInventoryAction";
 import { CheckInventoryAction } from "./actions/CheckInventoryAction";
+import { UseItemActionAlias, useItemAction } from "./actions/UseItemAction";
 
 export const router: Router = Router();
 
@@ -127,6 +128,9 @@ function handleActionInRoom(room: Room, alias: string, objectAliases?: string[])
             return PickupAction.handle(gameObjects[0]);
         case CheckInventoryActionAlias:
             return CheckInventoryAction.handle(gameObjects[0]);
+
+        case UseItemActionAlias:
+            return useItemAction.handle(gameObjects[0]);
     }
 
     return CustomAction.handle(alias, gameObjects);

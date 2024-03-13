@@ -2,7 +2,7 @@ import { ActionResult } from "../base/actionResults/ActionResult";
 import { TalkActionResult } from "../base/actionResults/TalkActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
-import { TalkChoiceAction } from "../base/actions/TalkAction";
+import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
 import { RingItemAlias } from "../items/RingItem";
@@ -73,12 +73,16 @@ export class HenryCharacter extends Character implements Examine {
 
         if (playerSession.knowLocationLowlands === true) {
             choiceActions = [
-                new TalkChoiceAction(4, "Can't you go with us on the mission?"),
-                new TalkChoiceAction(5, "Thanks for your help Henry"),
-                new TalkChoiceAction(6, "Do you have any advice for me?"),
+                new TalkChoiceAction(5, "Can't you go with us on the mission?"),
+                new TalkChoiceAction(6, "Thanks for your help Henry"),
+                new TalkChoiceAction(7, "Do you have any advice for me?"),
             ];
         }
 
         return new TalkActionResult(this, ["Henry: What happend?"], choiceActions);
+    }
+
+    public objectActions(): string[] {
+        return [ExamineActionAlias, TalkActionAlias];
     }
 }

@@ -37,7 +37,6 @@ export class MapItem extends Item implements Examine, Pickup {
         }
         return undefined;
     }
-
     public objectActions(): string[] {
         return [ExamineActionAlias, PickupActionAlias];
     }
