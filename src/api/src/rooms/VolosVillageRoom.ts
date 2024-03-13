@@ -1,4 +1,11 @@
-import { EnterVolo, EnterVoloAlias, NavigateNorthAlias, NavigationNorth } from "../actions/NavigateAction";
+import {
+    EnterVolo,
+    EnterVoloAlias,
+    LeaveVolo,
+    LeaveVoloAlias,
+    NavigateNorthAlias,
+    NavigationNorth,
+} from "../actions/NavigateAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { TextAndImageActionResult } from "../base/actionResults/TextAndImageActionResult";
@@ -8,10 +15,13 @@ import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { Drakecharacter } from "../characters/DrakeCharacter";
+import { RonaldoCharacter } from "../characters/RonaldoCharacter";
+import { Taylorcharacter } from "../characters/TaylorCharacter";
 import { getPlayerSession } from "../instances";
+import { secondMedalionHalfItem } from "../items/SecondMedalionHalfItem";
 import { PlayerSession } from "../types";
-
 export let wentGate: boolean = false;
+export let wentVolo: boolean = false;
 export const VolosVillageRoomAlias: string = "Volo's-Village";
 export class VolosVillageRoom extends Room {
     public examine(): ActionResult | undefined {
@@ -31,27 +41,60 @@ export class VolosVillageRoom extends Room {
 
     public images(): string[] {
         const playerSession: PlayerSession = getPlayerSession();
+        if (playerSession.leftVolo === true) {
+            return ["rooms/leavevolo.png"];
+        }
         if (playerSession.wentNorth === true) {
             return ["rooms/volodrake.png"];
+        }
+        if (wentVolo === true) {
+            return ["rooms/volovillage.png"];
         }
         return ["rooms/gate.png"];
     }
     public actions(): Action[] {
         const playerSession: PlayerSession = getPlayerSession();
         console.log(playerSession);
+        if (playerSession.secondMedalionHalf === true) {
+            return [new ExamineAction(), new TalkAction(), new LeaveVolo()];
+        }
+        if (wentVolo === true) {
+            return [new ExamineAction(), new TalkAction()];
+        }
         if (playerSession.drakeIntro === true) {
             return [new ExamineAction(), new TalkAction(), new EnterVolo()];
         }
         if (wentGate === true) {
             return [new ExamineAction(), new TalkAction()];
         }
+
         return [new NavigationNorth()];
     }
     public objects(): GameObject[] {
+        const playerSession: PlayerSession = getPlayerSession();
+        if (playerSession.leftVolo === true) {
+            return [new secondMedalionHalfItem()];
+        }
+        if (playerSession.taylorlikesRonaldo === true) {
+            return [new RonaldoCharacter(), new Drakecharacter()];
+        }
+        if (playerSession.ronaldoIntro === true) {
+            return [new RonaldoCharacter(), new Taylorcharacter()];
+        }
+        if (wentVolo === true) {
+            return [new RonaldoCharacter()];
+        }
         return [new Drakecharacter()];
     }
 
     public custom(alias: string, _gameObjects?: GameObject[] | undefined): ActionResult | undefined {
+        const playerSession: PlayerSession = getPlayerSession();
+        if (alias === LeaveVoloAlias) {
+            playerSession.leftVolo === true;
+            return new TextActionResult([
+                "I have 2 pieces of the medalion now, i assume this will come in handy when ariving at the lowlands...",
+            ]);
+        }
         if (alias === NavigateNorthAlias) {
             wentGate = true;
             console.log(wentGate);
@@ -61,6 +104,7 @@ export class VolosVillageRoom extends Room {
             );
         }
         if (alias === EnterVoloAlias) {
+            wentVolo = true;
             return new TextAndImageActionResult(
                 [
                     "The air feels cool, it makes u feel a lil zasty. U see a somewhat aerodynamic person. The name Ronaldo with a 7 is written on his back.",

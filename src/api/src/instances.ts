@@ -21,6 +21,9 @@ import { Torch1Item, Torch1ItemAlias } from "./items/Torch1Item";
 import { VolosVillageRoom, VolosVillageRoomAlias } from "./rooms/VolosVillageRoom";
 import { PlayerSession } from "./types";
 import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
+import { RonaldoCharacter, RonaldoCharacteralias } from "./characters/RonaldoCharacter";
+import { Taylorcharacter, Taylorcharacteralias } from "./characters/TaylorCharacter";
+import { secondMedalionHalfItem, secondMedalionHalfItemAlias } from "./items/SecondMedalionHalfItem";
 
 /**
  * Create a new player session object
@@ -36,6 +39,10 @@ export function createNewPlayerSession(): PlayerSession {
         image: "",
         wentNorth: false,
         drakeIntro: false,
+        taylorlikesRonaldo: false,
+        ronaldoIntro: false,
+        secondMedalionHalf: false,
+        leftVolo: false
     };
 }
 
@@ -114,6 +121,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
         case TunnelItemAlias:
             return new TunnelItem();
 
+        case secondMedalionHalfItemAlias:
+            return new secondMedalionHalfItem();
+
         case eleonorAlias:
             return new EleonorCharacter();
 
@@ -134,6 +144,12 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case DrakecharacterAlias:
             return new Drakecharacter();
+
+        case RonaldoCharacteralias:
+            return new RonaldoCharacter();
+
+        case Taylorcharacteralias:
+            return new Taylorcharacter();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:

@@ -15,6 +15,12 @@ export class Drakecharacter extends Character implements Examine {
     }
     public talk(choiceId?: number | undefined): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
+        if (playerSession.taylorlikesRonaldo === true) {
+            playerSession.secondMedalionHalf = true;
+            return new TextActionResult([
+                "I have never seen ronaldo so happy before... U deserve this, i dont know what it is for but its a half of some medalion. here u go :) *acquired half of medalion*",
+            ]);
+        }
         if (choiceId === 1) {
             return new TalkActionResult(
                 this,
@@ -25,7 +31,7 @@ export class Drakecharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "Pipe down sussy bakka, that aint so max wyn of u.If u want to enter the lowlands u shall first do some tasks for me, ul be awarded with the half of some random medalion. Go to ronaldo. Trust",
+                    "Pipe down sussy bakka, that aint so max wyn of u.If u want to enter the lowlands u shall first do something for me, ul be awarded with the half of some random medalion. Go to ronaldo. Trust",
                 ],
                 [new TalkChoiceAction(7, "Alright dazeling looking chief.. PIPE DOWN.")]
             );
@@ -33,7 +39,7 @@ export class Drakecharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "This is tragic... She was a baddie tho.. If u want to enter the lowlands u shall first do some tasks for me, ul be awarded with the half of some random medalion. Go to ronaldo. Trust.",
+                    "This is tragic... She was a baddie tho.. If u want to enter the lowlands u shall first do something for me, ul be awarded with the half of some random medalion. Go to ronaldo. Trust.",
                 ],
                 [new TalkChoiceAction(7, "Thank you drake...")]
             );
@@ -46,10 +52,7 @@ export class Drakecharacter extends Character implements Examine {
             ["Greetings handsome traveler.. What brings u to Volo's village?"],
             [
                 new TalkChoiceAction(1, "Im here on a journey to save the princess"),
-                new TalkChoiceAction(
-                    2,
-                    "leave the smalltalk for later, im here to on my way to the lowlands"
-                ),
+                new TalkChoiceAction(2, "leave the smalltalk for later, im here on my way to the lowlands"),
             ]
         );
     }

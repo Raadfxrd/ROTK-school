@@ -6,4 +6,8 @@ export type PlayerSession = {
     image: string;
     wentNorth: boolean;
     drakeIntro: boolean;
+    taylorlikesRonaldo: boolean;
+    ronaldoIntro: boolean;
+    secondMedalionHalf: boolean;
+    leftVolo: boolean;
 };

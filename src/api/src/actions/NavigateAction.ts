@@ -7,10 +7,17 @@ export const NavigateWestAlias: string = "NavigateWest";
 export const NavigateBlacksmithAlias: string = "KVBlacksmith";
 export const NavigateTownSquareAlias: string = "KVTownSquare";
 export const EnterVoloAlias: string = "EnterVolo";
+export const LeaveVoloAlias: string = "LeaveVolo";
 // class om naar het volo te navigeren
 export class EnterVolo extends Action {
     public constructor() {
         super(EnterVoloAlias, "Enter Volo", false);
+    }
+}
+//class om weg van volo te navigeren
+export class LeaveVolo extends Action {
+    public constructor() {
+        super(LeaveVoloAlias, "Leave Volo", false);
     }
 }
 
