@@ -61,6 +61,11 @@ export class RingItem extends Item implements Examine, Pickup, Talk {
     }
 
     public objectActions(): string[] {
+        const playerSession: PlayerSession = getPlayerSession();
+
+        if (playerSession.inventory.includes(RingItemAlias)) {
+            return [ExamineActionAlias, TalkActionAlias];
+        }
         return [ExamineActionAlias, PickupActionAlias];
     }
 }
