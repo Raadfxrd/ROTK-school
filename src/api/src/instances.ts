@@ -36,6 +36,9 @@ import { ArmourItem, ArmourItemAlias } from "./items/ArmourItem";
 import { battleAxeItem, battleAxeItemAlias } from "./items/battleAxeItem";
 import { maceItem, maceItemAlias } from "./items/maceItem";
 import { JohanCharacter, JohanCharacterAlias } from "./characters/JohanCharachter";
+import { ChurchWolburgRoom, ChurchWolburgRoomAlias } from "./rooms/ChurchWolburgRoom";
+import { ChurchTorch, ChurchTorchAlias } from "./items/ThroneRoomTorchItem";
+import { MarkCharacter, MarkCharacterAlias } from "./characters/MarkCharacter";
 
 /**
  * Create a new player session object
@@ -44,7 +47,7 @@ import { JohanCharacter, JohanCharacterAlias } from "./characters/JohanCharachte
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "Shop-room",
+        currentRoom: "startup",
         lastRoom: "",
         inventory: [],
         knowWhereMapIs: false,
@@ -113,10 +116,15 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case WolburgRoomAlias:
             return new WolburgRoom();
+
         case BlacksmithAlias:
             return new BlackSmithRoom();
+
         case ShopAlias:
             return new ShopRoom();
+
+        case ChurchWolburgRoomAlias:
+            return new ChurchWolburgRoom();
     }
 
     return undefined;
@@ -172,26 +180,39 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case KaraWhistleItemAlias:
             return new KaraWhistleItem();
+
         case RichardCharacterAlias:
             return new RichardCharacter();
 
         case BobCharacterAlias:
             return new BobCharacter();
+
         case IgnisAlias:
             return new IgnisCharacter();
+
         case SwordItemAlias:
             return new SwordItem();
+
         case BrannAlias:
             return new BrannCharacter();
+
         case ArmourItemAlias:
             return new ArmourItem();
+
         case battleAxeItemAlias:
             return new battleAxeItem();
+
         case maceItemAlias:
             return new maceItem();
 
         case JohanCharacterAlias:
             return new JohanCharacter();
+
+        case MarkCharacterAlias:
+            return new MarkCharacter();
+
+        case ChurchTorchAlias:
+            return new ChurchTorch();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
