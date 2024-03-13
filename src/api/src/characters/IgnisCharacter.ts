@@ -17,7 +17,7 @@ export class IgnisCharacter extends Character implements Examine {
         super(IgnisAlias, ExamineActionAlias);
     }
     public objectActions(): string[] {
-        return [TalkActionAlias];
+        return [TalkActionAlias, ExamineActionAlias];
     }
     public name(): string {
         return "Ignis";

@@ -3,7 +3,7 @@ import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
 import { CustomAction } from "../base/actions/CustomAction";
-import { ExamineActionAlias } from "../base/actions/ExamineAction";
+import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
@@ -29,7 +29,11 @@ export class ShopRoom extends Room {
         return new TextActionResult(["You are now located in the General store."]);
     }
     public actions(): Action[] {
-        return [new CustomAction("CheckInventoryAlias", "Check Inventory", false), new TalkAction()];
+        return [
+            new CustomAction("CheckInventoryAlias", "Check Inventory", false),
+            new TalkAction(),
+            new ExamineAction(),
+        ];
     }
     public objects(): GameObject[] {
         return [this, new BrannCharacter()];
