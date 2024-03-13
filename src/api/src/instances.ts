@@ -82,9 +82,6 @@ export function getRoomByAlias(alias: string): Room | undefined {
         case StartupRoomAlias:
             return new StartupRoom();
 
-        case ExampleRoomAlias:
-            return new ExampleRoom();
-
         case KarasValeTownSquareRoomAlias:
             return new KarasValeTownSquareRoom();
 
@@ -122,12 +119,6 @@ export function getRoomByAlias(alias: string): Room | undefined {
  */
 export function getGameObjectByAlias(alias: string): GameObject | undefined {
     switch (alias) {
-        case ExampleItemAlias:
-            return new ExampleItem();
-
-        case ExampleCharacterAlias:
-            return new ExampleCharacter();
-
         case DrakecharacterAlias:
             return new Drakecharacter();
 

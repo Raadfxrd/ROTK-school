@@ -46,6 +46,10 @@ export class ThroneRoom extends Room {
         return [picture];
     }
 
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
+    }
+
     public actions(): Action[] {
         const playerSession: PlayerSession = getPlayerSession();
 
