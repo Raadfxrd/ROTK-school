@@ -27,6 +27,92 @@ Raadsel consequenties:
 2/3 goed: De speler krijgt Kara's heflt van het medaillon en een aanwijzing over in welke plek het medaillon ligt
 3/3 goed: De speler krijgt Kara's heflt van het medaillon en een aanwijzing over in welke plek het medaillon ligt en een bonus item uit de opslag van Kara zelf.
 
+De raadsels:
+
+Riddle #1: In Spring I am gay in handsome array; in summer more clothing I wear;
+when colder it grows, I fling off my clothes; and in winter quite naked appear
+
+-   a tree X
+-   a goat X
+-   a mountain V
+
+Riddle #2: Some try to hide, some try to cheat; but time will show, we always will meet.
+Try as you might to guess my name, I promise you’ll know when you I do claim
+
+-   destiny X
+-   time X
+-   death V
+
+Riddle #3: As small as your thumb, I am light in the air.
+You may hear me before you see me, but trust that I’m there
+
+-   a hummingbird V
+-   a mosquito X
+-   a bumblebee X
+
+Riddle #4: Never resting, never still; moving silently from hill to hill;
+it does not walk, run, or trot; all is cool where it is not.
+
+-   the wind X
+-   the sun V
+-   the rain X
+
+Riddle #5: What can bring back the dead; make you cry,
+make you laugh, make you young; is born in an instant, yet lasts a lifetime
+
+-   a memory V
+-   a name X
+-   a joke X
+
+Riddle #6: What can run, but never walks; has a mouth, but never talks;
+has a head, but never weeps, has a bed, but never sleeps
+
+-   a chariot X
+-   a child X
+-   a river V
+
+Riddle #7: This thing all things devours: birds, beasts, trees, flowers;
+gnaws iron, bites steel, grinds hard stones to meal; slays kings, ruins towns;
+and beats high mountains down
+
+-   armies X
+-   time V
+-   nature X
+
+Riddle #8: At night they come without being fetched,
+and by day they are lost without being stolen
+
+-   the sun X
+-   the moon X
+-   the stars V
+
+Riddle #9: I create my lair with earthen string, and dispatch my prey with a biting sting
+
+-   a snake X
+-   a wasp X
+-   a spider V
+
+Riddle #10: I’m alive, but without breath; I’m as cold in life as in death;
+I’m never thirsty, though I always drink
+
+-   a jellyfish X
+-   a fish V
+-   a crocodile X
+
+Riddle #11: What has roots that no one sees; Is taller than trees;
+up, up, up it goes; And yet never grows
+
+-   a city X
+-   a mountain V
+-   a forest X
+
+Riddle #12: What is always old and sometimes new; never sad, sometimes blue;
+never empty, but sometimes full; never pushes, always pulls
+
+-   the moon V
+-   the tide X
+-   the sky X
+
 ## Scene 4: Volo's Village
 
 ## Scene 5: LowLands
