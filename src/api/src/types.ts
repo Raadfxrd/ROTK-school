@@ -11,8 +11,4 @@ export type PlayerSession = {
     gold: number;
     knowsOfKara: boolean;
     summonedKara: boolean;
-    blessing: boolean;
-    shownRing: boolean;
-    shownRingBadEnding: boolean;
-    image: string;
 };

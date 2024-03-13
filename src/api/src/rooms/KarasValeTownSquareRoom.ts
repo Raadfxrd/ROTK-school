@@ -32,7 +32,7 @@ export class KarasValeTownSquareRoom extends Room {
     }
 
     public images(): string[] {
-        return ["rooms/KVTownSquare.png"];
+        return ["rooms/KVTownSquare1.png"];
     }
 
     public actions(): Action[] {

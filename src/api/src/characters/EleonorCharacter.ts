@@ -90,7 +90,7 @@ export class EleonorCharacter extends Character implements Examine {
         } else if (_choiceId === 9) {
             return new TextActionResult(["Eleonor: Good luck Arthur and Alexandra."]);
         } else if (_choiceId === 10) {
-            playerSession.gold += 30;
+            playerSession.gold += 10;
             return new TextActionResult([
                 "Eleonor: Here is some gold to help you around, take good care of yourself.",
                 "*You recieved 10 gold and a steel sword*",
