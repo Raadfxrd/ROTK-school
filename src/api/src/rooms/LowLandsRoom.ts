@@ -30,8 +30,8 @@ export class LowLandsRoom extends Room {
         return [
             new CustomAction("storage", "Inventory", false),
             new ExamineAction(),
+            new CustomAction("back", "Navigate", false),
             new PickupAction(),
-            new CustomAction("move", "Navigate", false),
         ];
     }
 

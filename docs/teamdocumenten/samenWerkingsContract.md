@@ -14,7 +14,7 @@ Op dinsdag bespreken we wat er allemaal gebeurd is in de week ervoor en wat je w
 
 ## Afspraken Communicatie
 
-Op school face2face en erbuiten vai Discord calls message etc.
+Op school face2face en erbuiten via Discord calls message etc.
 
 ## Afspraken aanwezigheid
 

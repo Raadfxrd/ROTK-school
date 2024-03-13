@@ -46,10 +46,6 @@ export class ThroneRoom extends Room {
         return [picture];
     }
 
-    public objectActions(): string[] {
-        return [ExamineActionAlias];
-    }
-
     public actions(): Action[] {
         const playerSession: PlayerSession = getPlayerSession();
 
@@ -210,6 +206,8 @@ export class ThroneRoom extends Room {
             //Set the current room to the example room
             getPlayerSession().lastRoom = lastroom.alias;
             getPlayerSession().currentRoom = room.alias;
+            getPlayerSession().image = picture;
+
             return room.examine();
         }
         if (alias === "inventory") {
