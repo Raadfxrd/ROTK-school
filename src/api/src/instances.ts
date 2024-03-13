@@ -30,6 +30,7 @@ import { KaraWhistleItem, KaraWhistleItemAlias } from "./items/KaraWhistleItem";
 import { MapItem, MapItemAlias } from "./items/MapItem";
 import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
 import { RichardCharacter, RichardCharacterAlias } from "./characters/RichardCharacter";
+import { KaraCharacter, KaraCharacterAlias } from "./characters/KaraCharacter";
 
 /**
  * Create a new player session object
@@ -165,11 +166,15 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case KaraWhistleItemAlias:
             return new KaraWhistleItem();
+
         case RichardCharacterAlias:
             return new RichardCharacter();
 
         case BobCharacterAlias:
             return new BobCharacter();
+
+        case KaraCharacterAlias:
+            return new KaraCharacter();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:

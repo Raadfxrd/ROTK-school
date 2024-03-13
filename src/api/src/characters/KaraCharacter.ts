@@ -1,19 +1,25 @@
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TalkActionResult } from "../base/actionResults/TalkActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
-import { ExamineActionAlias } from "../base/actions/ExamineAction";
+import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 
 export const KaraCharacterAlias: string = "KaraCharacter";
 
-export class KaraCharacter extends Character {
+export class KaraCharacter extends Character implements Examine {
     public constructor() {
         super(KaraCharacterAlias);
     }
 
     public name(): string {
         return "Kara";
+    }
+
+    public examine(): ActionResult | undefined {
+        return new TextActionResult([
+            "It is a massive crow towering over you. It looks at you with curiosity.",
+        ]);
     }
 
     public talk(choiceId?: number | undefined): ActionResult | undefined {
