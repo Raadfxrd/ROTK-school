@@ -93,7 +93,7 @@ export class EleonorCharacter extends Character implements Examine {
             playerSession.gold += 30;
             return new TextActionResult([
                 "Eleonor: Here is some gold to help you around, take good care of yourself.",
-                "*You recieved 10 gold and a steel sword*",
+                "*You recieved 30 gold and a steel sword*",
             ]);
         }
 
