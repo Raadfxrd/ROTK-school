@@ -37,7 +37,7 @@ import { KaraCharacter, KaraCharacterAlias } from "./characters/KaraCharacter";
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "startup",
+        currentRoom: "KVTownSquare",
         lastRoom: "",
         inventory: [],
         knowWhereMapIs: false,
