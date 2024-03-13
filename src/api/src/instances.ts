@@ -31,6 +31,9 @@ import { MapItem, MapItemAlias } from "./items/MapItem";
 import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
 import { RichardCharacter, RichardCharacterAlias } from "./characters/RichardCharacter";
 import { JohanCharacter, JohanCharacterAlias } from "./characters/JohanCharachter";
+import { ChurchWolburgRoom, ChurchWolburgRoomAlias } from "./rooms/ChurchWolburgRoom";
+import { MarkCharacter, MarkCharacterAlias } from "./characters/MarkCharacter";
+import { ChurchTorch, ChurchTorchAlias } from "./items/ThroneRoomTorchItem";
 
 /**
  * Create a new player session object
@@ -51,6 +54,10 @@ export function createNewPlayerSession(): PlayerSession {
         horseMission20: false,
         horseMission30: false,
         gold: 0,
+        blessing: false,
+        shownRing: false,
+        shownRingBadEnding: false,
+        image: "",
     };
 }
 
@@ -108,6 +115,9 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case WolburgRoomAlias:
             return new WolburgRoom();
+
+        case ChurchWolburgRoomAlias:
+            return new ChurchWolburgRoom();
     }
 
     return undefined;
@@ -169,6 +179,7 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case KaraWhistleItemAlias:
             return new KaraWhistleItem();
+
         case RichardCharacterAlias:
             return new RichardCharacter();
 
@@ -177,6 +188,12 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case JohanCharacterAlias:
             return new JohanCharacter();
+
+        case MarkCharacterAlias:
+            return new MarkCharacter();
+
+        case ChurchTorchAlias:
+            return new ChurchTorch();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
