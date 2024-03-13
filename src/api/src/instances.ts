@@ -27,6 +27,14 @@ import { KaraWhistleItem, KaraWhistleItemAlias } from "./items/KaraWhistleItem";
 import { MapItem, MapItemAlias } from "./items/MapItem";
 import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
 import { RichardCharacter, RichardCharacterAlias } from "./characters/RichardCharacter";
+import { BlackSmithRoom, BlacksmithAlias } from "./rooms/BlacksmithRoom";
+import { IgnisCharacter, IgnisAlias } from "./characters/IgnisCharacter";
+import { SwordItemAlias, SwordItem } from "./items/SwordItem";
+import { ShopAlias, ShopRoom } from "./rooms/ShopRoom";
+import { BrannAlias, BrannCharacter } from "./characters/BrannCharacter";
+import { ArmourItem, ArmourItemAlias } from "./items/ArmourItem";
+import { battleAxeItem, battleAxeItemAlias } from "./items/battleAxeItem";
+import { maceItem, maceItemAlias } from "./items/maceItem";
 import { JohanCharacter, JohanCharacterAlias } from "./characters/JohanCharachter";
 import { KaraCharacter, KaraCharacterAlias } from "./characters/KaraCharacter";
 
@@ -103,6 +111,10 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case WolburgRoomAlias:
             return new WolburgRoom();
+        case BlacksmithAlias:
+            return new BlackSmithRoom();
+        case ShopAlias:
+            return new ShopRoom();
     }
 
     return undefined;
@@ -164,6 +176,18 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case BobCharacterAlias:
             return new BobCharacter();
+        case IgnisAlias:
+            return new IgnisCharacter();
+        case SwordItemAlias:
+            return new SwordItem();
+        case BrannAlias:
+            return new BrannCharacter();
+        case ArmourItemAlias:
+            return new ArmourItem();
+        case battleAxeItemAlias:
+            return new battleAxeItem();
+        case maceItemAlias:
+            return new maceItem();
 
         case JohanCharacterAlias:
             return new JohanCharacter();

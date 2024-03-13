@@ -6,6 +6,7 @@ import { BobCharacter } from "../characters/BobCharacter";
 import { Action } from "../base/actions/Action";
 import { TalkAction } from "../base/actions/TalkAction";
 import { ExamineActionAlias } from "../base/actions/ExamineAction";
+import { PickupActionAlias } from "../actions/PickupAction";
 export const TavernRoomAlias: string = "tavern-room";
 export class TavernRoom extends Room {
     public constructor() {
@@ -13,6 +14,9 @@ export class TavernRoom extends Room {
     }
     public name(): string {
         return "tavern";
+    }
+    public objectActions(): string[] {
+        return [ExamineActionAlias, PickupActionAlias];
     }
     public images(): string[] {
         return ["rooms/Tavern.png"];
@@ -26,9 +30,5 @@ export class TavernRoom extends Room {
     }
     public actions(): Action[] {
         return [new TalkAction()];
-    }
-
-    public objectActions(): string[] {
-        return [ExamineActionAlias];
     }
 }
