@@ -12,7 +12,7 @@ export const ExamineActionAlias: string = "examine";
 export interface Examine {
     /**
      * Execute the Examine action
-     * 
+     *
      * @returns Result of the Examine action
      */
     examine(): ActionResult | undefined;

@@ -17,14 +17,23 @@ import { LowLandsRoom, LowLandsRoomAlias } from "./rooms/LowLandsRoom";
 import { TunnelItem, TunnelItemAlias } from "./items/TunnelItem";
 import { ThroneRoom, ThroneRoomAlias } from "./rooms/ThroneRoom";
 import { HenryAlias, HenryCharacter } from "./characters/HenryCharacter";
-import { Torch1Item, Torch1ItemAlias } from "./items/Torch1Item";
+import { LowlandsTorch, LowlandsTorchAlias } from "./items/LowlandsTorchItem";
 import { VolosVillageRoom, VolosVillageRoomAlias } from "./rooms/VolosVillageRoom";
 import { TavernRoom, TavernRoomAlias } from "./rooms/TavernRoom";
 import { PlayerSession } from "./types";
 import { DarkTreesItem, DarkTreesItemAlias } from "./items/DarkTreesItem";
+import { AureliusCharacter, AureliusCharacterAlias } from "./characters/AureliusCharacter";
+import { KarasValeForestRoom, KarasValeForestRoomAlias } from "./rooms/KarasValeForestRoom";
+import { KVFallenTreesItem, KVFallenTreesItemAlias } from "./items/KVFallenTreeItem";
+import { KVForestItem, KVForestItemAlias } from "./items/KVForestItem";
+import { KaraWhistleItem, KaraWhistleItemAlias } from "./items/KaraWhistleItem";
 import { MapItem, MapItemAlias } from "./items/MapItem";
 import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
 import { RichardCharacter, RichardCharacterAlias } from "./characters/RichardCharacter";
+import { JohanCharacter, JohanCharacterAlias } from "./characters/JohanCharachter";
+import { ChurchWolburgRoom, ChurchWolburgRoomAlias } from "./rooms/ChurchWolburgRoom";
+import { MarkCharacter, MarkCharacterAlias } from "./characters/MarkCharacter";
+import { ChurchTorch, ChurchTorchAlias } from "./items/ThroneRoomTorchItem";
 
 /**
  * Create a new player session object
@@ -36,12 +45,19 @@ export function createNewPlayerSession(): PlayerSession {
         currentRoom: "startup",
         lastRoom: "",
         inventory: [],
-        pickedUpRing: false,
         knowWhereMapIs: false,
-        image: "",
         wentNorth: false,
+        knowsOfKara: false,
+        summonedKara: false,
         knowLocationLowlands: false,
+        horseMission10: false,
+        horseMission20: false,
+        horseMission30: false,
         gold: 0,
+        blessing: false,
+        shownRing: false,
+        shownRingBadEnding: false,
+        image: "",
     };
 }
 
@@ -88,6 +104,9 @@ export function getRoomByAlias(alias: string): Room | undefined {
         case ThroneRoomAlias:
             return new ThroneRoom();
 
+        case KarasValeForestRoomAlias:
+            return new KarasValeForestRoom();
+
         case VolosVillageRoomAlias:
             return new VolosVillageRoom();
 
@@ -96,6 +115,9 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case WolburgRoomAlias:
             return new WolburgRoom();
+
+        case ChurchWolburgRoomAlias:
+            return new ChurchWolburgRoom();
     }
 
     return undefined;
@@ -115,11 +137,12 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case ExampleCharacterAlias:
             return new ExampleCharacter();
+
         case DrakecharacterAlias:
             return new Drakecharacter();
 
-        case Torch1ItemAlias:
-            return new Torch1Item();
+        case LowlandsTorchAlias:
+            return new LowlandsTorch();
 
         case DarkTreesItemAlias:
             return new DarkTreesItem();
@@ -145,11 +168,32 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
         case CharlesAlias:
             return new CharlesCharacter();
 
+        case AureliusCharacterAlias:
+            return new AureliusCharacter();
+
+        case KVFallenTreesItemAlias:
+            return new KVFallenTreesItem();
+
+        case KVForestItemAlias:
+            return new KVForestItem();
+
+        case KaraWhistleItemAlias:
+            return new KaraWhistleItem();
+
         case RichardCharacterAlias:
             return new RichardCharacter();
 
         case BobCharacterAlias:
             return new BobCharacter();
+
+        case JohanCharacterAlias:
+            return new JohanCharacter();
+
+        case MarkCharacterAlias:
+            return new MarkCharacter();
+
+        case ChurchTorchAlias:
+            return new ChurchTorch();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:

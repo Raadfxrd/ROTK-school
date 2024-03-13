@@ -27,18 +27,20 @@ export class RingItem extends Item implements Examine, Pickup, Talk {
             ]);
         }
         return new TextActionResult([
-            "You see a ring laying on the floor that you have never seen before",
-            "The ring is made of silver and has been engraved with the image of an cave",
+            "You see a ring laying on the floor that you have never seen before. ",
+            "The ring is made of silver and has been engraved with the image of an cave.",
         ]);
     }
 
     public pickup(): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
 
-        if (!playerSession.inventory.includes(RingItemAlias) && playerSession.pickedUpRing === false) {
+        if (!playerSession.inventory.includes(RingItemAlias)) {
             playerSession.inventory.push(RingItemAlias);
-            playerSession.pickedUpRing = true;
-            return new TextActionResult(["You picked up the ring"]);
+            return new TextActionResult(["*You picked up the ring*"]);
+        }
+        if (!playerSession.inventory.includes(RingItemAlias)) {
+            return new TextActionResult(["*You already have the ring in your inventory*"]);
         } else {
             return undefined;
         }
@@ -56,5 +58,14 @@ export class RingItem extends Item implements Examine, Pickup, Talk {
         }
 
         return undefined;
+    }
+
+    public objectActions(): string[] {
+        const playerSession: PlayerSession = getPlayerSession();
+
+        if (playerSession.inventory.includes(RingItemAlias)) {
+            return [ExamineActionAlias, TalkActionAlias];
+        }
+        return [ExamineActionAlias, PickupActionAlias];
     }
 }

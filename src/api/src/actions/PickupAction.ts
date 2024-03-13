@@ -3,7 +3,7 @@ import { Action } from "../base/actions/Action";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { castTo, implementsInterface } from "../base/helpers";
 
-export const PickupActionAlias: string = "pickup-action";
+export const PickupActionAlias: string = "pickup";
 
 export interface Pickup {
     pickup(): ActionResult | undefined;

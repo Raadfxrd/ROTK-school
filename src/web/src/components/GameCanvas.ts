@@ -282,13 +282,17 @@ export class GameCanvas extends LitElement {
         return html`
             <div class="action-buttons ${this.selectedActionButton ? "fadeInDown center" : ""}">
                 <!-- Verander de center hier voor juiste uitlijning -->
-                ${this.gameObjectButtons?.map(
-                    (button) => html`<a
-                        class="action-button ${this.selectedGameObjectButtons.has(button) ? "active" : ""}"
-                        @click=${(): void => void this.handleClickObject(button)}
-                        >${button.name}</a
-                    >`
-                )}
+                ${this.gameObjectButtons
+                    ?.filter((button) => button.actions.includes(this.selectedActionButton!.alias))
+                    .map(
+                        (button) => html`<a
+                            class="action-button ${this.selectedGameObjectButtons.has(button)
+                                ? "active"
+                                : ""}"
+                            @click=${(): void => void this.handleClickObject(button)}
+                            >${button.name}</a
+                        >`
+                    )}
             </div>
         `;
     }

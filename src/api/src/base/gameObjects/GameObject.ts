@@ -25,6 +25,11 @@ export abstract class GameObject implements HasInterfaces {
     public abstract name(): string;
 
     /**
+     * List of actions that can be performed on this game object
+     */
+    public abstract objectActions(): string[];
+
+    /**
      * Alias of this game object
      */
     public get alias(): string {
@@ -44,6 +49,7 @@ export abstract class GameObject implements HasInterfaces {
         return {
             alias: this._alias,
             name: this.name(),
+            actions: this.objectActions(),
         };
     }
 }
