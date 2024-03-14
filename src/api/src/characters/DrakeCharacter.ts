@@ -3,7 +3,7 @@ import { Character } from "../base/gameObjects/Character";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkActionResult } from "../base/actionResults/TalkActionResult";
-import { TalkChoiceAction } from "../base/actions/TalkAction";
+import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { PlayerSession } from "../types";
 import { getPlayerSession } from "../instances";
 
@@ -68,5 +68,8 @@ export class Drakecharacter extends Character implements Examine {
         return new TextActionResult([
             "There is a somewhat zasty looking fella infront of u. It appears he is the village chief",
         ]);
+    }
+    public objectActions(): string[] {
+        return [ExamineActionAlias, TalkActionAlias];
     }
 }

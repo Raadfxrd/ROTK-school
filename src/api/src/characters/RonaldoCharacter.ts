@@ -2,7 +2,7 @@ import { ActionResult } from "../base/actionResults/ActionResult";
 import { TalkActionResult } from "../base/actionResults/TalkActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
-import { TalkChoiceAction } from "../base/actions/TalkAction";
+import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
 import { PlayerSession } from "../types";
@@ -60,5 +60,8 @@ export class RonaldoCharacter extends Character implements Examine {
     }
     public examine(): ActionResult | undefined {
         return new TextActionResult(["He is indeed very aerodynamic. Interesting."]);
+    }
+    public objectActions(): string[] {
+        return [ExamineActionAlias, TalkActionAlias];
     }
 }

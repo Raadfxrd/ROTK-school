@@ -2,7 +2,7 @@ import { ActionResult } from "../base/actionResults/ActionResult";
 import { TalkActionResult } from "../base/actionResults/TalkActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
-import { TalkChoiceAction } from "../base/actions/TalkAction";
+import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
 import { PlayerSession } from "../types";
@@ -57,5 +57,8 @@ export class Taylorcharacter extends Character implements Examine {
     }
     public examine(): ActionResult | undefined {
         return new TextActionResult(["U see a woman who looks like she likes to fly inside airplanes"]);
+    }
+    public objectActions(): string[] {
+        return [ExamineActionAlias, TalkActionAlias];
     }
 }

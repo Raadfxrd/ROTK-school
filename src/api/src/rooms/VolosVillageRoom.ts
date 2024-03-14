@@ -4,16 +4,14 @@ import {
     LeaveVolo,
     LeaveVoloAlias,
     NavigateNorthAlias,
-    NavigateSouthAlias,
     NavigationNorth,
-    NavigationSouth,
 } from "../actions/NavigateAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { TextAndImageActionResult } from "../base/actionResults/TextAndImageActionResult";
 import { Action } from "../base/actions/Action";
 import { CustomAction } from "../base/actions/CustomAction";
-import { ExamineAction } from "../base/actions/ExamineAction";
+import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
@@ -136,5 +134,8 @@ export class VolosVillageRoom extends Room {
             );
         }
         return undefined;
+    }
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
     }
 }
