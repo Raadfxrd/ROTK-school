@@ -39,6 +39,7 @@ import { JohanCharacter, JohanCharacterAlias } from "./characters/JohanCharachte
 import { ChurchWolburgRoom, ChurchWolburgRoomAlias } from "./rooms/ChurchWolburgRoom";
 import { ChurchTorch, ChurchTorchAlias } from "./items/ThroneRoomTorchItem";
 import { MarkCharacter, MarkCharacterAlias } from "./characters/MarkCharacter";
+import { VolosTorch, VolosTorchAlias } from "./items/VolosVillageTorchItem";
 
 /**
  * Create a new player session object
@@ -213,6 +214,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case ChurchTorchAlias:
             return new ChurchTorch();
+
+        case VolosTorchAlias:
+            return new VolosTorch();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:

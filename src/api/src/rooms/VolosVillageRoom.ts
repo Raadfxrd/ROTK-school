@@ -3,11 +3,10 @@ import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
 import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { GameObject } from "../base/gameObjects/GameObject";
-//import { Action } from "../base/actions/Action";
-//import { CustomAction } from "../base/actions/CustomAction";
-//import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { Drakecharacter } from "../characters/DrakeCharacter";
+import { PickupAction } from "../actions/PickupAction";
+import { VolosTorch } from "../items/VolosVillageTorchItem";
 
 export const VolosVillageRoomAlias: string = "Volo's Village";
 
@@ -18,6 +17,7 @@ export class VolosVillageRoom extends Room {
             "There is an eery aura around the gate",
         ]);
     }
+
     public constructor() {
         super(VolosVillageRoomAlias);
     }
@@ -29,11 +29,13 @@ export class VolosVillageRoom extends Room {
     public images(): string[] {
         return ["volodrake"];
     }
+
     public actions(): Action[] {
-        return [new ExamineAction()];
+        return [new ExamineAction(), new PickupAction()];
     }
+
     public objects(): GameObject[] {
-        return [new Drakecharacter()];
+        return [this, new Drakecharacter(), new VolosTorch()];
     }
 
     public objectActions(): string[] {
