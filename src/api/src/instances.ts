@@ -62,6 +62,8 @@ export function createNewPlayerSession(): PlayerSession {
         blessing: false,
         shownRing: false,
         shownRingBadEnding: false,
+        inStables: false,
+        inGate: false,
     };
 }
 
