@@ -1,7 +1,7 @@
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TalkActionResult } from "../base/actionResults/TalkActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
-import { ExamineActionAlias } from "../base/actions/ExamineAction";
+import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
@@ -10,9 +10,9 @@ import { PlayerSession } from "../types";
 
 export const MarkCharacterAlias: string = "mark-character";
 
-export class MarkCharacter extends Character {
+export class MarkCharacter extends Character implements Examine {
     public constructor() {
-        super(MarkCharacterAlias);
+        super(MarkCharacterAlias, ExamineActionAlias);
     }
 
     public name(): string {
