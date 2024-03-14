@@ -92,7 +92,7 @@ export class EleonorCharacter extends Character implements Examine {
         } else if (_choiceId === 10) {
             playerSession.gold += 30;
             return new TextActionResult([
-                "Eleonor: Here is some gold to help you around, take good care of yourself.",
+                "Eleonor: Here is some gold to help you around, Use it wisely and bring the princess back!",
                 "*You recieved 30 gold and a steel sword*",
             ]);
         }
