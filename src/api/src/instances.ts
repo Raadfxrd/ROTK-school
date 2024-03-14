@@ -77,6 +77,7 @@ export function createNewPlayerSession(): PlayerSession {
         drakeIntro: false,
         taylorlikesRonaldo: false,
         ronaldoIntro: false,
+        firstMedallionHalf: false,
         secondMedalionHalf: false,
         leftVolo: false,
         inStables: false,

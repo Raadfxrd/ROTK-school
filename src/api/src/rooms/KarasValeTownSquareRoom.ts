@@ -6,6 +6,7 @@ import { Action } from "../base/actions/Action";
 import {
     NavigateBackToWolburg,
     NavigateShopRoomAlias,
+    NavigateToLowlandsFromKV,
     NavigationBlacksmith,
     NavigationNorth,
     NavigationShop,
@@ -23,6 +24,7 @@ import { useItemAction } from "../actions/UseItemAction";
 import { BlackSmithRoom } from "./BlacksmithRoom";
 import { WolburgRoom } from "./WolburgRoom";
 import { ShopRoom } from "./ShopRoom";
+import { LowLandsRoom } from "./LowLandsRoom";
 
 export const KarasValeTownSquareRoomAlias: string = "KVTownSquare";
 
@@ -51,6 +53,7 @@ export class KarasValeTownSquareRoom extends Room {
                 new NavigationSouth(),
                 new NavigationWest(),
                 new useItemAction(),
+                new NavigateToLowlandsFromKV(),
             ];
         }
 
@@ -117,6 +120,14 @@ export class KarasValeTownSquareRoom extends Room {
 
         if (alias === "BackToWolburg") {
             const room: WolburgRoom = new WolburgRoom();
+
+            getPlayerSession().currentRoom = room.alias;
+
+            return room.examine();
+        }
+
+        if (alias === "NavigateLowLands") {
+            const room: LowLandsRoom = new LowLandsRoom();
 
             getPlayerSession().currentRoom = room.alias;
 
