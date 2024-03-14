@@ -220,4 +220,7 @@ export class ThroneRoom extends Room {
         }
         return undefined;
     }
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
+    }
 }
