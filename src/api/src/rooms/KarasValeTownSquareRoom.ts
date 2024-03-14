@@ -4,13 +4,13 @@ import { Room } from "../base/gameObjects/Room";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Action } from "../base/actions/Action";
 import {
+    NavigateBackToWolburg,
     NavigationBlacksmith,
     NavigationNorth,
     NavigationSouth,
     NavigationWest,
 } from "../actions/NavigateAction";
 import { getPlayerSession } from "../instances";
-import { KarasValeBlacksmithRoom } from "./KarasValeBlacksmithRoom";
 import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { PlayerSession } from "../types";
 import { AureliusCharacter } from "../characters/AureliusCharacter";
@@ -18,6 +18,8 @@ import { TalkAction } from "../base/actions/TalkAction";
 import { KarasValeForestRoom } from "./KarasValeForestRoom";
 import { KaraWhistleItem } from "../items/KaraWhistleItem";
 import { useItemAction } from "../actions/UseItemAction";
+import { BlackSmithRoom } from "./BlacksmithRoom";
+import { WolburgRoom } from "./WolburgRoom";
 
 export const KarasValeTownSquareRoomAlias: string = "KVTownSquare";
 
@@ -32,7 +34,7 @@ export class KarasValeTownSquareRoom extends Room {
     }
 
     public images(): string[] {
-        return ["rooms/KVTownSquare1.png"];
+        return ["rooms/KVTownSquare.png"];
     }
 
     public actions(): Action[] {
@@ -52,7 +54,7 @@ export class KarasValeTownSquareRoom extends Room {
             return [new ExamineAction(), new TalkAction(), new NavigationBlacksmith(), new NavigationSouth()];
         }
 
-        return [new NavigationNorth()];
+        return [new NavigationNorth(), new NavigateBackToWolburg()];
     }
 
     public objects(): GameObject[] {
@@ -73,8 +75,8 @@ export class KarasValeTownSquareRoom extends Room {
             ]);
         }
 
-        if (alias === "KVBlacksmith") {
-            const room: KarasValeBlacksmithRoom = new KarasValeBlacksmithRoom();
+        if (alias === "BlackSmith-room") {
+            const room: BlackSmithRoom = new BlackSmithRoom();
 
             //Set the current room to the example room
             getPlayerSession().currentRoom = room.alias;
@@ -89,6 +91,14 @@ export class KarasValeTownSquareRoom extends Room {
 
         if (alias === "NavigateWest") {
             const room: KarasValeForestRoom = new KarasValeForestRoom();
+
+            getPlayerSession().currentRoom = room.alias;
+
+            return room.examine();
+        }
+
+        if (alias === "BackToWolburg") {
+            const room: WolburgRoom = new WolburgRoom();
 
             getPlayerSession().currentRoom = room.alias;
 

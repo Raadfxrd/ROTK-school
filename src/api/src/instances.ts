@@ -7,7 +7,6 @@ import { eleonorAlias, EleonorCharacter } from "./characters/EleonorCharacter";
 import { Drakecharacter, DrakecharacterAlias } from "./characters/DrakeCharacter";
 import { BobCharacter, BobCharacterAlias } from "./characters/BobCharacter";
 import { RingItem, RingItemAlias } from "./items/RingItem";
-import { KarasValeBlacksmithRoom, KarasValeBlacksmithRoomAlias } from "./rooms/KarasValeBlacksmithRoom";
 import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./rooms/KarasValeTownSquareRoom";
 import { StartupRoom, StartupRoomAlias } from "./rooms/StartupRoom";
 import { LowLandsRoom, LowLandsRoomAlias } from "./rooms/LowLandsRoom";
@@ -36,6 +35,7 @@ import { ArmourItem, ArmourItemAlias } from "./items/ArmourItem";
 import { battleAxeItem, battleAxeItemAlias } from "./items/battleAxeItem";
 import { maceItem, maceItemAlias } from "./items/maceItem";
 import { JohanCharacter, JohanCharacterAlias } from "./characters/JohanCharachter";
+import { KaraCharacter, KaraCharacterAlias } from "./characters/KaraCharacter";
 import { ChurchWolburgRoom, ChurchWolburgRoomAlias } from "./rooms/ChurchWolburgRoom";
 import { ChurchTorch, ChurchTorchAlias } from "./items/ThroneRoomTorchItem";
 import { MarkCharacter, MarkCharacterAlias } from "./characters/MarkCharacter";
@@ -108,9 +108,6 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case KarasValeTownSquareRoomAlias:
             return new KarasValeTownSquareRoom();
-
-        case KarasValeBlacksmithRoomAlias:
-            return new KarasValeBlacksmithRoom();
 
         case LowLandsRoomAlias:
             return new LowLandsRoom();
@@ -241,6 +238,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case JohanCharacterAlias:
             return new JohanCharacter();
+
+        case KaraCharacterAlias:
+            return new KaraCharacter();
 
         case MarkCharacterAlias:
             return new MarkCharacter();
