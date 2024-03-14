@@ -6,7 +6,7 @@ import { ExamineActionAlias } from "../base/actions/ExamineAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { getPlayerSession } from "../instances";
-import { VolosVillageRoom } from "./VolosVillageRoom";
+import { ThroneRoom } from "./ThroneRoom";
 
 export const StartupRoomAlias: string = "startup";
 
@@ -33,7 +33,7 @@ export class StartupRoom extends Room {
 
     public custom(alias: string, _gameObjects?: GameObject[]): ActionResult | undefined {
         if (alias === "start-game") {
-            const room: VolosVillageRoom = new VolosVillageRoom();
+            const room: ThroneRoom = new ThroneRoom();
 
             //Set the current room to the example room
             getPlayerSession().currentRoom = room.alias;
