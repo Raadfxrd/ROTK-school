@@ -91,7 +91,7 @@ export class NavigationStablesWolburg extends Action {
 }
 
 // class om terug naar wolburg te navigeren vanaf kara's vale
-export class NavigateBackToWolburg extends Action {
+export class NavigateToWolburg extends Action {
     public constructor() {
         super(NavigateBackToWolburgAlias, "Wolburg", false);
     }
