@@ -40,6 +40,10 @@ import { ChurchWolburgRoom, ChurchWolburgRoomAlias } from "./rooms/ChurchWolburg
 import { ChurchTorch, ChurchTorchAlias } from "./items/ThroneRoomTorchItem";
 import { MarkCharacter, MarkCharacterAlias } from "./characters/MarkCharacter";
 import { VolosTorch, VolosTorchAlias } from "./items/VolosVillageTorchItem";
+import { DarkTreeItemAlias, DarkTreeItem } from "./items/DarkTreeItem";
+import { TunnelSwitcherAlias, TunnelSwitcher } from "./items/TunnelSwitcher";
+import { DarkTreesRoomAlias, DarkTreesRoom } from "./rooms/DarkTreesRoom";
+import { TunnelRoomAlias, TunnelRoom } from "./rooms/TunnelRoom";
 
 /**
  * Create a new player session object
