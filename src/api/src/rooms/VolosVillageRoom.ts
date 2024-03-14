@@ -118,10 +118,9 @@ export class VolosVillageRoom extends Room {
         if (alias === NavigateNorthAlias) {
             wentGate = true;
             console.log(wentGate);
-            return new TextAndImageActionResult(
-                ["There is a somewhat zasty looking fella infront of u. It appears he is the village chief"],
-                ["rooms/volodrake.png"]
-            );
+            return new TextActionResult([
+                "There is a somewhat zasty looking fella infront of u. It appears he is the village chief",
+            ]);
         }
         if (alias === EnterVoloAlias) {
             wentVolo = true;
