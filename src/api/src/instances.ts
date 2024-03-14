@@ -11,7 +11,7 @@ import { KarasValeBlacksmithRoom, KarasValeBlacksmithRoomAlias } from "./rooms/K
 import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./rooms/KarasValeTownSquareRoom";
 import { StartupRoom, StartupRoomAlias } from "./rooms/StartupRoom";
 import { LowLandsRoom, LowLandsRoomAlias } from "./rooms/LowLandsRoom";
-import { TunnelItem, TunnelItemAlias } from "./items/TunnelItem";
+import { TunnelWallItem, TunnelWallItemAlias } from "./items/TunnelWallItem";
 import { ThroneRoom, ThroneRoomAlias } from "./rooms/ThroneRoom";
 import { HenryAlias, HenryCharacter } from "./characters/HenryCharacter";
 import { LowlandsTorch, LowlandsTorchAlias } from "./items/LowlandsTorchItem";
@@ -135,8 +135,8 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
         case DarkTreesSwitcherAlias:
             return new DarkTreesSwitcher();
 
-        case TunnelItemAlias:
-            return new TunnelItem();
+        case TunnelWallItemAlias:
+            return new TunnelWallItem();
 
         case eleonorAlias:
             return new EleonorCharacter();

@@ -6,7 +6,6 @@ import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { DarkTreeItem } from "../items/DarkTreeItem";
-import { PickupAction } from "../actions/PickupAction";
 import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { PlayerSession } from "../types";
 import { LowLandsRoom } from "./LowLandsRoom";
@@ -31,7 +30,6 @@ export class DarkTreesRoom extends Room {
         return [
             new CustomAction("inventory", "Inventory", false),
             new ExamineAction(),
-            new PickupAction(),
             new CustomAction("go-back", "Go back", false),
         ];
     }
@@ -47,7 +45,6 @@ export class DarkTreesRoom extends Room {
             "You take a closer look at the trees.",
             "The bark is dark and rough, and the leaves are a sickly green.",
             "You feel a shiver run down your spine, yet you can't look away.",
-            "You try reading what is written on the bark.",
         ]);
     }
 

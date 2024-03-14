@@ -5,11 +5,10 @@ import { CustomAction } from "../base/actions/CustomAction";
 import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
-import { PickupAction } from "../actions/PickupAction";
 import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { PlayerSession } from "../types";
 import { LowLandsRoom } from "./LowLandsRoom";
-import { TunnelItem } from "../items/TunnelItem";
+import { TunnelWallItem } from "../items/TunnelWallItem";
 
 export const TunnelRoomAlias: string = "tunnel-room";
 let picture: string = "tunnel";
@@ -31,13 +30,12 @@ export class TunnelRoom extends Room {
         return [
             new CustomAction("inventory", "Inventory", false),
             new ExamineAction(),
-            new PickupAction(),
             new CustomAction("go-back", "Go back", false),
         ];
     }
 
     public objects(): GameObject[] {
-        return [this, new TunnelItem()];
+        return [this, new TunnelWallItem()];
     }
 
     public examine(): ActionResult | undefined {
