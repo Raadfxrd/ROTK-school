@@ -39,6 +39,10 @@ import { ArmourItem, ArmourItemAlias } from "./items/ArmourItem";
 import { battleAxeItem, battleAxeItemAlias } from "./items/battleAxeItem";
 import { maceItem, maceItemAlias } from "./items/maceItem";
 import { JohanCharacter, JohanCharacterAlias } from "./characters/JohanCharachter";
+import { HealingPotionAlias, HealingPotionItem } from "./items/HealingPotionItem";
+import { HolyBibleAlias, HolyBibleItem } from "./items/HolyBibleItem";
+import { SpiderEyeAlias, SpiderEyeItem } from "./items/SpiderEyeItem";
+import { MysteriousPaintingAlias, MysteriousPaintingItem } from "./items/MysteriousPaintingItem";
 
 /**
  * Create a new player session object
@@ -192,6 +196,14 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case JohanCharacterAlias:
             return new JohanCharacter();
+        case HealingPotionAlias:
+            return new HealingPotionItem();
+        case HolyBibleAlias:
+            return new HolyBibleItem();
+        case SpiderEyeAlias:
+            return new SpiderEyeItem();
+        case MysteriousPaintingAlias:
+            return new MysteriousPaintingItem();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
