@@ -27,3 +27,13 @@
 -   Duidelijker maken van wat je specifiek moet doen
 -   Start scherm een how to bij maken
 -   UI in design duidelijk
+
+## Feedback Coert
+
+-   Meer funny dingen
+
+## Feedback Marloes
+
+-   Reactive knopjes, zoals bij de ring dat aanpassen
+-   Pijltjes zoals dr layton
+-   Deuren open maken wanneer je naar buiten kan gaan

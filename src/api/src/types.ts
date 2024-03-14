@@ -19,4 +19,6 @@ export type PlayerSession = {
     blessing: boolean;
     shownRing: boolean;
     shownRingBadEnding: boolean;
+    inStables: boolean;
+    inGate: boolean;
 };
