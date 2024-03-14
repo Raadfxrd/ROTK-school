@@ -59,7 +59,7 @@ import { MysteriousPaintingAlias, MysteriousPaintingItem } from "./items/Mysteri
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "wolburg-room",
+        currentRoom: "startup",
         lastRoom: "",
         inventory: [],
         knowWhereMapIs: false,
