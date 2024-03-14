@@ -23,25 +23,32 @@ export class KaraCharacter extends Character implements Examine {
     }
 
     public getRandomNumber(_min: number, _max: number): number {
-        const x: number = Math.floor(Math.random() * 10) + 1;
+        const x: number = Math.floor(Math.random() * 3) + 5;
         return x;
     }
 
-    public createArrayOfNumbers(start: any, end: any): Array<number> {
+    public createArrayOfNumbers(start: number, end: number): Array<number> {
         const myArray: Array<number> = [];
 
-        for (let i: number = start; i < end; i++) {
+        for (let i: number = start; i <= end; i++) {
             myArray.push(i);
         }
         return myArray;
     }
 
-    public numbersArray: Array<number> = this.createArrayOfNumbers(5, 17);
-    public randomIndex: number = this.getRandomNumber(0, this.numbersArray.length - 1);
+    // public numbersArray: Array<number> = this.createArrayOfNumbers(5, 7);
+    // public randomIndex: number = this.getRandomNumber(0, this.numbersArray.length - 1);
+
+    // public riddlesAnsweredArray: Array<number> = this.createArrayOfNumbers(1, 3);
+    // public randomIndex2: number = this.getRandomNumber(0, this.riddlesAnsweredArray.length - 1);
+
     //choiceid = randomnumber
     // een continue knop na de question waar de choiceid wordt bepaald voor welke het wordt
 
     public talk(choiceId?: number | undefined): ActionResult | undefined {
+        // if (this.riddlesAnsweredArray.length === 0) {
+        //     return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(60, "bet")]);
+        // }
         if (choiceId === 1) {
             return new TalkActionResult(
                 this,
@@ -72,18 +79,24 @@ export class KaraCharacter extends Character implements Examine {
                     "You will answer my riddles.",
                     "If your mind is capable enough i shall share with you what i know of the whereabouts of the princess.",
                 ],
-                [new TalkChoiceAction(this.randomIndex, "Very well.")]
+                [new TalkChoiceAction(5, "Very well.")]
             );
         }
         if (choiceId === 4) {
             return new TalkActionResult(
                 this,
                 ["Word spreads quick and I have ears and eyes in many places."],
-                [new TalkChoiceAction(this.randomIndex, "Very well.")]
+                [new TalkChoiceAction(5, "Very well.")]
             );
         }
-        if (choiceId === 5) {
-            this.numbersArray.splice(this.randomIndex, 5);
+        if (choiceId === 5 && !this.numbersArray.includes(5)) {
+            const index: number = this.numbersArray.indexOf(5);
+            const numbersUsedArray: number[] = [];
+
+            // numbersUsedArray.push(this.numbersArray.splice(index, 1));
+
+            //this.numbersArray.splice(index, 1);
+            console.log(this.numbersArray);
             return new TalkActionResult(
                 this,
                 [
@@ -92,15 +105,17 @@ export class KaraCharacter extends Character implements Examine {
                     "What am I.",
                 ],
                 [
-                    new TalkChoiceAction(this.randomIndex, "A tree"), // correct answer
-                    new TalkChoiceAction(this.randomIndex, "A goat"),
-                    new TalkChoiceAction(this.randomIndex, "A mountain"),
+                    new TalkChoiceAction(40, "A tree"), // correct answer
+                    new TalkChoiceAction(50, "A goat"),
+                    new TalkChoiceAction(50, "A mountain"),
                 ]
             );
         }
 
-        if (choiceId === 6) {
-            this.numbersArray.splice(this.randomIndex, 6);
+        if (choiceId === 6 && !this.numbersArray.includes(6)) {
+            const index: number = this.numbersArray.indexOf(6);
+            this.numbersArray.splice(index, 1);
+            console.log(this.numbersArray);
             return new TalkActionResult(
                 this,
                 [
@@ -108,15 +123,17 @@ export class KaraCharacter extends Character implements Examine {
                     "Try as you might to guess my name, I promise you'll know when you I do claim",
                 ],
                 [
-                    new TalkChoiceAction(this.randomIndex, "Destiny"),
-                    new TalkChoiceAction(this.randomIndex, "Time"),
-                    new TalkChoiceAction(this.randomIndex, "Death"), // correct answer
+                    new TalkChoiceAction(50, "Destiny"),
+                    new TalkChoiceAction(50, "Time"),
+                    new TalkChoiceAction(40, "Death"), // correct answer
                 ]
             );
         }
 
-        if (choiceId === 7) {
-            this.numbersArray.splice(this.randomIndex, 7);
+        if (choiceId === 7 && !this.numbersArray.includes(7)) {
+            const index: number = this.numbersArray.indexOf(7);
+            this.numbersArray.splice(index, 1);
+            console.log(this.numbersArray);
             return new TalkActionResult(
                 this,
                 [
@@ -124,17 +141,32 @@ export class KaraCharacter extends Character implements Examine {
                     "You may hear me before you see me, but trust that I'm there",
                 ],
                 [
-                    new TalkChoiceAction(this.randomIndex, "A hummingbird"), // correct answer
-                    new TalkChoiceAction(this.randomIndex, "A mosquito"),
-                    new TalkChoiceAction(this.randomIndex, "A Bumblebee"),
+                    new TalkChoiceAction(40, "A hummingbird"), // correct answer
+                    new TalkChoiceAction(50, "A mosquito"),
+                    new TalkChoiceAction(50, "A Bumblebee"),
                 ]
             );
         }
+        if (choiceId === 40) {
+            return new TalkActionResult(
+                this,
+                ["You are correct human, another"],
+                [new TalkChoiceAction(100, "Alright")]
+            );
+        }
 
-        // math.random
-        // gebruiken en daarna
-        // nummer pushen naar array
-        // als het nummer nog een keer getrokken wordt check of het al in de array staat
+        if (choiceId === 50) {
+            this.riddlesAnsweredArray.splice(0, 1);
+            console.log(this.numbersArray);
+            console.log(this.randomIndex);
+            console.log(this.riddlesAnsweredArray);
+            return new TalkActionResult(
+                this,
+                ["Incorrect, another"],
+                [new TalkChoiceAction(this.randomIndex, "Very well")]
+            );
+        }
+
         if (choiceId === 100) {
             return new TextActionResult([""]);
         }
