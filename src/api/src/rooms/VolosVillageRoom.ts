@@ -45,22 +45,19 @@ export class VolosVillageRoom extends Room {
     public images(): string[] {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.leftVolo === true) {
-            return ["rooms/leavevolo.png"];
-        }
-        if (playerSession.wentNorth === true) {
-            return ["rooms/volodrake.png"];
+            return ["rooms/vologate.png"];
         }
         if (wentVolo === true) {
             return ["rooms/volovillage.png"];
         }
-        return ["rooms/gate.png"];
+        return ["rooms/vologate.png"];
     }
 
     public actions(): Action[] {
         const playerSession: PlayerSession = getPlayerSession();
         console.log(playerSession);
         if (playerSession.leftVolo === true) {
-            return [new ExamineAction()];
+            return [new ExamineAction(), new CustomAction("back-karas", "Back", false)];
         }
         if (playerSession.secondMedalionHalf === true) {
             return [new ExamineAction(), new TalkAction(), new LeaveVolo()];
