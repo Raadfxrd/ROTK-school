@@ -7,7 +7,7 @@ import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
 import { PlayerSession } from "../types";
 
-export const JohanCharacterAlias: string = "mark-character";
+export const JohanCharacterAlias: string = "johan-character";
 
 export class JohanCharacter extends Character implements Examine {
     public constructor() {

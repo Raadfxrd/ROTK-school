@@ -30,7 +30,10 @@ export class KaraWhistleItem extends Item implements Examine, useItem {
             this.PlayerSession.summonedKara = true;
         }
 
-        if (this.PlayerSession.summonedKara === true) {
+        if (
+            this.PlayerSession.summonedKara === true &&
+            this.PlayerSession.currentRoom === KarasValeForestRoomAlias
+        ) {
             return new TextAndImageActionResult(
                 ["*First you hear the cracking of the trees, then a giant crow appears in front of you*"],
                 ["rooms/Kara.png"]

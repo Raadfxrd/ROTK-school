@@ -4,6 +4,7 @@ import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
 import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
+import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { KaraCharacter } from "../characters/KaraCharacter";
@@ -35,7 +36,7 @@ export class KarasValeForestRoom extends Room {
     }
 
     public actions(): Action[] {
-        return [new ExamineAction(), new useItemAction(), new NavigationEast()];
+        return [new ExamineAction(), new useItemAction(), new TalkAction(), new NavigationEast()];
     }
 
     public examine(): ActionResult | undefined {

@@ -10,6 +10,8 @@ import { TalkAction } from "../base/actions/TalkAction";
 import { PlayerSession } from "../types";
 import { ExamineActionAlias } from "../base/actions/ExamineAction";
 import { PickupActionAlias } from "../actions/PickupAction";
+import { NavigationSouth } from "../actions/NavigateAction";
+import { KarasValeTownSquareRoom } from "./KarasValeTownSquareRoom";
 
 export const BlacksmithAlias: string = "BlackSmith-room";
 export class BlackSmithRoom extends Room {
@@ -29,7 +31,11 @@ export class BlackSmithRoom extends Room {
         return [this, new IgnisCharacter()];
     }
     public actions(): Action[] {
-        return [new CustomAction("CheckInventoryAlias", "Check Inventory", false), new TalkAction()];
+        return [
+            new CustomAction("CheckInventoryAlias", "Check Inventory", false),
+            new TalkAction(),
+            new NavigationSouth(),
+        ];
     }
     public examine(): ActionResult | undefined {
         return new TextActionResult(["<CLASH!> You have now entered the Blacksmith"]);
@@ -45,6 +51,14 @@ export class BlackSmithRoom extends Room {
             }
             gameObjectArray.push("Gold amount: " + playerSession.gold);
             return new TextActionResult(gameObjectArray);
+        }
+        if (alias === "NavigateSouth") {
+            const room: KarasValeTownSquareRoom = new KarasValeTownSquareRoom();
+
+            //Set the current room to the example room
+            getPlayerSession().currentRoom = room.alias;
+
+            return room.examine();
         }
         return undefined;
     }

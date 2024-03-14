@@ -46,10 +46,6 @@ export class ThroneRoom extends Room {
         return [picture];
     }
 
-    public objectActions(): string[] {
-        return [ExamineActionAlias];
-    }
-
     public actions(): Action[] {
         const playerSession: PlayerSession = getPlayerSession();
 
@@ -224,7 +220,6 @@ export class ThroneRoom extends Room {
         }
         return undefined;
     }
-
     public objectActions(): string[] {
         return [ExamineActionAlias];
     }
