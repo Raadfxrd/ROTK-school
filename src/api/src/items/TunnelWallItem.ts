@@ -80,6 +80,23 @@ export class TunnelWallItem extends Item implements Examine {
                 ["rooms/tunnel-wall.png", "items/TorchPlainsOnWall.png"]
             );
         }
+        if (
+            playerSession.inventory.includes(ShadowbeakTorchAlias) &&
+            playerSession.inventory.includes(KarasTorchAlias) &&
+            playerSession.inventory.includes(VolosTorchAlias) &&
+            playerSession.inventory.includes(ThroneTorchAlias) &&
+            playerSession.inventory.includes(ShopTorchAlias) &&
+            playerSession.inventory.includes(LowlandsTorchAlias)
+        ) {
+            return new TextAndImageActionResult(
+                [
+                    "You place in the torches that belong to the different regions.",
+                    "The torches flicker, casting shadows on the wall of the tunnel.",
+                    "You can finally pass through the tunnel.",
+                ],
+                ["items/tunnel-wall-complete.png"]
+            );
+        }
         if (!playerSession.inventory.includes(LowlandsTorchAlias)) {
             return new TextAndImageActionResult(
                 [
