@@ -89,14 +89,14 @@ export class KaraCharacter extends Character implements Examine {
                 [new TalkChoiceAction(5, "Very well.")]
             );
         }
-        if (choiceId === 5 && !this.numbersArray.includes(5)) {
-            const index: number = this.numbersArray.indexOf(5);
-            const numbersUsedArray: number[] = [];
+        if (choiceId === 5) {
+            // const index: number = this.numbersArray.indexOf(5);
+            // const numbersUsedArray: number[] = [];
 
             // numbersUsedArray.push(this.numbersArray.splice(index, 1));
 
             //this.numbersArray.splice(index, 1);
-            console.log(this.numbersArray);
+            // console.log(this.numbersArray);
             return new TalkActionResult(
                 this,
                 [
@@ -105,17 +105,17 @@ export class KaraCharacter extends Character implements Examine {
                     "What am I.",
                 ],
                 [
-                    new TalkChoiceAction(40, "A tree"), // correct answer
-                    new TalkChoiceAction(50, "A goat"),
-                    new TalkChoiceAction(50, "A mountain"),
+                    new TalkChoiceAction(6, "A tree"), // correct answer
+                    new TalkChoiceAction(6, "A goat"),
+                    new TalkChoiceAction(6, "A mountain"),
                 ]
             );
         }
 
-        if (choiceId === 6 && !this.numbersArray.includes(6)) {
-            const index: number = this.numbersArray.indexOf(6);
-            this.numbersArray.splice(index, 1);
-            console.log(this.numbersArray);
+        if (choiceId === 6) {
+            // const index: number = this.numbersArray.indexOf(6);
+            //     this.numbersArray.splice(index, 1);
+            //     console.log(this.numbersArray);
             return new TalkActionResult(
                 this,
                 [
@@ -123,17 +123,17 @@ export class KaraCharacter extends Character implements Examine {
                     "Try as you might to guess my name, I promise you'll know when you I do claim",
                 ],
                 [
-                    new TalkChoiceAction(50, "Destiny"),
-                    new TalkChoiceAction(50, "Time"),
-                    new TalkChoiceAction(40, "Death"), // correct answer
+                    new TalkChoiceAction(7, "Destiny"),
+                    new TalkChoiceAction(7, "Time"),
+                    new TalkChoiceAction(7, "Death"), // correct answer
                 ]
             );
         }
 
-        if (choiceId === 7 && !this.numbersArray.includes(7)) {
-            const index: number = this.numbersArray.indexOf(7);
-            this.numbersArray.splice(index, 1);
-            console.log(this.numbersArray);
+        if (choiceId === 7) {
+            // const index: number = this.numbersArray.indexOf(7);
+            // this.numbersArray.splice(index, 1);
+            // console.log(this.numbersArray);
             return new TalkActionResult(
                 this,
                 [
@@ -141,31 +141,54 @@ export class KaraCharacter extends Character implements Examine {
                     "You may hear me before you see me, but trust that I'm there",
                 ],
                 [
-                    new TalkChoiceAction(40, "A hummingbird"), // correct answer
-                    new TalkChoiceAction(50, "A mosquito"),
-                    new TalkChoiceAction(50, "A Bumblebee"),
+                    new TalkChoiceAction(90, "A hummingbird"), // correct answer
+                    new TalkChoiceAction(90, "A mosquito"),
+                    new TalkChoiceAction(90, "A Bumblebee"),
                 ]
             );
         }
-        if (choiceId === 40) {
+
+        if (choiceId === 90) {
             return new TalkActionResult(
                 this,
-                ["You are correct human, another"],
-                [new TalkChoiceAction(100, "Alright")]
+                [
+                    "You have succeeded in answering my riddles human, a most impressive feat.",
+                    "Here, take these as a reward for your wit and tenacity.",
+                    "*You are gain one half of a medaillion and a blue torch*",
+                ],
+                [
+                    new TalkChoiceAction(100, "Thank you"),
+                    new TalkChoiceAction(91, "Where can i find the other medallion"),
+                ]
             );
         }
 
-        if (choiceId === 50) {
-            this.riddlesAnsweredArray.splice(0, 1);
-            console.log(this.numbersArray);
-            console.log(this.randomIndex);
-            console.log(this.riddlesAnsweredArray);
+        if (choiceId === 91) {
             return new TalkActionResult(
                 this,
-                ["Incorrect, another"],
-                [new TalkChoiceAction(this.randomIndex, "Very well")]
+                ["You must seek out Volo's village, there you will find the other half of the medallion"],
+                [new TalkChoiceAction(100, "Thank you")]
             );
         }
+        // if (choiceId === 40) {
+        //     return new TalkActionResult(
+        //         this,
+        //         ["You are correct human, another"],
+        //         [new TalkChoiceAction(100, "Alright")]
+        //     );
+        // }
+
+        // if (choiceId === 50) {
+        //     // this.riddlesAnsweredArray.splice(0, 1);
+        //     // console.log(this.numbersArray);
+        //     // console.log(this.randomIndex);
+        //     // console.log(this.riddlesAnsweredArray);
+        //     return new TalkActionResult(
+        //         this,
+        //         ["Incorrect, another"],
+        //         [new TalkChoiceAction(, "Very well")]
+        //     );
+        // }
 
         if (choiceId === 100) {
             return new TextActionResult([""]);
