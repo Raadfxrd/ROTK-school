@@ -1,3 +1,4 @@
+import { Back, NavigateBackAlias } from "../actions/NavigateAction";
 import { PickupActionAlias } from "../actions/PickupAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
@@ -10,6 +11,8 @@ import { Room } from "../base/gameObjects/Room";
 import { BrannCharacter } from "../characters/BrannCharacter";
 import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { PlayerSession } from "../types";
+import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./KarasValeTownSquareRoom";
+import { WolburgRoom, WolburgRoomAlias } from "./WolburgRoom";
 
 export const ShopAlias: string = "Shop-room";
 export class ShopRoom extends Room {
@@ -33,6 +36,7 @@ export class ShopRoom extends Room {
             new CustomAction("CheckInventoryAlias", "Check Inventory", false),
             new TalkAction(),
             new ExamineAction(),
+            new Back(),
         ];
     }
     public objects(): GameObject[] {
@@ -48,6 +52,18 @@ export class ShopRoom extends Room {
             }
             gameObjectArray.push("Gold amount: " + playerSession.gold);
             return new TextActionResult(gameObjectArray);
+        }
+
+        if (alias === NavigateBackAlias) {
+            const playerSession: PlayerSession = getPlayerSession();
+            playerSession.currentRoom = playerSession.lastRoom;
+            if (playerSession.lastRoom === WolburgRoomAlias) {
+                const room: WolburgRoom = new WolburgRoom();
+                return room.examine();
+            } else if (playerSession.lastRoom === KarasValeTownSquareRoomAlias) {
+                const room: KarasValeTownSquareRoom = new KarasValeTownSquareRoom();
+                return room.examine();
+            }
         }
         return undefined;
     }
