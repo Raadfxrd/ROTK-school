@@ -51,6 +51,8 @@ export class IgnisCharacter extends Character implements Examine {
                 return new TextActionResult([
                     "Yes, this is my specialty. I will make you a strong piece of armor made out off the most durable piece of iron.",
                 ]);
+            } else if (playerSession.gold <= 41) {
+                return new TextActionResult(["you dont have enough gold..."]);
             }
         }
         if (_choiceId === 5) {
@@ -71,6 +73,8 @@ export class IgnisCharacter extends Character implements Examine {
                 playerSession.gold -= 15;
                 playerSession.inventory.push(SwordItemAlias);
                 return new TextActionResult(["Alright, here you go.<hands over sword>"]);
+            } else if (playerSession.gold <= 15) {
+                return new TextActionResult(["you dont have enough gold..."]);
             }
         }
         if (_choiceId === 7) {
@@ -78,6 +82,8 @@ export class IgnisCharacter extends Character implements Examine {
                 playerSession.gold -= 23;
                 playerSession.inventory.push(battleAxeItemAlias);
                 return new TextActionResult(["That should do it!<hands over battle-axe>"]);
+            } else if (playerSession.gold <= 23) {
+                return new TextActionResult(["you dont have enough gold..."]);
             }
         }
         if (_choiceId === 8) {
@@ -85,6 +91,8 @@ export class IgnisCharacter extends Character implements Examine {
                 playerSession.gold -= 18;
                 playerSession.inventory.push(maceItemAlias);
                 return new TextActionResult(["Sure...<hands over mace>"]);
+            } else if (playerSession.gold <= 18) {
+                return new TextActionResult(["you dont have enough gold..."]);
             }
         }
 
