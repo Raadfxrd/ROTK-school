@@ -55,7 +55,7 @@ import { secondMedalionHalfItem, secondMedalionHalfItemAlias } from "./items/Sec
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "startup",
+        currentRoom: "KVTownSquare",
         lastRoom: "",
         inventory: [],
         knowWhereMapIs: false,
