@@ -1,8 +1,9 @@
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { Character } from "../base/gameObjects/Character";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
-import { TalkActionAlias } from "../base/actions/TalkAction";
 import { ExamineActionAlias } from "../base/actions/ExamineAction";
+import { TalkActionAlias } from "../base/actions/TalkAction";
+
 export const DrakecharacterAlias: string = "drake";
 
 export class Drakecharacter extends Character {
@@ -21,6 +22,6 @@ export class Drakecharacter extends Character {
         ]);
     }
     public objectActions(): string[] {
-        return [TalkActionAlias, ExamineActionAlias];
+        return [ExamineActionAlias, TalkActionAlias];
     }
 }

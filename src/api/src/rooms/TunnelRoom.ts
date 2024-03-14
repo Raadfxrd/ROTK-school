@@ -5,24 +5,21 @@ import { CustomAction } from "../base/actions/CustomAction";
 import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
-import { LowlandsTorch } from "../items/LowlandsTorchItem";
-import { DarkTreesSwitcher } from "../items/DarkTreesSwitcher";
-import { TunnelSwitcher } from "../items/TunnelSwitcher";
-import { PickupAction } from "../actions/PickupAction";
 import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { PlayerSession } from "../types";
-import { VolosVillageRoom } from "./VolosVillageRoom";
+import { LowLandsRoom } from "./LowLandsRoom";
+import { TunnelWallItem } from "../items/TunnelWallItem";
 
-export const LowLandsRoomAlias: string = "lowlands-room";
-let picture: string = "lowlands";
+export const TunnelRoomAlias: string = "tunnel-room";
+let picture: string = "tunnel";
 
-export class LowLandsRoom extends Room {
+export class TunnelRoom extends Room {
     public constructor() {
-        super("lowlands-room");
+        super("tunnel-room");
     }
 
     public name(): string {
-        return "LowLands";
+        return "A dark tunnel";
     }
 
     public images(): string[] {
@@ -33,24 +30,23 @@ export class LowLandsRoom extends Room {
         return [
             new CustomAction("inventory", "Inventory", false),
             new ExamineAction(),
-            new PickupAction(),
             new CustomAction("go-back", "Go back", false),
         ];
     }
 
     public objects(): GameObject[] {
-        return [this, new LowlandsTorch(), new DarkTreesSwitcher(), new TunnelSwitcher()];
+        return [this, new TunnelWallItem()];
     }
 
-    public examine = (): ActionResult | undefined => {
-        picture = "rooms/lowlands.png";
+    public examine(): ActionResult | undefined {
+        picture = "rooms/tunnel.png";
         return new TextActionResult([
-            "You are in the LowLands.",
-            "The trees are dark and the air is heavy.",
-            "You can see a small tunnel in the middle.",
-            "You can see a torch on the ground a bit further away.",
+            "The tunnel stretches into darkness, promising neither safety nor comfort.",
+            "It is a place of mystery and danger.",
+            "You try going inside the tunnel, but there is a mysterious force stopping you.",
+            "You should try finding a light source before venturing into the unknown.",
         ]);
-    };
+    }
 
     public custom(alias: string, _gameObjects?: GameObject[]): ActionResult | undefined {
         if (alias === "inventory") {
@@ -63,15 +59,17 @@ export class LowLandsRoom extends Room {
             gameObjectArray.push("Gold amount: " + playerSession.gold);
             return new TextActionResult(gameObjectArray);
         }
-        const lastroom: LowLandsRoom = new LowLandsRoom();
-        const room: VolosVillageRoom = new VolosVillageRoom();
+        if (alias === "go-back") {
+            const lastroom: TunnelRoom = new TunnelRoom();
+            const room: LowLandsRoom = new LowLandsRoom();
 
-        //Set the current room to the example room
-        getPlayerSession().lastRoom = lastroom.alias;
-        getPlayerSession().currentRoom = room.alias;
-        return room.examine();
+            //Set the current room to the example room
+            getPlayerSession().lastRoom = lastroom.alias;
+            getPlayerSession().currentRoom = room.alias;
+            return room.examine();
+        }
+        return undefined;
     }
-
     public objectActions(): string[] {
         return [ExamineActionAlias];
     }

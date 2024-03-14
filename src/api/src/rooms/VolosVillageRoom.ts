@@ -8,7 +8,7 @@ import { Drakecharacter } from "../characters/DrakeCharacter";
 import { PickupAction } from "../actions/PickupAction";
 import { VolosTorch } from "../items/VolosVillageTorchItem";
 
-export const VolosVillageRoomAlias: string = "Volo's Village";
+export const VolosVillageRoomAlias: string = "Volos-Village";
 
 export class VolosVillageRoom extends Room {
     public examine(): ActionResult | undefined {
