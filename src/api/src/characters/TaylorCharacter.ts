@@ -20,6 +20,14 @@ export class Taylorcharacter extends Character implements Examine {
                 [new TalkChoiceAction(4, "He has actually")]
             );
         }
+        if (choiceId === 2) {
+            playerSession.taylorlikesRonaldo = true;
+            new TalkActionResult(
+                this,
+                ["No way!! I want to date him <3"],
+                [new TalkChoiceAction(1, "yeah his jet go sui!")]
+            );
+        }
         if (choiceId === 4) {
             playerSession.taylorlikesRonaldo = true;
             return new TalkActionResult(
@@ -32,14 +40,7 @@ export class Taylorcharacter extends Character implements Examine {
             playerSession.taylorlikesRonaldo = true;
             return new TextActionResult(["Deal"]);
         }
-        if (choiceId === 2) {
-            playerSession.taylorlikesRonaldo = true;
-            new TalkActionResult(
-                this,
-                ["No way!! I want to date him <3"],
-                [new TalkChoiceAction(1, "yeah his jet go sui!")]
-            );
-        }
+
         return new TalkActionResult(
             this,
             ["Hi there. u look baked. how can i help you? "],

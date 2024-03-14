@@ -33,6 +33,9 @@ export class RonaldoCharacter extends Character implements Examine {
                     new TalkChoiceAction(3, "I think i know how to get taylor to like u. Il be back at ya"),
                 ]
             );
+        } else if (choiceId === 3) {
+            playerSession.ronaldoIntro = true;
+            return new TextActionResult(["I trust you"]);
         } else if (choiceId === 2) {
             return new TalkActionResult(
                 this,

@@ -4,12 +4,15 @@ import {
     LeaveVolo,
     LeaveVoloAlias,
     NavigateNorthAlias,
+    NavigateSouthAlias,
     NavigationNorth,
+    NavigationSouth,
 } from "../actions/NavigateAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { TextAndImageActionResult } from "../base/actionResults/TextAndImageActionResult";
 import { Action } from "../base/actions/Action";
+import { CustomAction } from "../base/actions/CustomAction";
 import { ExamineAction } from "../base/actions/ExamineAction";
 import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
@@ -20,6 +23,7 @@ import { Taylorcharacter } from "../characters/TaylorCharacter";
 import { getPlayerSession } from "../instances";
 import { secondMedalionHalfItem } from "../items/SecondMedalionHalfItem";
 import { PlayerSession } from "../types";
+import { KarasValeTownSquareRoom } from "./KarasValeTownSquareRoom";
 export let wentGate: boolean = false;
 export let wentVolo: boolean = false;
 export const VolosVillageRoomAlias: string = "Volo's-Village";
@@ -55,6 +59,9 @@ export class VolosVillageRoom extends Room {
     public actions(): Action[] {
         const playerSession: PlayerSession = getPlayerSession();
         console.log(playerSession);
+        if (playerSession.leftVolo === true) {
+            return [new ExamineAction()];
+        }
         if (playerSession.secondMedalionHalf === true) {
             return [new ExamineAction(), new TalkAction(), new LeaveVolo()];
         }
@@ -68,7 +75,7 @@ export class VolosVillageRoom extends Room {
             return [new ExamineAction(), new TalkAction()];
         }
 
-        return [new NavigationNorth()];
+        return [new NavigationNorth(), new CustomAction("back-karas", "Back", false)];
     }
     public objects(): GameObject[] {
         const playerSession: PlayerSession = getPlayerSession();
@@ -89,11 +96,23 @@ export class VolosVillageRoom extends Room {
 
     public custom(alias: string, _gameObjects?: GameObject[] | undefined): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
+
         if (alias === LeaveVoloAlias) {
-            playerSession.leftVolo === true;
+            playerSession.leftVolo = true;
+            wentGate = false;
+            wentVolo = false;
             return new TextActionResult([
                 "I have 2 pieces of the medalion now, i assume this will come in handy when ariving at the lowlands...",
             ]);
+        }
+        if (alias === "back-karas") {
+            const lastroom: VolosVillageRoom = new VolosVillageRoom();
+            const room: KarasValeTownSquareRoom = new KarasValeTownSquareRoom();
+
+            //Set the current room to the example room
+            getPlayerSession().lastRoom = lastroom.alias;
+            getPlayerSession().currentRoom = room.alias;
+            return room.examine();
         }
         if (alias === NavigateNorthAlias) {
             wentGate = true;
@@ -105,6 +124,7 @@ export class VolosVillageRoom extends Room {
         }
         if (alias === EnterVoloAlias) {
             wentVolo = true;
+            wentGate = false;
             return new TextAndImageActionResult(
                 [
                     "The air feels cool, it makes u feel a lil zasty. U see a somewhat aerodynamic person. The name Ronaldo with a 7 is written on his back.",
