@@ -59,7 +59,7 @@ import { MysteriousPaintingAlias, MysteriousPaintingItem } from "./items/Mysteri
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "startup",
+        currentRoom: "wolburg-room",
         lastRoom: "",
         inventory: [],
         knowWhereMapIs: false,
@@ -250,7 +250,18 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
             return new SpiderEyeItem();
         case MysteriousPaintingAlias:
             return new MysteriousPaintingItem();
-
+        case KaraCharacterAlias:
+            return new KaraCharacter();
+        case ChurchTorchAlias:
+            return new ChurchTorch();
+        case MarkCharacterAlias:
+            return new MarkCharacter();
+        case VolosTorchAlias:
+            return new VolosTorch();
+        case DarkTreeItemAlias:
+            return new DarkTreeItem();
+        case TunnelSwitcherAlias:
+            return new TunnelSwitcher();
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
             return getRoomByAlias(alias);

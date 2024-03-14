@@ -10,8 +10,9 @@ import { TalkAction } from "../base/actions/TalkAction";
 import { PlayerSession } from "../types";
 import { ExamineActionAlias } from "../base/actions/ExamineAction";
 import { PickupActionAlias } from "../actions/PickupAction";
-import { NavigationSouth } from "../actions/NavigateAction";
-import { KarasValeTownSquareRoom } from "./KarasValeTownSquareRoom";
+import { Back, NavigateBackAlias } from "../actions/NavigateAction";
+import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./KarasValeTownSquareRoom";
+import { WolburgRoomAlias, WolburgRoom } from "./WolburgRoom";
 
 export const BlacksmithAlias: string = "BlackSmith-room";
 export class BlackSmithRoom extends Room {
@@ -34,7 +35,7 @@ export class BlackSmithRoom extends Room {
         return [
             new CustomAction("CheckInventoryAlias", "Check Inventory", false),
             new TalkAction(),
-            new NavigationSouth(),
+            new Back(),
         ];
     }
     public examine(): ActionResult | undefined {
@@ -52,13 +53,16 @@ export class BlackSmithRoom extends Room {
             gameObjectArray.push("Gold amount: " + playerSession.gold);
             return new TextActionResult(gameObjectArray);
         }
-        if (alias === "NavigateSouth") {
-            const room: KarasValeTownSquareRoom = new KarasValeTownSquareRoom();
-
-            //Set the current room to the example room
-            getPlayerSession().currentRoom = room.alias;
-
-            return room.examine();
+        if (alias === NavigateBackAlias) {
+            const playerSession: PlayerSession = getPlayerSession();
+            playerSession.currentRoom = playerSession.lastRoom;
+            if (playerSession.lastRoom === WolburgRoomAlias) {
+                const room: WolburgRoom = new WolburgRoom();
+                return room.examine();
+            } else if (playerSession.lastRoom === KarasValeTownSquareRoomAlias) {
+                const room: KarasValeTownSquareRoom = new KarasValeTownSquareRoom();
+                return room.examine();
+            }
         }
         return undefined;
     }
