@@ -44,6 +44,9 @@ import { DarkTreeItemAlias, DarkTreeItem } from "./items/DarkTreeItem";
 import { TunnelSwitcherAlias, TunnelSwitcher } from "./items/TunnelSwitcher";
 import { DarkTreesRoomAlias, DarkTreesRoom } from "./rooms/DarkTreesRoom";
 import { TunnelRoomAlias, TunnelRoom } from "./rooms/TunnelRoom";
+import { RonaldoCharacter, RonaldoCharacteralias } from "./characters/RonaldoCharacter";
+import { Taylorcharacter, Taylorcharacteralias } from "./characters/TaylorCharacter";
+import { secondMedalionHalfItem, secondMedalionHalfItemAlias } from "./items/SecondMedalionHalfItem";
 
 /**
  * Create a new player session object
@@ -67,6 +70,11 @@ export function createNewPlayerSession(): PlayerSession {
         blessing: false,
         shownRing: false,
         shownRingBadEnding: false,
+        drakeIntro: false,
+        taylorlikesRonaldo: false,
+        ronaldoIntro: false,
+        secondMedalionHalf: false,
+        leftVolo: false,
     };
 }
 
@@ -162,6 +170,12 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
         case TunnelWallItemAlias:
             return new TunnelWallItem();
 
+        case secondMedalionHalfItemAlias:
+            return new secondMedalionHalfItem();
+
+        case secondMedalionHalfItemAlias:
+            return new secondMedalionHalfItem();
+
         case eleonorAlias:
             return new EleonorCharacter();
 
@@ -179,6 +193,15 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case CharlesAlias:
             return new CharlesCharacter();
+
+        case DrakecharacterAlias:
+            return new Drakecharacter();
+
+        case RonaldoCharacteralias:
+            return new RonaldoCharacter();
+
+        case Taylorcharacteralias:
+            return new Taylorcharacter();
 
         case AureliusCharacterAlias:
             return new AureliusCharacter();
