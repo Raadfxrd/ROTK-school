@@ -1,3 +1,9 @@
+import {
+    NavigateBlacksmithAlias,
+    NavigateShopRoomAlias,
+    NavigationBlacksmith,
+    NavigationShop,
+} from "../actions/NavigateAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
@@ -11,8 +17,10 @@ import { JohanCharacter } from "../characters/JohanCharachter";
 import { RichardCharacter } from "../characters/RichardCharacter";
 import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { PlayerSession } from "../types";
+import { BlackSmithRoom } from "./BlacksmithRoom";
 import { ChurchWolburgRoom } from "./ChurchWolburgRoom";
 import { KarasValeTownSquareRoom } from "./KarasValeTownSquareRoom";
+import { ShopRoom } from "./ShopRoom";
 import { ThroneRoom } from "./ThroneRoom";
 
 export const WolburgRoomAlias: string = "wolburg-room";
@@ -58,6 +66,8 @@ export class WolburgRoom extends Room {
             new CustomAction("inventory", "Inventory", false),
             new CustomAction("stablesAlias", "Stables", false),
             new CustomAction("church", "Church", false),
+            new NavigationBlacksmith(),
+            new NavigationShop(),
             new CustomAction("back-throneroom", "Back", false),
         ];
     }
@@ -137,6 +147,26 @@ export class WolburgRoom extends Room {
             //Set the current room to the example room
             getPlayerSession().lastRoom = lastroom.alias;
             getPlayerSession().currentRoom = room.alias;
+            return room.examine();
+        }
+        if (alias === NavigateShopRoomAlias) {
+            const room: ShopRoom = new ShopRoom();
+            const lastRoom: WolburgRoom = new WolburgRoom();
+
+            //Set the current room to the example room
+            getPlayerSession().lastRoom = lastRoom.alias;
+            getPlayerSession().currentRoom = room.alias;
+
+            return room.examine();
+        }
+        if (alias === NavigateBlacksmithAlias) {
+            const room: BlackSmithRoom = new BlackSmithRoom();
+            const lastRoom: WolburgRoom = new WolburgRoom();
+
+            //Set the current room to the example room
+            getPlayerSession().currentRoom = room.alias;
+            getPlayerSession().lastRoom = lastRoom.alias;
+
             return room.examine();
         }
         if (alias === "souther-gate") {

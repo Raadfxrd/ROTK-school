@@ -5,8 +5,10 @@ import { GameObject } from "../base/gameObjects/GameObject";
 import { Action } from "../base/actions/Action";
 import {
     NavigateBackToWolburg,
+    NavigateShopRoomAlias,
     NavigationBlacksmith,
     NavigationNorth,
+    NavigationShop,
     NavigationSouth,
     NavigationWest,
 } from "../actions/NavigateAction";
@@ -20,6 +22,7 @@ import { KaraWhistleItem } from "../items/KaraWhistleItem";
 import { useItemAction } from "../actions/UseItemAction";
 import { BlackSmithRoom } from "./BlacksmithRoom";
 import { WolburgRoom } from "./WolburgRoom";
+import { ShopRoom } from "./ShopRoom";
 
 export const KarasValeTownSquareRoomAlias: string = "KVTownSquare";
 
@@ -44,6 +47,7 @@ export class KarasValeTownSquareRoom extends Room {
                 new ExamineAction(),
                 new TalkAction(),
                 new NavigationBlacksmith(),
+                new NavigationShop(),
                 new NavigationSouth(),
                 new NavigationWest(),
                 new useItemAction(),
@@ -51,7 +55,13 @@ export class KarasValeTownSquareRoom extends Room {
         }
 
         if (this.playerSession.wentNorth === true) {
-            return [new ExamineAction(), new TalkAction(), new NavigationBlacksmith(), new NavigationSouth()];
+            return [
+                new ExamineAction(),
+                new TalkAction(),
+                new NavigationBlacksmith(),
+                new NavigationShop(),
+                new NavigationSouth(),
+            ];
         }
 
         return [new NavigationNorth(), new NavigateBackToWolburg()];
@@ -75,6 +85,14 @@ export class KarasValeTownSquareRoom extends Room {
             ]);
         }
 
+        if (alias === NavigateShopRoomAlias) {
+            const room: ShopRoom = new ShopRoom();
+
+            //Set the current room to the example room
+            getPlayerSession().currentRoom = room.alias;
+
+            return room.examine();
+        }
         if (alias === "BlackSmith-room") {
             const room: BlackSmithRoom = new BlackSmithRoom();
 

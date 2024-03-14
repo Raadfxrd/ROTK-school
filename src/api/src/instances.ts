@@ -47,6 +47,10 @@ import { TunnelRoomAlias, TunnelRoom } from "./rooms/TunnelRoom";
 import { RonaldoCharacter, RonaldoCharacteralias } from "./characters/RonaldoCharacter";
 import { Taylorcharacter, Taylorcharacteralias } from "./characters/TaylorCharacter";
 import { secondMedalionHalfItem, secondMedalionHalfItemAlias } from "./items/SecondMedalionHalfItem";
+import { HealingPotionAlias, HealingPotionItem } from "./items/HealingPotionItem";
+import { HolyBibleAlias, HolyBibleItem } from "./items/HolyBibleItem";
+import { SpiderEyeAlias, SpiderEyeItem } from "./items/SpiderEyeItem";
+import { MysteriousPaintingAlias, MysteriousPaintingItem } from "./items/MysteriousPaintingItem";
 
 /**
  * Create a new player session object
@@ -55,7 +59,7 @@ import { secondMedalionHalfItem, secondMedalionHalfItemAlias } from "./items/Sec
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "startup",
+        currentRoom: "wolburg-room",
         lastRoom: "",
         inventory: [],
         knowWhereMapIs: false,
@@ -240,25 +244,26 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case JohanCharacterAlias:
             return new JohanCharacter();
-
+        case HealingPotionAlias:
+            return new HealingPotionItem();
+        case HolyBibleAlias:
+            return new HolyBibleItem();
+        case SpiderEyeAlias:
+            return new SpiderEyeItem();
+        case MysteriousPaintingAlias:
+            return new MysteriousPaintingItem();
         case KaraCharacterAlias:
             return new KaraCharacter();
-
-        case MarkCharacterAlias:
-            return new MarkCharacter();
-
         case ChurchTorchAlias:
             return new ChurchTorch();
-
+        case MarkCharacterAlias:
+            return new MarkCharacter();
         case VolosTorchAlias:
             return new VolosTorch();
-
         case DarkTreeItemAlias:
             return new DarkTreeItem();
-
         case TunnelSwitcherAlias:
             return new TunnelSwitcher();
-
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
             return getRoomByAlias(alias);
