@@ -8,6 +8,7 @@ export const NavigateBlacksmithAlias: string = "BlackSmith-room";
 export const NavigateTownSquareAlias: string = "KVTownSquare";
 export const EnterVoloAlias: string = "EnterVolo";
 export const LeaveVoloAlias: string = "LeaveVolo";
+export const NavigateToVolosVillageAlias: string = "NavigateVolo";
 // class om naar het volo te navigeren
 export class EnterVolo extends Action {
     public constructor() {
@@ -77,5 +78,11 @@ export class NavigationStablesWolburg extends Action {
 export class NavigateBackToWolburg extends Action {
     public constructor() {
         super(NavigateBackToWolburgAlias, "Wolburg", false);
+    }
+}
+
+export class NavigateToVolosVillage extends Action {
+    public constructor() {
+        super(NavigateToVolosVillageAlias, "Volo's village", false);
     }
 }
