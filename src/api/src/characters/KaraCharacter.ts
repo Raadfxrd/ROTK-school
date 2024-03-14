@@ -4,6 +4,8 @@ import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
+import { getPlayerSession } from "../instances";
+import { PlayerSession } from "../types";
 
 export const KaraCharacterAlias: string = "KaraCharacter";
 
@@ -11,6 +13,8 @@ export class KaraCharacter extends Character implements Examine {
     public constructor() {
         super(KaraCharacterAlias);
     }
+
+    public playerSession: PlayerSession = getPlayerSession();
 
     public name(): string {
         return "Kara";
@@ -149,6 +153,7 @@ export class KaraCharacter extends Character implements Examine {
         }
 
         if (choiceId === 90) {
+            this.playerSession.firstMedallionHalf = true;
             return new TalkActionResult(
                 this,
                 [

@@ -7,6 +7,7 @@ export type PlayerSession = {
     drakeIntro: boolean;
     taylorlikesRonaldo: boolean;
     ronaldoIntro: boolean;
+    firstMedallionHalf: boolean;
     secondMedalionHalf: boolean;
     leftVolo: boolean;
     knowLocationLowlands: boolean;

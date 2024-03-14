@@ -11,6 +11,7 @@ export const NavigateTownSquareAlias: string = "KVTownSquare";
 export const EnterVoloAlias: string = "EnterVolo";
 export const LeaveVoloAlias: string = "LeaveVolo";
 export const NavigateToVolosVillageAlias: string = "NavigateVolo";
+export const NavigateToLowlandsFromKVAlias: string = "NavigateLowLands";
 // class om naar het volo te navigeren
 export class EnterVolo extends Action {
     public constructor() {
@@ -100,5 +101,11 @@ export class NavigateToWolburg extends Action {
 export class NavigateToVolosVillage extends Action {
     public constructor() {
         super(NavigateToVolosVillageAlias, "Volo's village", false);
+    }
+}
+
+export class NavigateToLowlandsFromKV extends Action {
+    public constructor() {
+        super(NavigateToLowlandsFromKVAlias, "The lowlands", false);
     }
 }
