@@ -17,4 +17,7 @@ export class secondMedalionHalfItem extends Item implements Examine {
     public examine(): ActionResult | undefined {
         return new TextActionResult(["It's the half of a medalion. This may be usefull in the lowlands"]);
     }
+    public objectActions(): string[] {
+        return [ExamineActionAlias];
+    }
 }
