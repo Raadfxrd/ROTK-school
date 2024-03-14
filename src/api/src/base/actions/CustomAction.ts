@@ -12,10 +12,10 @@ export const CustomActionAlias: string = "Custom";
 export interface Custom {
     /**
      * Execute a custom action
-     * 
+     *
      * @param alias Alias of the custom action to execute
      * @param gameObjects 0 or more reference to GameObjects for use during the execution of the custom action
-     * 
+     *
      * @returns Result of the custom action
      */
     custom(alias: string, gameObjects: GameObject[] | undefined): ActionResult | undefined;

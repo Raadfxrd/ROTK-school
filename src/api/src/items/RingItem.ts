@@ -23,33 +23,33 @@ export class RingItem extends Item implements Examine, Pickup, Talk {
 
         if (playerSession.inventory.includes(RingItemAlias)) {
             return new TextActionResult([
-                "The ring is made of silver and has been engraved with the image of an cave"
+                "The ring is made of silver and has been engraved with the image of an cave",
             ]);
         }
         return new TextActionResult([
-            "You see a ring laying on the floor that you have never seen before",
-            "The ring is made of silver and has been engraved with the image of an cave",
+            "You see a ring laying on the floor that you have never seen before. ",
+            "The ring is made of silver and has been engraved with the image of an cave.",
         ]);
     }
 
     public pickup(): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
 
-        if (!playerSession.inventory.includes(RingItemAlias) && playerSession.pickedUpRing === false) {
+        if (!playerSession.inventory.includes(RingItemAlias)) {
             playerSession.inventory.push(RingItemAlias);
-            playerSession.pickedUpRing = true;
-            return new TextActionResult(["You picked up the ring"]);
+            return new TextActionResult(["*You picked up the ring*"]);
+        }
+        if (!playerSession.inventory.includes(RingItemAlias)) {
+            return new TextActionResult(["*You already have the ring in your inventory*"]);
         } else {
-            return new TextActionResult([
-                "You already have the ring in your inventory"
-            ]);
+            return undefined;
         }
     }
 
-    public talk():ActionResult | undefined {
+    public talk(): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
 
-        if (playerSession.inventory.includes(RingItemAlias)){
+        if (playerSession.inventory.includes(RingItemAlias)) {
             return new TextActionResult([
                 "*You start talking to the ring*",
                 "My precious, GOLUM GOLUM.",
@@ -57,9 +57,10 @@ export class RingItem extends Item implements Examine, Pickup, Talk {
             ]);
         }
 
-        return new TextActionResult([
-            "NO"
-        ]);
-        
+        return undefined;
+    }
+
+    public objectActions(): string[] {
+        return [ExamineActionAlias, PickupActionAlias, TalkActionAlias];
     }
 }
