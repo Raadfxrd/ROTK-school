@@ -1,4 +1,4 @@
-import { NavigationEast } from "../actions/NavigateAction";
+import { NavigateToVolosVillage, NavigationEast } from "../actions/NavigateAction";
 import { useItemAction } from "../actions/UseItemAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
@@ -14,6 +14,7 @@ import { KVForestItem } from "../items/KVForestItem";
 import { KaraWhistleItem } from "../items/KaraWhistleItem";
 import { PlayerSession } from "../types";
 import { KarasValeTownSquareRoom } from "./KarasValeTownSquareRoom";
+import { VolosVillageRoom } from "./VolosVillageRoom";
 
 export const KarasValeForestRoomAlias: string = "KVForest";
 
@@ -36,7 +37,13 @@ export class KarasValeForestRoom extends Room {
     }
 
     public actions(): Action[] {
-        return [new ExamineAction(), new useItemAction(), new TalkAction(), new NavigationEast()];
+        return [
+            new ExamineAction(),
+            new useItemAction(),
+            new TalkAction(),
+            new NavigationEast(),
+            new NavigateToVolosVillage(),
+        ];
     }
 
     public examine(): ActionResult | undefined {
@@ -55,8 +62,17 @@ export class KarasValeForestRoom extends Room {
 
             return room.examine();
         }
+
+        if (alias === "NavigateVolo") {
+            const room: VolosVillageRoom = new VolosVillageRoom();
+
+            getPlayerSession().currentRoom = room.alias;
+
+            return room.examine();
+        }
         return undefined;
     }
+
     public objectActions(): string[] {
         return [ExamineActionAlias];
     }
