@@ -61,6 +61,6 @@ export class RingItem extends Item implements Examine, Pickup, Talk {
     }
 
     public objectActions(): string[] {
-        return [ExamineActionAlias, PickupActionAlias];
+        return [ExamineActionAlias, PickupActionAlias, TalkActionAlias];
     }
 }

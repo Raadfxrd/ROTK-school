@@ -17,7 +17,7 @@ export class DarkTreeItem extends Item implements Examine {
     public examine(): ActionResult | undefined {
         return new TextActionResult([
             "The tree looms ominously, its branches like twisted arms.",
-            "You take a closer look at the tree, there is an inscription written on the bark.",
+            "You take a closer look at the tree, there is an inscription written on the bark:",
             "Among the lands are obels of guiding light. Bring the light to me, and I shall grant thee passage to the mighty one.",
         ]);
     }
