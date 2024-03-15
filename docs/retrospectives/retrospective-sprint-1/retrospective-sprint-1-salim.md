@@ -1,4 +1,4 @@
-# Retrospective sprint 0 Borys
+# Retrospective sprint 1 Salim
 
 ## Wat ging goed?
 
