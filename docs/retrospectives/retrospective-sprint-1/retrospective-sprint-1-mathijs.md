@@ -25,3 +25,9 @@
 -   ik wil voor volgende sprint het combat systeem ontwerpen waarmee je de boss kan verslaan.
 -   Ook wil ik de gemaakte items eigenschappen meegeven die belangrijk zijn in het verhaal.
 -   Ook wil ik voor volgende sprint UI/UX onderzoek gaan doen doormiddel van gebruikerstesten.
+
+## leerdoel van groep voor mij
+
+-   meer verhaal in de tavern, shop en blacksmith.(jay)
+-   meer opties bij NPC's.(jay)
+-   kijk commits na, zorg dat het klopt.(borys)
