@@ -39,7 +39,7 @@ export class BlackSmithRoom extends Room {
         ];
     }
     public examine(): ActionResult | undefined {
-        return new TextActionResult(["<CLASH!> You have now entered the Blacksmith"]);
+        return new TextActionResult(["<CLASH!> You have now entered the Blacksmith."]);
     }
 
     public custom(alias: string, _gameObjects?: GameObject[] | undefined): ActionResult | undefined {

@@ -22,9 +22,11 @@ import { getPlayerSession } from "../instances";
 import { secondMedalionHalfItem } from "../items/SecondMedalionHalfItem";
 import { PlayerSession } from "../types";
 import { KarasValeTownSquareRoom } from "./KarasValeTownSquareRoom";
+
 export let wentGate: boolean = false;
 export let wentVolo: boolean = false;
-export const VolosVillageRoomAlias: string = "Volo's-Village";
+export const VolosVillageRoomAlias: string = "VolosVillage";
+
 export class VolosVillageRoom extends Room {
     public examine(): ActionResult | undefined {
         return new TextActionResult([
@@ -36,6 +38,7 @@ export class VolosVillageRoom extends Room {
     public constructor() {
         super(VolosVillageRoomAlias);
     }
+
     public playerSession: PlayerSession = getPlayerSession();
 
     public name(): string {

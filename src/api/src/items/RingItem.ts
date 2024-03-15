@@ -15,7 +15,7 @@ export class RingItem extends Item implements Examine, Pickup, Talk {
     }
 
     public name(): string {
-        return "Ring";
+        return "A ring";
     }
 
     public examine(): ActionResult | undefined {
@@ -23,12 +23,12 @@ export class RingItem extends Item implements Examine, Pickup, Talk {
 
         if (playerSession.inventory.includes(RingItemAlias)) {
             return new TextActionResult([
-                "The ring is made of silver and has been engraved with the image of an cave",
+                "The ring is made of silver and has been engraved with the image of a cave.",
             ]);
         }
         return new TextActionResult([
             "You see a ring laying on the floor that you have never seen before. ",
-            "The ring is made of silver and has been engraved with the image of an cave.",
+            "The ring is made of silver and has been engraved with the image of a cave.",
         ]);
     }
 

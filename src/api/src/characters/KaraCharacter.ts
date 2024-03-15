@@ -62,7 +62,7 @@ export class KaraCharacter extends Character implements Examine {
                     "But before I give you what you need I will judge you myself.",
                 ],
                 [
-                    new TalkChoiceAction(3, "I am ready for your challenge."),
+                    new TalkChoiceAction(3, "I am ready for your challenge"),
                     new TalkChoiceAction(4, "How do you know of my quest?"),
                 ]
             );
@@ -71,8 +71,8 @@ export class KaraCharacter extends Character implements Examine {
         if (choiceId === 2) {
             return new TalkActionResult(
                 this,
-                ["Many do, but i deem very few worthy enough to receive it."],
-                [new TalkChoiceAction(3, "I am ready for your challenge.")]
+                ["Many do, but I deem very few worthy enough to receive it."],
+                [new TalkChoiceAction(3, "I am ready for your challenge")]
             );
         }
 
@@ -81,16 +81,16 @@ export class KaraCharacter extends Character implements Examine {
                 this,
                 [
                     "You will answer my riddles.",
-                    "If your mind is capable enough i shall share with you what i know of the whereabouts of the princess.",
+                    "If your mind is capable enough I shall share with you what I know of the whereabouts of the princess.",
                 ],
-                [new TalkChoiceAction(5, "Very well.")]
+                [new TalkChoiceAction(5, "Very well")]
             );
         }
         if (choiceId === 4) {
             return new TalkActionResult(
                 this,
                 ["Word spreads quick and I have ears and eyes in many places."],
-                [new TalkChoiceAction(5, "Very well.")]
+                [new TalkChoiceAction(5, "Very well")]
             );
         }
         if (choiceId === 5) {
@@ -106,7 +106,7 @@ export class KaraCharacter extends Character implements Examine {
                 [
                     "In Spring I am gay in handsome array in summer more clothing I wear when colder it grows.",
                     "I fling off my clothes and in winter quite naked appear.",
-                    "What am I.",
+                    "What am I?",
                 ],
                 [
                     new TalkChoiceAction(6, "A tree"), // correct answer
@@ -147,7 +147,7 @@ export class KaraCharacter extends Character implements Examine {
                 [
                     new TalkChoiceAction(90, "A hummingbird"), // correct answer
                     new TalkChoiceAction(90, "A mosquito"),
-                    new TalkChoiceAction(90, "A Bumblebee"),
+                    new TalkChoiceAction(90, "A bumblebee"),
                 ]
             );
         }
@@ -159,11 +159,11 @@ export class KaraCharacter extends Character implements Examine {
                 [
                     "You have succeeded in answering my riddles human, a most impressive feat.",
                     "Here, take these as a reward for your wit and tenacity.",
-                    "*You are gain one half of a medaillion and a blue torch*",
+                    "*You gain one half of a medaillion and a blue torch*",
                 ],
                 [
                     new TalkChoiceAction(100, "Thank you"),
-                    new TalkChoiceAction(91, "Where can i find the other medallion"),
+                    new TalkChoiceAction(91, "Where can I find the other medallion"),
                 ]
             );
         }
@@ -171,7 +171,7 @@ export class KaraCharacter extends Character implements Examine {
         if (choiceId === 91) {
             return new TalkActionResult(
                 this,
-                ["You must seek out Volo's village, there you will find the other half of the medallion"],
+                ["You must seek out Volo's Village, there you will find the other half of the medallion"],
                 [new TalkChoiceAction(100, "Thank you")]
             );
         }
@@ -202,11 +202,11 @@ export class KaraCharacter extends Character implements Examine {
             this,
             ["For what purpose have you summoned me human?"],
             [
-                new TalkChoiceAction(1, "I am on a mission of great importance."),
+                new TalkChoiceAction(1, "I am on a mission of great importance"),
 
-                new TalkChoiceAction(2, "I seek your wisdom."),
+                new TalkChoiceAction(2, "I seek your wisdom"),
 
-                new TalkChoiceAction(100, "bye!"),
+                new TalkChoiceAction(100, "Bye!"),
             ]
         );
     }

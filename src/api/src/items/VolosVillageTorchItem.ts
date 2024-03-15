@@ -24,12 +24,12 @@ export class VolosTorch extends Item implements Examine, Pickup {
     public pickup(): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.inventory.includes(VolosTorchAlias)) {
-            return new TextActionResult(["You already picked up the torch."]);
+            return new TextActionResult(["*You already picked up the torch.*"]);
         }
 
         if (!playerSession.inventory.includes(VolosTorchAlias)) {
             playerSession.inventory.push(VolosTorchAlias);
-            return new TextActionResult(["You pick up the torch."]);
+            return new TextActionResult(["*You pick up the torch.*"]);
         } else {
             return undefined;
         }

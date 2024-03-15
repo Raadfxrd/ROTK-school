@@ -21,7 +21,7 @@ export class MarkCharacter extends Character implements Examine {
 
     public examine(): ActionResult | undefined {
         return new TextActionResult([
-            "You are looking at a small priest, he is not higher than your hip.",
+            "You are looking at a small priest, he is not taller than your hip.",
             "You know that these creatures are called halflings.",
             "The small priest is wearing brown robes.",
         ]);
@@ -38,7 +38,7 @@ export class MarkCharacter extends Character implements Examine {
                     [
                         new TalkChoiceAction(2, "Do you know something about this ring"),
                         new TalkChoiceAction(3, "I would like to pray."),
-                        new TalkChoiceAction(99, "bye!"),
+                        new TalkChoiceAction(99, "Bye!"),
                     ]
                 );
             } else if (_choiceId === 2) {
@@ -47,7 +47,7 @@ export class MarkCharacter extends Character implements Examine {
                     ["Mark: This ring you are showing me, where did you get it from? This is from legends!"],
                     [
                         new TalkChoiceAction(4, "I just want to know what this ring is"),
-                        new TalkChoiceAction(5, "It was from one of the kidnappers."),
+                        new TalkChoiceAction(5, "It was from one of the kidnappers"),
                         new TalkChoiceAction(6, "It's secret"),
                     ]
                 );
@@ -62,7 +62,7 @@ export class MarkCharacter extends Character implements Examine {
                     ],
                     [
                         new TalkChoiceAction(2, "Do you know something about this ring"),
-                        new TalkChoiceAction(99, "bye!"),
+                        new TalkChoiceAction(99, "Bye!"),
                     ]
                 );
             } else if (_choiceId === 4) {
@@ -84,7 +84,7 @@ export class MarkCharacter extends Character implements Examine {
                     this,
                     ["Mark: Kidnappers? Who did they kidnap?"],
                     [
-                        new TalkChoiceAction(10, "The princess, she is gone"),
+                        new TalkChoiceAction(10, "The princess, she's gone"),
                         new TalkChoiceAction(6, "I can't tell, it's top secret"),
                     ]
                 );
@@ -95,7 +95,7 @@ export class MarkCharacter extends Character implements Examine {
                         "Mark: Alright, keep your secrets. But why would I want to tell you something about this ring then?",
                     ],
                     [
-                        new TalkChoiceAction(15, "I'm Arthur from the kingsguard"),
+                        new TalkChoiceAction(15, "I'm Arthur from the Kingsguard"),
                         new TalkChoiceAction(16, "We got a quest"),
                         new TalkChoiceAction(17, "I'll pay you 5 gold"),
                     ]
@@ -115,8 +115,8 @@ export class MarkCharacter extends Character implements Examine {
                 return new TalkActionResult(
                     this,
                     [
-                        "Mark: What I have heard of where they might reside is the Lowlands, but you should be very cautious about the Lowlands.",
-                        "The lowlands is known as a place of no return and very mysterious place.",
+                        "Mark: What I have heard of where they might reside is the LowLands, but you should be very cautious about the LowLands.",
+                        "The LowLands is known as a place of no return and very mysterious place.",
                     ],
                     [new TalkChoiceAction(9, "Thanks, I'll go on my way")]
                 );
@@ -185,10 +185,10 @@ export class MarkCharacter extends Character implements Examine {
                     "Would you like to pray to our god?",
                 ],
                 [
-                    new TalkChoiceAction(1, "Oh hi Mark"),
+                    new TalkChoiceAction(1, "Oh, hi Mark"),
                     new TalkChoiceAction(2, "Do you know something about this ring"),
-                    new TalkChoiceAction(3, "I would like to pray."),
-                    new TalkChoiceAction(99, "bye!"),
+                    new TalkChoiceAction(3, "I would like to pray"),
+                    new TalkChoiceAction(99, "Bye!"),
                 ]
             );
         }
@@ -215,7 +215,7 @@ export class MarkCharacter extends Character implements Examine {
                 return new TalkActionResult(
                     this,
                     [
-                        "Mark: We got the torch from someone, he was mysterious and dropped it of and told us to take care of it.",
+                        "Mark: We got the torch from someone, he was mysterious, dropped it of and told us to take care of it.",
                         "But this was more than 100 years ago, I don't see why we still have to take care of it so take it.",
                     ],
                     [new TalkChoiceAction(5, "Take torch"), new TalkChoiceAction(99, "Bye!")]

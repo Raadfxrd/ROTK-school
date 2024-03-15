@@ -21,8 +21,8 @@ export class HenryCharacter extends Character implements Examine {
 
     public examine(): ActionResult | undefined {
         return new TextActionResult([
-            "This is Henry, Henry Just got into the kingsguard. He comes from the noble family 'Bourbon'",
-            "He looks like a really genuine guy that can take a hit. He is wearing some nice knight armour. He doesn't look that scary though.",
+            "This is Henry, Henry just got into the Kingsguard. He comes from the noble family Bourbon",
+            "He looks like a really genuine guy that can take a hit. He is wearing some nice knight armour. Doesn't look that scary though.",
         ]);
     }
 
@@ -33,13 +33,13 @@ export class HenryCharacter extends Character implements Examine {
             ]);
         } else if (_choiceId === 2) {
             return new TextActionResult([
-                "Henry: Start looking where she was last seen, there must be something there",
+                "Henry: Start looking where she was last seen, there must be something there.",
             ]);
         } else if (_choiceId === 3) {
             return new TextActionResult(["Henry: If you find something, let me know."]);
         } else if (_choiceId === 4) {
             return new TextActionResult([
-                "Henry: I've never seen this ring before, you might ask the king, he knows a lot more than i do.",
+                "Henry: I've never seen this ring before, you might ask the King, he knows a lot more than I do.",
             ]);
         } else if (_choiceId === 5) {
             return new TextActionResult([
@@ -63,12 +63,12 @@ export class HenryCharacter extends Character implements Examine {
 
         let choiceActions: TalkChoiceAction[] = [
             new TalkChoiceAction(1, "Have you seen the queen?"),
-            new TalkChoiceAction(2, "I have got no clue."),
+            new TalkChoiceAction(2, "I have got no clue"),
             new TalkChoiceAction(3, "Bye!"),
         ];
 
         if (playerSession.inventory.includes(RingItemAlias)) {
-            choiceActions.push(new TalkChoiceAction(4, "I have found a ring."));
+            choiceActions.push(new TalkChoiceAction(4, "I have found a ring"));
         }
 
         if (playerSession.knowLocationLowlands === true) {

@@ -43,7 +43,7 @@ export class JohanCharacter extends Character implements Examine {
         } else if (_choiceId === 2) {
             return new TalkActionResult(
                 this,
-                ["Johan: They went to the zuider gate.", "Can you alstjeblieft take mij horses back?"],
+                ["Johan: They went to the zuider gate.", "Can you alsjeblieft take mij horses back?"],
                 [
                     new TalkChoiceAction(5, "If there is a reward..."),
                     new TalkChoiceAction(6, "Of course, I'll get them back"),
@@ -81,7 +81,7 @@ export class JohanCharacter extends Character implements Examine {
                 [
                     new TalkChoiceAction(10, "I want 10 gold now and 10 gold when I'm back"),
                     new TalkChoiceAction(6, "Of course, I'll get them back"),
-                    new TalkChoiceAction(11, "I want more, this is not worth it."),
+                    new TalkChoiceAction(11, "I want more, this is not worth it"),
                 ]
             );
         } else if (_choiceId === 6) {
@@ -95,10 +95,10 @@ export class JohanCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "Johan: They indeed were, They had some kind of magie. I don't know veel about magie but it looked like their leader.",
+                    "Johan: They indeed were, they had some kind of magie. I don't know veel about magie but it looked like their leader.",
                 ],
                 [
-                    new TalkChoiceAction(12, "Interesting, thanks for the information."),
+                    new TalkChoiceAction(12, "Interesting, thanks for the information"),
                     new TalkChoiceAction(5, "I'll take your horses back"),
                 ]
             );
@@ -125,7 +125,7 @@ export class JohanCharacter extends Character implements Examine {
                 ["Johan: Final offer, 30 gold totaal, 15 now, 15 when jij are back."],
                 [
                     new TalkChoiceAction(13, "I need to go, I can't help further"),
-                    new TalkChoiceAction(14, "I want more, this is not worth it."),
+                    new TalkChoiceAction(14, "I want more, this is not worth it"),
                     new TalkChoiceAction(15, "I'll take it"),
                 ]
             );
@@ -143,7 +143,7 @@ export class JohanCharacter extends Character implements Examine {
                 "Kom back in one stukje.",
             ]);
         } else if (_choiceId === 99) {
-            return new TextActionResult(["Doei doei."]);
+            return new TextActionResult(["Doei doei"]);
         }
 
         return new TalkActionResult(

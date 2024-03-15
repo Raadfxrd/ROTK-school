@@ -29,12 +29,12 @@ export class ShopTorch extends Item implements Examine, Pickup {
     public pickup(): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.inventory.includes(ShopTorchAlias)) {
-            return new TextActionResult(["You already picked up the torch."]);
+            return new TextActionResult(["*You already picked up the torch.*"]);
         }
 
         if (!playerSession.inventory.includes(ShopTorchAlias)) {
             playerSession.inventory.push(ShopTorchAlias);
-            return new TextActionResult(["You picked up the torch."]);
+            return new TextActionResult(["*You picked up the torch.*"]);
         } else {
             return undefined;
         }

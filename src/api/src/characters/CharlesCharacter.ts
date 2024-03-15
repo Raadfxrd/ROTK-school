@@ -22,8 +22,8 @@ export class CharlesCharacter extends Character implements Examine {
     public examine(): ActionResult | undefined {
         return new TextActionResult([
             "An old man known as Charles the Wise, he has a hat which reasembles him as a wizard.",
-            "He wears blue robes, wears a white shirt underneath the robes and wears some white trousers.",
-            "Besides knowing that he is a bit on the older side he still looks like a fit man",
+            "He wears blue robes, wears a white shirt underneath and wears some white trousers.",
+            "Besides knowing that he is a bit on the older side he still looks like a fit man.",
         ]);
     }
 
@@ -38,9 +38,7 @@ export class CharlesCharacter extends Character implements Examine {
                 "Hope we can find the princess soon...",
             ]);
         } else if (_choiceId === 2) {
-            return new TextActionResult([
-                "Charles: Bandits are most of the time not the cleanest ones so they must have left something",
-            ]);
+            return new TextActionResult(["Charles: Bandits are often clumsy they must have left something."]);
         } else if (_choiceId === 3) {
             return new TextActionResult([
                 "Charles: I am not an explorer myself and unforunately don't know what this sigil on the ring is...",
@@ -48,7 +46,7 @@ export class CharlesCharacter extends Character implements Examine {
             ]);
         } else if (_choiceId === 4) {
             return new TextActionResult([
-                "Charles: I must stay here to protect the city for any more danger. You never what the enemy has in their plans",
+                "Charles: I must stay here to protect the city for any more danger. You never what the enemy has in their plans.",
                 "I wish you and Alexandra good fortune, go save that princess.",
             ]);
         } else if (_choiceId === 5) {
@@ -70,13 +68,13 @@ export class CharlesCharacter extends Character implements Examine {
         ];
 
         if (playerSession.inventory.includes(RingItemAlias)) {
-            choiceActions.push(new TalkChoiceAction(3, "I have found a ring."));
+            choiceActions.push(new TalkChoiceAction(3, "I have found a ring"));
         }
 
         if (playerSession.knowLocationLowlands === true) {
             choiceActions = [
                 new TalkChoiceAction(4, "Can't you join me on the mission?"),
-                new TalkChoiceAction(5, "Thanks for your help charles."),
+                new TalkChoiceAction(5, "Thanks for your help charles"),
                 new TalkChoiceAction(6, "Do you have any advice for the mission?"),
             ];
         }

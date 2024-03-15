@@ -47,7 +47,7 @@ export class KarasValeForestRoom extends Room {
     }
 
     public examine(): ActionResult | undefined {
-        return new TextActionResult(["You are standing in a forest"]);
+        return new TextActionResult(["You are standing in a forest."]);
     }
 
     public objects(): GameObject[] {

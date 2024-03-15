@@ -29,7 +29,7 @@ export class ShopRoom extends Room {
         return ["rooms/store.png"];
     }
     public examine(): ActionResult | undefined {
-        return new TextActionResult(["You are now located in the General store."]);
+        return new TextActionResult(["You are now located in the General Store."]);
     }
     public actions(): Action[] {
         return [

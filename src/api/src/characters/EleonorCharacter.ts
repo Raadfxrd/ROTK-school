@@ -22,8 +22,8 @@ export class EleonorCharacter extends Character implements Examine {
     public examine(): ActionResult | undefined {
         return new TextActionResult([
             "The great king Eleonor, Grandson of founder of the castle Ferdinand. ",
-            "He won a lot of important battles to keep the peace in the realm. He looks a bit older than on the pictures",
-            "He looks if he is fearing the worst for his daughter, Eleonora",
+            "He won a lot of important battles to keep the peace in the realm. He looks a bit older than on the paintings.",
+            "He looks if he is fearing the worst for his daughter, Eleonora.",
         ]);
     }
 
@@ -32,12 +32,12 @@ export class EleonorCharacter extends Character implements Examine {
 
         if (_choiceId === 1) {
             return new TextActionResult([
-                "Eleonor: How? I thought you were here to protect her",
-                "Find out how this has happened and return to me if you know more",
+                "Eleonor: How? I thought you were here to protect her.",
+                "Find out how this has happened and return to me if you know more.",
             ]);
         } else if (_choiceId === 2) {
             return new TextActionResult([
-                "Eleonor: Please, I don't want anything bad happen to her. Let me know if you find something",
+                "Eleonor: Please, I don't want anything bad happen to her. Let me know if you find something.",
             ]);
         } else if (_choiceId === 3) {
             return new TextActionResult(["Eleonor: Please, let me know if you have something..."]);
@@ -52,8 +52,8 @@ export class EleonorCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "Eleonor: I think that's it! They must bring her to there, it is known as the Lowlands. I've heard of all different kinds of mysteries going on there",
-                    "I won't send you on your own to search for the princess. Take Alexandra with you, she knows a lot about what is happening too",
+                    "Eleonor: I think that's it! They must bring her to there, it is known as the Lowlands. I've heard of all different kinds of mysteries going on there.",
+                    "I won't send you on your own to search for the princess. Take Alexandra with you, she knows a lot about what is happening too.",
                     "You must save her at any cost, you are the reason she is gone.",
                 ],
                 [new TalkChoiceAction(10, "Start Adventure")]
@@ -65,7 +65,7 @@ export class EleonorCharacter extends Character implements Examine {
                 [
                     "Eleonor: I think that's not it. Volo's village is a really friendly village with some darker type of people.",
                     "I took some time thinking about this while you were looking at the map and I think the place you are looking for are the LowLands.",
-                    "I won't send you on your own to search for the princess. Take Alexandra with you, she knows a lot about what is happening too",
+                    "I won't send you on your own to search for the princess. Take Alexandra with you, she knows a lot about what is happening too.",
                     "You must save her at any cost, you are the reason she is gone.",
                 ],
                 [new TalkChoiceAction(10, "Start Adventure")]
@@ -77,7 +77,7 @@ export class EleonorCharacter extends Character implements Examine {
                 [
                     "Eleonor: I think that's not it. Quickpass is a neutral village whom are really kind to all people passing by.",
                     "I took some time thinking about this while you were looking at the map and I think the place you are looking for are the LowLands.",
-                    "I won't send you on your own to search for the princess. Take Alexandra with you, she knows a lot about what is happening too",
+                    "I won't send you on your own to search for the princess. Take Alexandra with you, she knows a lot about what is happening too.",
                     "You must save her at any cost, you are the reason she is gone.",
                 ],
                 [new TalkChoiceAction(10, "Start Adventure")]
@@ -98,13 +98,13 @@ export class EleonorCharacter extends Character implements Examine {
         }
 
         let choiceActions: TalkChoiceAction[] = [
-            new TalkChoiceAction(1, "There were a few bandits in the croud that took her."),
-            new TalkChoiceAction(2, "I have got no clue."),
+            new TalkChoiceAction(1, "There were a few bandits in the croud that took her"),
+            new TalkChoiceAction(2, "I have got no clue"),
             new TalkChoiceAction(3, "Bye!"),
         ];
 
         if (playerSession.inventory.includes(RingItemAlias)) {
-            choiceActions.push(new TalkChoiceAction(4, "I have found a ring."));
+            choiceActions.push(new TalkChoiceAction(4, "I have found a ring"));
         }
 
         if (playerSession.knowLocationLowlands === true) {

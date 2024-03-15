@@ -12,7 +12,7 @@ export class HolyBibleItem extends Item implements Examine {
         return [PickupActionAlias];
     }
     public name(): string {
-        return "HolyBible";
+        return "Holy Bible";
     }
     public examine(): ActionResult | undefined {
         return undefined;

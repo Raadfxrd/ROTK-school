@@ -12,7 +12,7 @@ export class SpiderEyeItem extends Item implements Examine {
         return [PickupActionAlias];
     }
     public name(): string {
-        return "SpiderEye";
+        return "Spider eye";
     }
     public examine(): ActionResult | undefined {
         return undefined;

@@ -28,13 +28,13 @@ export class ChurchTorch extends Item implements Examine, Pickup {
     public pickup(): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.inventory.includes(ChurchTorchAlias)) {
-            return new TextActionResult(["You already picked up the torch."]);
+            return new TextActionResult(["*You already picked up the torch.*"]);
         }
 
         if (!playerSession.inventory.includes(ChurchTorchAlias)) {
             playerSession.inventory.push(ChurchTorchAlias);
             return new TextActionResult([
-                "You pick up the torch.",
+                "*You pick up the torch.*",
                 "You feel a magic flow going through your body.",
                 "All of a sudden, the magic leaves your body and you are left with the torch.",
                 "You feel uneasy.",

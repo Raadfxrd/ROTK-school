@@ -38,9 +38,9 @@ export class ChurchWolburgRoom extends Room implements Examine {
     public examine(): ActionResult | undefined {
         return new TextActionResult([
             "You enter the holy church of Wolburg.",
-            "There is a godly statue on the end of the room. You know that this statue is the god 'Pelor'.",
+            "There is a godly statue on the end of the room. You know that this statue is the god Pelor.",
             "Pelor is known as the god of sun and healing.",
-            "The church is pretty empty, there are only a few people inside.",
+            "The church is pretty empty, there is only a few people inside.",
         ]);
     }
 

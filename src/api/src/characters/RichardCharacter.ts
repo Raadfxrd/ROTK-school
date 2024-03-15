@@ -30,7 +30,7 @@ export class RichardCharacter extends Character implements Examine {
                 this,
                 ["Richard: Those maggots, they were running away and pushed me aside."],
                 [
-                    new TalkChoiceAction(3, "What do they look like"),
+                    new TalkChoiceAction(3, "What do they look like?"),
                     new TalkChoiceAction(4, "Did they have someone with them?"),
                 ]
             );
@@ -49,7 +49,7 @@ export class RichardCharacter extends Character implements Examine {
                 this,
                 [
                     "Richard: Couldn't really take a good look, they were just really fast and hasty.",
-                    "for me they just looked like normal peasants",
+                    "For me they just looked like normal peasants.",
                 ],
                 [
                     new TalkChoiceAction(5, "Where were they headed?"),
@@ -59,7 +59,7 @@ export class RichardCharacter extends Character implements Examine {
         } else if (_choiceId === 4) {
             return new TalkActionResult(
                 this,
-                ["Richard: I indeed saw someone taken but didn't think much of it"],
+                ["Richard: I indeed saw someone being taken but didn't think much of it."],
                 [
                     new TalkChoiceAction(5, "Where were they headed"),
                     new TalkChoiceAction(6, "Thanks i'll go look further"),
@@ -69,7 +69,7 @@ export class RichardCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 ["Richard: They were going to the stables where all the commotion is now."],
-                [new TalkChoiceAction(6, "Thanks, that's all i needed")]
+                [new TalkChoiceAction(6, "Thanks, that's all I needed")]
             );
         } else if (_choiceId === 6) {
             return new TextActionResult(["Good luck going after them."]);
@@ -97,7 +97,7 @@ export class RichardCharacter extends Character implements Examine {
         } else if (_choiceId === 10) {
             return new TalkActionResult(
                 this,
-                ["Richard: Figure it out quickly because she is our queen!"],
+                ["Richard: Figure it out quickly because she is our Queen!"],
                 [
                     new TalkChoiceAction(5, "We think the people running away were it"),
                     new TalkChoiceAction(14, "Can you help me then?"),
@@ -110,7 +110,7 @@ export class RichardCharacter extends Character implements Examine {
                 ["Richard: Bandits? They are here in town?"],
                 [
                     new TalkChoiceAction(12, "Apparently yeah"),
-                    new TalkChoiceAction(5, "I think it were the people running"),
+                    new TalkChoiceAction(5, "I think it was the people running away!"),
                 ]
             );
         } else if (_choiceId === 12) {
@@ -118,14 +118,14 @@ export class RichardCharacter extends Character implements Examine {
                 this,
                 ["Richard: Thats not great, take them down will ya"],
                 [
-                    new TalkChoiceAction(13, "have you seen something strange lately?"),
+                    new TalkChoiceAction(13, "Have you seen something strange lately?"),
                     new TalkChoiceAction(6, "I will!"),
                 ]
             );
         } else if (_choiceId === 13) {
             return new TalkActionResult(
                 this,
-                ["Richard: Well besides those people running not much"],
+                ["Richard: Well besides those people running away not much"],
                 [
                     new TalkChoiceAction(5, "Where were they headed?"),
                     new TalkChoiceAction(6, "We'll go after them"),
@@ -134,7 +134,7 @@ export class RichardCharacter extends Character implements Examine {
         } else if (_choiceId === 14) {
             return new TalkActionResult(
                 this,
-                ["Richard: Alrighty son, What can i do?"],
+                ["Richard: Alrighty son, What can I do?"],
                 [
                     new TalkChoiceAction(5, "Where did the people go to?"),
                     new TalkChoiceAction(3, "What do the people look like?"),

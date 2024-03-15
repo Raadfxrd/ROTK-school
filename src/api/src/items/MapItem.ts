@@ -21,8 +21,8 @@ export class MapItem extends Item implements Examine, Pickup {
     public examine(): ActionResult | undefined {
         return new TextAndImageActionResult(
             [
-                "This looks like the map of Kaseon, you see all the different cities and towns in the region",
-                "You see that some towns don't have a name included on them",
+                "This looks like the map of Kaseon, you see all the different cities and towns in the region.",
+                "You see that some towns don't have a name included on them.",
             ],
             ["rooms/Kaseon.png"]
         );
@@ -33,7 +33,7 @@ export class MapItem extends Item implements Examine, Pickup {
 
         if (!playerSession.inventory.includes(MapItemAlias)) {
             playerSession.inventory.push(MapItemAlias);
-            return new TextActionResult(["You picked up the map"]);
+            return new TextActionResult(["*You picked up the map.*"]);
         }
         return undefined;
     }

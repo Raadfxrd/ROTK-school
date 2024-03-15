@@ -31,14 +31,14 @@ export class AureliusCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 ["Aurelius: And who might you be looking for?"],
-                [new TalkChoiceAction(2, "You do not need to know who it is.")]
+                [new TalkChoiceAction(2, "You do not need to know who it is")]
             );
         }
         if (choiceId === 2) {
             return new TalkActionResult(
                 this,
                 ["Aurelius: Well i'm afraid I can't help you then, but I do know of someone who might."],
-                [new TalkChoiceAction(3, "Please, where can i find this person.")]
+                [new TalkChoiceAction(3, "Please, where can i find this person")]
             );
         }
         if (choiceId === 3) {
@@ -48,9 +48,9 @@ export class AureliusCharacter extends Character implements Examine {
                     "Aurelius: You will want to seek out Kara. She lives in the forest. ",
                     "But beware, for if you can not answer her riddles there will be a price to pay. ",
                     "Take this aswell, you shall need it to summon her. ",
-                    "<He gives you a whistle.>",
+                    "*He gives you a whistle.*",
                 ],
-                [new TalkChoiceAction(4, "Thank you.")]
+                [new TalkChoiceAction(4, "Thank you")]
             );
         }
 

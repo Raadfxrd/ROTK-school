@@ -51,7 +51,7 @@ export class AlexandraCharacter extends Character implements Examine {
                 return new TextActionResult([
                     "Alexandra: Those bandits are the worst. I heard some rumours about them being here and took caution.",
                     "The first thing I have seen was some people in the crowd making hand signals to eachother.",
-                    "I took some time and remembered what there code meant. 'she is coming, we need to go now'",
+                    "I took some time and remembered what their code meant. She is coming, we need to go now'",
                     "Hope we can find the princess soon...",
                 ]);
             } else if (_choiceId === 2) {
@@ -61,12 +61,12 @@ export class AlexandraCharacter extends Character implements Examine {
             } else if (_choiceId === 3) {
                 return new TextActionResult([
                     "Alexandra: I have seen this sigil somewhere, where was it again...",
-                    "Let me think about this for a minute. You can ask the king in the meantime.",
+                    "Let me think about this for a minute. You can ask the King in the meantime.",
                 ]);
             } else if (_choiceId === 4) {
                 return new TalkActionResult(
                     this,
-                    ["Alexandra: So what is it boss? where do we need to go to."],
+                    ["Alexandra: So what is it boss? Where do we need to go to."],
                     [
                         new TalkChoiceAction(10, "It is a location not named on the map on the bottom left"),
                         new TalkChoiceAction(11, "We need to go to Windhollow"),
@@ -84,42 +84,42 @@ export class AlexandraCharacter extends Character implements Examine {
                 ]);
             } else if (_choiceId === 8) {
                 return new TextActionResult([
-                    "Alexandra: Follow me, i'll lead the way. Lowlands here we come!",
+                    "Alexandra: Follow me, I'll lead the way. LowLands here we come!",
                 ]);
             } else if (_choiceId === 9) {
                 return new TextActionResult(["Alexandra: Alright, let me know if you are ready though guy."]);
             } else if (_choiceId === 10) {
                 return new TextActionResult([
                     "Alexandra: I knew it, I heard loads about it but wasn't too sure it was a thing.",
-                    "People only spoke of it as a legend, the Lowlands, but it must be real...",
-                    "Tell the king that we need to head towards the Lowlands",
+                    "People only spoke of it as a legend, the LowLands, but it must be real...",
+                    "Tell the king that we need to head towards the LowLands.",
                 ]);
             } else if (_choiceId === 11) {
                 return new TextActionResult([
                     "Alexandra: I don't know chief, that doesn't sound right. ",
-                    "It must be something really mysterious of things what I've heard. maybe ask the king.",
+                    "It must be something really mysterious of things what I've heard. maybe ask the King.",
                 ]);
             } else if (_choiceId === 12) {
                 return new TextActionResult([
                     "Alexandra: Mmmh... I don't think that's it,",
-                    "It has to do with something really mysterious, you should ask the king about this.",
+                    "It has to do with something really mysterious, you should ask the King about this.",
                 ]);
             }
 
             let choiceActions: TalkChoiceAction[] = [
-                new TalkChoiceAction(1, "There were a few bandits in the croud that took her."),
+                new TalkChoiceAction(1, "There were a few bandits in the croud that took her"),
                 new TalkChoiceAction(2, "I'm going to take a look"),
             ];
 
             if (playerSession.inventory.includes(RingItemAlias)) {
-                choiceActions.push(new TalkChoiceAction(3, "I have found a ring."));
+                choiceActions.push(new TalkChoiceAction(3, "I have found a ring"));
             }
 
             if (playerSession.knowLocationLowlands === true) {
                 choiceActions = [
                     new TalkChoiceAction(7, "Follow me, i'll lead the way"),
                     new TalkChoiceAction(8, "Alright lets's go!"),
-                    new TalkChoiceAction(9, "Give me a second."),
+                    new TalkChoiceAction(9, "Give me a second"),
                 ];
                 return new TalkActionResult(
                     this,
@@ -160,7 +160,7 @@ export class AlexandraCharacter extends Character implements Examine {
                     return new TextActionResult(["Alright lets go."]);
                 } else if (_choiceId === 2) {
                     return new TextActionResult([
-                        "That's fine, take your time",
+                        "That's fine, take your time.",
                         "If we don't get the princess back we are dead, just to give you a heads up boss.",
                     ]);
                 } else if (_choiceId === 99) {
@@ -169,13 +169,13 @@ export class AlexandraCharacter extends Character implements Examine {
                 return new TalkActionResult(
                     this,
                     [
-                        "This is it, the end of Wolburg,",
+                        "This is it, the end of Wolburg.",
                         "Are you ready to save the princess?",
-                        "Maybe if you forgot anything you can go back to the shop and buy something",
+                        "Maybe if you forgot anything you can go back to the shop and buy something.",
                     ],
                     [
                         new TalkChoiceAction(1, "I'm fine, lets go!"),
-                        new TalkChoiceAction(2, "I totally forgot something."),
+                        new TalkChoiceAction(2, "I totally forgot something"),
                         new TalkChoiceAction(99, "Bye!"),
                     ]
                 );
@@ -190,28 +190,28 @@ export class AlexandraCharacter extends Character implements Examine {
                 }
                 if (_choiceId === 1) {
                     return new TextActionResult([
-                        "Alexandra: You should talk to him, I think that would cheer him up",
+                        "Alexandra: You should talk to him, I think that would cheer him up.",
                     ]);
                 } else if (_choiceId === 2) {
                     return new TalkActionResult(
                         this,
-                        ["Alexandra: Are you sure, I think he needs help"],
+                        ["Alexandra: Are you sure, I think he needs help."],
                         [
                             new TalkChoiceAction(3, "I'm sure, lets go"),
                             new TalkChoiceAction(4, "Alright, lets check him out"),
                         ]
                     );
                 } else if (_choiceId === 3) {
-                    return new TextActionResult(["Alexandra: Sure thing boss"]);
+                    return new TextActionResult(["Alexandra: Sure thing boss."]);
                 } else if (_choiceId === 4) {
-                    return new TextActionResult(["Alexandra: Yess nice! You are the best"]);
+                    return new TextActionResult(["Alexandra: Yess nice! You are the best."]);
                 } else if (_choiceId === 99) {
                     return new TextActionResult(["Alexandra: Oh alright, Bye!"]);
                 }
                 return new TalkActionResult(
                     this,
                     [
-                        "Alexandra: Look at that poor man, he is even crying, I'm wondering whats happened to him",
+                        "Alexandra: Look at that poor man, he is even crying, I'm wondering whats happened to him.",
                     ],
                     [
                         new TalkChoiceAction(1, "Lets check him out!"),
@@ -246,7 +246,7 @@ export class AlexandraCharacter extends Character implements Examine {
                     [
                         "Alexandra: I think it just doesn't make sense to me.",
                         "If I do something that helps the people because of my good deed why should a god be involved into this?",
-                        "It's that i made it like this so that people get better not that the god did this to make the world better",
+                        "It's that i made it like this so that people get better not that the god did this to make the world better.",
                     ],
                     [
                         new TalkChoiceAction(4, "But some things are unexplainable"),
@@ -258,8 +258,8 @@ export class AlexandraCharacter extends Character implements Examine {
                 return new TalkActionResult(
                     this,
                     [
-                        "Alexandra: Right! It's some made up stuff by the higher ups that just want to make money out of people their toughts",
-                        "It's a total scam and people fall really easily into it because of some unexplainable things happening",
+                        "Alexandra: Right! It's some made up stuff by the higher ups that just want to make money out of people their toughts.",
+                        "It's a total scam and people fall really easily into it because of some unexplainable things happening.",
                     ],
                     [
                         new TalkChoiceAction(6, "What unexplainable things?"),
@@ -317,7 +317,7 @@ export class AlexandraCharacter extends Character implements Examine {
                     this,
                     [
                         "Alexandra: I'll try the best I can do.",
-                        "So there are 9 gods that have created life, our world where we live in now. That are the gods, tyr, pelor, sune, kelemvor, oghma, leira, hextor, shar and umberlee",
+                        "So there are 9 gods that have created life, our world where we live in now. That are the gods: Tyr, Pelor, Sune, Kelemvor, Oghma, Leira, Hextor, Shar and Umberlee.",
                         "These gods are the creating of good and bad, there are also gods that are neutral.",
                         "But I don't really believe in the gods so you should ask someone here about it more if you are interested.",
                     ],
@@ -337,7 +337,7 @@ export class AlexandraCharacter extends Character implements Examine {
             } else if (_choiceId === 12) {
                 return new TextActionResult([
                     "Alexandra: That's what I wanted to hear, stupid gods.",
-                    "Let's go further on our mission boss, we got a princess to save",
+                    "Let's go further on our mission boss, we got a princess to save.",
                 ]);
             } else if (_choiceId === 13) {
                 return new TextActionResult(["Alexandra: So let's get back into the mission."]);

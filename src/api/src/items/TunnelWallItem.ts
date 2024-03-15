@@ -32,7 +32,7 @@ export class TunnelWallItem extends Item implements Examine {
         ) {
             return new TextAndImageActionResult(
                 [
-                    "You place in the torches that belong to the different regions.",
+                    "*You place in the torches that belong to the different regions.*",
                     "The torches flicker, casting shadows on the wall of the tunnel.",
                     "You can finally pass through the tunnel.",
                 ],
@@ -42,7 +42,7 @@ export class TunnelWallItem extends Item implements Examine {
         if (playerSession.inventory.includes(LowlandsTorchAlias)) {
             return new TextAndImageActionResult(
                 [
-                    "You place in the torch that belongs to the LowLands.",
+                    "*You place in the torch that belongs to the LowLands.*",
                     "The torch flickers, casting shadows on the wall of the tunnel.",
                     "You hear a strange noise...",
                 ],
@@ -52,7 +52,7 @@ export class TunnelWallItem extends Item implements Examine {
         if (playerSession.inventory.includes(ShopTorchAlias)) {
             return new TextAndImageActionResult(
                 [
-                    "You place in the torch that belongs to the Shop.",
+                    "*You place in the torch that belongs to the Shop.*",
                     "The torch flickers, casting shadows on the wall of the tunnel.",
                     "You hear a strange noise...",
                 ],
@@ -62,7 +62,7 @@ export class TunnelWallItem extends Item implements Examine {
         if (playerSession.inventory.includes(ChurchTorchAlias)) {
             return new TextAndImageActionResult(
                 [
-                    "You place in the torch that belongs to Wolburg.",
+                    "*You place in the torch that belongs to Wolburg.*",
                     "The torch flickers, casting shadows on the wall of the tunnel.",
                     "You hear a strange noise...",
                 ],
@@ -72,7 +72,7 @@ export class TunnelWallItem extends Item implements Examine {
         if (playerSession.inventory.includes(VolosTorchAlias)) {
             return new TextAndImageActionResult(
                 [
-                    "You place in the torch that belongs to Volo.",
+                    "*You place in the torch that belongs to Volo.*",
                     "The torch flickers, casting shadows on the wall of the tunnel.",
                     "You hear a strange noise...",
                 ],

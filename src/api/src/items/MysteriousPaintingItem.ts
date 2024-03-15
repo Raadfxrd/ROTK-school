@@ -12,7 +12,7 @@ export class MysteriousPaintingItem extends Item implements Examine {
         return [PickupActionAlias];
     }
     public name(): string {
-        return "MysteriousPainting";
+        return "Mysterious painting";
     }
     public examine(): ActionResult | undefined {
         return undefined;

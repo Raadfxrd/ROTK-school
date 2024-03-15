@@ -18,7 +18,7 @@ export class BobCharacter extends Character implements Examine {
         return "Bob";
     }
     public examine(): ActionResult | undefined {
-        return new TextActionResult(["It's a friendly bartender"]);
+        return new TextActionResult(["It's a friendly bartender."]);
     }
     public talk(_choiceId?: number | undefined): ActionResult | undefined {
         if (_choiceId === 1) {
@@ -26,7 +26,9 @@ export class BobCharacter extends Character implements Examine {
         }
         if (_choiceId === 2) {
             const number: number = generateRandomNumber();
-            return new TextActionResult(["<Hands over keys> Yes, ofcourse! You have room number " + number]);
+            return new TextActionResult([
+                "<Hands over keys> Yes, ofcourse! You have room number " + number + ".",
+            ]);
         }
         if (_choiceId === 3) {
             return new TalkActionResult(
@@ -35,7 +37,7 @@ export class BobCharacter extends Character implements Examine {
                     "The town is a melting pot of diverse cultures and races, as travelers from distant lands are drawn to the promises of both prosperity and enlightenment. The people of Ravens Rest are known for their craftsmanship, creating intricate tapestries, ornate weaponry, and mystical artifacts that fetch high prices in the markets of distant realms.",
                 ],
                 [
-                    new TalkChoiceAction(4, "Ask about Ravens Rest's origin?"),
+                    new TalkChoiceAction(4, "Ask about Ravens Rest's origin"),
                     new TalkChoiceAction(5, "Who is Eldred Stormraven?"),
                 ]
             );

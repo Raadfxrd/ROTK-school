@@ -12,7 +12,7 @@ export class HealingPotionItem extends Item implements Examine {
         return [PickupActionAlias];
     }
     public name(): string {
-        return "HealingPotion";
+        return "Healing potion";
     }
     public examine(): ActionResult | undefined {
         return undefined;

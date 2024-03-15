@@ -12,7 +12,7 @@ export class battleAxeItem extends Item implements Examine {
         return [PickupActionAlias];
     }
     public name(): string {
-        return "battleAxe";
+        return "Battle axe";
     }
     public examine(): ActionResult | undefined {
         return undefined;

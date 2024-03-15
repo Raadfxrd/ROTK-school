@@ -111,19 +111,19 @@ export class ThroneRoom extends Room {
             picture = "rooms/Kaseon.png";
             this.images();
             return new TextActionResult([
-                "You enter the 'Realm of the Kings'.",
-                "In the province 'Kaseon' a new queen is to be crowned in the capital city of 'Wolburg': Queen Eleonora.",
+                "You enter the Realm of the Kings.",
+                "In the province Kaseon a new queen is to be crowned in the capital city of Wolburg: Queen Eleonora.",
             ]);
         } else if (playerSession.inventory.includes(RingItemAlias)) {
             return new TextActionResult([
-                "The throne room of Wolburg in castle Ferdinand.",
-                "The people in the Throneroom have been calmed down now.",
+                "The throne room of Wolburg in Castle Ferdinand.",
+                "The people in the Throne room have calmed down now.",
                 "Besides of the ring laying on the ground before there is nothing more to see here.",
             ]);
         } else {
             return new TextActionResult([
                 "You look at the spot where the princess was last seen, There is something shining on the ground.",
-                "It looks like a small circular object, maybe from the kidnappers that grabbed the princess.",
+                "It looks like a small circular object, maybe the kidnappers that grabbed the princess dropped it.",
             ]);
         }
     }
@@ -136,8 +136,8 @@ export class ThroneRoom extends Room {
             this.images();
             clickedContinue1 = true;
             return new TextActionResult([
-                "You are 'Arthur', a member of the kingsguard. The other kingsguard members are 'Alexandra', 'Henry' and 'Charles'.",
-                "Your duty is to protect the king, and soon the queen.",
+                "You are Arthur, a member of the kingsguard. The other kingsguard members are Alexandra, Henry and Charles.",
+                "Your duty is to protect the King, and soon the Queen.",
             ]);
         }
         if (alias === "continue-2") {
@@ -148,8 +148,8 @@ export class ThroneRoom extends Room {
             this.name();
             this.images();
             return new TextActionResult([
-                "When a new king or queen gets crowned it is tradition that the old king or queen hands over the crown to the new king or queen",
-                "You are standing in the throne room, next to the throne where the king is seated.",
+                "When a new monorch gets crowned it is tradition that the old monarch hands over the crown to the new monarch.",
+                "You are standing in the throne room, next to the throne where the monarch is seated.",
             ]);
         }
         if (alias === "continue-3") {
@@ -157,7 +157,7 @@ export class ThroneRoom extends Room {
             clickedContinue2 = false;
             return new TextActionResult([
                 "You notice that it is starting to get really crowded in the throne room.",
-                "You reckon it's almost time for the princess to enter the throne room.",
+                "You reckon it's almost time for the Princess to enter the throne room.",
             ]);
         }
         if (alias === "continue-4") {
@@ -165,7 +165,7 @@ export class ThroneRoom extends Room {
             clickedContinue4 = true;
             return new TextActionResult([
                 "You spot some people making suspicious hand gestures in the crowd.",
-                "You try to take a closer look at the hand signals, but your attention is drawn by the sound of trumpets announcing the princess' arrival.",
+                "You try to take a closer look at the hand signals, but your attention is drawn by the sound of trumpets announcing the Princess' arrival.",
             ]);
         }
         if (alias === "continue-5") {
@@ -174,7 +174,7 @@ export class ThroneRoom extends Room {
             picture = "rooms/princessenteringthroneroom.png";
             this.images();
             return new TextActionResult([
-                "You see the princess entering the room, all the attendees of the corronation stand up.",
+                "You see the Princess entering the room, all the attendees of the corronation stand up.",
                 "Suddenly, the whole room turns pitch black...",
             ]);
         }
@@ -184,7 +184,7 @@ export class ThroneRoom extends Room {
             picture = "rooms/darkness.png";
             this.images();
             return new TextActionResult([
-                "You hear a scream, a woman's scream. Could it be the princess?",
+                "You hear a scream, a womans' scream. Could it be the Princess?",
                 "You hurry your way through the chaos and panicking townsfolk.",
             ]);
         }
