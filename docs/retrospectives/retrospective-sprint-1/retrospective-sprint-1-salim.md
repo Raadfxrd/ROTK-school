@@ -24,6 +24,7 @@
 -   Slecht gecommuniceerd en niet gecommit namens mij..
 -   Niet genoeg oplossingen bijgehouden
 -   Weinig documentatie
+-   Ik vraag te veel moet eigenlijk meer aan mijn fouten werken ipv snel op te lossen.
 
 ## Eigen mening
 
