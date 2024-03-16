@@ -15,7 +15,7 @@
 -   het onderzoeken naar UI/UX design
 -   het verzamelen van requirements en deze omzetten naar acceptatiecriteria
 
-## Terugblik op srint 0
+## Terugblik op srint 1
 
 -   We hebben veel geleerd. Denk hierbij aan een nieuwe game engine leren en algemene vooruitgang in Typescript.
 -   We hebben een werkend spel samengesteld aan het eind van sprint 1 zoals moet volgens de Agile methodes.
