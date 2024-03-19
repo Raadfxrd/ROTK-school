@@ -10,12 +10,12 @@ export class RandomDiceResult extends TextActionResult {
      * Create a new instance of this action result
      *
      * @param text Text to show
-     * @param number Number to show
+     * @param dice Max number allowed to be rolled
      */
-    public constructor(text: string[], Dice: number) {
+    public constructor(text: string[], dice: number) {
         super(text);
 
-        const number: number = Math.floor(Math.random() * Dice) + 1;
+        const number: number = Math.floor(Math.random() * dice) + 1;
 
         const numberString: string = number.toString();
 
