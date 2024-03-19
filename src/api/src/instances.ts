@@ -59,7 +59,7 @@ import { MysteriousPaintingAlias, MysteriousPaintingItem } from "./items/Mysteri
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "wolburg-room",
+        currentRoom: "KVTownSquare",
         lastRoom: "",
         inventory: [],
         knowWhereMapIs: false,
@@ -82,6 +82,7 @@ export function createNewPlayerSession(): PlayerSession {
         leftVolo: false,
         inStables: false,
         inGate: false,
+        hasWhistle: false,
     };
 }
 

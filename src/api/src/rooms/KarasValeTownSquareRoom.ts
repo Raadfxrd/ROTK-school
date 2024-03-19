@@ -56,7 +56,6 @@ export class KarasValeTownSquareRoom extends Room {
                 new NavigateToLowlandsFromKV(),
             ];
         }
-
         if (this.playerSession.wentNorth === true) {
             return [
                 new ExamineAction(),
@@ -71,7 +70,10 @@ export class KarasValeTownSquareRoom extends Room {
     }
 
     public objects(): GameObject[] {
-        return [new AureliusCharacter(), new KaraWhistleItem()];
+        if (this.playerSession.hasWhistle === true) {
+            return [new AureliusCharacter(), new KaraWhistleItem()];
+        }
+        return [new AureliusCharacter()];
     }
 
     public examine(): ActionResult | undefined {

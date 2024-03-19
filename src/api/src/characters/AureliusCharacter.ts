@@ -31,17 +31,20 @@ export class AureliusCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 ["Aurelius: And who might you be looking for?"],
-                [new TalkChoiceAction(2, "You do not need to know who it is.")]
+                [
+                    new TalkChoiceAction(6, "You do not need to know who it is."),
+                    new TalkChoiceAction(3, "I am looking for the princess."),
+                ]
             );
         }
         if (choiceId === 2) {
             return new TalkActionResult(
                 this,
                 ["Aurelius: Well i'm afraid I can't help you then, but I do know of someone who might."],
-                [new TalkChoiceAction(3, "Please, where can i find this person.")]
+                [new TalkChoiceAction(97, "Please, where can i find this person.")]
             );
         }
-        if (choiceId === 3) {
+        if (choiceId === 97) {
             return new TalkActionResult(
                 this,
                 [
@@ -50,22 +53,27 @@ export class AureliusCharacter extends Character implements Examine {
                     "Take this aswell, you shall need it to summon her. ",
                     "<He gives you a whistle.>",
                 ],
-                [new TalkChoiceAction(4, "Thank you.")]
+                [new TalkChoiceAction(98, "Thank you.")]
             );
         }
 
-        if (choiceId === 4) {
+        if (choiceId === 98) {
             this.playerSession.knowsOfKara = true;
+            this.playerSession.hasWhistle = true;
 
             return new TextActionResult([""]);
         }
-        if (choiceId === 10) {
+        if (choiceId === 99) {
             return new TextActionResult([""]);
         }
         return new TalkActionResult(
             this,
             ["Hello there"],
-            [new TalkChoiceAction(1, "I'm looking for someone"), new TalkChoiceAction(10, "Bye!")]
+            [
+                new TalkChoiceAction(1, "I'm looking for someone"),
+                new TalkChoiceAction(2, "Has anybody passed through this village recently?"),
+                new TalkChoiceAction(10, "Bye!"),
+            ]
         );
     }
     public objectActions(): string[] {
