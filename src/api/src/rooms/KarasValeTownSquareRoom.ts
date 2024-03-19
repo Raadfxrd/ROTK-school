@@ -44,7 +44,6 @@ export class KarasValeTownSquareRoom extends Room {
 
     public actions(): Action[] {
         if (this.playerSession.knowsOfKara === true && this.playerSession.wentNorth === true) {
-            console.log(this.playerSession);
             return [
                 new ExamineAction(),
                 new TalkAction(),
