@@ -51,6 +51,7 @@ import { HealingPotionAlias, HealingPotionItem } from "./items/HealingPotionItem
 import { HolyBibleAlias, HolyBibleItem } from "./items/HolyBibleItem";
 import { SpiderEyeAlias, SpiderEyeItem } from "./items/SpiderEyeItem";
 import { MysteriousPaintingAlias, MysteriousPaintingItem } from "./items/MysteriousPaintingItem";
+import { IntroRoom, IntroRoomAlias } from "./rooms/IntroRoom";
 
 /**
  * Create a new player session object
@@ -59,7 +60,7 @@ import { MysteriousPaintingAlias, MysteriousPaintingItem } from "./items/Mysteri
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "wolburg-room",
+        currentRoom: "startup",
         lastRoom: "",
         inventory: [],
         knowWhereMapIs: false,
@@ -148,6 +149,9 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case TunnelRoomAlias:
             return new TunnelRoom();
+
+        case IntroRoomAlias:
+            return new IntroRoom();
     }
 
     return undefined;
