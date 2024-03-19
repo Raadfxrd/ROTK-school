@@ -72,6 +72,7 @@ export function createNewPlayerSession(): PlayerSession {
         horseMission20: false,
         horseMission30: false,
         gold: 0,
+        healthPoints: 10,
         blessing: false,
         shownRing: false,
         shownRingBadEnding: false,

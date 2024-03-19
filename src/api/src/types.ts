@@ -15,6 +15,7 @@ export type PlayerSession = {
     horseMission20: boolean;
     horseMission10: boolean;
     gold: number;
+    healthPoints: number;
     knowsOfKara: boolean;
     summonedKara: boolean;
     blessing: boolean;
