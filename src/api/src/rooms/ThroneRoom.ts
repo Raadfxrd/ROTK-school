@@ -17,7 +17,6 @@ import { MapItem, MapItemAlias } from "../items/MapItem";
 import { PlayerSession } from "../types";
 import { WolburgRoom } from "./WolburgRoom";
 import { useItemAction } from "../actions/UseItemAction";
-import { RandomDiceResult } from "../base/actionResults/randomDiceResult";
 
 export const ThroneRoomAlias: string = "throne-room";
 
@@ -78,12 +77,11 @@ export class ThroneRoom extends Room {
     public examine(): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.inventory.includes(RingItemAlias)) {
-            return new RandomDiceResult(["this is your dice result"], 4);
-            // return new TextActionResult([
-            //     "The throne room of Wolburg in castle Ferdinand.",
-            //     "The people in the Throneroom have been calmed down now.",
-            //     "Besides of the ring laying on the ground before there is nothing more to see here.",
-            // ]);
+            return new TextActionResult([
+                "The throne room of Wolburg in castle Ferdinand.",
+                "The people in the Throneroom have been calmed down now.",
+                "Besides of the ring laying on the ground before there is nothing more to see here.",
+            ]);
         } else {
             return new TextActionResult([
                 "You look at the spot where the princess was last seen, There is something shining on the ground.",

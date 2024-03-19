@@ -72,8 +72,11 @@ export function createNewPlayerSession(): PlayerSession {
         inventory: [],
         equipment: [],
         gold: 0,
+
+        //Stats
         healthPoints: 10,
         armourClass: 12,
+        strength: 14,
 
         //Booleans
         knowWhereMapIs: false,

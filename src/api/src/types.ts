@@ -17,6 +17,7 @@ export type PlayerSession = {
     gold: number;
     healthPoints: number;
     armourClass: number;
+    strength: number;
     equipment: string[];
     knowsOfKara: boolean;
     summonedKara: boolean;
