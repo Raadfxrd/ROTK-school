@@ -21,7 +21,7 @@ export class ChainmailArmourOfTheGreatItem extends Item implements Examine, Pick
     public examine(): ActionResult | undefined {
         return new TextActionResult([
             "This piece of armour will win you more battles because of its sturdiness.",
-            "Equiping it will give you an extra bonus to your Armour Class.",
+            "Equipping it will give you an extra bonus to your Armour Class. (+2)",
         ]);
     }
 
@@ -44,11 +44,11 @@ export class ChainmailArmourOfTheGreatItem extends Item implements Examine, Pick
             playerSession.armourClass += 2;
             console.log(playerSession.armourClass);
             return new TextActionResult([
-                "You equiped the Chainmail Armour of the Great",
+                "You equipped the Chainmail Armour of the Great",
                 "You feel a bit more clumsy but you feel a lot bigger and stronger...",
             ]);
         }
-        return new TextActionResult(["You already equiped the armour set"]);
+        return new TextActionResult(["You already equipped the armour set"]);
     }
 
     public objectActions(): string[] {
