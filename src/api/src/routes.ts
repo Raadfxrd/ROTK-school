@@ -155,6 +155,7 @@ function convertActionResultToGameState(actionResult?: ActionResult): GameState 
     }
 
     return {
+        playerHP: playerSession.healthPoints,
         roomAlias: room.alias,
         roomTitle: room.name(),
         roomImages: (actionResult as TextAndImageActionResult)?.images || room.images(),

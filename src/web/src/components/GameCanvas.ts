@@ -5,6 +5,8 @@ import { getState, performAction } from "../services/routeService";
 
 @customElement("game-canvas")
 export class GameCanvas extends LitElement {
+    private playerHP: number = 100;
+
     public static styles = css`
         /** Maken van nieuwe grid layout voor nieuwe custom layout **/
         .game {
@@ -136,6 +138,10 @@ export class GameCanvas extends LitElement {
             align-items: flex-end;
             justify-content: flex-end;
         }
+        .hp-bar {
+            height: 10px;
+            background-color: green;
+        }
 
         /** Animation keyframes voor ".action-buttons" **/
         @keyframes fadeInDown {
@@ -182,6 +188,7 @@ export class GameCanvas extends LitElement {
         this.contentText = state.text;
         this.actionButtons = state.actions;
         this.gameObjectButtons = state.objects;
+        this.playerHP = state.playerHP;
 
         this.selectedActionButton = undefined;
         this.selectedGameObjectButtons.clear();
@@ -235,6 +242,9 @@ export class GameCanvas extends LitElement {
                 <div class="header">${this.renderHeader()}</div>
                 <div class="sidebar">${this.renderSidebar()}</div>
                 <div class="buttons">${this.renderFooter()}</div>
+                <div class="hp-bar" style="width: ${this.playerHP}%">
+                    <div>hp:${this.playerHP}</div>
+                </div>
             </div>
         `;
     }
@@ -260,7 +270,7 @@ export class GameCanvas extends LitElement {
     }
 
     private renderSidebar(): TemplateResult {
-        return html`${this.contentText?.map((text) => html`<p>${text}</p>`)}`;
+        return html`${this.contentText?.map((text) => html`<p>${text}</p>`)} `;
     }
 
     private renderFooter(): TemplateResult {

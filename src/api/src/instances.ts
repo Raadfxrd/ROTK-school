@@ -56,6 +56,7 @@ import {
     ChainmailArmourOfTheGreatItem,
     ChainmailArmourOfTheGreatItemAlias,
 } from "./items/ChainmailArmourOfTheGreatItem";
+import { SmaugAlias, SmaugRoom } from "./rooms/SmaugRoom";
 
 /**
  * Create a new player session object
@@ -65,14 +66,14 @@ import {
 export function createNewPlayerSession(): PlayerSession {
     return {
         //Room session
-        currentRoom: "startup-room",
+        currentRoom: "Smaug-room",
         lastRoom: "",
 
         //Inventory session
         inventory: [],
         equipment: [],
         gold: 0,
-        healthPoints: 10,
+        healthPoints: 100,
         armourClass: 12,
 
         //Booleans
@@ -166,6 +167,8 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case IntroRoomAlias:
             return new IntroRoom();
+        case SmaugAlias:
+            return new SmaugRoom();
     }
 
     return undefined;
