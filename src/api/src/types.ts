@@ -14,6 +14,7 @@ export type PlayerSession = {
     horseMission30: boolean;
     horseMission20: boolean;
     horseMission10: boolean;
+    inCombat: boolean;
     gold: number;
     healthPoints: number;
     armourClass: number;

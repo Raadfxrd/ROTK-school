@@ -56,6 +56,8 @@ import {
     ChainmailArmourOfTheGreatItem,
     ChainmailArmourOfTheGreatItemAlias,
 } from "./items/ChainmailArmourOfTheGreatItem";
+import { SteelSwordItem, SteelSwordItemAlias } from "./items/SteelSwordItem";
+import { SwordOfGoodFortuneItem, SwordOfGoodFortuneItemAlias } from "./items/SwordOfGoodFortuneItem";
 
 /**
  * Create a new player session object
@@ -67,6 +69,7 @@ export function createNewPlayerSession(): PlayerSession {
         //Room session
         currentRoom: "startup-room",
         lastRoom: "",
+        inCombat: false,
 
         //Inventory session
         inventory: [],
@@ -299,6 +302,12 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case ChainmailArmourOfTheGreatItemAlias:
             return new ChainmailArmourOfTheGreatItem();
+
+        case SteelSwordItemAlias:
+            return new SteelSwordItem();
+
+        case SwordOfGoodFortuneItemAlias:
+            return new SwordOfGoodFortuneItem();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:

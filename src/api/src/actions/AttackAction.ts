@@ -3,17 +3,19 @@ import { Action } from "../base/actions/Action";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { implementsInterface, castTo } from "../base/helpers";
 import { ExampleActionAlias } from "./ExampleAction";
-export const CheckInventoryActionAlias: string = "Check Inventory";
-export interface CheckInventory {
-    CheckInventory(): ActionResult | undefined;
+
+export const AttackActionAlias: string = "attack-action";
+
+export interface Attack {
+    Attack(): ActionResult | undefined;
 }
-export class CheckInventoryAction extends Action {
+export class AttackAction extends Action {
     public constructor() {
-        super(CheckInventoryActionAlias, "Check Inventory", true);
+        super(AttackActionAlias, "Attack", false);
     }
     public static handle(gameObject: GameObject): ActionResult | undefined {
         if (implementsInterface(gameObject, ExampleActionAlias)) {
-            return castTo<CheckInventory>(gameObject).CheckInventory();
+            return castTo<Attack>(gameObject).Attack();
         }
 
         return undefined;

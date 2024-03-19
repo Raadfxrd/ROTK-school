@@ -187,6 +187,28 @@ export class AlexandraCharacter extends Character implements Examine {
                     playerSession.horseMission20 === true ||
                     playerSession.horseMission30 === true
                 ) {
+                    if (_choiceId === 1) {
+                        return new TextActionResult([
+                            "Alexandra: We indeed do, you should take a closer look next time we are in Wolburg.",
+                        ]);
+                    } else if (_choiceId === 2) {
+                        return new TextActionResult([
+                            "Alexandra: You are right, we need to save the princess!",
+                        ]);
+                    }
+
+                    return new TalkActionResult(
+                        this,
+                        [
+                            "Alexandra: At least Richard is getting back up again. It even looks like people are helping him.",
+                            "The more I see these people work together the more I love this city.",
+                        ],
+                        [
+                            new TalkChoiceAction(1, "What a great folk we have"),
+                            new TalkChoiceAction(2, "We need to go further"),
+                            new TalkChoiceAction(99, "Bye!"),
+                        ]
+                    );
                 }
                 if (_choiceId === 1) {
                     return new TextActionResult([

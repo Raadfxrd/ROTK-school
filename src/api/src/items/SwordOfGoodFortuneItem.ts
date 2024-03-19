@@ -44,7 +44,7 @@ export class SwordOfGoodFortuneItem extends Item implements Examine, Pickup, use
             playerSession.strength += 2;
             return new TextActionResult([
                 "You equipped the Sword of Good Fortune.",
-                "You feel one with the sword, the Sword of Good Fortune feels great in your hand and you it is more on the lighter side.",
+                "You feel one with the sword, it's weight is on the lighter side ands feels great in your hands.",
             ]);
         }
         return new TextActionResult(["You already equipped the Sword of Good Fortune"]);
