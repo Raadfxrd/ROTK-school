@@ -1,15 +1,4 @@
 @font-face {
-    font-family: "MonsterFriend";
-    src: url("../fonts/monsterfriendfore-webfont.woff2") format("woff2"),
-        url("../fonts/monsterfriendfore-webfont.svg") format("svg"),
-        url("../fonts/monsterfriendfore-webfont.ttf") format("truetype"),
-        url("../fonts/monsterfriendfore-webfont.woff") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: block;
-}
-
-@font-face {
     font-family: "Onesize";
     src: url("/assets/fonts/Onesize.eot"), url("/assets/fonts/Onesize.eot?#iefix") format("embedded-opentype"),
         url("/assets/fonts/Onesize.woff2") format("woff2"), url("/assets/fonts/Onesize.woff") format("woff"),
@@ -24,8 +13,7 @@
     --button-radius: 2px;
     --button-cursor: pointer;
     --button-user-select: none;
-    --font: "MonsterFriend";
-    --font2: "Onesize";
+    --font: "Onesize";
 }
 
 html,
@@ -49,6 +37,9 @@ body {
 
 game-canvas {
     font-family: var(--font);
-    font-size: 1.3rem;
+    font-size: 1.8rem;
+    font-weight: bolder;
+    letter-spacing: -2px;
+    line-height: 1;
     color: white;
 }

@@ -8,7 +8,7 @@ import { Room } from "../base/gameObjects/Room";
 import { getPlayerSession } from "../instances";
 import { IntroRoom } from "./IntroRoom";
 
-export const StartupRoomAlias: string = "startup";
+export const StartupRoomAlias: string = "startup-room";
 
 export class StartupRoom extends Room {
     public constructor() {
