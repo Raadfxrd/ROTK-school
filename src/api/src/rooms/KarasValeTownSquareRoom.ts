@@ -25,6 +25,7 @@ import { BlackSmithRoom } from "./BlacksmithRoom";
 import { WolburgRoom } from "./WolburgRoom";
 import { ShopRoom } from "./ShopRoom";
 import { LowLandsRoom } from "./LowLandsRoom";
+import { JainaCharacter } from "../characters/JainaCharacter";
 
 export const KarasValeTownSquareRoomAlias: string = "KVTownSquare";
 
@@ -70,9 +71,9 @@ export class KarasValeTownSquareRoom extends Room {
 
     public objects(): GameObject[] {
         if (this.playerSession.hasWhistle === true) {
-            return [new AureliusCharacter(), new KaraWhistleItem()];
+            return [new AureliusCharacter(), new KaraWhistleItem(), new JainaCharacter()];
         }
-        return [new AureliusCharacter()];
+        return [new AureliusCharacter(), new JainaCharacter()];
     }
 
     public examine(): ActionResult | undefined {
