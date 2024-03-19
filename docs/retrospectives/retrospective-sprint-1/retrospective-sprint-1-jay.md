@@ -1,27 +1,38 @@
 ## Stop
 
--
+-   Spelfouten, punctuatie, hoofdletters
 
 ## Start
 
--
+-   Email naar docent
+-   Spelfouten, punctuatie, hoofdletters
+-   Vroeger deployen (Dag ervoor tenminste)
+-   Documenteren
 
 ## Continue
 
--
+-   Veel gewerkt vergeleken met andere groepen en een mooi resultaat kunnen laten zien.
+-   We hebben een werkend spel
+-   Goed verhaal
 
-## Smart Doel
+## SMART Doel
 
-Ik wil in aankomende sprint volledig en goed leren te werken met express en lit zodat mijn kamers er precies zo uit zien zoals ik wil.
+### SMART doel voor Salim
 
-## Terugblik op sprint 0
+-   Ik wil dat je elke week opschrijft of laat weten wat je allemaal af wilt hebben in die week zodat je ons blijft bij benen.
 
-Ik vond het heel jammer om te beginnen met weinig informatie over "The game" en dat dit pas later in het blok van toepassing komt. Ik snap het aan de ene kant wel dat dit zo gebeurd maar nog steeds vind ik het wel jammer. Daarnaast vind ik dat de HvA weinig doet met de nieuwe libraries die werden meegegven en dat we dit vooral zelf moeten doen. Ik hoopte dat hiervan wel meer informatie op een online les van kwam maar dat is helaas niet gebeurd. Hierdoor moest ik zelf heel veel gaan opzoeken voor het een en ander wat ik fijner vind als dit in de les meer wordt gedaan.
+### SMART doel Jay
 
-Daarnaast vond ik het ook jammer dat we soms met maar 3 mensen van het groepje op school zitten. Ik wil het liefst met zijn allen in de klas zitten zodat we gezamenlijk kunnen werken aan het project, zeker in het aankomende sprint.
+-   Ik wil dat ik veel mijn teamgenoten help en ze op hetzelfde niveau breng van coderen, veel feedback teruggeef aan mijn teamgenoten.
 
-Tot slot vind ik het wel leuk als iedereen er is en ik vind het ook fijn om met mijn team samen te werken.
+### SMART doel voor Jay van Joas
 
-## Retrespective feedback
+-   Ik wil dat Wolburg 100% af is en werkt voordat ik aan de combat gaat werken zodat de combat niet lukt je een werkend product hebt om op terug te vallen.
 
-Als groep zeinde de start stop continue in een gezamenlijke document zetten en je eigen doel en terugblik kan in een eigen document.
+### SMART doel voor Jay van Borys
+
+-   Ik wil dat je beter let op je Nederlands en Engels, vooral op je interpunctie, hoofdletter gebruik en spelfouten.
+
+## Terugblik op sprint 1
+
+Sprint 1 ging heel anders dan ik had verwacht. We hebben een eigen game engine gekregen en daarmee moesten we aan de slag gaan. Hierdoor waren een aantal van onze user stories niet meer mogelijk om te behalen. Verder waren er een paar issues tussen ons en Salim. Salim kwam vaker te laat en ging vroeg weg. Daarnaast had hij erg weinig gecommit waardoor het leek alsof hij niks aan het doen was. We hebben hem hierop aangesproken en hopen dat het aankomende sprint beter gaat werken. Ik heb zelf erg veel gedaan, eigenlijk ook precies zoveel ik wilde doen als verwacht. Hiermee ben ik blij mee want nu kan ik volgens mijn planning verder gaan.
