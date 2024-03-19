@@ -28,7 +28,6 @@ export class MarkCharacter extends Character {
     }
     public talk(_choiceId?: number | undefined): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
-        console.log(playerSession);
 
         if (playerSession.shownRing === false && playerSession.shownRingBadEnding === false) {
             if (_choiceId === 1) {
