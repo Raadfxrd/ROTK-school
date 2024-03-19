@@ -5,6 +5,10 @@ import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
+import { HealingPotionAlias } from "../items/HealingPotionItem";
+import { HolyBibleAlias } from "../items/HolyBibleItem";
+import { MysteriousPaintingAlias } from "../items/MysteriousPaintingItem";
+import { SpiderEyeAlias } from "../items/SpiderEyeItem";
 import { PlayerSession } from "../types";
 
 export const BrannAlias: string = "Brann";
@@ -26,7 +30,7 @@ export class BrannCharacter extends Character implements Examine {
         if (_choiceId === 5) {
             if (playerSession.gold >= 12) {
                 playerSession.gold -= 12;
-                playerSession.inventory.push();
+                playerSession.inventory.push(HealingPotionAlias);
                 return new TextActionResult([
                     "<hands over potion of healing> There you go. this should help you in times of need. But don't drink too much or you will start to see things.",
                 ]);
@@ -37,7 +41,7 @@ export class BrannCharacter extends Character implements Examine {
         if (_choiceId === 6) {
             if (playerSession.gold >= 8) {
                 playerSession.gold -= 8;
-                playerSession.inventory.push();
+                playerSession.inventory.push(HolyBibleAlias);
                 return new TextActionResult([
                     "<SABATON- The Last Stand starts playing> This book will keep you safe from all evil this world contains. Blessings upon thee",
                 ]);
@@ -48,7 +52,7 @@ export class BrannCharacter extends Character implements Examine {
         if (_choiceId === 7) {
             if (playerSession.gold >= 7) {
                 playerSession.gold -= 7;
-                playerSession.inventory.push();
+                playerSession.inventory.push(SpiderEyeAlias);
                 return new TextActionResult([
                     "<hands over Spider eye> Here, this is used mostly for brewings and potions. however i have seen them being used for other meanings aswell.",
                 ]);
@@ -59,7 +63,7 @@ export class BrannCharacter extends Character implements Examine {
         if (_choiceId === 8) {
             if (playerSession.gold >= 6) {
                 playerSession.gold -= 6;
-                playerSession.inventory.push();
+                playerSession.inventory.push(MysteriousPaintingAlias);
                 return new TextActionResult([
                     "A nice painting painted by an ancient sorcerer long ago. it is believed this painting holds secrets.",
                 ]);

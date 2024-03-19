@@ -1,12 +1,32 @@
 import { Action } from "../base/actions/Action";
 
 export const NavigateNorthAlias: string = "NavigateNorth";
+export const NavigateBackToWolburgAlias: string = "BackToWolburg";
 export const NavigateEastAlias: string = "NavigateEast";
 export const NavigateSouthAlias: string = "NavigateSouth";
 export const NavigateWestAlias: string = "NavigateWest";
-export const NavigateBlacksmithAlias: string = "KVBlacksmith";
+export const NavigateBlacksmithAlias: string = "BlackSmith-room";
+export const NavigateShopRoomAlias: string = "ShopRoom";
 export const NavigateTownSquareAlias: string = "KVTownSquare";
+export const EnterVoloAlias: string = "EnterVolo";
+export const LeaveVoloAlias: string = "LeaveVolo";
+export const NavigateToVolosVillageAlias: string = "NavigateVolo";
+export const NavigateToLowlandsFromKVAlias: string = "NavigateLowLands";
+// class om naar het volo te navigeren
+export class EnterVolo extends Action {
+    public constructor() {
+        super(EnterVoloAlias, "Enter Volo", false);
+    }
+}
+//class om weg van volo te navigeren
+export class LeaveVolo extends Action {
+    public constructor() {
+        super(LeaveVoloAlias, "Leave Volo", false);
+    }
+}
+
 export const NavigateStablesWolburgAlias: string = "WStables";
+export const NavigateBackAlias: string = "Back";
 // class om naar het noorden te navigeren
 export class NavigationNorth extends Action {
     public constructor() {
@@ -42,6 +62,21 @@ export class NavigationBlacksmith extends Action {
         super(NavigateBlacksmithAlias, "Blacksmith", false);
     }
 }
+export class NavigateBackToWolburg extends Action {
+    public constructor() {
+        super(NavigateBackToWolburgAlias, "Back To Wolburg", false);
+    }
+}
+export class NavigationShop extends Action {
+    public constructor() {
+        super(NavigateShopRoomAlias, "ShopRoom", false);
+    }
+}
+export class Back extends Action {
+    public constructor() {
+        super(NavigateBackAlias, "Back", false);
+    }
+}
 
 export class NavigationTownSquare extends Action {
     public constructor() {
@@ -53,5 +88,24 @@ export class NavigationTownSquare extends Action {
 export class NavigationStablesWolburg extends Action {
     public constructor() {
         super(NavigateStablesWolburgAlias, "Stables", false);
+    }
+}
+
+// class om terug naar wolburg te navigeren vanaf kara's vale
+export class NavigateToWolburg extends Action {
+    public constructor() {
+        super(NavigateBackToWolburgAlias, "Wolburg", false);
+    }
+}
+
+export class NavigateToVolosVillage extends Action {
+    public constructor() {
+        super(NavigateToVolosVillageAlias, "Volo's village", false);
+    }
+}
+
+export class NavigateToLowlandsFromKV extends Action {
+    public constructor() {
+        super(NavigateToLowlandsFromKVAlias, "The lowlands", false);
     }
 }

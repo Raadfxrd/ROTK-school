@@ -4,6 +4,12 @@ export type PlayerSession = {
     inventory: string[];
     knowWhereMapIs: boolean;
     wentNorth: boolean;
+    drakeIntro: boolean;
+    taylorlikesRonaldo: boolean;
+    ronaldoIntro: boolean;
+    firstMedallionHalf: boolean;
+    secondMedalionHalf: boolean;
+    leftVolo: boolean;
     knowLocationLowlands: boolean;
     horseMission30: boolean;
     horseMission20: boolean;
@@ -14,4 +20,6 @@ export type PlayerSession = {
     blessing: boolean;
     shownRing: boolean;
     shownRingBadEnding: boolean;
+    inStables: boolean;
+    inGate: boolean;
 };

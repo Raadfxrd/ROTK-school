@@ -7,7 +7,6 @@ import { eleonorAlias, EleonorCharacter } from "./characters/EleonorCharacter";
 import { Drakecharacter, DrakecharacterAlias } from "./characters/DrakeCharacter";
 import { BobCharacter, BobCharacterAlias } from "./characters/BobCharacter";
 import { RingItem, RingItemAlias } from "./items/RingItem";
-import { KarasValeBlacksmithRoom, KarasValeBlacksmithRoomAlias } from "./rooms/KarasValeBlacksmithRoom";
 import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./rooms/KarasValeTownSquareRoom";
 import { StartupRoom, StartupRoomAlias } from "./rooms/StartupRoom";
 import { LowLandsRoom, LowLandsRoomAlias } from "./rooms/LowLandsRoom";
@@ -36,6 +35,7 @@ import { ArmourItem, ArmourItemAlias } from "./items/ArmourItem";
 import { battleAxeItem, battleAxeItemAlias } from "./items/battleAxeItem";
 import { maceItem, maceItemAlias } from "./items/maceItem";
 import { JohanCharacter, JohanCharacterAlias } from "./characters/JohanCharachter";
+import { KaraCharacter, KaraCharacterAlias } from "./characters/KaraCharacter";
 import { ChurchWolburgRoom, ChurchWolburgRoomAlias } from "./rooms/ChurchWolburgRoom";
 import { ChurchTorch, ChurchTorchAlias } from "./items/ThroneRoomTorchItem";
 import { MarkCharacter, MarkCharacterAlias } from "./characters/MarkCharacter";
@@ -44,6 +44,13 @@ import { DarkTreeItemAlias, DarkTreeItem } from "./items/DarkTreeItem";
 import { TunnelSwitcherAlias, TunnelSwitcher } from "./items/TunnelSwitcher";
 import { DarkTreesRoomAlias, DarkTreesRoom } from "./rooms/DarkTreesRoom";
 import { TunnelRoomAlias, TunnelRoom } from "./rooms/TunnelRoom";
+import { RonaldoCharacter, RonaldoCharacteralias } from "./characters/RonaldoCharacter";
+import { Taylorcharacter, Taylorcharacteralias } from "./characters/TaylorCharacter";
+import { secondMedalionHalfItem, secondMedalionHalfItemAlias } from "./items/SecondMedalionHalfItem";
+import { HealingPotionAlias, HealingPotionItem } from "./items/HealingPotionItem";
+import { HolyBibleAlias, HolyBibleItem } from "./items/HolyBibleItem";
+import { SpiderEyeAlias, SpiderEyeItem } from "./items/SpiderEyeItem";
+import { MysteriousPaintingAlias, MysteriousPaintingItem } from "./items/MysteriousPaintingItem";
 
 /**
  * Create a new player session object
@@ -52,7 +59,7 @@ import { TunnelRoomAlias, TunnelRoom } from "./rooms/TunnelRoom";
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "startup",
+        currentRoom: "wolburg-room",
         lastRoom: "",
         inventory: [],
         knowWhereMapIs: false,
@@ -67,6 +74,14 @@ export function createNewPlayerSession(): PlayerSession {
         blessing: false,
         shownRing: false,
         shownRingBadEnding: false,
+        drakeIntro: false,
+        taylorlikesRonaldo: false,
+        ronaldoIntro: false,
+        firstMedallionHalf: false,
+        secondMedalionHalf: false,
+        leftVolo: false,
+        inStables: false,
+        inGate: false,
     };
 }
 
@@ -100,9 +115,6 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case KarasValeTownSquareRoomAlias:
             return new KarasValeTownSquareRoom();
-
-        case KarasValeBlacksmithRoomAlias:
-            return new KarasValeBlacksmithRoom();
 
         case LowLandsRoomAlias:
             return new LowLandsRoom();
@@ -162,6 +174,12 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
         case TunnelWallItemAlias:
             return new TunnelWallItem();
 
+        case secondMedalionHalfItemAlias:
+            return new secondMedalionHalfItem();
+
+        case secondMedalionHalfItemAlias:
+            return new secondMedalionHalfItem();
+
         case eleonorAlias:
             return new EleonorCharacter();
 
@@ -179,6 +197,15 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case CharlesAlias:
             return new CharlesCharacter();
+
+        case DrakecharacterAlias:
+            return new Drakecharacter();
+
+        case RonaldoCharacteralias:
+            return new RonaldoCharacter();
+
+        case Taylorcharacteralias:
+            return new Taylorcharacter();
 
         case AureliusCharacterAlias:
             return new AureliusCharacter();
@@ -218,22 +245,26 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case JohanCharacterAlias:
             return new JohanCharacter();
-
-        case MarkCharacterAlias:
-            return new MarkCharacter();
-
+        case HealingPotionAlias:
+            return new HealingPotionItem();
+        case HolyBibleAlias:
+            return new HolyBibleItem();
+        case SpiderEyeAlias:
+            return new SpiderEyeItem();
+        case MysteriousPaintingAlias:
+            return new MysteriousPaintingItem();
+        case KaraCharacterAlias:
+            return new KaraCharacter();
         case ChurchTorchAlias:
             return new ChurchTorch();
-
+        case MarkCharacterAlias:
+            return new MarkCharacter();
         case VolosTorchAlias:
             return new VolosTorch();
-
         case DarkTreeItemAlias:
             return new DarkTreeItem();
-
         case TunnelSwitcherAlias:
             return new TunnelSwitcher();
-
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
             return getRoomByAlias(alias);
