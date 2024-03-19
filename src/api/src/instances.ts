@@ -52,6 +52,10 @@ import { HolyBibleAlias, HolyBibleItem } from "./items/HolyBibleItem";
 import { SpiderEyeAlias, SpiderEyeItem } from "./items/SpiderEyeItem";
 import { MysteriousPaintingAlias, MysteriousPaintingItem } from "./items/MysteriousPaintingItem";
 import { IntroRoom, IntroRoomAlias } from "./rooms/IntroRoom";
+import {
+    ChainmailArmourOfTheGreatItem,
+    ChainmailArmourOfTheGreatItemAlias,
+} from "./items/ChainmailArmourOfTheGreatItem";
 
 /**
  * Create a new player session object
@@ -60,19 +64,22 @@ import { IntroRoom, IntroRoomAlias } from "./rooms/IntroRoom";
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "startup",
+        //Room session
+        currentRoom: "startup-room",
         lastRoom: "",
+
+        //Inventory session
         inventory: [],
+        equipment: [],
+        gold: 0,
+        healthPoints: 10,
+        armourClass: 12,
+
+        //Booleans
         knowWhereMapIs: false,
         wentNorth: false,
         knowsOfKara: false,
         summonedKara: false,
-        knowLocationLowlands: false,
-        horseMission10: false,
-        horseMission20: false,
-        horseMission30: false,
-        gold: 0,
-        healthPoints: 10,
         blessing: false,
         shownRing: false,
         shownRingBadEnding: false,
@@ -84,6 +91,12 @@ export function createNewPlayerSession(): PlayerSession {
         leftVolo: false,
         inStables: false,
         inGate: false,
+
+        //Missions
+        knowLocationLowlands: false,
+        horseMission10: false,
+        horseMission20: false,
+        horseMission30: false,
     };
 }
 
@@ -250,26 +263,40 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case JohanCharacterAlias:
             return new JohanCharacter();
+
         case HealingPotionAlias:
             return new HealingPotionItem();
+
         case HolyBibleAlias:
             return new HolyBibleItem();
+
         case SpiderEyeAlias:
             return new SpiderEyeItem();
+
         case MysteriousPaintingAlias:
             return new MysteriousPaintingItem();
+
         case KaraCharacterAlias:
             return new KaraCharacter();
+
         case ChurchTorchAlias:
             return new ChurchTorch();
+
         case MarkCharacterAlias:
             return new MarkCharacter();
+
         case VolosTorchAlias:
             return new VolosTorch();
+
         case DarkTreeItemAlias:
             return new DarkTreeItem();
+
         case TunnelSwitcherAlias:
             return new TunnelSwitcher();
+
+        case ChainmailArmourOfTheGreatItemAlias:
+            return new ChainmailArmourOfTheGreatItem();
+
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
             return getRoomByAlias(alias);

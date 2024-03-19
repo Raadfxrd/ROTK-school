@@ -16,6 +16,7 @@ import { RingItem, RingItemAlias } from "../items/RingItem";
 import { MapItem, MapItemAlias } from "../items/MapItem";
 import { PlayerSession } from "../types";
 import { WolburgRoom } from "./WolburgRoom";
+import { useItemAction } from "../actions/UseItemAction";
 
 export const ThroneRoomAlias: string = "throne-room";
 
@@ -40,6 +41,7 @@ export class ThroneRoom extends Room {
             new ExamineAction(),
             new TalkAction(),
             new PickupAction(),
+            new useItemAction(),
             new CustomAction("inventory", "Inventory", false),
         ];
 
