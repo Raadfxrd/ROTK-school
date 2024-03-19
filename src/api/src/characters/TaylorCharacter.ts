@@ -16,24 +16,23 @@ export class Taylorcharacter extends Character implements Examine {
         if (choiceId === 1) {
             return new TalkActionResult(
                 this,
-                ["I do know him. I wonder if he has a private jet.."],
-                [new TalkChoiceAction(4, "He has actually")]
+                ["What is it?"],
+                [
+                    new TalkChoiceAction(
+                        4,
+                        "Its about Edwin, I hope u know what he is doing in this village. He openly bragged about it with me"
+                    ),
+                ]
             );
         }
         if (choiceId === 2) {
-            playerSession.taylorlikesRonaldo = true;
-            new TalkActionResult(
-                this,
-                ["No way!! I want to date him <3"],
-                [new TalkChoiceAction(1, "yeah his jet go sui!")]
-            );
+            new TextActionResult(["Okay... Il talk to him one last time"]);
         }
         if (choiceId === 4) {
-            playerSession.taylorlikesRonaldo = true;
             return new TalkActionResult(
                 this,
-                ["omg really!? I want to date him!!"],
-                [new TalkChoiceAction(5, "yeah he likes u too apperantly. Nice!")]
+                ["Do you have proof? He is super nice to me.. i cant believe it."],
+                [new TalkChoiceAction(5, "I will get you proof. But trust me")]
             );
         }
         if (choiceId === 3) {
@@ -43,11 +42,14 @@ export class Taylorcharacter extends Character implements Examine {
 
         return new TalkActionResult(
             this,
-            ["Hi there. u look baked. how can i help you? "],
+            ["Hi there, how can i help you"],
             [
-                new TalkChoiceAction(1, "Do u know ronaldo?"),
-                new TalkChoiceAction(2, "Did u know ronaldo has a private jet?"),
-                new TalkChoiceAction(3, "If u date ronaldo, i will give u money to fly"),
+                new TalkChoiceAction(1, "Hello, I have to talk about something with you"),
+                new TalkChoiceAction(2, "Hello, I want you to talk with Ronaldo. He has something to give u"),
+                new TalkChoiceAction(
+                    3,
+                    "I have a proposal...U made ronaldo really sad.. Can u date him, I'll pay you. "
+                ),
             ]
         );
     }

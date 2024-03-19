@@ -47,6 +47,7 @@ import { TunnelRoomAlias, TunnelRoom } from "./rooms/TunnelRoom";
 import { RonaldoCharacter, RonaldoCharacteralias } from "./characters/RonaldoCharacter";
 import { Taylorcharacter, Taylorcharacteralias } from "./characters/TaylorCharacter";
 import { secondMedalionHalfItem, secondMedalionHalfItemAlias } from "./items/SecondMedalionHalfItem";
+import { EdwinCharacter, EdwinCharacterAlias } from "./characters/EdwinCharacter";
 
 /**
  * Create a new player session object
@@ -256,6 +257,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case TunnelSwitcherAlias:
             return new TunnelSwitcher();
+
+        case EdwinCharacterAlias:
+            return new EdwinCharacter();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
