@@ -40,19 +40,20 @@ export class KaraCharacter extends Character implements Examine {
         return myArray;
     }
 
+    public riddlesAnsweredArrayPush(): ActionResult | undefined {
+        if (getPlayerSession().riddlesAnswered.filter((x) => x === "riddle-answered").length >= 3) {
+            return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(100, "bet")]);
+        }
+        return undefined;
+    }
+
     public numbersArray: number[] = this.createArrayOfNumbers(5, 7);
     public randomIndex: number = this.getRandomNumber(0, this.numbersArray.length - 1);
-
-    // public riddlesAnsweredArray: Array<number> = this.createArrayOfNumbers(1, 3);
-    // public randomIndex2: number = this.getRandomNumber(0, this.riddlesAnsweredArray.length - 1);
 
     //choiceid = randomnumber
     // een continue knop na de question waar de choiceid wordt bepaald voor welke het wordt
 
     public talk(choiceId?: number | undefined): ActionResult | undefined {
-        // if (this.riddlesAnsweredArray.length === 0) {
-        //     return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(60, "bet")]);
-        // }
         if (choiceId === 1) {
             return new TalkActionResult(
                 this,
@@ -83,24 +84,25 @@ export class KaraCharacter extends Character implements Examine {
                     "You will answer my riddles.",
                     "If your mind is capable enough i shall share with you what i know of the whereabouts of the princess.",
                 ],
-                [new TalkChoiceAction(5, "Very well.")]
+                [new TalkChoiceAction(this.randomIndex, "Very well.")]
             );
         }
         if (choiceId === 4) {
             return new TalkActionResult(
                 this,
                 ["Word spreads quick and I have ears and eyes in many places."],
-                [new TalkChoiceAction(5, "Very well.")]
+                [new TalkChoiceAction(this.randomIndex, "Very well.")]
             );
         }
         if (choiceId === 5) {
-            // const index: number = this.numbersArray.indexOf(5);
-            // const numbersUsedArray: number[] = [];
+            const index: number = this.numbersArray.indexOf(5);
+            getPlayerSession().allRiddles.splice(index, 1);
 
             // numbersUsedArray.push(this.numbersArray.splice(index, 1));
 
-            //this.numbersArray.splice(index, 1);
-            // console.log(this.numbersArray);
+            // this.numbersArray.splice(index, 1);
+            console.log(this.numbersArray);
+            console.log(this.randomIndex, "ID 5");
             return new TalkActionResult(
                 this,
                 [
@@ -109,9 +111,9 @@ export class KaraCharacter extends Character implements Examine {
                     "What am I.",
                 ],
                 [
-                    new TalkChoiceAction(6, "A tree"), // correct answer
-                    new TalkChoiceAction(6, "A goat"),
-                    new TalkChoiceAction(6, "A mountain"),
+                    new TalkChoiceAction(40, "A tree"), // correct answer
+                    new TalkChoiceAction(50, "A goat"),
+                    new TalkChoiceAction(50, "A mountain"),
                 ]
             );
         }
@@ -120,6 +122,10 @@ export class KaraCharacter extends Character implements Examine {
             // const index: number = this.numbersArray.indexOf(6);
             //     this.numbersArray.splice(index, 1);
             //     console.log(this.numbersArray);
+            const index: number = this.numbersArray.indexOf(6);
+            getPlayerSession().allRiddles.splice(index, 1);
+            console.log(this.numbersArray);
+            console.log(this.randomIndex, "ID 6");
             return new TalkActionResult(
                 this,
                 [
@@ -127,9 +133,9 @@ export class KaraCharacter extends Character implements Examine {
                     "Try as you might to guess my name, I promise you'll know when you I do claim",
                 ],
                 [
-                    new TalkChoiceAction(7, "Destiny"),
-                    new TalkChoiceAction(7, "Time"),
-                    new TalkChoiceAction(7, "Death"), // correct answer
+                    new TalkChoiceAction(50, "Destiny"),
+                    new TalkChoiceAction(50, "Time"),
+                    new TalkChoiceAction(40, "Death"), // correct answer
                 ]
             );
         }
@@ -138,6 +144,10 @@ export class KaraCharacter extends Character implements Examine {
             // const index: number = this.numbersArray.indexOf(7);
             // this.numbersArray.splice(index, 1);
             // console.log(this.numbersArray);
+            const index: number = this.numbersArray.indexOf(7);
+            getPlayerSession().allRiddles.splice(index, 1);
+            console.log(this.numbersArray);
+            console.log(this.randomIndex, "ID 7");
             return new TalkActionResult(
                 this,
                 [
@@ -145,9 +155,9 @@ export class KaraCharacter extends Character implements Examine {
                     "You may hear me before you see me, but trust that I'm there",
                 ],
                 [
-                    new TalkChoiceAction(90, "A hummingbird"), // correct answer
-                    new TalkChoiceAction(90, "A mosquito"),
-                    new TalkChoiceAction(90, "A Bumblebee"),
+                    new TalkChoiceAction(40, "A hummingbird"), // correct answer
+                    new TalkChoiceAction(50, "A mosquito"),
+                    new TalkChoiceAction(50, "A Bumblebee"),
                 ]
             );
         }
@@ -162,8 +172,8 @@ export class KaraCharacter extends Character implements Examine {
                     "*You are gain one half of a medaillion and a blue torch*",
                 ],
                 [
-                    new TalkChoiceAction(100, "Thank you"),
                     new TalkChoiceAction(91, "Where can i find the other medallion"),
+                    new TalkChoiceAction(100, "Thank you"),
                 ]
             );
         }
@@ -175,25 +185,38 @@ export class KaraCharacter extends Character implements Examine {
                 [new TalkChoiceAction(100, "Thank you")]
             );
         }
-        // if (choiceId === 40) {
-        //     return new TalkActionResult(
-        //         this,
-        //         ["You are correct human, another"],
-        //         [new TalkChoiceAction(100, "Alright")]
-        //     );
-        // }
+        if (choiceId === 40) {
+            console.log(getPlayerSession().allRiddles, "CHOICEID 40");
+            getPlayerSession().riddlesAnswered.push("riddle-answered");
+            if (getPlayerSession().riddlesAnswered.filter((x) => x === "riddle-answered").length >= 3) {
+                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(100, "bet")]);
+            }
+            return new TalkActionResult(
+                this,
+                ["You are correct human, another"],
+                [new TalkChoiceAction(this.randomIndex, "Alright")]
+            );
+        }
 
-        // if (choiceId === 50) {
-        //     // this.riddlesAnsweredArray.splice(0, 1);
-        //     // console.log(this.numbersArray);
-        //     // console.log(this.randomIndex);
-        //     // console.log(this.riddlesAnsweredArray);
-        //     return new TalkActionResult(
-        //         this,
-        //         ["Incorrect, another"],
-        //         [new TalkChoiceAction(, "Very well")]
-        //     );
-        // }
+        if (choiceId === 50) {
+            console.log(getPlayerSession().allRiddles, "CHOICEID 50");
+            getPlayerSession().riddlesAnswered.push("riddle-answered");
+
+            if (getPlayerSession().riddlesAnswered.filter((x) => x === "riddle-answered").length >= 3) {
+                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(100, "")]);
+            }
+
+            return new TalkActionResult(
+                this,
+                ["Incorrect, another"],
+                [new TalkChoiceAction(this.randomIndex, "Very well")]
+            );
+
+            // this.riddlesAnsweredArray.splice(0, 1);
+            // console.log(this.numbersArray);
+            // console.log(this.randomIndex);
+            // console.log(this.riddlesAnsweredArray);
+        }
 
         if (choiceId === 100) {
             return new TextActionResult([""]);
