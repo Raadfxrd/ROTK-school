@@ -138,8 +138,7 @@ export class GameCanvas extends LitElement {
             align-items: flex-end;
             justify-content: flex-end;
         }
-        .hp-bar {
-            height: 10px;
+        #healthbar {
             background-color: green;
         }
 
@@ -242,8 +241,8 @@ export class GameCanvas extends LitElement {
                 <div class="header">${this.renderHeader()}</div>
                 <div class="sidebar">${this.renderSidebar()}</div>
                 <div class="buttons">${this.renderFooter()}</div>
-                <div class="hp-bar" style="width: ${this.playerHP}%">
-                    <div>hp:${this.playerHP}</div>
+                <div>
+                    HP:${this.playerHP}<progress id="healthbar" max="100" value=${this.playerHP}></progress>
                 </div>
             </div>
         `;
