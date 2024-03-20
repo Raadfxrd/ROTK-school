@@ -245,24 +245,34 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case JohanCharacterAlias:
             return new JohanCharacter();
+
         case HealingPotionAlias:
             return new HealingPotionItem();
+
         case HolyBibleAlias:
             return new HolyBibleItem();
+
         case SpiderEyeAlias:
             return new SpiderEyeItem();
+
         case MysteriousPaintingAlias:
             return new MysteriousPaintingItem();
+
         case KaraCharacterAlias:
             return new KaraCharacter();
+
         case ChurchTorchAlias:
             return new ChurchTorch();
+
         case MarkCharacterAlias:
             return new MarkCharacter();
+
         case VolosTorchAlias:
             return new VolosTorch();
+
         case DarkTreeItemAlias:
             return new DarkTreeItem();
+
         case TunnelSwitcherAlias:
             return new TunnelSwitcher();
         //NOTE: Fall back to rooms, since those are game objects too.

@@ -126,6 +126,7 @@ function handleActionInRoom(room: Room, alias: string, objectAliases?: string[])
 
         case PickupActionAlias:
             return PickupAction.handle(gameObjects[0]);
+
         case CheckInventoryActionAlias:
             return CheckInventoryAction.handle(gameObjects[0]);
 
