@@ -80,7 +80,7 @@ export class StartScreen extends LitElement {
             right: 0;
             bottom: 0;
             z-index: -1;
-            background-image: url("../../public/assets/img/rooms/ROTK.png");
+            background-image: url("/assets/img/rooms/ROTK.png");
             background-size: calc(100vh - 40px) calc(100vh - 40px);
             background-repeat: no-repeat;
             background-position-x: 3%;
