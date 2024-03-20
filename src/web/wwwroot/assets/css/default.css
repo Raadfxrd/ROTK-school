@@ -45,10 +45,3 @@ start-screen {
     text-shadow: none;
     text-rendering: optimizeLegibility;
 }
-
-start-screen {
-    background-image: url("../../public/assets/img/rooms/ROTK.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    /* background-position: center; */
-}

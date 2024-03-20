@@ -52,10 +52,82 @@ export class StartScreen extends LitElement {
         }
 
         .made-by {
-            height: 40px;
+            height: 45px;
             grid-area: made-by;
             align-self: flex-end;
             text-align: center;
+        }
+
+        .start {
+            overflow: hidden;
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: calc(100vh - 40px) calc(100vh - 40px);
+            background-repeat: no-repeat;
+            background-position-x: 3%;
+            background-position-y: 100%;
+        }
+
+        .start:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background-image: url("../../public/assets/img/rooms/ROTK.png");
+            background-size: calc(100vh - 40px) calc(100vh - 40px);
+            background-repeat: no-repeat;
+            background-position-x: 3%;
+            background-position-y: 100%;
+            -webkit-animation: imgSlideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+            animation: imgSlideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+        }
+
+        @-webkit-keyframes imgSlideIn {
+            0% {
+                -webkit-transform: translateX(-1000px) scaleX(2.5) scaleY(0.2);
+                transform: translateX(-1000px) scaleX(2.5) scaleY(0.2);
+                -webkit-transform-origin: 100% 50%;
+                transform-origin: 100% 50%;
+                -webkit-filter: blur(40px);
+                filter: blur(40px);
+                opacity: 0;
+            }
+            100% {
+                -webkit-transform: translateX(0) scaleY(1) scaleX(1);
+                transform: translateX(0) scaleY(1) scaleX(1);
+                -webkit-transform-origin: 50% 50%;
+                transform-origin: 50% 50%;
+                -webkit-filter: blur(0);
+                filter: blur(0);
+                opacity: 1;
+            }
+        }
+        @keyframes imgSlideIn {
+            0% {
+                -webkit-transform: translateX(-1000px) scaleX(2.5) scaleY(0.2);
+                transform: translateX(-1000px) scaleX(2.5) scaleY(0.2);
+                -webkit-transform-origin: 100% 50%;
+                transform-origin: 100% 50%;
+                -webkit-filter: blur(40px);
+                filter: blur(40px);
+                opacity: 0;
+            }
+            100% {
+                -webkit-transform: translateX(0) scaleY(1) scaleX(1);
+                transform: translateX(0) scaleY(1) scaleX(1);
+                -webkit-transform-origin: 50% 50%;
+                transform-origin: 50% 50%;
+                -webkit-filter: blur(0);
+                filter: blur(0);
+                opacity: 1;
+            }
         }
     `;
 
