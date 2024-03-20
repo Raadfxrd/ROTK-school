@@ -16,6 +16,7 @@ import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { Drakecharacter } from "../characters/DrakeCharacter";
+import { EdwinCharacter } from "../characters/EdwinCharacter";
 import { RonaldoCharacter } from "../characters/RonaldoCharacter";
 import { Taylorcharacter } from "../characters/TaylorCharacter";
 import { getPlayerSession } from "../instances";
@@ -84,7 +85,7 @@ export class VolosVillageRoom extends Room {
             return [new RonaldoCharacter(), new Drakecharacter()];
         }
         if (playerSession.ronaldoIntro === true) {
-            return [new RonaldoCharacter(), new Taylorcharacter()];
+            return [new Taylorcharacter(), new EdwinCharacter()];
         }
         if (wentVolo === true) {
             return [new RonaldoCharacter()];
@@ -115,17 +116,13 @@ export class VolosVillageRoom extends Room {
         if (alias === NavigateNorthAlias) {
             wentGate = true;
             console.log(wentGate);
-            return new TextActionResult([
-                "There is a somewhat zasty looking fella infront of u. It appears he is the village chief",
-            ]);
+            return new TextActionResult(["There seems to be a person infront of a gate"]);
         }
         if (alias === EnterVoloAlias) {
             wentVolo = true;
             wentGate = false;
             return new TextAndImageActionResult(
-                [
-                    "The air feels cool, it makes u feel a lil zasty. U see a somewhat aerodynamic person. The name Ronaldo with a 7 is written on his back.",
-                ],
+                ["The air feels cool. U see a sad knight sitting in the village center."],
                 ["rooms/volovillage.png"]
             );
         }
