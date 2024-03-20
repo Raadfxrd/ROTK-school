@@ -31,8 +31,8 @@ export class KaraCharacter extends Character implements Examine {
         return x;
     }
 
-    public createArrayOfNumbers(start: number, end: number): Array<number> {
-        const myArray: Array<number> = [];
+    public createArrayOfNumbers(start: number, end: number): number[] {
+        const myArray: number[] = [];
 
         for (let i: number = start; i <= end; i++) {
             myArray.push(i);
@@ -40,8 +40,8 @@ export class KaraCharacter extends Character implements Examine {
         return myArray;
     }
 
-    // public numbersArray: Array<number> = this.createArrayOfNumbers(5, 7);
-    // public randomIndex: number = this.getRandomNumber(0, this.numbersArray.length - 1);
+    public numbersArray: number[] = this.createArrayOfNumbers(5, 7);
+    public randomIndex: number = this.getRandomNumber(0, this.numbersArray.length - 1);
 
     // public riddlesAnsweredArray: Array<number> = this.createArrayOfNumbers(1, 3);
     // public randomIndex2: number = this.getRandomNumber(0, this.riddlesAnsweredArray.length - 1);
