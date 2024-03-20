@@ -19,4 +19,5 @@ export type PlayerSession = {
     blessing: boolean;
     shownRing: boolean;
     shownRingBadEnding: boolean;
+    edwinHint: boolean;
 };

@@ -76,6 +76,7 @@ export function createNewPlayerSession(): PlayerSession {
         ronaldoIntro: false,
         secondMedalionHalf: false,
         leftVolo: false,
+        edwinHint: false,
     };
 }
 

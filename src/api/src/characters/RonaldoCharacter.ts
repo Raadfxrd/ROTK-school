@@ -40,7 +40,7 @@ export class RonaldoCharacter extends Character implements Examine {
                     "Yeah, he is an infamous person. We assume he does illegal trading in our village. He is also very rude.",
                     "I have no clue why Taylor likes him... He must be lying to her in some way?",
                 ],
-                [new TalkChoiceAction(5, "I see... Il try to see what he is plotting. ")]
+                [new TalkChoiceAction(4, "I see... Il try to see what he is plotting. ")]
             );
         } else if (choiceId === 2) {
             return new TalkActionResult(
@@ -70,7 +70,7 @@ export class RonaldoCharacter extends Character implements Examine {
         return "ronaldo";
     }
     public examine(): ActionResult | undefined {
-        return new TextActionResult(["There seems to be sad warrior."]);
+        return new TextActionResult(["There seems to be a sad warrior."]);
     }
     public objectActions(): string[] {
         return [ExamineActionAlias, TalkActionAlias];

@@ -36,6 +36,7 @@ export class Taylorcharacter extends Character implements Examine {
             );
         }
         if (choiceId === 3) {
+            //if statement voor gold
             playerSession.taylorlikesRonaldo = true;
             return new TextActionResult(["Deal"]);
         }

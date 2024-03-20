@@ -23,6 +23,29 @@ export class BrannCharacter extends Character implements Examine {
     }
     public talk(_choiceId?: number | undefined): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
+        if (_choiceId === 50) {
+            return new TalkActionResult(
+                this,
+                ["I do infact know about him, he sells herbs in this village."],
+                [new TalkChoiceAction(51, "Can u check those HERBS?")]
+            );
+        }
+        if (_choiceId === 51) {
+            //taylor likes ronaldo omdat Edwin crimineel is
+            return new TextActionResult([
+                "Oh lord.. These are all illegal weapons! Il report this. Thank you",
+            ]);
+        }
+        if (_choiceId === 60) {
+            if (playerSession.gold >= 15) {
+                playerSession.gold -= 15;
+                playerSession.inventory.push();
+                return new TextActionResult([
+                    "<hands over roses> There you go, no clue why u should need them but they look nice",
+                ]);
+            }
+        }
+
         if (_choiceId === 5) {
             if (playerSession.gold >= 12) {
                 playerSession.gold -= 12;
@@ -77,6 +100,7 @@ export class BrannCharacter extends Character implements Examine {
                     new TalkChoiceAction(6, "Holy bible(8G)"),
                     new TalkChoiceAction(7, "Spider eye(2G)"),
                     new TalkChoiceAction(8, "mysterious painting(6G)"), // schrijf code maake daadwerkelijke items.
+                    new TalkChoiceAction(60, "Red roses(15G)"),
                 ]
             );
         }
@@ -146,6 +170,19 @@ export class BrannCharacter extends Character implements Examine {
         }
         if (_choiceId === 15) {
             return new TextActionResult(["Fine... i dint want it anyways."]);
+        }
+        if (playerSession.edwinHint === true) {
+            return new TalkActionResult(
+                this,
+                ["Greetings Stranger, we have all the items you need."],
+                [
+                    new TalkChoiceAction(1, "What items do you sell?"),
+                    new TalkChoiceAction(2, "Ask about Ignis."),
+                    new TalkChoiceAction(3, "Show Ring to Brann"),
+                    new TalkChoiceAction(4, "Do you know where I can find a torch?"),
+                    new TalkChoiceAction(50, "Do u know about this Edwin fella?"),
+                ]
+            );
         }
 
         return new TalkActionResult(
