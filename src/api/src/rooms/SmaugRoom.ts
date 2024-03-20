@@ -5,20 +5,22 @@ import { Action } from "../base/actions/Action";
 import { CustomAction } from "../base/actions/CustomAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
-import { TalkAction } from "../base/actions/TalkAction";
+import { TalkAction, TalkActionAlias } from "../base/actions/TalkAction";
 import { PlayerSession } from "../types";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { Back, NavigateBackAlias } from "../actions/NavigateAction";
 import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./KarasValeTownSquareRoom";
 import { WolburgRoomAlias, WolburgRoom } from "./WolburgRoom";
+import { SmaugCharacter } from "../characters/SmaugCharacter";
 
-export const SmaugAlias: string = "Smaug-room";
+export const SmaugRoomAlias: string = "Smaug-room";
+
 export class SmaugRoom extends Room implements Examine {
     public objectActions(): string[] {
-        return [ExamineActionAlias];
+        return [ExamineActionAlias, TalkActionAlias];
     }
     public constructor() {
-        super(SmaugAlias);
+        super(SmaugRoomAlias);
     }
     public name(): string {
         return "Smaug Chamber";
@@ -27,7 +29,7 @@ export class SmaugRoom extends Room implements Examine {
         return ["rooms/smaug.png"];
     }
     public objects(): GameObject[] {
-        return [];
+        return [new SmaugCharacter()];
     }
     public actions(): Action[] {
         return [

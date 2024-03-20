@@ -56,7 +56,8 @@ import {
     ChainmailArmourOfTheGreatItem,
     ChainmailArmourOfTheGreatItemAlias,
 } from "./items/ChainmailArmourOfTheGreatItem";
-import { SmaugAlias, SmaugRoom } from "./rooms/SmaugRoom";
+import { SmaugRoomAlias, SmaugRoom } from "./rooms/SmaugRoom";
+import { SmaugAlias, SmaugCharacter } from "./characters/SmaugCharacter";
 
 /**
  * Create a new player session object
@@ -167,7 +168,7 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case IntroRoomAlias:
             return new IntroRoom();
-        case SmaugAlias:
+        case SmaugRoomAlias:
             return new SmaugRoom();
     }
 
@@ -299,6 +300,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case ChainmailArmourOfTheGreatItemAlias:
             return new ChainmailArmourOfTheGreatItem();
+
+        case SmaugAlias:
+            return new SmaugCharacter();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
