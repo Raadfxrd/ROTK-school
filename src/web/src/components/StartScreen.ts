@@ -15,37 +15,47 @@ export class StartScreen extends LitElement {
                 100vw - 40px
             ); /** Limiteren van display van website door viewwidth - 40px doen, zorgt voor "claustrofobische" retro vibe **/
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 1.1fr 1fr 2fr;
             grid-template-rows: 1fr 1fr 1fr;
             gap: 0px 0px;
             grid-auto-flow: row;
             grid-template-areas:
                 ". . ."
-                ". start-buttons ."
+                ". . start-buttons"
                 ". . made-by";
-            background-color: #fff;
         }
 
         .start-buttons {
             grid-area: start-buttons;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
         }
 
-        button {
-            background-color: #9988ee;
+        .button {
+            background-color: #7f68c1;
             border-radius: var(--button-radius);
             padding: var(--button-padding);
             cursor: var(--button-cursor);
             user-select: var(--button-user-select);
             display: inline-block;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             max-height: 1.5rem;
+            width: calc(25% - 10px);
+        }
+
+        .button:hover {
+            background-color: #332c57;
+            transition: background-color 0.3s;
         }
 
         .made-by {
             height: 40px;
             grid-area: made-by;
             align-self: flex-end;
-            text-align: end;
+            text-align: center;
         }
     `;
 
@@ -60,13 +70,13 @@ export class StartScreen extends LitElement {
 
     private renderButtons(): TemplateResult {
         return html`
-            <button>Start Game</button>
-            <button>How to play</button>
-            <button>Load game</button>
+            <a class="button">Start Game</a>
+            <a class="button">How to play</a>
+            <a class="button">Load game</a>
         `;
     }
 
     private renderFooter(): TemplateResult {
-        return html` <p>© 2024 - Made by: Borys, Jay, Joas, Matthijs en Salim.</p> `;
+        return html` <p>© 2024 - Made by: Borys, Jay, Joas, Matthijs and Salim.</p> `;
     }
 }
