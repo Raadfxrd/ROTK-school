@@ -76,8 +76,8 @@ export class GameCanvas extends LitElement {
             overflow: auto;
             justify-self: center;
             align-self: start;
-            grid-area: buttons;
             width: 100%;
+            grid-area: buttons;
         }
 
         .button,
@@ -241,7 +241,7 @@ export class GameCanvas extends LitElement {
 
     private renderTitle(): TemplateResult {
         if (this.roomTitle) {
-            return html` <div class="title">${this.roomTitle}</div> `;
+            return html`${this.roomTitle}`;
         }
 
         return html`${nothing}`;
@@ -249,11 +249,7 @@ export class GameCanvas extends LitElement {
 
     private renderHeader(): TemplateResult {
         if (this.roomImages && this.roomImages.length > 0) {
-            return html`
-                <div class="header">
-                    ${this.roomImages?.map((url) => html`<img src="/assets/img/${url}" />`)}
-                </div>
-            `;
+            return html` ${this.roomImages?.map((url) => html`<img src="/assets/img/${url}" />`)} `;
         }
 
         return html`${nothing}`;
@@ -265,15 +261,13 @@ export class GameCanvas extends LitElement {
 
     private renderFooter(): TemplateResult {
         return html`
-            <div class="buttons">
-                ${this.actionButtons?.map(
-                    (button) => html`<a
-                        class="button ${this.selectedActionButton === button ? "active" : ""}"
-                        @click=${(): void => void this.handleClickAction(button)}
-                        >${button.label}</a
-                    >`
-                )}
-            </div>
+            ${this.actionButtons?.map(
+                (button) => html`<a
+                    class="button ${this.selectedActionButton === button ? "active" : ""}"
+                    @click=${(): void => void this.handleClickAction(button)}
+                    >${button.label}</a
+                >`
+            )}
             ${this.selectedActionButton ? this.renderActionButtons() : nothing}
         `;
     }
