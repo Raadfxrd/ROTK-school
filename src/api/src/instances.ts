@@ -65,7 +65,7 @@ import {
 export function createNewPlayerSession(): PlayerSession {
     return {
         //Room session
-        currentRoom: "startup-room",
+        currentRoom: "intro-room",
         lastRoom: "",
 
         //Inventory session

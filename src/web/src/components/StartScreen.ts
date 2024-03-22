@@ -1,6 +1,7 @@
 // import { ActionReference, GameObjectReference, GameState } from "@shared/types";
 import { LitElement, TemplateResult, css, html } from "lit";
 import { customElement } from "lit/decorators.js";
+import { GameCanvas } from "./GameCanvas";
 // import { getState, performAction } from "../services/routeService";
 
 @customElement("start-screen")
@@ -107,6 +108,13 @@ export class StartScreen extends LitElement {
             animation: imgSlideInFromLeft 1.3s cubic-bezier(0.23, 1, 0.32, 1) both;
         }
 
+        .how-to-play {
+            background-color: #7f68c1;
+            border-radius: var(--button-radius);
+            padding: var(--button-padding);
+            cursor: var(--button-cursor);
+        }
+
         @-webkit-keyframes imgSlideInFromLeft {
             0% {
                 -webkit-transform: translateX(-1000px) scaleX(2.5) scaleY(0.2);
@@ -192,6 +200,29 @@ export class StartScreen extends LitElement {
         }
     `;
 
+    private showHowToPlay: boolean = false;
+    private howToPlayInstructions: string = "";
+
+    public startGame(): void {
+        console.log("game started");
+
+        // Create a new instance of GameCanvas
+        const gameCanvas: GameCanvas = document.createElement("game-canvas") as GameCanvas;
+
+        // Append the gameCanvas to the body or any other container where you want the game to load
+        document.body.appendChild(gameCanvas);
+    }
+
+    public howToPlay(): void {
+        this.showHowToPlay = true;
+        this.howToPlayInstructions = "Here are the instructions on how to play the game...";
+        this.requestUpdate();
+    }
+
+    public loadGame(): void {
+        console.log("load game");
+    }
+
     public render(): TemplateResult {
         return html`
             <div class="start">
@@ -203,10 +234,15 @@ export class StartScreen extends LitElement {
 
     private renderButtons(): TemplateResult {
         return html`
-            <a class="button">Start Game</a>
-            <a class="button">How to play</a>
-            <a class="button">Load game</a>
+            <a @click=${this.startGame} class="button">Start game</a>
+            <a @click=${this.howToPlay} class="button">How to play</a>
+            ${this.showHowToPlay ? this.renderHowToPlay() : ""}
+            <a @click=${this.loadGame} class="button">Load game</a>
         `;
+    }
+
+    private renderHowToPlay(): TemplateResult {
+        return html` <p>${this.howToPlayInstructions}</p> `;
     }
 
     private renderFooter(): TemplateResult {
