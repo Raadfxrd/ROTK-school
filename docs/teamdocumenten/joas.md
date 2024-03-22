@@ -40,3 +40,33 @@ UseItemAction volgt de standaard procedure van acties, er zit een handle functie
 NavigateAction:
 
 NavigateAction gebruikt geen handle functie omdat het een actie is die niet op gameobjects uitgevoerd wordt. In plaats daarvan is de actie gemaakt om knoppen aan te kunnen maken die de naam van de bestemming kunnen hebben.
+
+# Verzamelen/ identificeren van requirements
+
+-   Characters moeten nadat ze hun nut hebben gehad de speler bij zichzelf wegsturen zodat de speler weet dat ze hier klaar zijn
+-   Characters moeten meerdere branches van dialoog hebben
+-   Characters moeten geëxamined kunnen worden
+-   Characters kunnen de spelers een item geven
+-   Characters kunnen spelers informatie geven over de wereld, om het spel meer levendig te maken.
+
+## MoSCoW
+
+**MustHave**
+
+-   Characters moeten meerdere branches van dialoog hebben
+-   Characters moeten geëxamined kunnen worden
+
+**ShouldHave**
+
+-   Characters moeten nadat ze hun nut hebben gehad de speler bij zichzelf wegsturen zodat de speler weet dat ze hier klaar zijn
+
+**CouldHave**
+
+-   Characters kunnen de spelers een item geven
+-   Characters kunnen spelers informatie geven over de wereld, om het spel meer levendig te maken.
+
+**WontHave**
+
+# User story:
+
+Ik wil op meerdere characters meerdere dialoog opties hebben in Kara's Vale
