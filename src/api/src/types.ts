@@ -25,4 +25,5 @@ export type PlayerSession = {
     shownRingBadEnding: boolean;
     inStables: boolean;
     inGate: boolean;
+    death: boolean;
 };

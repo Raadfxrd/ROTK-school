@@ -58,6 +58,7 @@ import {
 } from "./items/ChainmailArmourOfTheGreatItem";
 import { SmaugRoomAlias, SmaugRoom } from "./rooms/SmaugRoom";
 import { SmaugAlias, SmaugCharacter } from "./characters/SmaugCharacter";
+import { DeathAlias, deathRoom } from "./rooms/Deathroom";
 
 /**
  * Create a new player session object
@@ -67,7 +68,7 @@ import { SmaugAlias, SmaugCharacter } from "./characters/SmaugCharacter";
 export function createNewPlayerSession(): PlayerSession {
     return {
         //Room session
-        currentRoom: "Smaug-room",
+        currentRoom: "startup-room",
         lastRoom: "",
 
         //Inventory session
@@ -93,6 +94,7 @@ export function createNewPlayerSession(): PlayerSession {
         leftVolo: false,
         inStables: false,
         inGate: false,
+        death: false,
 
         //Missions
         knowLocationLowlands: false,
@@ -170,6 +172,8 @@ export function getRoomByAlias(alias: string): Room | undefined {
             return new IntroRoom();
         case SmaugRoomAlias:
             return new SmaugRoom();
+        case DeathAlias:
+            return new deathRoom();
     }
 
     return undefined;
