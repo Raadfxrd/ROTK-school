@@ -6,7 +6,9 @@ import { CustomAction } from "../base/actions/CustomAction";
 import { ExamineActionAlias } from "../base/actions/ExamineAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
-import { resetPlayerSession } from "../instances";
+import { getPlayerSession } from "../instances";
+import { SmaugRoom } from "./SmaugRoom";
+import { StartupRoom } from "./StartupRoom";
 
 export const DeathAlias: string = "death-room";
 export class deathRoom extends Room {
@@ -33,7 +35,12 @@ export class deathRoom extends Room {
     }
     public custom(alias: string, _gameObjects: GameObject[] | undefined): ActionResult | undefined {
         if (alias === "RestartAlias") {
-            resetPlayerSession();
+            // const playerSession: PlayerSession = getPlayerSession();
+            const lastroom: SmaugRoom = new SmaugRoom();
+            const room: StartupRoom = new StartupRoom();
+            getPlayerSession().lastRoom = lastroom.alias;
+            getPlayerSession().currentRoom = room.alias;
+            return room.examine;
         }
         return undefined;
     }
