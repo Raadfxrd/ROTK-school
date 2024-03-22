@@ -3,18 +3,20 @@ import { Action } from "../base/actions/Action";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { implementsInterface, castTo } from "../base/helpers";
 
-export const AttackActionAlias: string = "attack-action";
+export const NavigationActionAlias: string = "navigation-action";
 
-export interface Attack {
-    Attack(): ActionResult | undefined;
+export interface Navigation {
+    navigation(): ActionResult | undefined;
 }
-export class AttackAction extends Action {
+
+export class NavigationAction extends Action {
     public constructor() {
-        super(AttackActionAlias, "Attack", false);
+        super(NavigationActionAlias, "Navigate", true);
     }
+
     public static handle(gameObject: GameObject): ActionResult | undefined {
-        if (implementsInterface(gameObject, AttackActionAlias)) {
-            return castTo<Attack>(gameObject).Attack();
+        if (implementsInterface(gameObject, NavigationActionAlias)) {
+            return castTo<Navigation>(gameObject).navigation();
         }
 
         return undefined;
