@@ -67,7 +67,7 @@ import { SmaugAlias, SmaugCharacter } from "./characters/SmaugCharacter";
 export function createNewPlayerSession(): PlayerSession {
     return {
         //Room session
-        currentRoom: "Smaug-room",
+        currentRoom: "intro-room",
         lastRoom: "",
 
         //Inventory session
