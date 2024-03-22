@@ -25,8 +25,7 @@ export class RonaldoCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "How do u know?... Well it doesn't matter, i long for this girl named Taylor. For some reason she doesnt see me standing anymore... She took an interest in Edwin! From all people... ",
-                    "If u can help me in any way, then i shall see what i can do for u",
+                    "How do u know?... Well it doesn't matter, i long for this girl named Taylor. For some reason she doesnt see me standing anymore... She took an interest in Edwin! From all people... If u can help me in any way, then i shall see what i can do for u",
                 ],
                 [
                     new TalkChoiceAction(2, "Let me see what i can do for you. Do u know what Taylor likes?"),

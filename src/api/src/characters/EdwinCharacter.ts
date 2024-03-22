@@ -9,17 +9,17 @@ export const EdwinCharacterAlias: string = "edwin";
 
 export class EdwinCharacter extends Character implements Examine {
     public constructor() {
-        super(ExamineActionAlias);
+        super(EdwinCharacterAlias, ExamineActionAlias);
     }
-    public talk(choiceId?: number | undefined): ActionResult | undefined {
-        if (choiceId === 1) {
+    public talk(_choiceId?: number | undefined): ActionResult | undefined {
+        if (_choiceId === 1) {
             //boolean voor leugen
             new TalkActionResult(
                 this,
                 ["Ah it was easy!, I just tell her a bunch of lies about hero story's"],
                 [new TalkChoiceAction(3, "Ah u a sneaky one haha.")]
             );
-        } else if (choiceId === 2) {
+        } else if (_choiceId === 2) {
             //boolean voor shop dialouge voor illegale documenten
             new TalkActionResult(
                 this,
@@ -38,6 +38,7 @@ export class EdwinCharacter extends Character implements Examine {
             ]
         );
     }
+
     public name(): string {
         return "Edwin";
     }
