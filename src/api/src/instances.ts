@@ -60,6 +60,8 @@ import { SteelSwordItem, SteelSwordItemAlias } from "./items/SteelSwordItem";
 import { SwordOfGoodFortuneItem, SwordOfGoodFortuneItemAlias } from "./items/SwordOfGoodFortuneItem";
 import { SmaugRoomAlias, SmaugRoom } from "./rooms/SmaugRoom";
 import { SmaugAlias, SmaugCharacter } from "./characters/SmaugCharacter";
+import { StablesWolburgRoom, StablesWolburgRoomAlias } from "./rooms/StablesWolburgRoom";
+import { GateWolburgRoom, GateWolburgRoomAlias } from "./rooms/GateWolburgRoom";
 
 /**
  * Create a new player session object
@@ -174,8 +176,15 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case IntroRoomAlias:
             return new IntroRoom();
+
         case SmaugRoomAlias:
             return new SmaugRoom();
+
+        case StablesWolburgRoomAlias:
+            return new StablesWolburgRoom();
+
+        case GateWolburgRoomAlias:
+            return new GateWolburgRoom();
     }
 
     return undefined;

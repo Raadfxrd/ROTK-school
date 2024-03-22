@@ -21,7 +21,7 @@ export class BlackSmithRoom extends Room {
     public objectActions(): string[] {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.currentRoom === BlacksmithAlias) {
-            return [ExamineActionAlias, PickupActionAlias, NavigationActionAlias];
+            return [ExamineActionAlias, PickupActionAlias];
         }
         return [NavigationActionAlias];
     }

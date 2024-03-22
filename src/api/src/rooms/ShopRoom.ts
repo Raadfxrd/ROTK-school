@@ -26,7 +26,7 @@ export class ShopRoom extends Room implements Navigation {
     public objectActions(): string[] {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.currentRoom === ShopAlias) {
-            return [ExamineActionAlias, PickupActionAlias, NavigationActionAlias];
+            return [ExamineActionAlias, PickupActionAlias];
         }
         return [NavigationActionAlias];
     }

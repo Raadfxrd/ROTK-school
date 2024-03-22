@@ -72,7 +72,7 @@ export class ChurchWolburgRoom extends Room implements Examine {
     public objectActions(): string[] {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.currentRoom === ChurchWolburgRoomAlias) {
-            return [ExamineActionAlias, NavigationActionAlias];
+            return [ExamineActionAlias];
         }
         return [NavigationActionAlias];
     }

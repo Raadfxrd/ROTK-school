@@ -17,6 +17,7 @@ import { BlackSmithRoom } from "./BlacksmithRoom";
 import { ChurchWolburgRoom } from "./ChurchWolburgRoom";
 import { KarasValeTownSquareRoom } from "./KarasValeTownSquareRoom";
 import { ShopRoom } from "./ShopRoom";
+import { StablesWolburgRoom } from "./StablesWolburgRoom";
 import { ThroneRoom } from "./ThroneRoom";
 
 export const WolburgRoomAlias: string = "wolburg-room";
@@ -99,8 +100,9 @@ export class WolburgRoom extends Room {
             ...getGameObjectsFromInventory(),
             new AlexandraCharacter(),
             new RichardCharacter(),
-            new ShopRoom(),
             new ChurchWolburgRoom(),
+            new StablesWolburgRoom(),
+            new ShopRoom(),
             new BlackSmithRoom(),
         ];
     }
