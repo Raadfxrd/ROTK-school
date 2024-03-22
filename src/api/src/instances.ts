@@ -70,7 +70,7 @@ import { DeathAlias, deathRoom } from "./rooms/Deathroom";
 export function createNewPlayerSession(): PlayerSession {
     return {
         //Room session
-        currentRoom: "intro-room",
+        currentRoom: "Smaug-room",
         lastRoom: "",
         inCombat: false,
 
