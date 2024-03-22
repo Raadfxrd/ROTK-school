@@ -77,6 +77,7 @@ export function createNewPlayerSession(): PlayerSession {
         secondMedalionHalf: false,
         leftVolo: false,
         edwinHint: false,
+        edwinBusted: false,
     };
 }
 

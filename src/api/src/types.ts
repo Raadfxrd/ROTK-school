@@ -20,4 +20,5 @@ export type PlayerSession = {
     shownRing: boolean;
     shownRingBadEnding: boolean;
     edwinHint: boolean;
+    edwinBusted: boolean;
 };

@@ -31,7 +31,8 @@ export class BrannCharacter extends Character implements Examine {
             );
         }
         if (_choiceId === 51) {
-            //taylor likes ronaldo omdat Edwin crimineel is
+            //Brann wordt opgepakt--ending :)
+            playerSession.edwinBusted = true;
             return new TextActionResult([
                 "Oh lord.. These are all illegal weapons! Il report this. Thank you",
             ]);

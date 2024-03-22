@@ -15,6 +15,7 @@ import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction
 import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
+import { BrannCharacter } from "../characters/BrannCharacter";
 import { Drakecharacter } from "../characters/DrakeCharacter";
 import { EdwinCharacter } from "../characters/EdwinCharacter";
 import { RonaldoCharacter } from "../characters/RonaldoCharacter";
@@ -82,13 +83,13 @@ export class VolosVillageRoom extends Room {
             return [new secondMedalionHalfItem()];
         }
         if (playerSession.taylorlikesRonaldo === true) {
-            return [new RonaldoCharacter(), new Drakecharacter()];
+            return [new RonaldoCharacter(), new Drakecharacter(), new BrannCharacter()];
         }
         if (playerSession.ronaldoIntro === true) {
-            return [new Taylorcharacter(), new EdwinCharacter()];
+            return [new Taylorcharacter(), new EdwinCharacter(), new BrannCharacter()];
         }
         if (wentVolo === true) {
-            return [new RonaldoCharacter()];
+            return [new RonaldoCharacter(), new BrannCharacter()];
         }
         return [new Drakecharacter()];
     }
