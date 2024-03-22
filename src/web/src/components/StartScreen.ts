@@ -1,8 +1,7 @@
-// import { ActionReference, GameObjectReference, GameState } from "@shared/types";
 import { LitElement, TemplateResult, css, html } from "lit";
 import { customElement } from "lit/decorators.js";
 import { GameCanvas } from "./GameCanvas";
-// import { getState, performAction } from "../services/routeService";
+// import { playerSessionMiddleware } from "../../../api/src/base/playerSessionMiddleware";
 
 @customElement("start-screen")
 export class StartScreen extends LitElement {
@@ -58,7 +57,7 @@ export class StartScreen extends LitElement {
             display: inline-block;
             margin-bottom: 20px;
             max-height: 1.5rem;
-            width: calc(25% - 10px);
+            width: calc(30% - 10px);
         }
 
         .button:hover {
@@ -206,10 +205,19 @@ export class StartScreen extends LitElement {
     public startGame(): void {
         console.log("game started");
 
-        // Create a new instance of GameCanvas
+        // // // Prompt the user for a session name
+        // const sessionName: any = window.prompt("Enter a session name");
+
+        // // // Create a new player session with the provided name
+        // playerSessionMiddleware(sessionName, () => {
+        //     // Here you can initialize the session object
+        //     return {};
+        // });
+
+        // Create a new instance of the game-canvas
         const gameCanvas: GameCanvas = document.createElement("game-canvas") as GameCanvas;
 
-        // Append the gameCanvas to the body or any other container where you want the game to load
+        // Add the game-canvas to the body of the page
         document.body.appendChild(gameCanvas);
 
         this.remove();
@@ -236,7 +244,7 @@ export class StartScreen extends LitElement {
 
     private renderButtons(): TemplateResult {
         return html`
-            <a @click=${this.startGame} class="button">Start game</a>
+            <a @click=${this.startGame} class="button">Start new game</a>
             <a @click=${this.howToPlay} class="button">How to play</a>
             ${this.showHowToPlay ? this.renderHowToPlay() : ""}
             <a @click=${this.loadGame} class="button">Load game</a>
@@ -248,6 +256,6 @@ export class StartScreen extends LitElement {
     }
 
     private renderFooter(): TemplateResult {
-        return html` <p>© 2024 - Made by: Borys, Jay, Joas, Matthijs and Salim.</p> `;
+        return html` <p>© 2024 - Made by: Borys, Jay, Joas, Mathijs and Salim.</p> `;
     }
 }
