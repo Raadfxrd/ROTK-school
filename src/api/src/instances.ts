@@ -85,7 +85,9 @@ export function createNewPlayerSession(): PlayerSession {
         inGate: false,
         hasWhistle: false,
         riddlesAnswered: [],
-        allRiddles: [],
+        correctAnswers: [],
+        wrongAnswers: [],
+        allRiddles: [5, 6, 7],
     };
 }
 

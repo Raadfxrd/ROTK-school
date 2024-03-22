@@ -24,5 +24,7 @@ export type PlayerSession = {
     inStables: boolean;
     inGate: boolean;
     riddlesAnswered: string[];
-    allRiddles: string[];
+    allRiddles: number[];
+    correctAnswers: string[];
+    wrongAnswers: string[];
 };
