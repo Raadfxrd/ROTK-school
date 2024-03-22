@@ -6,6 +6,7 @@ import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
 import { RingItemAlias } from "../items/RingItem";
+import { SwordOfGoodFortuneItemAlias } from "../items/SwordOfGoodFortuneItem";
 import { PlayerSession } from "../types";
 
 export const CharlesAlias: string = "Charles-character";
@@ -57,6 +58,10 @@ export class CharlesCharacter extends Character implements Examine {
                 "I wish you and Alexandra good fortune, go save that princess.",
             ]);
         } else if (_choiceId === 6) {
+            const playerSession: PlayerSession = getPlayerSession();
+
+            playerSession.inventory.push(SwordOfGoodFortuneItemAlias);
+
             return new TextActionResult([
                 "Charles: I can give you this sword i have, I don't use it because I am a wizard of course.",
                 "Take good care of it and use it wisely.",

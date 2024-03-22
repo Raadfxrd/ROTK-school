@@ -56,6 +56,8 @@ import {
     ChainmailArmourOfTheGreatItem,
     ChainmailArmourOfTheGreatItemAlias,
 } from "./items/ChainmailArmourOfTheGreatItem";
+import { SteelSwordItem, SteelSwordItemAlias } from "./items/SteelSwordItem";
+import { SwordOfGoodFortuneItem, SwordOfGoodFortuneItemAlias } from "./items/SwordOfGoodFortuneItem";
 import { SmaugRoomAlias, SmaugRoom } from "./rooms/SmaugRoom";
 import { SmaugAlias, SmaugCharacter } from "./characters/SmaugCharacter";
 
@@ -69,13 +71,17 @@ export function createNewPlayerSession(): PlayerSession {
         //Room session
         currentRoom: "intro-room",
         lastRoom: "",
+        inCombat: false,
 
         //Inventory session
         inventory: [],
         equipment: [],
         gold: 0,
+
+        //Stats
         healthPoints: 100,
         armourClass: 12,
+        strength: 14,
 
         //Booleans
         knowWhereMapIs: false,
@@ -300,6 +306,12 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case ChainmailArmourOfTheGreatItemAlias:
             return new ChainmailArmourOfTheGreatItem();
+
+        case SteelSwordItemAlias:
+            return new SteelSwordItem();
+
+        case SwordOfGoodFortuneItemAlias:
+            return new SwordOfGoodFortuneItem();
 
         case SmaugAlias:
             return new SmaugCharacter();
