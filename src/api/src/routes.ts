@@ -23,6 +23,8 @@ import { PickupAction, PickupActionAlias } from "./actions/PickupAction";
 import { CheckInventoryActionAlias } from "./actions/CheckInventoryAction";
 import { CheckInventoryAction } from "./actions/CheckInventoryAction";
 import { UseItemActionAlias, useItemAction } from "./actions/UseItemAction";
+import { AttackAction, AttackActionAlias } from "./actions/AttackAction";
+import { NavigationAction, NavigationActionAlias } from "./actions/NavigationAction";
 
 export const router: Router = Router();
 
@@ -132,6 +134,12 @@ function handleActionInRoom(room: Room, alias: string, objectAliases?: string[])
 
         case UseItemActionAlias:
             return useItemAction.handle(gameObjects[0]);
+
+        case AttackActionAlias:
+            return AttackAction.handle(gameObjects[0]);
+
+        case NavigationActionAlias:
+            return NavigationAction.handle(gameObjects[0]);
     }
 
     return CustomAction.handle(alias, gameObjects);

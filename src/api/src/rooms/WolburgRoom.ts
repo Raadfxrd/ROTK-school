@@ -1,9 +1,5 @@
-import {
-    NavigateBlacksmithAlias,
-    NavigateShopRoomAlias,
-    NavigationBlacksmith,
-    NavigationShop,
-} from "../actions/NavigateAction";
+import { NavigateBlacksmithAlias, NavigateShopRoomAlias } from "../actions/NavigateAction";
+import { NavigationAction } from "../actions/NavigationAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
@@ -64,11 +60,7 @@ export class WolburgRoom extends Room {
             new ExamineAction(),
             new TalkAction(),
             new CustomAction("inventory", "Inventory", false),
-            new CustomAction("stablesAlias", "Stables", false),
-            new CustomAction("church", "Church", false),
-            new NavigationBlacksmith(),
-            new NavigationShop(),
-            new CustomAction("back-throneroom", "Back", false),
+            new NavigationAction(),
         ];
     }
 
@@ -102,7 +94,15 @@ export class WolburgRoom extends Room {
         if (playerSession.inGate === true) {
             return [this, ...getGameObjectsFromInventory(), new AlexandraCharacter()];
         }
-        return [this, ...getGameObjectsFromInventory(), new AlexandraCharacter(), new RichardCharacter()];
+        return [
+            this,
+            ...getGameObjectsFromInventory(),
+            new AlexandraCharacter(),
+            new RichardCharacter(),
+            new ShopRoom(),
+            new ChurchWolburgRoom(),
+            new BlackSmithRoom(),
+        ];
     }
 
     public custom(alias: string, _gameObjects?: GameObject[]): ActionResult | undefined {
