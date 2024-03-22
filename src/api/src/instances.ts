@@ -60,6 +60,7 @@ import { SteelSwordItem, SteelSwordItemAlias } from "./items/SteelSwordItem";
 import { SwordOfGoodFortuneItem, SwordOfGoodFortuneItemAlias } from "./items/SwordOfGoodFortuneItem";
 import { SmaugRoomAlias, SmaugRoom } from "./rooms/SmaugRoom";
 import { SmaugAlias, SmaugCharacter } from "./characters/SmaugCharacter";
+import { DeathAlias, deathRoom } from "./rooms/Deathroom";
 import { StablesWolburgRoom, StablesWolburgRoomAlias } from "./rooms/StablesWolburgRoom";
 import { GateWolburgRoom, GateWolburgRoomAlias } from "./rooms/GateWolburgRoom";
 
@@ -101,6 +102,7 @@ export function createNewPlayerSession(): PlayerSession {
         leftVolo: false,
         inStables: false,
         inGate: false,
+        death: false,
 
         //Missions
         knowLocationLowlands: false,
@@ -179,6 +181,8 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case SmaugRoomAlias:
             return new SmaugRoom();
+        case DeathAlias:
+            return new deathRoom();
 
         case StablesWolburgRoomAlias:
             return new StablesWolburgRoom();
