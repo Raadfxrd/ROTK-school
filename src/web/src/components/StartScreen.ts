@@ -211,6 +211,8 @@ export class StartScreen extends LitElement {
 
         // Append the gameCanvas to the body or any other container where you want the game to load
         document.body.appendChild(gameCanvas);
+
+        this.remove();
     }
 
     public howToPlay(): void {
