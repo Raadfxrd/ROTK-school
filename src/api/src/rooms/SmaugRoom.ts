@@ -12,6 +12,7 @@ import { Back, NavigateBackAlias } from "../actions/NavigateAction";
 import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./KarasValeTownSquareRoom";
 import { WolburgRoomAlias, WolburgRoom } from "./WolburgRoom";
 import { SmaugCharacter } from "../characters/SmaugCharacter";
+import { princessCharacter } from "../characters/princessCharacter";
 
 export const SmaugRoomAlias: string = "Smaug-room";
 
@@ -20,7 +21,7 @@ export class SmaugRoom extends Room implements Examine {
         return [ExamineActionAlias, TalkActionAlias];
     }
     public constructor() {
-        super(SmaugRoomAlias);
+        super(SmaugRoomAlias, ExamineActionAlias);
     }
     public name(): string {
         return "Smaug Chamber";
@@ -29,7 +30,7 @@ export class SmaugRoom extends Room implements Examine {
         return ["rooms/smaug.png"];
     }
     public objects(): GameObject[] {
-        return [new SmaugCharacter()];
+        return [new SmaugCharacter(), new princessCharacter()];
     }
     public actions(): Action[] {
         return [
@@ -44,6 +45,11 @@ export class SmaugRoom extends Room implements Examine {
     }
 
     public custom(alias: string, _gameObjects?: GameObject[] | undefined): ActionResult | undefined {
+        const playerSession: PlayerSession = getPlayerSession();
+        if (playerSession.strength >= 14) {
+            if (alias === "Kill") {
+            }
+        }
         if (alias === "CheckInventoryAlias") {
             const playerSession: PlayerSession = getPlayerSession();
             const gameobject: GameObject[] = getGameObjectsFromInventory();
