@@ -228,7 +228,7 @@ export class StartScreen extends LitElement {
 
     private showHowToPlay: boolean = false;
 
-    public startGame(): void {
+    private startGame(): void {
         console.log("game started");
 
         // Create a new instance of the game-canvas
@@ -240,12 +240,12 @@ export class StartScreen extends LitElement {
         this.remove();
     }
 
-    public howToPlay(): void {
+    private howToPlay(): void {
         this.showHowToPlay = true;
         this.requestUpdate();
     }
 
-    public loadGame(): void {
+    private loadGame(): void {
         console.log("load game");
     }
 
@@ -268,7 +268,7 @@ export class StartScreen extends LitElement {
         `;
     }
 
-    public backToStart(): void {
+    private backToStart(): void {
         this.showHowToPlay = false;
         this.requestUpdate();
     }

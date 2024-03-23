@@ -192,6 +192,9 @@ export class GameCanvas extends LitElement {
         this.selectedActionButton = undefined;
         this.selectedGameObjectButtons.clear();
 
+        if (state.text) {
+            this.typewriter(state.text);
+        }
         this.requestUpdate();
     }
 
@@ -232,6 +235,19 @@ export class GameCanvas extends LitElement {
         }
 
         this.requestUpdate();
+    }
+
+    private typewriter(text: string[], index: number = 0, charIndex: number = 0, speed: number = 20): void {
+        if (index < text.length) {
+            const line: string = text[index];
+            if (charIndex < line.length) {
+                this.contentText = [...text.slice(0, index), line.substr(0, charIndex + 1)];
+                this.requestUpdate();
+                setTimeout(() => this.typewriter(text, index, charIndex + 1, speed), speed);
+            } else {
+                setTimeout(() => this.typewriter(text, index + 1, 0, speed), speed);
+            }
+        }
     }
 
     protected render(): TemplateResult {
