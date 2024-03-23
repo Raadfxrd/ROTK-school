@@ -61,6 +61,7 @@ import { SwordOfGoodFortuneItem, SwordOfGoodFortuneItemAlias } from "./items/Swo
 import { SmaugRoomAlias, SmaugRoom } from "./rooms/SmaugRoom";
 import { SmaugAlias, SmaugCharacter } from "./characters/SmaugCharacter";
 import { DeathAlias, deathRoom } from "./rooms/Deathroom";
+import { princessAlias, princessCharacter } from "./characters/princessCharacter";
 import { StablesWolburgRoom, StablesWolburgRoomAlias } from "./rooms/StablesWolburgRoom";
 import { GateWolburgRoom, GateWolburgRoomAlias } from "./rooms/GateWolburgRoom";
 
@@ -72,7 +73,7 @@ import { GateWolburgRoom, GateWolburgRoomAlias } from "./rooms/GateWolburgRoom";
 export function createNewPlayerSession(): PlayerSession {
     return {
         //Room session
-        currentRoom: "intro-room",
+        currentRoom: "Smaug-room",
         lastRoom: "",
         inCombat: false,
 
@@ -328,6 +329,8 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case SmaugAlias:
             return new SmaugCharacter();
+        case princessAlias:
+            return new princessCharacter();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
