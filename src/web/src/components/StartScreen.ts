@@ -18,13 +18,7 @@ export class StartScreen extends LitElement {
             grid-template-columns: 1.1fr 1fr 2.4fr;
             grid-template-rows: 1fr 1fr 1fr;
             gap: 0px 0px;
-            grid-auto-flow: row;
-            grid-template-areas:
-                ". . ."
-                ". . start-buttons"
-                ". . made-by";
         }
-
         .start-buttons {
             overflow: hidden;
             content: "";
@@ -33,12 +27,12 @@ export class StartScreen extends LitElement {
             left: 0;
             right: 0;
             bottom: 0;
-            grid-area: start-buttons;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             text-align: center;
+            grid-area: 2 / 3 / 3 / 3;
         }
 
         .start-buttons {
@@ -60,9 +54,22 @@ export class StartScreen extends LitElement {
             width: calc(30% - 10px);
         }
 
-        .button:hover {
+        .button:hover,
+        .back-button:hover {
             background-color: #332c57;
             transition: background-color 0.3s;
+        }
+
+        .back-button {
+            background-color: #7f68c1;
+            border-radius: var(--button-radius);
+            padding: var(--button-padding);
+            cursor: var(--button-cursor);
+            user-select: var(--button-user-select);
+            display: inline-block;
+            margin-top: 20px;
+            position: absolute;
+            bottom: 20px;
         }
 
         .made-by {
@@ -70,10 +77,10 @@ export class StartScreen extends LitElement {
             content: "";
             -webkit-animation: imgSlideInFromRight 1.3s cubic-bezier(0.23, 1, 0.32, 1) both;
             animation: imgSlideInFromRight 1.3s cubic-bezier(0.23, 1, 0.32, 1) both;
-            height: calc(11vh - 40px);
-            grid-area: made-by;
+            height: calc(11vh - 50px);
             align-self: flex-end;
             text-align: center;
+            grid-area: 3 / 3 / 4 / 4;
         }
 
         .start {
@@ -112,6 +119,26 @@ export class StartScreen extends LitElement {
             border-radius: var(--button-radius);
             padding: var(--button-padding);
             cursor: var(--button-cursor);
+        }
+
+        .instructions-sidebar {
+            border: 2px solid #c0c0c0;
+            background-color: #000;
+            padding: 20px;
+            color: #fff;
+            font-size: 1.8rem;
+            letter-spacing: -2px;
+            line-height: 1;
+            grid-area: 1 / 3 / 4 / 4;
+            display: flex;
+            flex-direction: column;
+            justify-self: end;
+            width: 50%;
+            /* Subtract the height of the .made-by box and any additional space you want to leave */
+            height: calc(100vh - (11vh - 40px) - 60px);
+            margin-bottom: calc(100vh - (11vh - 40px));
+            -webkit-animation: imgSlideInFromRight 1.3s cubic-bezier(0.23, 1, 0.32, 1) both;
+            animation: imgSlideInFromRight 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
         }
 
         @-webkit-keyframes imgSlideInFromLeft {
@@ -200,19 +227,9 @@ export class StartScreen extends LitElement {
     `;
 
     private showHowToPlay: boolean = false;
-    private howToPlayInstructions: string = "";
 
     public startGame(): void {
         console.log("game started");
-
-        // // // Prompt the user for a session name
-        // const sessionName: any = window.prompt("Enter a session name");
-
-        // // // Create a new player session with the provided name
-        // playerSessionMiddleware(sessionName, () => {
-        //     // Here you can initialize the session object
-        //     return {};
-        // });
 
         // Create a new instance of the game-canvas
         const gameCanvas: GameCanvas = document.createElement("game-canvas") as GameCanvas;
@@ -225,7 +242,6 @@ export class StartScreen extends LitElement {
 
     public howToPlay(): void {
         this.showHowToPlay = true;
-        this.howToPlayInstructions = "Here are the instructions on how to play the game...";
         this.requestUpdate();
     }
 
@@ -233,10 +249,10 @@ export class StartScreen extends LitElement {
         console.log("load game");
     }
 
-    public render(): TemplateResult {
+    protected render(): TemplateResult {
         return html`
             <div class="start">
-                <div class="start-buttons">${this.renderButtons()}</div>
+                ${this.showHowToPlay ? this.renderInstructionsSidebar() : this.renderButtons()}
                 <div class="made-by">${this.renderFooter()}</div>
             </div>
         `;
@@ -244,15 +260,36 @@ export class StartScreen extends LitElement {
 
     private renderButtons(): TemplateResult {
         return html`
-            <a @click=${this.startGame} class="button">Start new game</a>
-            <a @click=${this.howToPlay} class="button">How to play</a>
-            ${this.showHowToPlay ? this.renderHowToPlay() : ""}
-            <a @click=${this.loadGame} class="button">Load game</a>
+            <div class="start-buttons">
+                <a @click=${this.startGame} class="button">Start new game</a>
+                ${!this.showHowToPlay ? html`<a @click=${this.howToPlay} class="button">How to play</a>` : ""}
+                <a @click=${this.loadGame} class="button">Load game</a>
+            </div>
         `;
     }
 
-    private renderHowToPlay(): TemplateResult {
-        return html` <p>${this.howToPlayInstructions}</p> `;
+    public backToStart(): void {
+        this.showHowToPlay = false;
+        this.requestUpdate();
+    }
+
+    private renderInstructionsSidebar(): TemplateResult {
+        return html`
+            <div class="instructions-sidebar">
+                <p>Here are the instructions on how to play our game:</p>
+                <ul>
+                    <li>The story will be presented at the right of your screen. Just like in this box!</li>
+                    <li>Use the buttons to navigate through the story and make choices.</li>
+                    <li>
+                        Explore the world and interact with objects to progress. Trust me, it will be worth it
+                        in the end!
+                    </li>
+                    <li>Make sure to keep an eye on your health bar, you don't want to die!</li>
+                    <li>Good luck and have fun!</li>
+                </ul>
+                <a @click=${this.backToStart} class=" back-button">Back</a>
+            </div>
+        `;
     }
 
     private renderFooter(): TemplateResult {
