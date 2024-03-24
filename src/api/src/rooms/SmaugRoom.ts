@@ -15,6 +15,7 @@ import { SmaugCharacter } from "../characters/SmaugCharacter";
 import { princessCharacter } from "../characters/princessCharacter";
 
 export const SmaugRoomAlias: string = "Smaug-room";
+let image: string = "rooms/smaug.png";
 
 export class SmaugRoom extends Room implements Examine {
     public objectActions(): string[] {
@@ -27,7 +28,7 @@ export class SmaugRoom extends Room implements Examine {
         return "Smaug Chamber";
     }
     public images(): string[] {
-        return ["rooms/smaug.png"];
+        return [image];
     }
     public objects(): GameObject[] {
         return [new SmaugCharacter(), new princessCharacter()];
@@ -35,6 +36,7 @@ export class SmaugRoom extends Room implements Examine {
     public actions(): Action[] {
         return [
             new CustomAction("CheckInventoryAlias", "Check Inventory", false),
+            new CustomAction("killSmaug", "Kill Smaug", false),
             new TalkAction(),
             new Back(),
             new ExamineAction(),
@@ -48,6 +50,7 @@ export class SmaugRoom extends Room implements Examine {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.strength >= 14) {
             if (alias === "Kill") {
+                image = "";
             }
         }
         if (alias === "CheckInventoryAlias") {
