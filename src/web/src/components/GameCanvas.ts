@@ -112,6 +112,7 @@ export class GameCanvas extends LitElement {
             padding: var(--button-padding);
             cursor: var(--button-cursor);
             user-select: var(--button-user-select);
+            width: 100%;
         }
 
         .action-button {
