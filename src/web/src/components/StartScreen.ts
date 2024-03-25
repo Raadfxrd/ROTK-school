@@ -10,9 +10,7 @@ export class StartScreen extends LitElement {
             height: calc(
                 100vh - 40px
             ); /** Limiteren van display van website door viewheight - 40px doen, zorgt voor "claustrofobische" retro vibe **/
-            width: calc(
-                100vw - 40px
-            ); /** Limiteren van display van website door viewwidth - 40px doen, zorgt voor "claustrofobische" retro vibe **/
+            width: calc(100% - 20px);
             display: grid;
             grid-template-columns: 1.1fr 1fr 2.4fr;
             grid-template-rows: 1fr 1fr 1fr;
