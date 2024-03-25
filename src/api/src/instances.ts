@@ -73,7 +73,7 @@ import { GateWolburgRoom, GateWolburgRoomAlias } from "./rooms/GateWolburgRoom";
 export function createNewPlayerSession(): PlayerSession {
     return {
         //Room session
-        currentRoom: "Smaug-room",
+        currentRoom: "intro-room",
         lastRoom: "",
         inCombat: false,
 
