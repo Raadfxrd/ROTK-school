@@ -160,28 +160,34 @@ export class GameCanvas extends LitElement {
         }
     `;
 
+    // Optionele variabelen voor het opslaan van de huidige staat van de kamer.
     private roomTitle?: string;
     private roomImages?: string[];
     private contentText?: string[];
     private actionButtons?: ActionReference[];
     private gameObjectButtons?: GameObjectReference[];
 
+    // Variabelen voor het opslaan van geselecteerde acties en game object knoppen.
     private selectedActionButton?: ActionReference;
     private selectedGameObjectButtons: Set<GameObjectReference> = new Set<GameObjectReference>();
 
+    // Functie die wordt aangeroepen wanneer het component met het DOM verbindt.
     public connectedCallback(): void {
         super.connectedCallback();
 
-        void this.refreshState();
+        void this.refreshState(); // Asynchroon de huidige spelstaat verversen.
     }
 
+    // Asynchrone functie om de huidige spelstaat te verversen.
     private async refreshState(): Promise<void> {
-        const state: GameState = await getState();
+        const state: GameState = await getState(); // Haalt de huidige spelstaat op.
 
-        this.updateState(state);
+        this.updateState(state); // Update de componentstaat met de nieuwe spelstaat.
     }
 
+    // Functie om de componentstaat bij te werken gebaseerd op de spelstaat.
     private updateState(state: GameState): void {
+        // Stel de component variabelen in gebaseerd op de spelstaat.
         this.roomTitle = state.roomTitle;
         this.roomImages = state.roomImages;
         this.contentText = state.text;
@@ -189,20 +195,25 @@ export class GameCanvas extends LitElement {
         this.gameObjectButtons = state.objects;
         this.playerHP = state.playerHP;
 
+        // Reset geselecteerde acties en objecten.
         this.selectedActionButton = undefined;
         this.selectedGameObjectButtons.clear();
 
+        // Als er tekst is, gebruik de typemachine functie om het te tonen.
         if (state.text) {
             this.typewriter(state.text);
         }
-        this.requestUpdate();
+        this.requestUpdate(); // Verzoek om de component te herrenderen.
     }
 
+    // Functie om een actieknop klik te verwerken.
     private async handleClickAction(button: ActionReference): Promise<void> {
         if (button.needsObject) {
+            // Als de actie een object vereist, selecteer dan de actie en reset geselecteerde objecten.
             this.selectedActionButton = button;
             this.selectedGameObjectButtons.clear();
         } else {
+            // Voer de actie uit en update de staat als deze verandert.
             const state: any = await performAction(button.alias);
 
             if (state !== undefined) {
@@ -210,83 +221,103 @@ export class GameCanvas extends LitElement {
             }
         }
 
-        this.requestUpdate();
+        this.requestUpdate(); // Verzoek om de component te herrenderen.
     }
 
+    // Functie om een game object knop klik te verwerken.
     private async handleClickObject(button: GameObjectReference): Promise<void> {
         if (!this.selectedActionButton) {
-            return;
+            return; // Als er geen actie geselecteerd is, negeer de klik.
         }
 
-        this.selectedGameObjectButtons.add(button);
+        this.selectedGameObjectButtons.add(button); // Voeg het object toe aan de set van geselecteerde objecten.
 
+        // Voer de geselecteerde actie uit met de geselecteerde objecten.
         const state: GameState | undefined = await performAction(
             this.selectedActionButton.alias,
             Array.from(this.selectedGameObjectButtons, (e) => e.alias)
         );
 
+        // Reset selecties als er 2 of meer objecten geselecteerd zijn.
         if (this.selectedGameObjectButtons.size >= 2) {
             this.selectedActionButton = undefined;
             this.selectedGameObjectButtons.clear();
         }
 
         if (state !== undefined) {
-            this.updateState(state);
+            this.updateState(state); // Update de staat als deze verandert.
         }
 
-        this.requestUpdate();
+        this.requestUpdate(); // Verzoek om de component te herrenderen.
     }
 
+    // Typemachine functie om tekst te animeren.
     private typewriter(text: string[], index: number = 0, charIndex: number = 0, speed: number = 20): void {
         if (index < text.length) {
             const line: string = text[index];
             if (charIndex < line.length) {
+                // Toon tekst één karakter per keer.
                 this.contentText = [...text.slice(0, index), line.substr(0, charIndex + 1)];
                 this.requestUpdate();
                 setTimeout(() => this.typewriter(text, index, charIndex + 1, speed), speed);
             } else {
+                // Ga naar de volgende regel als de huidige voltooid is.
                 setTimeout(() => this.typewriter(text, index + 1, 0, speed), speed);
             }
         }
     }
 
+    // Hoofdrendermethode die de HTML-structuur van het component genereert.
     protected render(): TemplateResult {
+        // Bouwt de HTML op met de gedefinieerde subrendermethodes voor verschillende delen van de UI.
         return html`
             <div class="game">
                 <div class="title">${this.renderTitle()}</div>
+                <!-- Toont de titel van de kamer -->
                 <div class="header">${this.renderHeader()}</div>
+                <!-- Toont afbeeldingen van de kamer -->
                 <div class="sidebar">${this.renderSidebar()}</div>
+                <!-- Toont de inhoudstekst van de kamer -->
                 <div class="buttons">${this.renderFooter()}</div>
+                <!-- Toont de actie- en objectknoppen -->
                 <div>
                     HP:${this.playerHP}<progress id="healthbar" max="100" value=${this.playerHP}></progress>
+                    <!-- Toont de speler zijn gezondheid -->
                 </div>
             </div>
         `;
     }
 
+    // Genereert de titel van de kamer.
     private renderTitle(): TemplateResult {
         if (this.roomTitle) {
-            return html`${this.roomTitle}`;
+            return html`${this.roomTitle}`; // Geeft de kamer titel weer als deze bestaat.
         }
 
-        return html`${nothing}`;
+        return html`${nothing}`; // Geeft niets weer als er geen titel is.
     }
 
+    // Genereert de header met kamer afbeeldingen.
     private renderHeader(): TemplateResult {
         if (this.roomImages && this.roomImages.length > 0) {
+            // Genereert een lijst van afbeeldingselementen voor elke kamer afbeelding.
             return html` ${this.roomImages?.map((url) => html`<img src="/assets/img/${url}" />`)} `;
         }
 
-        return html`${nothing}`;
+        return html`${nothing}`; // Geeft niets weer als er geen afbeeldingen zijn.
     }
 
+    // Genereert de zijbalk met inhoudstekst.
     private renderSidebar(): TemplateResult {
+        // Genereert een paragraaf voor elk stuk inhoudstekst.
         return html`${this.contentText?.map((text) => html`<p>${text}</p>`)} `;
     }
 
+    // Genereert de footer met actieknoppen.
     private renderFooter(): TemplateResult {
         return html`
             ${this.actionButtons?.map(
+                // Genereert een link-element voor elke actieknop.
                 (button) => html`<a
                     class="button ${this.selectedActionButton === button ? "active" : ""}"
                     @click=${(): void => void this.handleClickAction(button)}
@@ -294,14 +325,16 @@ export class GameCanvas extends LitElement {
                 >`
             )}
             ${this.selectedActionButton ? this.renderActionButtons() : nothing}
+            <!-- Toont extra actieknoppen als er een actie geselecteerd is -->
         `;
     }
 
+    // Genereert extra actieknoppen gerelateerd aan geselecteerde acties.
     private renderActionButtons(): TemplateResult {
         return html`
             <div class="action-buttons ${this.selectedActionButton ? "fadeInDown center" : ""}">
-                <!-- Verander de center hier voor juiste uitlijning -->
                 ${this.gameObjectButtons
+                    // Filtert en toont alleen de knoppen die overeenkomen met de geselecteerde actie.
                     ?.filter((button) => button.actions.includes(this.selectedActionButton!.alias))
                     .map(
                         (button) => html`<a
