@@ -251,7 +251,7 @@ export class StartScreen extends LitElement {
         }
     }
 
-    private startGame(): void {
+    private loadGame(): void {
         console.log("Game started!");
         const gameCanvas: GameCanvas = document.createElement("game-canvas") as GameCanvas;
         document.body.appendChild(gameCanvas);
@@ -301,10 +301,6 @@ export class StartScreen extends LitElement {
         }
     }
 
-    private loadGame(): void {
-        console.log("Game loaded");
-    }
-
     private backToStart(): void {
         if (this.isTyping) {
             this.isTyping = false;
@@ -327,9 +323,8 @@ export class StartScreen extends LitElement {
     private renderButtons(): TemplateResult {
         return html`
             <div class="start-buttons">
-                <a @click=${this.startGame} class="button">Start new game</a>
+                <a @click=${this.loadGame} class="button">Load last game</a>
                 ${!this.showHowToPlay ? html`<a @click=${this.howToPlay} class="button">How to play</a>` : ""}
-                <a @click=${this.loadGame} class="button">Load game</a>
             </div>
         `;
     }
