@@ -39,7 +39,7 @@ export class ChurchWolburgRoom extends Room implements Examine {
     }
 
     public actions(): Action[] {
-        return [new ExamineAction(), new TalkAction(), new CustomAction("go-back", "Go Back", false)];
+        return [new ExamineAction(), new TalkAction(), new CustomAction("go-back", "Back", false)];
     }
 
     public objects(): GameObject[] {

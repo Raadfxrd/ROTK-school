@@ -12,7 +12,7 @@ export const MarkCharacterAlias: string = "mark-character";
 
 export class MarkCharacter extends Character {
     public constructor() {
-        super(MarkCharacterAlias);
+        super(MarkCharacterAlias, ExamineActionAlias);
     }
 
     public name(): string {
