@@ -78,6 +78,8 @@ export function createNewPlayerSession(): PlayerSession {
         leftVolo: false,
         edwinHint: false,
         edwinBusted: false,
+        roseAcquired: false,
+        ronaldoGotRose: false,
     };
 }
 

@@ -21,4 +21,6 @@ export type PlayerSession = {
     shownRingBadEnding: boolean;
     edwinHint: boolean;
     edwinBusted: boolean;
+    roseAcquired: boolean;
+    ronaldoGotRose: boolean;
 };

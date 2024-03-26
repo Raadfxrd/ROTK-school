@@ -31,8 +31,8 @@ export class Drakecharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "U won't pass until i say so! If u want to enter the lowlands u shall first do something for me.",
-                    "The guardian of the village Ronaldo, He has a problem with his wife and wont cooperate untl he is happy again. Can you talk to him?",
+                    "Not so fast! If u want to enter the lowlands u shall first do something for me.",
+                    "The guardian of the village Ronaldo, He is struggling with his love and wont listen untl he is happy again. Can you help him?",
                 ],
                 [new TalkChoiceAction(7, "Alright..")]
             );

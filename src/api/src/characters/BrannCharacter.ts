@@ -41,6 +41,7 @@ export class BrannCharacter extends Character implements Examine {
             if (playerSession.gold >= 15) {
                 playerSession.gold -= 15;
                 playerSession.inventory.push();
+                playerSession.roseAcquired = true;
                 return new TextActionResult([
                     "<hands over roses> There you go, no clue why u should need them but they look nice",
                 ]);

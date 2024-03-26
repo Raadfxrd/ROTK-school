@@ -17,15 +17,23 @@ export class RonaldoCharacter extends Character implements Examine {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.taylorlikesRonaldo === true) {
             return new TextActionResult([
-                "I have no clue how u did it but i think Taylor see's me standing again!",
+                "Ronaldo: I have no clue how u did it but i think Taylor see's me standing again!",
                 "I want to pay u for all ur troubles... But i dont have the gold! I have an interesting item that may be of some worth! Drake has it now. he will give it to u",
             ]);
+        }
+        if (playerSession.roseAcquired === true) {
+            playerSession.ronaldoGotRose = true;
+            return new TalkActionResult(
+                this,
+                ["Ronaldo: A red rose? How did u get this? either way with this i can win taylor back!!!"],
+                [new TalkChoiceAction(40, "No worrys! I'l tell Taylor to see u.")]
+            );
         }
         if (choiceId === 1) {
             return new TalkActionResult(
                 this,
                 [
-                    "How do u know?... Well it doesn't matter, i long for this girl named Taylor. For some reason she doesnt see me standing anymore... She took an interest in Edwin! From all people... If u can help me in any way, then i shall see what i can do for u",
+                    "Drake told u? Well.. i long for this girl named Taylor. unknowingly recently she doesnt like me... She took an interest in Edwin! From all people...",
                 ],
                 [
                     new TalkChoiceAction(2, "Let me see what i can do for you. Do u know what Taylor likes?"),
