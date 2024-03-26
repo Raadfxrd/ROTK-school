@@ -306,6 +306,7 @@ export class KaraCharacter extends Character implements Examine {
                 [new TalkChoiceAction(100, "Thank you")]
             );
         }
+
         if (choiceId === 40) {
             getPlayerSession().riddlesAnswered.push("riddle-answered");
             getPlayerSession().correctAnswers.push("correct-answer");
