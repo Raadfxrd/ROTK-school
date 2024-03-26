@@ -74,7 +74,7 @@ import { ShopTorch, ShopTorchAlias } from "./items/ShopTorchItem";
 export function createNewPlayerSession(): PlayerSession {
     return {
         //Room session
-        currentRoom: "KVTownSquare",
+        currentRoom: "Smaug-room",
         lastRoom: "",
         inCombat: false,
 
