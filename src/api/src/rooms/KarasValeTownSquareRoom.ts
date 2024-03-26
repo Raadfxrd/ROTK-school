@@ -26,6 +26,7 @@ import { ShopRoom } from "./ShopRoom";
 import { LowLandsRoom } from "./LowLandsRoom";
 import { NavigationActionAlias } from "../actions/NavigationAction";
 import { GateWolburgRoom } from "./GateWolburgRoom";
+import { JainaCharacter } from "../characters/JainaCharacter";
 
 export const KarasValeTownSquareRoomAlias: string = "KVTownSquare";
 
@@ -56,7 +57,6 @@ export class KarasValeTownSquareRoom extends Room {
                 new NavigateToLowlandsFromKV(),
             ];
         }
-
         if (this.playerSession.wentNorth === true) {
             return [
                 new ExamineAction(),
@@ -71,7 +71,10 @@ export class KarasValeTownSquareRoom extends Room {
     }
 
     public objects(): GameObject[] {
-        return [new AureliusCharacter(), new KaraWhistleItem()];
+        if (this.playerSession.hasWhistle === true) {
+            return [new AureliusCharacter(), new KaraWhistleItem(), new JainaCharacter()];
+        }
+        return [new AureliusCharacter(), new JainaCharacter()];
     }
 
     public navigation(): ActionResult | undefined {

@@ -22,10 +22,15 @@ export type PlayerSession = {
     equipment: string[];
     knowsOfKara: boolean;
     summonedKara: boolean;
+    hasWhistle: boolean;
     blessing: boolean;
     shownRing: boolean;
     shownRingBadEnding: boolean;
     inStables: boolean;
     inGate: boolean;
+    riddlesAnswered: string[];
+    allRiddles: number[];
+    correctAnswers: string[];
+    wrongAnswers: string[];
     death: boolean;
 };
