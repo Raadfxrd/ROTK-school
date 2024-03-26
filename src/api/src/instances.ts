@@ -51,6 +51,7 @@ import { HealingPotionAlias, HealingPotionItem } from "./items/HealingPotionItem
 import { HolyBibleAlias, HolyBibleItem } from "./items/HolyBibleItem";
 import { SpiderEyeAlias, SpiderEyeItem } from "./items/SpiderEyeItem";
 import { MysteriousPaintingAlias, MysteriousPaintingItem } from "./items/MysteriousPaintingItem";
+import { JainaCharacter, JainaCharacterAlias } from "./characters/JainaCharacter";
 import { IntroRoom, IntroRoomAlias } from "./rooms/IntroRoom";
 import {
     ChainmailArmourOfTheGreatItem,
@@ -111,6 +112,11 @@ export function createNewPlayerSession(): PlayerSession {
         horseMission10: false,
         horseMission20: false,
         horseMission30: false,
+        hasWhistle: false,
+        riddlesAnswered: [],
+        correctAnswers: [],
+        wrongAnswers: [],
+        allRiddles: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
     };
 }
 
@@ -335,6 +341,8 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
         case ShopTorchAlias:
             return new ShopTorch();
 
+        case JainaCharacterAlias:
+            return new JainaCharacter();
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
             return getRoomByAlias(alias);
