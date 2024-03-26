@@ -17,9 +17,6 @@ export class BobCharacter extends Character implements Examine {
     public name(): string {
         return "Bob";
     }
-    public objectActions(): string[] {
-        return [TalkActionAlias, ExamineActionAlias];
-    }
     public examine(): ActionResult | undefined {
         return new TextActionResult(["It's a friendly bartender"]);
     }

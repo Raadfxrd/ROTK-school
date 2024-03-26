@@ -11,7 +11,8 @@ import { TunnelSwitcher } from "../items/TunnelSwitcher";
 import { PickupAction } from "../actions/PickupAction";
 import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { PlayerSession } from "../types";
-import { VolosVillageRoom } from "./VolosVillageRoom";
+
+import { KarasValeTownSquareRoom } from "./KarasValeTownSquareRoom";
 
 export const LowLandsRoomAlias: string = "lowlands-room";
 let picture: string = "lowlands";
@@ -64,7 +65,7 @@ export class LowLandsRoom extends Room {
             return new TextActionResult(gameObjectArray);
         }
         const lastroom: LowLandsRoom = new LowLandsRoom();
-        const room: VolosVillageRoom = new VolosVillageRoom();
+        const room: KarasValeTownSquareRoom = new KarasValeTownSquareRoom();
 
         //Set the current room to the example room
         getPlayerSession().lastRoom = lastroom.alias;

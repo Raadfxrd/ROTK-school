@@ -5,6 +5,11 @@ import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
+import { HealingPotionAlias } from "../items/HealingPotionItem";
+import { HolyBibleAlias } from "../items/HolyBibleItem";
+import { MysteriousPaintingAlias } from "../items/MysteriousPaintingItem";
+import { ShopTorchAlias } from "../items/ShopTorchItem";
+import { SpiderEyeAlias } from "../items/SpiderEyeItem";
 import { PlayerSession } from "../types";
 
 export const BrannAlias: string = "Brann";
@@ -51,7 +56,7 @@ export class BrannCharacter extends Character implements Examine {
         if (_choiceId === 5) {
             if (playerSession.gold >= 12) {
                 playerSession.gold -= 12;
-                playerSession.inventory.push();
+                playerSession.inventory.push(HealingPotionAlias);
                 return new TextActionResult([
                     "<hands over potion of healing> There you go. this should help you in times of need. But don't drink too much or you will start to see things.",
                 ]);
@@ -62,7 +67,7 @@ export class BrannCharacter extends Character implements Examine {
         if (_choiceId === 6) {
             if (playerSession.gold >= 8) {
                 playerSession.gold -= 8;
-                playerSession.inventory.push();
+                playerSession.inventory.push(HolyBibleAlias);
                 return new TextActionResult([
                     "<SABATON- The Last Stand starts playing> This book will keep you safe from all evil this world contains. Blessings upon thee",
                 ]);
@@ -73,7 +78,7 @@ export class BrannCharacter extends Character implements Examine {
         if (_choiceId === 7) {
             if (playerSession.gold >= 7) {
                 playerSession.gold -= 7;
-                playerSession.inventory.push();
+                playerSession.inventory.push(SpiderEyeAlias);
                 return new TextActionResult([
                     "<hands over Spider eye> Here, this is used mostly for brewings and potions. however i have seen them being used for other meanings aswell.",
                 ]);
@@ -84,7 +89,7 @@ export class BrannCharacter extends Character implements Examine {
         if (_choiceId === 8) {
             if (playerSession.gold >= 6) {
                 playerSession.gold -= 6;
-                playerSession.inventory.push();
+                playerSession.inventory.push(MysteriousPaintingAlias);
                 return new TextActionResult([
                     "A nice painting painted by an ancient sorcerer long ago. it is believed this painting holds secrets.",
                 ]);
@@ -101,7 +106,7 @@ export class BrannCharacter extends Character implements Examine {
                     new TalkChoiceAction(5, "Healing Potion(12G)"),
                     new TalkChoiceAction(6, "Holy bible(8G)"),
                     new TalkChoiceAction(7, "Spider eye(2G)"),
-                    new TalkChoiceAction(8, "mysterious painting(6G)"), // schrijf code maake daadwerkelijke items.
+                    new TalkChoiceAction(8, "mysterious painting(6G)"),
                     new TalkChoiceAction(60, "Red roses(15G)"),
                 ]
             );
@@ -157,8 +162,9 @@ export class BrannCharacter extends Character implements Examine {
         if (_choiceId === 12) {
             if (playerSession.gold >= 5) {
                 playerSession.gold -= 5;
+                playerSession.inventory.push(ShopTorchAlias);
                 return new TextActionResult([
-                    "Take a look inside that barrel over there. It contains the torch you are looking for.",
+                    "THere, take this torch, adventurer. It may seem like a simple flame, but it carries ancient fire within. Let its light guide you through the darkest paths of your journey. May it be your beacon of hope and protection. Go forth now, and let its flame illuminate your way.",
                 ]); //maak code met een barrel die je kan inspecten.
             } else if (playerSession.gold <= 5) {
                 return new TextActionResult(["you dont have enough money..."]);

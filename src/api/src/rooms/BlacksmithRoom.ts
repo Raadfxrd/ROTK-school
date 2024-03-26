@@ -9,15 +9,21 @@ import { IgnisCharacter } from "../characters/IgnisCharacter";
 import { TalkAction } from "../base/actions/TalkAction";
 import { PlayerSession } from "../types";
 import { ExamineActionAlias } from "../base/actions/ExamineAction";
+import { Back, NavigateBackAlias } from "../actions/NavigateAction";
+import { NavigationActionAlias } from "../actions/NavigationAction";
 import { PickupActionAlias } from "../actions/PickupAction";
 
 export const BlacksmithAlias: string = "BlackSmith-room";
 export class BlackSmithRoom extends Room {
-    public objectActions(): string[] {
-        return [ExamineActionAlias, PickupActionAlias];
-    }
     public constructor() {
-        super(BlacksmithAlias);
+        super(BlacksmithAlias, NavigationActionAlias);
+    }
+    public objectActions(): string[] {
+        const playerSession: PlayerSession = getPlayerSession();
+        if (playerSession.currentRoom === BlacksmithAlias) {
+            return [ExamineActionAlias, PickupActionAlias];
+        }
+        return [NavigationActionAlias];
     }
     public name(): string {
         return "BlackSmith";
@@ -29,8 +35,24 @@ export class BlackSmithRoom extends Room {
         return [this, new IgnisCharacter()];
     }
     public actions(): Action[] {
-        return [new CustomAction("CheckInventoryAlias", "Check Inventory", false), new TalkAction()];
+        return [
+            new CustomAction("CheckInventoryAlias", "Check Inventory", false),
+            new TalkAction(),
+            new Back(),
+        ];
     }
+
+    public navigation(): ActionResult | undefined {
+        const room: BlackSmithRoom = new BlackSmithRoom();
+        const lastroom: string = getPlayerSession().currentRoom;
+
+        //Set the current room to the example room
+        getPlayerSession().currentRoom = room.alias;
+        getPlayerSession().lastRoom = lastroom;
+
+        return room.examine();
+    }
+
     public examine(): ActionResult | undefined {
         return new TextActionResult(["<CLASH!> You have now entered the Blacksmith"]);
     }
@@ -45,6 +67,13 @@ export class BlackSmithRoom extends Room {
             }
             gameObjectArray.push("Gold amount: " + playerSession.gold);
             return new TextActionResult(gameObjectArray);
+        }
+        if (alias === NavigateBackAlias) {
+            const playerSession: PlayerSession = getPlayerSession();
+            const currentRoom: string = playerSession.currentRoom;
+            const lastRoom: string = playerSession.lastRoom;
+            playerSession.currentRoom = lastRoom;
+            playerSession.lastRoom = currentRoom;
         }
         return undefined;
     }

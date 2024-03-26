@@ -1,3 +1,5 @@
+import { NavigateBlacksmithAlias, NavigateShopRoomAlias } from "../actions/NavigateAction";
+import { NavigationAction } from "../actions/NavigationAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
@@ -7,19 +9,16 @@ import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { AlexandraCharacter } from "../characters/AlexandraCharacter";
-import { JohanCharacter } from "../characters/JohanCharachter";
 import { RichardCharacter } from "../characters/RichardCharacter";
 import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { PlayerSession } from "../types";
+import { BlackSmithRoom } from "./BlacksmithRoom";
 import { ChurchWolburgRoom } from "./ChurchWolburgRoom";
-import { KarasValeTownSquareRoom } from "./KarasValeTownSquareRoom";
+import { ShopRoom } from "./ShopRoom";
+import { StablesWolburgRoom } from "./StablesWolburgRoom";
 import { ThroneRoom } from "./ThroneRoom";
 
 export const WolburgRoomAlias: string = "wolburg-room";
-
-let image: string = "rooms/WolburgCity.png";
-let inStables: boolean = false;
-let inGate: boolean = false;
 
 export class WolburgRoom extends Room {
     public constructor() {
@@ -31,50 +30,26 @@ export class WolburgRoom extends Room {
     }
 
     public images(): string[] {
-        return [image];
+        return ["rooms/WolburgCity.png"];
     }
 
     public actions(): Action[] {
-        if (inStables === true) {
-            return [
-                new ExamineAction(),
-                new TalkAction(),
-                new CustomAction("inventory", "Inventory", false),
-                new CustomAction("souther-gate", "Gate", false),
-                new CustomAction("back", "Back", false),
-            ];
-        }
-        if (inGate === true) {
-            return [
-                new ExamineAction(),
-                new TalkAction(),
-                new CustomAction("inventory", "Inventory", false),
-                new CustomAction("karas-vale", "Kara's Vale", false),
-                new CustomAction("back-gate", "Back", false),
-            ];
-        }
         return [
             new ExamineAction(),
             new TalkAction(),
             new CustomAction("inventory", "Inventory", false),
-            new CustomAction("stablesAlias", "Stables", false),
-            new CustomAction("church", "Church", false),
-            new CustomAction("back-throneroom", "Back", false),
+            new NavigationAction(),
+            new CustomAction("back", "Back", false),
         ];
     }
 
     public examine(): ActionResult | undefined {
-        if (inStables === true) {
+        const playerSession: PlayerSession = getPlayerSession();
+
+        if (playerSession.knowLocationLowlands === false) {
             return new TextActionResult([
-                "The stables of Wolburg.",
-                "Usually there are horses here but as of right now it is completely empty.",
-                "You see the Stablekeeper crying on the ground, he looks like he is hurt.",
-            ]);
-        }
-        if (inGate === true) {
-            return new TextActionResult([
-                "You are at the souther gate of the city, passing the gate means the adventure is truly going to start",
-                "You feel ready to go on this adventure and rescue the princess.",
+                "You run after the kidnappers and you enter the city Wolburg. It is really lively out in town and you see the kidnappers run towards the stables.",
+                "On their way to the stables they knock someone down and run further.",
             ]);
         }
         return new TextActionResult([
@@ -84,30 +59,32 @@ export class WolburgRoom extends Room {
     }
 
     public objects(): GameObject[] {
-        if (inStables === true) {
-            return [this, ...getGameObjectsFromInventory(), new AlexandraCharacter(), new JohanCharacter()];
+        const playerSession: PlayerSession = getPlayerSession();
+        if (playerSession.knowLocationLowlands === false) {
+            return [
+                this,
+                ...getGameObjectsFromInventory(),
+                new RichardCharacter(),
+                new ChurchWolburgRoom(),
+                new StablesWolburgRoom(),
+                new ShopRoom(),
+                new BlackSmithRoom(),
+            ];
         }
-        if (inGate === true) {
-            return [this, ...getGameObjectsFromInventory(), new AlexandraCharacter()];
-        }
-        return [this, ...getGameObjectsFromInventory(), new AlexandraCharacter(), new RichardCharacter()];
+        return [
+            this,
+            ...getGameObjectsFromInventory(),
+            new AlexandraCharacter(),
+            new RichardCharacter(),
+            new ChurchWolburgRoom(),
+            new StablesWolburgRoom(),
+            new ShopRoom(),
+            new BlackSmithRoom(),
+        ];
     }
 
     public custom(alias: string, _gameObjects?: GameObject[]): ActionResult | undefined {
-        if (alias === "stablesAlias") {
-            inStables = true;
-            image = "rooms/stableWolburg.png";
-            return new TextActionResult([
-                "The stables of Wolburg.",
-                "Usually there are horses here but as of right now it is completely empty.",
-                "You see the Stablekeeper crying on the ground, he looks like he is hurt.",
-            ]);
-        }
         if (alias === "back") {
-            inStables = false;
-            image = "rooms/WolburgCity.png";
-        }
-        if (alias === "back-throneroom") {
             const lastroom: WolburgRoom = new WolburgRoom();
             const room: ThroneRoom = new ThroneRoom();
 
@@ -126,55 +103,24 @@ export class WolburgRoom extends Room {
             gameObjectArray.push("Gold amount: " + playerSession.gold);
             return new TextActionResult(gameObjectArray);
         }
-        if (alias === "church") {
-            const lastroom: WolburgRoom = new WolburgRoom();
-            const room: ChurchWolburgRoom = new ChurchWolburgRoom();
+        if (alias === NavigateShopRoomAlias) {
+            const room: ShopRoom = new ShopRoom();
+            const lastRoom: WolburgRoom = new WolburgRoom();
 
             //Set the current room to the example room
-            getPlayerSession().lastRoom = lastroom.alias;
+            getPlayerSession().lastRoom = lastRoom.alias;
             getPlayerSession().currentRoom = room.alias;
+
             return room.examine();
         }
-        if (alias === "souther-gate") {
-            inGate = true;
-            inStables = false;
-            image = "rooms/gate-wolburg.png";
-            this.images();
-            return new TextActionResult([
-                "You are at the souther gate of the city, passing the gate means the adventure is truly going to start",
-                "You feel ready to go on this adventure and rescue the princess.",
-            ]);
-        }
-        if (alias === "back-gate") {
-            const playerSession: PlayerSession = getPlayerSession();
-            if (
-                playerSession.horseMission10 === true ||
-                playerSession.horseMission20 === true ||
-                playerSession.horseMission30 === true
-            ) {
-                inStables = true;
-                inGate = false;
-                image = "rooms/stableWolburg.png";
-                return new TextActionResult([
-                    "You went back to the stables, you see that Johan got himself back together.",
-                    "After you went away you see that some people came to him to help him.",
-                ]);
-            }
-            inStables = true;
-            inGate = false;
-            image = "rooms/stableWolburg.png";
-            return new TextActionResult([
-                "You went back to the stables, you see that the man in the stables got himself back together.",
-                "After you went away you see that some people came to him to help him.",
-            ]);
-        }
-        if (alias === "karas-vale") {
-            const lastroom: WolburgRoom = new WolburgRoom();
-            const room: KarasValeTownSquareRoom = new KarasValeTownSquareRoom();
+        if (alias === NavigateBlacksmithAlias) {
+            const room: BlackSmithRoom = new BlackSmithRoom();
+            const lastRoom: WolburgRoom = new WolburgRoom();
 
             //Set the current room to the example room
-            getPlayerSession().lastRoom = lastroom.alias;
             getPlayerSession().currentRoom = room.alias;
+            getPlayerSession().lastRoom = lastRoom.alias;
+
             return room.examine();
         }
         return undefined;

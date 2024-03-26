@@ -57,7 +57,6 @@ export class VolosVillageRoom extends Room {
 
     public actions(): Action[] {
         const playerSession: PlayerSession = getPlayerSession();
-        console.log(playerSession);
         if (playerSession.leftVolo === true) {
             return [new ExamineAction(), new CustomAction("back-karas", "Back", false)];
         }
@@ -116,7 +115,6 @@ export class VolosVillageRoom extends Room {
         }
         if (alias === NavigateNorthAlias) {
             wentGate = true;
-            console.log(wentGate);
             return new TextActionResult(["There seems to be a person infront of a gate"]);
         }
         if (alias === EnterVoloAlias) {
