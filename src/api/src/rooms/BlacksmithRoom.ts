@@ -9,18 +9,21 @@ import { IgnisCharacter } from "../characters/IgnisCharacter";
 import { TalkAction } from "../base/actions/TalkAction";
 import { PlayerSession } from "../types";
 import { ExamineActionAlias } from "../base/actions/ExamineAction";
-import { PickupActionAlias } from "../actions/PickupAction";
 import { Back, NavigateBackAlias } from "../actions/NavigateAction";
-import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./KarasValeTownSquareRoom";
-import { WolburgRoomAlias, WolburgRoom } from "./WolburgRoom";
+import { NavigationActionAlias } from "../actions/NavigationAction";
+import { PickupActionAlias } from "../actions/PickupAction";
 
 export const BlacksmithAlias: string = "BlackSmith-room";
 export class BlackSmithRoom extends Room {
-    public objectActions(): string[] {
-        return [ExamineActionAlias, PickupActionAlias];
-    }
     public constructor() {
-        super(BlacksmithAlias);
+        super(BlacksmithAlias, NavigationActionAlias);
+    }
+    public objectActions(): string[] {
+        const playerSession: PlayerSession = getPlayerSession();
+        if (playerSession.currentRoom === BlacksmithAlias) {
+            return [ExamineActionAlias, PickupActionAlias];
+        }
+        return [NavigationActionAlias];
     }
     public name(): string {
         return "BlackSmith";
@@ -38,6 +41,18 @@ export class BlackSmithRoom extends Room {
             new Back(),
         ];
     }
+
+    public navigation(): ActionResult | undefined {
+        const room: BlackSmithRoom = new BlackSmithRoom();
+        const lastroom: string = getPlayerSession().currentRoom;
+
+        //Set the current room to the example room
+        getPlayerSession().currentRoom = room.alias;
+        getPlayerSession().lastRoom = lastroom;
+
+        return room.examine();
+    }
+
     public examine(): ActionResult | undefined {
         return new TextActionResult(["<CLASH!> You have now entered the Blacksmith"]);
     }
@@ -55,14 +70,10 @@ export class BlackSmithRoom extends Room {
         }
         if (alias === NavigateBackAlias) {
             const playerSession: PlayerSession = getPlayerSession();
-            playerSession.currentRoom = playerSession.lastRoom;
-            if (playerSession.lastRoom === WolburgRoomAlias) {
-                const room: WolburgRoom = new WolburgRoom();
-                return room.examine();
-            } else if (playerSession.lastRoom === KarasValeTownSquareRoomAlias) {
-                const room: KarasValeTownSquareRoom = new KarasValeTownSquareRoom();
-                return room.examine();
-            }
+            const currentRoom: string = playerSession.currentRoom;
+            const lastRoom: string = playerSession.lastRoom;
+            playerSession.currentRoom = lastRoom;
+            playerSession.lastRoom = currentRoom;
         }
         return undefined;
     }

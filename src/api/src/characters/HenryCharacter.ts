@@ -5,6 +5,7 @@ import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
+import { ChainmailArmourOfTheGreatItemAlias } from "../items/ChainmailArmourOfTheGreatItem";
 import { RingItemAlias } from "../items/RingItem";
 import { PlayerSession } from "../types";
 
@@ -52,6 +53,9 @@ export class HenryCharacter extends Character implements Examine {
                 "Henry: No problem kiddo, Good luck on your adventure and your mission.",
             ]);
         } else if (_choiceId === 7) {
+            const playerSession: PlayerSession = getPlayerSession();
+
+            playerSession.inventory.push(ChainmailArmourOfTheGreatItemAlias);
             return new TextActionResult([
                 "Henry: I got you a set of armour laying in the dust.",
                 "Take it with you on your adventure. Good luck kiddo.",

@@ -1,4 +1,5 @@
 export type GameState = {
+    playerHP: number;
     roomAlias: string;
     roomTitle: string;
     roomImages: string[];

@@ -51,6 +51,22 @@ import { HealingPotionAlias, HealingPotionItem } from "./items/HealingPotionItem
 import { HolyBibleAlias, HolyBibleItem } from "./items/HolyBibleItem";
 import { SpiderEyeAlias, SpiderEyeItem } from "./items/SpiderEyeItem";
 import { MysteriousPaintingAlias, MysteriousPaintingItem } from "./items/MysteriousPaintingItem";
+import { JainaCharacter, JainaCharacterAlias } from "./characters/JainaCharacter";
+import { IntroRoom, IntroRoomAlias } from "./rooms/IntroRoom";
+import {
+    ChainmailArmourOfTheGreatItem,
+    ChainmailArmourOfTheGreatItemAlias,
+} from "./items/ChainmailArmourOfTheGreatItem";
+import { SteelSwordItem, SteelSwordItemAlias } from "./items/SteelSwordItem";
+import { SwordOfGoodFortuneItem, SwordOfGoodFortuneItemAlias } from "./items/SwordOfGoodFortuneItem";
+import { SmaugRoomAlias, SmaugRoom } from "./rooms/SmaugRoom";
+import { SmaugAlias, SmaugCharacter } from "./characters/SmaugCharacter";
+import { DeathAlias, deathRoom } from "./rooms/Deathroom";
+import { princessAlias, princessCharacter } from "./characters/princessCharacter";
+import { StablesWolburgRoom, StablesWolburgRoomAlias } from "./rooms/StablesWolburgRoom";
+import { GateWolburgRoom, GateWolburgRoomAlias } from "./rooms/GateWolburgRoom";
+import { VladimirCharacter, VladimirCharacterAlias } from "./characters/VladimirCharacter";
+import { ShopTorch, ShopTorchAlias } from "./items/ShopTorchItem";
 
 /**
  * Create a new player session object
@@ -59,18 +75,30 @@ import { MysteriousPaintingAlias, MysteriousPaintingItem } from "./items/Mysteri
  */
 export function createNewPlayerSession(): PlayerSession {
     return {
-        currentRoom: "wolburg-room",
+        //Room session
+        currentRoom: "intro-room",
         lastRoom: "",
+        inCombat: false,
+
+        //Inventory session
         inventory: [],
+        equipment: [],
+        gold: 0,
+
+        //Stats
+        healthPoints: 100,
+        armourClass: 12,
+        strength: 14,
+
+        //enemy stats
+        vladimirHP: 20,
+        vladimirGone: false,
+
+        //Booleans
         knowWhereMapIs: false,
         wentNorth: false,
         knowsOfKara: false,
         summonedKara: false,
-        knowLocationLowlands: false,
-        horseMission10: false,
-        horseMission20: false,
-        horseMission30: false,
-        gold: 0,
         blessing: false,
         shownRing: false,
         shownRingBadEnding: false,
@@ -82,6 +110,18 @@ export function createNewPlayerSession(): PlayerSession {
         leftVolo: false,
         inStables: false,
         inGate: false,
+        death: false,
+
+        //Missions
+        knowLocationLowlands: false,
+        horseMission10: false,
+        horseMission20: false,
+        horseMission30: false,
+        hasWhistle: false,
+        riddlesAnswered: [],
+        correctAnswers: [],
+        wrongAnswers: [],
+        allRiddles: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
     };
 }
 
@@ -148,6 +188,20 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case TunnelRoomAlias:
             return new TunnelRoom();
+
+        case IntroRoomAlias:
+            return new IntroRoom();
+
+        case SmaugRoomAlias:
+            return new SmaugRoom();
+        case DeathAlias:
+            return new deathRoom();
+
+        case StablesWolburgRoomAlias:
+            return new StablesWolburgRoom();
+
+        case GateWolburgRoomAlias:
+            return new GateWolburgRoom();
     }
 
     return undefined;
@@ -245,26 +299,58 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case JohanCharacterAlias:
             return new JohanCharacter();
+
         case HealingPotionAlias:
             return new HealingPotionItem();
+
         case HolyBibleAlias:
             return new HolyBibleItem();
+
         case SpiderEyeAlias:
             return new SpiderEyeItem();
+
         case MysteriousPaintingAlias:
             return new MysteriousPaintingItem();
+
         case KaraCharacterAlias:
             return new KaraCharacter();
+
         case ChurchTorchAlias:
             return new ChurchTorch();
+
         case MarkCharacterAlias:
             return new MarkCharacter();
+
         case VolosTorchAlias:
             return new VolosTorch();
+
         case DarkTreeItemAlias:
             return new DarkTreeItem();
+
         case TunnelSwitcherAlias:
             return new TunnelSwitcher();
+
+        case ChainmailArmourOfTheGreatItemAlias:
+            return new ChainmailArmourOfTheGreatItem();
+
+        case SteelSwordItemAlias:
+            return new SteelSwordItem();
+
+        case SwordOfGoodFortuneItemAlias:
+            return new SwordOfGoodFortuneItem();
+
+        case SmaugAlias:
+            return new SmaugCharacter();
+        case princessAlias:
+            return new princessCharacter();
+        case ShopTorchAlias:
+            return new ShopTorch();
+
+        case VladimirCharacterAlias:
+            return new VladimirCharacter();
+
+        case JainaCharacterAlias:
+            return new JainaCharacter();
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
             return getRoomByAlias(alias);

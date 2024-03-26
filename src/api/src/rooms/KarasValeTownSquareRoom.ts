@@ -22,15 +22,17 @@ import { KarasValeForestRoom } from "./KarasValeForestRoom";
 import { KaraWhistleItem } from "../items/KaraWhistleItem";
 import { useItemAction } from "../actions/UseItemAction";
 import { BlackSmithRoom } from "./BlacksmithRoom";
-import { WolburgRoom } from "./WolburgRoom";
 import { ShopRoom } from "./ShopRoom";
 import { LowLandsRoom } from "./LowLandsRoom";
+import { NavigationActionAlias } from "../actions/NavigationAction";
+import { GateWolburgRoom } from "./GateWolburgRoom";
+import { JainaCharacter } from "../characters/JainaCharacter";
 
 export const KarasValeTownSquareRoomAlias: string = "KVTownSquare";
 
 export class KarasValeTownSquareRoom extends Room {
     public constructor() {
-        super(KarasValeTownSquareRoomAlias);
+        super(KarasValeTownSquareRoomAlias, NavigationActionAlias);
     }
     public playerSession: PlayerSession = getPlayerSession();
 
@@ -44,7 +46,6 @@ export class KarasValeTownSquareRoom extends Room {
 
     public actions(): Action[] {
         if (this.playerSession.knowsOfKara === true && this.playerSession.wentNorth === true) {
-            console.log(this.playerSession);
             return [
                 new ExamineAction(),
                 new TalkAction(),
@@ -56,7 +57,6 @@ export class KarasValeTownSquareRoom extends Room {
                 new NavigateToLowlandsFromKV(),
             ];
         }
-
         if (this.playerSession.wentNorth === true) {
             return [
                 new ExamineAction(),
@@ -71,7 +71,21 @@ export class KarasValeTownSquareRoom extends Room {
     }
 
     public objects(): GameObject[] {
-        return [new AureliusCharacter(), new KaraWhistleItem()];
+        if (this.playerSession.hasWhistle === true) {
+            return [new AureliusCharacter(), new KaraWhistleItem(), new JainaCharacter()];
+        }
+        return [new AureliusCharacter(), new JainaCharacter()];
+    }
+
+    public navigation(): ActionResult | undefined {
+        const room: KarasValeTownSquareRoom = new KarasValeTownSquareRoom();
+        const lastroom: string = getPlayerSession().currentRoom;
+
+        //Set the current room to the example room
+        getPlayerSession().currentRoom = room.alias;
+        getPlayerSession().lastRoom = lastroom;
+
+        return room.examine();
     }
 
     public examine(): ActionResult | undefined {
@@ -90,17 +104,21 @@ export class KarasValeTownSquareRoom extends Room {
 
         if (alias === NavigateShopRoomAlias) {
             const room: ShopRoom = new ShopRoom();
+            const lastroom: KarasValeTownSquareRoom = new KarasValeTownSquareRoom();
 
             //Set the current room to the example room
             getPlayerSession().currentRoom = room.alias;
+            getPlayerSession().lastRoom = lastroom.alias;
 
             return room.examine();
         }
         if (alias === "BlackSmith-room") {
             const room: BlackSmithRoom = new BlackSmithRoom();
+            const lastroom: KarasValeTownSquareRoom = new KarasValeTownSquareRoom();
 
             //Set the current room to the example room
             getPlayerSession().currentRoom = room.alias;
+            getPlayerSession().lastRoom = lastroom.alias;
 
             return room.examine();
         }
@@ -119,7 +137,7 @@ export class KarasValeTownSquareRoom extends Room {
         }
 
         if (alias === "BackToWolburg") {
-            const room: WolburgRoom = new WolburgRoom();
+            const room: GateWolburgRoom = new GateWolburgRoom();
 
             getPlayerSession().currentRoom = room.alias;
 
@@ -135,7 +153,12 @@ export class KarasValeTownSquareRoom extends Room {
         }
         return undefined;
     }
+
     public objectActions(): string[] {
-        return [ExamineActionAlias];
+        const playerSession: PlayerSession = getPlayerSession();
+        if (playerSession.currentRoom === KarasValeTownSquareRoomAlias) {
+            return [ExamineActionAlias, NavigationActionAlias];
+        }
+        return [NavigationActionAlias];
     }
 }

@@ -1,4 +1,5 @@
 import { Back, NavigateBackAlias } from "../actions/NavigateAction";
+import { Navigation, NavigationActionAlias } from "../actions/NavigationAction";
 import { PickupActionAlias } from "../actions/PickupAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
@@ -15,15 +16,30 @@ import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./KarasVa
 import { WolburgRoom, WolburgRoomAlias } from "./WolburgRoom";
 
 export const ShopAlias: string = "Shop-room";
-export class ShopRoom extends Room {
+export class ShopRoom extends Room implements Navigation {
     public constructor() {
-        super(ShopAlias);
+        super(ShopAlias, NavigationActionAlias);
     }
     public name(): string {
         return "Shop";
     }
     public objectActions(): string[] {
-        return [ExamineActionAlias, PickupActionAlias];
+        const playerSession: PlayerSession = getPlayerSession();
+        if (playerSession.currentRoom === ShopAlias) {
+            return [ExamineActionAlias, PickupActionAlias];
+        }
+        return [NavigationActionAlias];
+    }
+
+    public navigation(): ActionResult | undefined {
+        const room: ShopRoom = new ShopRoom();
+        const lastroom: string = getPlayerSession().currentRoom;
+
+        //Set the current room to the example room
+        getPlayerSession().currentRoom = room.alias;
+        getPlayerSession().lastRoom = lastroom;
+
+        return room.examine();
     }
     public images(): string[] {
         return ["rooms/store.png"];

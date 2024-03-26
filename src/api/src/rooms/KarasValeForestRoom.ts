@@ -51,7 +51,10 @@ export class KarasValeForestRoom extends Room {
     }
 
     public objects(): GameObject[] {
-        return [new KVFallenTreesItem(), new KVForestItem(), new KaraWhistleItem(), new KaraCharacter()];
+        if (this.PlayerSession.summonedKara === true) {
+            return [new KVFallenTreesItem(), new KVForestItem(), new KaraWhistleItem(), new KaraCharacter()];
+        }
+        return [new KVFallenTreesItem(), new KVForestItem(), new KaraWhistleItem()];
     }
 
     public custom(alias: string, _gameObjects: GameObject[] | undefined): ActionResult | undefined {
