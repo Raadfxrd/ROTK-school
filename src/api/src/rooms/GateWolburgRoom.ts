@@ -36,9 +36,9 @@ export class GateWolburgRoom extends Room {
             new ExamineAction(),
             new TalkAction(),
             new CustomAction("inventory", "Inventory", false),
+            new AttackAction(),
             new NavigationAction(),
             new Back(),
-            new AttackAction(),
         ];
     }
 
