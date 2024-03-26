@@ -16,6 +16,7 @@ export type PlayerSession = {
     horseMission10: boolean;
     inCombat: boolean;
     vladimirHP: number;
+    smaugHP: number;
     vladimirGone: boolean;
     gold: number;
     healthPoints: number;

@@ -9,6 +9,38 @@ import { deathRoom } from "../rooms/Deathroom";
 import { PlayerSession } from "../types";
 
 export const SmaugAlias: string = "Smaug";
+export class SmaugProperties {
+    private static _healthPoints: number = 150;
+    private static _damage: number = 25;
+
+    //health
+    public static get healthPoints(): number {
+        return this._healthPoints;
+    }
+    public static set healthPoints(value: number) {
+        this._healthPoints = value;
+    }
+    //damage
+    public static get Damage(): number {
+        return this._damage;
+    }
+    public static set damage(value: number) {
+        this._damage = value;
+    }
+}
+function randomMove(): string {
+    const damage: string = "i did damage";
+    const evade: string = "i evaded";
+    const evadeAndDamage: string = "i evaded and did damage";
+    const getHit: string = "i got hit";
+    const getHitAndDamage: string = "i got hit and did damage";
+    const results: Array<string> = [damage, evade, evadeAndDamage, getHit, getHitAndDamage];
+    const randomIndex: any = Math.floor(Math.random() * results.length);
+    return results[randomIndex];
+}
+const move: string = randomMove();
+console.log(move);
+
 export class SmaugCharacter extends Character implements Examine {
     public constructor() {
         super(SmaugAlias, ExamineActionAlias);

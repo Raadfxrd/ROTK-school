@@ -93,6 +93,7 @@ export function createNewPlayerSession(): PlayerSession {
         //enemy stats
         vladimirHP: 20,
         vladimirGone: false,
+        smaugHP: 150,
 
         //Booleans
         knowWhereMapIs: false,
