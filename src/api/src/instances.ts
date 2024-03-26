@@ -65,6 +65,7 @@ import { DeathAlias, deathRoom } from "./rooms/Deathroom";
 import { princessAlias, princessCharacter } from "./characters/princessCharacter";
 import { StablesWolburgRoom, StablesWolburgRoomAlias } from "./rooms/StablesWolburgRoom";
 import { GateWolburgRoom, GateWolburgRoomAlias } from "./rooms/GateWolburgRoom";
+import { ShopTorch, ShopTorchAlias } from "./items/ShopTorchItem";
 
 /**
  * Create a new player session object
@@ -337,6 +338,8 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
             return new SmaugCharacter();
         case princessAlias:
             return new princessCharacter();
+        case ShopTorchAlias:
+            return new ShopTorch();
 
         case JainaCharacterAlias:
             return new JainaCharacter();

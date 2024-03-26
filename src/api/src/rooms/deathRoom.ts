@@ -23,7 +23,7 @@ export class deathRoom extends Room {
         return "Death";
     }
     public images(): string[] {
-        return [];
+        return ["rooms/GameOver.png"];
     }
     public objects(): GameObject[] {
         return [];
