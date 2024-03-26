@@ -26,63 +26,17 @@ export class KaraCharacter extends Character implements Examine {
         ]);
     }
 
-    // public getRandomNumber(_min: number, _max: number): number {
-    //     const x: number = Math.floor(Math.random() * 3) + 5;
-    //     return x;
-    // }
-
-    // public createNumbersArray(start: number, end: number): number[] {
-    //     const playerSession: PlayerSession = getPlayerSession();
-    //     const myArray: number[] = [];
-
-    //     playerSession.allRiddles = [];
-    //     for (let i: number = start; i <= end; i++) {
-    //         const randomNumber: number = this.getRandomNumber(5, 7);
-    //         if (!myArray.includes(randomNumber)) {
-    //             myArray.push(randomNumber);
-    //         }
-    //     }
-    //     return myArray;
-    // }
-
     public riddlesArray: number[] = this.playerSession.allRiddles;
 
-    public shuffle(riddlesArray: number[]): number[] {
-        let currentIndex: number = riddlesArray.length,
-            randomIndex: number;
-
-        while (currentIndex > 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
-            riddlesArray[currentIndex],
-                (riddlesArray[randomIndex] = riddlesArray[randomIndex]),
-                riddlesArray[currentIndex];
+    public shuffleArray(riddlesArray: number[]): number[] {
+        for (let i: number = riddlesArray.length - 1; i > 0; i--) {
+            const j: number = Math.floor(Math.random() * (i + 1));
+            [riddlesArray[i], riddlesArray[j]] = [riddlesArray[j], riddlesArray[i]];
         }
-        this.playerSession.allRiddles = riddlesArray;
-        console.log(riddlesArray, "riddlesarray");
         return riddlesArray;
     }
 
-    public finalRiddlesArray = this.shuffle(this.riddlesArray);
-
-    // public numbersArray: any = this.createNumbersArray(5, 7);
-    // public x: any = getPlayerSession().allRiddles.push(this.numbersArray);
-
-    // public randomIndex: number = this.getRandomNumber(5, this.numbersArray);
-
-    // public riddlesAnsweredArrayPush(): ActionResult | undefined {
-    //     if (getPlayerSession().riddlesAnswered.filter((x) => x === "riddle-answered").length >= 3) {
-    //         return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(100, "bet")]);
-    //     }
-    //     return undefined;
-    // }
-
-    // choiceid = randomnumber
-    // een continue knop na de question waar de choiceid wordt bepaald voor welke het wordt
-    // all riddles is een lege array
-    // wanneer een choice id langskomt zet je die choice id in de lege array
-    // wanneer er een randomindex langskomt wordt er gekeken of dat nummer al in de array staat, zo ja, try again till succes
-    // zo nee proceed
+    public finalRiddlesArray = this.shuffleArray(this.riddlesArray);
 
     public talk(choiceId?: number | undefined): ActionResult | undefined {
         if (choiceId === 1) {
@@ -102,7 +56,6 @@ export class KaraCharacter extends Character implements Examine {
         }
 
         if (choiceId === 2) {
-            // console.log(this.numbersArray);
             return new TalkActionResult(
                 this,
                 ["Many do, but i deem very few worthy enough to receive it."],
@@ -131,12 +84,8 @@ export class KaraCharacter extends Character implements Examine {
         }
 
         if (choiceId === 5) {
-            // const index: number = this.numbersArray.indexOf(5);
-            // getPlayerSession().allRiddles.splice(index, 1);
-            // this.numbersArray.splice(0, 1);
-            this.finalRiddlesArray.splice(0, 1);
-            console.log(this.finalRiddlesArray, "CHOICEID 5");
-            //console.log(getPlayerSession().allRiddles, "CHOICEID 5");
+            const index: number = this.finalRiddlesArray.indexOf(5);
+            this.finalRiddlesArray.splice(index, 1);
             return new TalkActionResult(
                 this,
                 [
@@ -153,11 +102,8 @@ export class KaraCharacter extends Character implements Examine {
         }
 
         if (choiceId === 6) {
-            // const index: number = this.numbersArray.indexOf(6);
-            // getPlayerSession().allRiddles.splice(index, 1);
-            this.finalRiddlesArray.splice(0, 1);
-            console.log(this.finalRiddlesArray, "CHOICEID 6");
-            // console.log(getPlayerSession().allRiddles, "CHOICEID 6");
+            const index: number = this.finalRiddlesArray.indexOf(6);
+            this.finalRiddlesArray.splice(index, 1);
             return new TalkActionResult(
                 this,
                 [
@@ -173,11 +119,8 @@ export class KaraCharacter extends Character implements Examine {
         }
 
         if (choiceId === 7) {
-            // const index: number = this.numbersArray.indexOf(7);
-            // getPlayerSession().allRiddles.splice(index, 1);
-            this.finalRiddlesArray.splice(0, 1);
-            console.log(this.finalRiddlesArray, "CHOICEID 7");
-            // console.log(getPlayerSession().allRiddles, "CHOICEID 7 ");
+            const index: number = this.finalRiddlesArray.indexOf(7);
+            this.finalRiddlesArray.splice(index, 1);
             return new TalkActionResult(
                 this,
                 [
@@ -192,6 +135,154 @@ export class KaraCharacter extends Character implements Examine {
             );
         }
 
+        if (choiceId === 8) {
+            const index: number = this.finalRiddlesArray.indexOf(8);
+            this.finalRiddlesArray.splice(index, 1);
+            return new TalkActionResult(
+                this,
+                [
+                    "Never resting, never still, moving silently from hill to hill.",
+                    "it does not walk, run, or trot; all is cool where it is not.",
+                ],
+                [
+                    new TalkChoiceAction(50, "The wind"),
+                    new TalkChoiceAction(40, "The sun"), // correct answer
+                    new TalkChoiceAction(50, "The rain"),
+                ]
+            );
+        }
+
+        if (choiceId === 9) {
+            const index: number = this.finalRiddlesArray.indexOf(9);
+            this.finalRiddlesArray.splice(index, 1);
+            return new TalkActionResult(
+                this,
+                [
+                    "What can bring back the dead, make you cry make you laugh, make you young.",
+                    "Is born in an instant, yet lasts a lifetime.",
+                ],
+                [
+                    new TalkChoiceAction(40, "A memory"), // correct answer
+                    new TalkChoiceAction(50, "A name"),
+                    new TalkChoiceAction(50, "A joke"),
+                ]
+            );
+        }
+
+        if (choiceId === 10) {
+            const index: number = this.finalRiddlesArray.indexOf(10);
+            this.finalRiddlesArray.splice(index, 1);
+            return new TalkActionResult(
+                this,
+                [
+                    "What can run but never walks. Has a mouth but never talks",
+                    "Has a head but never weeps. Has a bed but never sleeps.",
+                ],
+                [
+                    new TalkChoiceAction(40, "A chariot"),
+                    new TalkChoiceAction(40, "A child"),
+                    new TalkChoiceAction(50, "A river"), // correct answer
+                ]
+            );
+        }
+
+        if (choiceId === 11) {
+            const index: number = this.finalRiddlesArray.indexOf(11);
+            this.finalRiddlesArray.splice(index, 1);
+            return new TalkActionResult(
+                this,
+                [
+                    "This thing all things devours: birds, beasts, trees, flowers.",
+                    "Gnaws iron, bites steel, grinds hard stones to meal.",
+                    "Slays kings, ruins towns and beats high mountains down",
+                ],
+                [
+                    new TalkChoiceAction(50, "Armies"),
+                    new TalkChoiceAction(40, "Time"), // correct answer
+                    new TalkChoiceAction(50, "Nature"),
+                ]
+            );
+        }
+
+        if (choiceId === 12) {
+            const index: number = this.finalRiddlesArray.indexOf(12);
+            this.finalRiddlesArray.splice(index, 1);
+            return new TalkActionResult(
+                this,
+                ["At night they come without being fetched.", "At night they are lost without being stolen"],
+                [
+                    new TalkChoiceAction(50, "The sun"),
+                    new TalkChoiceAction(50, "The moon"),
+                    new TalkChoiceAction(40, "The stars"), // correct answer
+                ]
+            );
+        }
+
+        if (choiceId === 13) {
+            const index: number = this.finalRiddlesArray.indexOf(13);
+            this.finalRiddlesArray.splice(index, 1);
+            return new TalkActionResult(
+                this,
+                ["I create my lair with earthen string, and dispatch my prey with a biting sting"],
+                [
+                    new TalkChoiceAction(50, "A snake"),
+                    new TalkChoiceAction(50, "A wasp"),
+                    new TalkChoiceAction(40, "A spider"), // correct answer
+                ]
+            );
+        }
+
+        if (choiceId === 14) {
+            const index: number = this.finalRiddlesArray.indexOf(14);
+            this.finalRiddlesArray.splice(index, 1);
+            return new TalkActionResult(
+                this,
+                [
+                    "I'm alive, but without breath.",
+                    "I'm as cold in life, as in death",
+                    "I'm never thirsty, though I always drink",
+                ],
+                [
+                    new TalkChoiceAction(50, "A jellyfish"),
+                    new TalkChoiceAction(40, "A fish"), // correct answer
+                    new TalkChoiceAction(50, "A crocodile "),
+                ]
+            );
+        }
+
+        if (choiceId === 15) {
+            const index: number = this.finalRiddlesArray.indexOf(15);
+            this.finalRiddlesArray.splice(index, 1);
+            return new TalkActionResult(
+                this,
+                [
+                    "What has roots that no one sees. Grows taller than trees.",
+                    "Up, up, up it goes, and yet never grows",
+                ],
+                [
+                    new TalkChoiceAction(50, "A city"),
+                    new TalkChoiceAction(40, "A mountain"),
+                    new TalkChoiceAction(50, "A forest"),
+                ]
+            );
+        }
+
+        if (choiceId === 16) {
+            const index: number = this.finalRiddlesArray.indexOf(16);
+            this.finalRiddlesArray.splice(index, 1);
+            return new TalkActionResult(
+                this,
+                [
+                    "What is always old and sometimes new. Never sad sometimes blue",
+                    "Never empty sometimes full. Never pushes always pulls.",
+                ],
+                [
+                    new TalkChoiceAction(40, "The moon"),
+                    new TalkChoiceAction(50, "The tide"),
+                    new TalkChoiceAction(50, "The sky"),
+                ]
+            );
+        }
         if (choiceId === 90) {
             this.playerSession.firstMedallionHalf = true;
             return new TalkActionResult(
@@ -216,7 +307,6 @@ export class KaraCharacter extends Character implements Examine {
             );
         }
         if (choiceId === 40) {
-            console.log(this.riddlesArray, "CHOICEID 40");
             getPlayerSession().riddlesAnswered.push("riddle-answered");
             getPlayerSession().correctAnswers.push("correct-answer");
 
@@ -226,12 +316,11 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 ["You are correct human, another"],
-                [new TalkChoiceAction(this.riddlesArray[0], "Alright")]
+                [new TalkChoiceAction(this.finalRiddlesArray[0], "Alright")]
             );
         }
 
         if (choiceId === 50) {
-            console.log(getPlayerSession().allRiddles, "CHOICEID 50");
             getPlayerSession().riddlesAnswered.push("riddle-answered");
             getPlayerSession().wrongAnswers.push("wrong-answer");
 
@@ -242,7 +331,7 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 ["Incorrect, another"],
-                [new TalkChoiceAction(this.riddlesArray[0], "Very well")]
+                [new TalkChoiceAction(this.finalRiddlesArray[0], "Very well")]
             );
         }
 
