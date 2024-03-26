@@ -10,7 +10,7 @@ export interface Attack {
 }
 export class AttackAction extends Action {
     public constructor() {
-        super(AttackActionAlias, "Attack", false);
+        super(AttackActionAlias, "Attack", true);
     }
     public static handle(gameObject: GameObject): ActionResult | undefined {
         if (implementsInterface(gameObject, AttackActionAlias)) {

@@ -101,17 +101,21 @@ export class KarasValeTownSquareRoom extends Room {
 
         if (alias === NavigateShopRoomAlias) {
             const room: ShopRoom = new ShopRoom();
+            const lastroom: KarasValeTownSquareRoom = new KarasValeTownSquareRoom();
 
             //Set the current room to the example room
             getPlayerSession().currentRoom = room.alias;
+            getPlayerSession().lastRoom = lastroom.alias;
 
             return room.examine();
         }
         if (alias === "BlackSmith-room") {
             const room: BlackSmithRoom = new BlackSmithRoom();
+            const lastroom: KarasValeTownSquareRoom = new KarasValeTownSquareRoom();
 
             //Set the current room to the example room
             getPlayerSession().currentRoom = room.alias;
+            getPlayerSession().lastRoom = lastroom.alias;
 
             return room.examine();
         }

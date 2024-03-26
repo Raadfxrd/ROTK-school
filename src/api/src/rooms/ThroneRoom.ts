@@ -35,19 +35,14 @@ export class ThroneRoom extends Room {
     }
 
     public actions(): Action[] {
-        const playerSession: PlayerSession = getPlayerSession();
-
         const actions: Action[] = [
             new ExamineAction(),
             new TalkAction(),
             new PickupAction(),
             new useItemAction(),
             new CustomAction("inventory", "Inventory", false),
+            new CustomAction("wolburg", "Go Outside", false),
         ];
-
-        if (playerSession.knowLocationLowlands === true) {
-            actions.push(new CustomAction("wolburg", "Go Outside", false));
-        }
 
         return actions;
     }

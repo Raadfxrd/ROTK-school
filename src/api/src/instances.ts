@@ -62,6 +62,7 @@ import { SmaugRoomAlias, SmaugRoom } from "./rooms/SmaugRoom";
 import { SmaugAlias, SmaugCharacter } from "./characters/SmaugCharacter";
 import { StablesWolburgRoom, StablesWolburgRoomAlias } from "./rooms/StablesWolburgRoom";
 import { GateWolburgRoom, GateWolburgRoomAlias } from "./rooms/GateWolburgRoom";
+import { VladimirCharacter, VladimirCharacterAlias } from "./characters/VladimirCharacter";
 
 /**
  * Create a new player session object
@@ -84,6 +85,10 @@ export function createNewPlayerSession(): PlayerSession {
         healthPoints: 100,
         armourClass: 12,
         strength: 14,
+
+        //enemy stats
+        vladimirHP: 20,
+        vladimirGone: false,
 
         //Booleans
         knowWhereMapIs: false,
@@ -324,6 +329,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case SmaugAlias:
             return new SmaugCharacter();
+
+        case VladimirCharacterAlias:
+            return new VladimirCharacter();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
