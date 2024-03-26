@@ -65,6 +65,8 @@ import { DeathAlias, deathRoom } from "./rooms/Deathroom";
 import { princessAlias, princessCharacter } from "./characters/princessCharacter";
 import { StablesWolburgRoom, StablesWolburgRoomAlias } from "./rooms/StablesWolburgRoom";
 import { GateWolburgRoom, GateWolburgRoomAlias } from "./rooms/GateWolburgRoom";
+import { VladimirCharacter, VladimirCharacterAlias } from "./characters/VladimirCharacter";
+import { ShopTorch, ShopTorchAlias } from "./items/ShopTorchItem";
 
 /**
  * Create a new player session object
@@ -87,6 +89,10 @@ export function createNewPlayerSession(): PlayerSession {
         healthPoints: 100,
         armourClass: 12,
         strength: 14,
+
+        //enemy stats
+        vladimirHP: 20,
+        vladimirGone: false,
 
         //Booleans
         knowWhereMapIs: false,
@@ -337,6 +343,11 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
             return new SmaugCharacter();
         case princessAlias:
             return new princessCharacter();
+        case ShopTorchAlias:
+            return new ShopTorch();
+
+        case VladimirCharacterAlias:
+            return new VladimirCharacter();
 
         case JainaCharacterAlias:
             return new JainaCharacter();

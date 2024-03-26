@@ -8,9 +8,6 @@ import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { TalkAction, TalkActionAlias } from "../base/actions/TalkAction";
 import { PlayerSession } from "../types";
 import { Examine, ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
-import { Back, NavigateBackAlias } from "../actions/NavigateAction";
-import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./KarasValeTownSquareRoom";
-import { WolburgRoomAlias, WolburgRoom } from "./WolburgRoom";
 import { SmaugCharacter } from "../characters/SmaugCharacter";
 import { princessCharacter } from "../characters/princessCharacter";
 
@@ -38,7 +35,6 @@ export class SmaugRoom extends Room implements Examine {
             new CustomAction("CheckInventoryAlias", "Check Inventory", false),
             new CustomAction("killSmaug", "Kill Smaug", false),
             new TalkAction(),
-            new Back(),
             new ExamineAction(),
         ];
     }
@@ -49,8 +45,9 @@ export class SmaugRoom extends Room implements Examine {
     public custom(alias: string, _gameObjects?: GameObject[] | undefined): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.strength >= 14) {
-            if (alias === "Kill") {
-                image = "";
+            if (alias === "killSmaug") {
+                image = "rooms/princess.png";
+                return new TextActionResult(["You have freed the princess"]);
             }
         }
         if (alias === "CheckInventoryAlias") {
@@ -62,17 +59,6 @@ export class SmaugRoom extends Room implements Examine {
             }
             gameObjectArray.push("Gold amount: " + playerSession.gold);
             return new TextActionResult(gameObjectArray);
-        }
-        if (alias === NavigateBackAlias) {
-            const playerSession: PlayerSession = getPlayerSession();
-            playerSession.currentRoom = playerSession.lastRoom;
-            if (playerSession.lastRoom === WolburgRoomAlias) {
-                const room: WolburgRoom = new WolburgRoom();
-                return room.examine();
-            } else if (playerSession.lastRoom === KarasValeTownSquareRoomAlias) {
-                const room: KarasValeTownSquareRoom = new KarasValeTownSquareRoom();
-                return room.examine();
-            }
         }
         return undefined;
     }

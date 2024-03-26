@@ -34,8 +34,8 @@ export class StablesWolburgRoom extends Room {
             new ExamineAction(),
             new TalkAction(),
             new CustomAction("inventory", "Inventory", false),
-            new Back(),
             new NavigationAction(),
+            new Back(),
         ];
     }
 
@@ -51,6 +51,14 @@ export class StablesWolburgRoom extends Room {
     }
 
     public examine(): ActionResult | undefined {
+        const playerSession: PlayerSession = getPlayerSession();
+        if (playerSession.knowLocationLowlands === false) {
+            return new TextActionResult([
+                "The stables of Wolburg.",
+                "You see the kidnappers take the horses from the stablekeeper. If you are fast enough you can get to the gate before they can get on their horses.",
+                "On the other side you see the stablekeeper on the ground. He looks like he is in pain.",
+            ]);
+        }
         return new TextActionResult([
             "The stables of Wolburg.",
             "Usually there are horses here but as of right now it is completely empty.",
@@ -74,6 +82,10 @@ export class StablesWolburgRoom extends Room {
             const lastRoom: string = WolburgRoomAlias;
             playerSession.currentRoom = lastRoom;
             playerSession.lastRoom = currentRoom;
+            return new TextActionResult([
+                "The City Wolburg, it is really lively out in town. You see some people further at the stable that were in trouble. Maybe another clue?",
+                "There are some buildings nearby like houses, a church, a tavern and a blacksmith.",
+            ]);
         }
         if (alias === "inventory") {
             const gameobject: GameObject[] = getGameObjectsFromInventory();

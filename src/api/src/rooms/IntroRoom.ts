@@ -146,7 +146,8 @@ export class IntroRoom extends Room {
             getPlayerSession().currentRoom = room.alias;
             return new TextActionResult([
                 "The darkness vanishes and you see some people running away with the bound princess.",
-                "You think about going after them, but they are already too far gone...",
+                "The kidnappers are already running away, but you think you still can get to them.",
+                "Besides that the kidnappers ran away, there might be a clue in this room where they are from...",
             ]);
         }
         return undefined;

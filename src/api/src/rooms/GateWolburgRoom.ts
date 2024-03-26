@@ -1,3 +1,4 @@
+import { AttackAction, AttackActionAlias } from "../actions/AttackAction";
 import { Back, NavigateBackAlias } from "../actions/NavigateAction";
 import { NavigationAction, NavigationActionAlias } from "../actions/NavigationAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
@@ -9,6 +10,7 @@ import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { AlexandraCharacter } from "../characters/AlexandraCharacter";
+import { VladimirCharacter } from "../characters/VladimirCharacter";
 import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { PlayerSession } from "../types";
 import { KarasValeTownSquareRoom } from "./KarasValeTownSquareRoom";
@@ -18,11 +20,11 @@ export const GateWolburgRoomAlias: string = "souter-gate-wolburg";
 
 export class GateWolburgRoom extends Room {
     public constructor() {
-        super(GateWolburgRoomAlias, NavigationActionAlias);
+        super(GateWolburgRoomAlias, NavigationActionAlias, AttackActionAlias);
     }
 
     public name(): string {
-        return "Souther Gate";
+        return "Southern Gate";
     }
 
     public images(): string[] {
@@ -36,6 +38,7 @@ export class GateWolburgRoom extends Room {
             new CustomAction("inventory", "Inventory", false),
             new NavigationAction(),
             new Back(),
+            new AttackAction(),
         ];
     }
 
@@ -51,6 +54,20 @@ export class GateWolburgRoom extends Room {
     }
 
     public examine(): ActionResult | undefined {
+        const playerSession: PlayerSession = getPlayerSession();
+
+        if (
+            playerSession.knowLocationLowlands === false ||
+            playerSession.horseMission10 === false ||
+            playerSession.horseMission20 === false ||
+            playerSession.horseMission30 === false
+        ) {
+            return new TextActionResult([
+                "You are hurrying your way to the kidnappers who are also trying to get on their horses as quick as possible.",
+                "One of the kidnappers is more on the back than the others. This is your closest chance, take it.",
+            ]);
+        }
+
         return new TextActionResult([
             "You are at the souther gate of the city, passing the gate means the adventure is truly going to start",
             "You feel ready to go on this adventure and rescue the princess.",
@@ -58,6 +75,21 @@ export class GateWolburgRoom extends Room {
     }
 
     public objects(): GameObject[] {
+        const playerSession: PlayerSession = getPlayerSession();
+        if (
+            playerSession.knowLocationLowlands === false ||
+            playerSession.horseMission10 === false ||
+            playerSession.horseMission20 === false ||
+            playerSession.horseMission30 === false
+        ) {
+            return [
+                this,
+                ...getGameObjectsFromInventory(),
+                new AlexandraCharacter(),
+                new KarasValeTownSquareRoom(),
+                new VladimirCharacter(),
+            ];
+        }
         return [
             this,
             ...getGameObjectsFromInventory(),
