@@ -1,4 +1,4 @@
-import { NavigateToVolosVillage, NavigationEast } from "../actions/NavigateAction";
+import { NavigationAction, NavigationActionAlias } from "../actions/NavigationAction";
 import { useItemAction } from "../actions/UseItemAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
@@ -16,11 +16,11 @@ import { PlayerSession } from "../types";
 import { KarasValeTownSquareRoom } from "./KarasValeTownSquareRoom";
 import { VolosVillageRoom } from "./VolosVillageRoom";
 
-export const KarasValeForestRoomAlias: string = "KVForest";
+export const KarasValeForestRoomAlias: string = "KVForest-room";
 
 export class KarasValeForestRoom extends Room {
     public constructor() {
-        super(KarasValeForestRoomAlias);
+        super(KarasValeForestRoomAlias, NavigationActionAlias);
     }
 
     public PlayerSession: PlayerSession = getPlayerSession();
@@ -37,13 +37,18 @@ export class KarasValeForestRoom extends Room {
     }
 
     public actions(): Action[] {
-        return [
-            new ExamineAction(),
-            new useItemAction(),
-            new TalkAction(),
-            new NavigationEast(),
-            new NavigateToVolosVillage(),
-        ];
+        return [new ExamineAction(), new useItemAction(), new TalkAction(), new NavigationAction()];
+    }
+
+    public navigation(): ActionResult | undefined {
+        const room: KarasValeForestRoom = new KarasValeForestRoom();
+        const lastroom: string = getPlayerSession().currentRoom;
+
+        //Set the current room to the example room
+        getPlayerSession().currentRoom = room.alias;
+        getPlayerSession().lastRoom = lastroom;
+
+        return room.examine();
     }
 
     public examine(): ActionResult | undefined {
@@ -52,9 +57,22 @@ export class KarasValeForestRoom extends Room {
 
     public objects(): GameObject[] {
         if (this.PlayerSession.summonedKara === true) {
-            return [new KVFallenTreesItem(), new KVForestItem(), new KaraWhistleItem(), new KaraCharacter()];
+            return [
+                new KVFallenTreesItem(),
+                new KVForestItem(),
+                new KaraWhistleItem(),
+                new KaraCharacter(),
+                new KarasValeTownSquareRoom(),
+                new VolosVillageRoom(),
+            ];
         }
-        return [new KVFallenTreesItem(), new KVForestItem(), new KaraWhistleItem()];
+        return [
+            new KVFallenTreesItem(),
+            new KVForestItem(),
+            new KaraWhistleItem(),
+            new KarasValeTownSquareRoom(),
+            new VolosVillageRoom(),
+        ];
     }
 
     public custom(alias: string, _gameObjects: GameObject[] | undefined): ActionResult | undefined {
@@ -77,6 +95,9 @@ export class KarasValeForestRoom extends Room {
     }
 
     public objectActions(): string[] {
-        return [ExamineActionAlias];
+        if (this.PlayerSession.currentRoom === KarasValeForestRoomAlias) {
+            return [ExamineActionAlias];
+        }
+        return [NavigationActionAlias];
     }
 }

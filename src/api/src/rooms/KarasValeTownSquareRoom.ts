@@ -3,16 +3,7 @@ import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Room } from "../base/gameObjects/Room";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Action } from "../base/actions/Action";
-import {
-    NavigateBackToWolburg,
-    NavigateShopRoomAlias,
-    NavigateToLowlandsFromKV,
-    NavigationBlacksmith,
-    NavigationNorth,
-    NavigationShop,
-    NavigationSouth,
-    NavigationWest,
-} from "../actions/NavigateAction";
+import { NavigateBackToWolburg, NavigationNorth } from "../actions/NavigateAction";
 import { getPlayerSession } from "../instances";
 import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { PlayerSession } from "../types";
@@ -24,7 +15,7 @@ import { useItemAction } from "../actions/UseItemAction";
 import { BlackSmithRoom } from "./BlacksmithRoom";
 import { ShopRoom } from "./ShopRoom";
 import { LowLandsRoom } from "./LowLandsRoom";
-import { NavigationActionAlias } from "../actions/NavigationAction";
+import { NavigationAction, NavigationActionAlias } from "../actions/NavigationAction";
 import { GateWolburgRoom } from "./GateWolburgRoom";
 import { JainaCharacter } from "../characters/JainaCharacter";
 
@@ -46,25 +37,10 @@ export class KarasValeTownSquareRoom extends Room {
 
     public actions(): Action[] {
         if (this.playerSession.knowsOfKara === true && this.playerSession.wentNorth === true) {
-            return [
-                new ExamineAction(),
-                new TalkAction(),
-                new NavigationBlacksmith(),
-                new NavigationShop(),
-                new NavigationSouth(),
-                new NavigationWest(),
-                new useItemAction(),
-                new NavigateToLowlandsFromKV(),
-            ];
+            return [new ExamineAction(), new TalkAction(), new useItemAction(), new NavigationAction()];
         }
         if (this.playerSession.wentNorth === true) {
-            return [
-                new ExamineAction(),
-                new TalkAction(),
-                new NavigationBlacksmith(),
-                new NavigationShop(),
-                new NavigationSouth(),
-            ];
+            return [new ExamineAction(), new TalkAction(), new NavigationAction()];
         }
 
         return [new NavigationNorth(), new NavigateBackToWolburg()];
@@ -72,9 +48,17 @@ export class KarasValeTownSquareRoom extends Room {
 
     public objects(): GameObject[] {
         if (this.playerSession.hasWhistle === true) {
-            return [new AureliusCharacter(), new KaraWhistleItem(), new JainaCharacter()];
+            return [
+                // new NavigateToLowlandsFromKV(),
+                new AureliusCharacter(),
+                new KaraWhistleItem(),
+                new JainaCharacter(),
+                new BlackSmithRoom(),
+                new ShopRoom(),
+                new KarasValeForestRoom(),
+            ];
         }
-        return [new AureliusCharacter(), new JainaCharacter()];
+        return [new AureliusCharacter(), new JainaCharacter(), new BlackSmithRoom(), new ShopRoom()];
     }
 
     public navigation(): ActionResult | undefined {
@@ -102,38 +86,9 @@ export class KarasValeTownSquareRoom extends Room {
             ]);
         }
 
-        if (alias === NavigateShopRoomAlias) {
-            const room: ShopRoom = new ShopRoom();
-            const lastroom: KarasValeTownSquareRoom = new KarasValeTownSquareRoom();
-
-            //Set the current room to the example room
-            getPlayerSession().currentRoom = room.alias;
-            getPlayerSession().lastRoom = lastroom.alias;
-
-            return room.examine();
-        }
-        if (alias === "BlackSmith-room") {
-            const room: BlackSmithRoom = new BlackSmithRoom();
-            const lastroom: KarasValeTownSquareRoom = new KarasValeTownSquareRoom();
-
-            //Set the current room to the example room
-            getPlayerSession().currentRoom = room.alias;
-            getPlayerSession().lastRoom = lastroom.alias;
-
-            return room.examine();
-        }
-
         if (alias === "NavigateSouth") {
             this.playerSession.wentNorth = false;
             return new TextActionResult(["In front of you is a small town named Kara's Vale."]);
-        }
-
-        if (alias === "NavigateWest") {
-            const room: KarasValeForestRoom = new KarasValeForestRoom();
-
-            getPlayerSession().currentRoom = room.alias;
-
-            return room.examine();
         }
 
         if (alias === "BackToWolburg") {
@@ -157,7 +112,7 @@ export class KarasValeTownSquareRoom extends Room {
     public objectActions(): string[] {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.currentRoom === KarasValeTownSquareRoomAlias) {
-            return [ExamineActionAlias, NavigationActionAlias];
+            return [ExamineActionAlias];
         }
         return [NavigationActionAlias];
     }

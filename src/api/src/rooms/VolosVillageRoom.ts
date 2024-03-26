@@ -6,6 +6,7 @@ import {
     NavigateNorthAlias,
     NavigationNorth,
 } from "../actions/NavigateAction";
+import { NavigationActionAlias } from "../actions/NavigationAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { TextAndImageActionResult } from "../base/actionResults/TextAndImageActionResult";
@@ -34,7 +35,7 @@ export class VolosVillageRoom extends Room {
     }
 
     public constructor() {
-        super(VolosVillageRoomAlias);
+        super(VolosVillageRoomAlias, NavigationActionAlias);
     }
     public playerSession: PlayerSession = getPlayerSession();
 
@@ -72,6 +73,17 @@ export class VolosVillageRoom extends Room {
         }
 
         return [new NavigationNorth(), new CustomAction("back-karas", "Back", false)];
+    }
+
+    public navigation(): ActionResult | undefined {
+        const room: VolosVillageRoom = new VolosVillageRoom();
+        const lastroom: string = getPlayerSession().currentRoom;
+
+        //Set the current room to the example room
+        getPlayerSession().currentRoom = room.alias;
+        getPlayerSession().lastRoom = lastroom;
+
+        return room.examine();
     }
 
     public objects(): GameObject[] {
@@ -130,6 +142,9 @@ export class VolosVillageRoom extends Room {
         return undefined;
     }
     public objectActions(): string[] {
-        return [ExamineActionAlias];
+        if (this.playerSession.currentRoom === VolosVillageRoomAlias) {
+            return [ExamineActionAlias];
+        }
+        return [NavigationActionAlias];
     }
 }
