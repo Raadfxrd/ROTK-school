@@ -28,6 +28,7 @@ export class KaraCharacter extends Character implements Examine {
 
     public riddlesArray: number[] = this.playerSession.allRiddles;
 
+    // functie om riddlesArray te shuffelen zodat je een random volgorde krijgt
     public shuffleArray(riddlesArray: number[]): number[] {
         for (let i: number = riddlesArray.length - 1; i > 0; i--) {
             const j: number = Math.floor(Math.random() * (i + 1));

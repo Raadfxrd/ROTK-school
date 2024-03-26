@@ -74,7 +74,7 @@ import { GateWolburgRoom, GateWolburgRoomAlias } from "./rooms/GateWolburgRoom";
 export function createNewPlayerSession(): PlayerSession {
     return {
         //Room session
-        currentRoom: "intro-room",
+        currentRoom: "KVTownSquare",
         lastRoom: "",
         inCombat: false,
 
