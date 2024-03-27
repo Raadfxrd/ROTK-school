@@ -331,13 +331,55 @@ export class KaraCharacter extends Character implements Examine {
                 [
                     "You only managed to correctly answer one of my riddles. A dissapointing score to be sure",
                     "Still I grant you this item, you will have to figure out when you need to use it yourself",
+                    "*You gain a blue torch*",
                 ],
                 [new TalkChoiceAction(100, "Thank you")]
             );
         }
 
         if (choiceId === 84) {
-            return new TalkActionResult(this, ["You stupid bitch"], [new TalkChoiceAction(100, "dayum")]);
+            return new TalkActionResult(
+                this,
+                [
+                    "You have failed to answer my riddles correctly human, you do not meet my expectations.",
+                    "If it is your wish to save the princess I can give you what you need, but at a price.",
+                ],
+                [new TalkChoiceAction(85, "What kind of price?")]
+            );
+        }
+
+        if (choiceId === 85) {
+            return new TalkActionResult(
+                this,
+                ["Either you pay with your life force, or your gold. I do like shiny things after all."],
+                [
+                    new TalkChoiceAction(86, "I choose the gold"),
+                    new TalkChoiceAction(87, "I choose my life force"),
+                    new TalkChoiceAction(88, "I choose neither, die!"),
+                ]
+            );
+        }
+
+        if (choiceId === 86) {
+            if (this.playerSession.gold >= 15) {
+                this.playerSession.gold -= 15;
+                return new TalkActionResult(
+                    this,
+                    [
+                        "Very well.",
+                        "*A handfull of gold floats out of your pouch and moves towards the crow.",
+                        "I grant you this torch.",
+                        "*You gain a blue torch*",
+                    ],
+                    [new TalkChoiceAction(89, "")]
+                );
+            } else {
+                return new TalkActionResult(
+                    this,
+                    ["It seems you do not have the funds you need."],
+                    [new TalkChoiceAction(90, "")]
+                );
+            }
         }
         if (choiceId === 91) {
             return new TalkActionResult(
