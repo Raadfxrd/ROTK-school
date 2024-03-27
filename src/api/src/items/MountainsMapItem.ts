@@ -17,9 +17,9 @@ export class MountainsMapItem extends Item implements Examine {
     public examine(): ActionResult | undefined {
         return new TextAndImageActionResult(
             [
-                "You take a close look at the grey mountains.",
+                "You take a close look at the grey area on the map.",
                 "It is a big area with a lot of hills and mountains.",
-                "In the mountains there reside what looks like some houses.",
+                "You see some houses were built high on top of the hills, perhaps to avoid floodings.",
             ],
             ["rooms/MountainMap.jpg"]
         );

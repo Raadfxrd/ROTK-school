@@ -19,7 +19,6 @@ export class QuickPassMapItem extends Item implements Examine {
             [
                 "You take a close look at Quickpass.",
                 "It is a big town which is between 2 main roads, probably with a lot of trades going on in the town",
-                "There is a path going around the cave.",
             ],
             ["rooms/QuickpassMap.jpg"]
         );
