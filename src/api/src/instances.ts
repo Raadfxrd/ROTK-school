@@ -91,6 +91,7 @@ export function createNewPlayerSession(): PlayerSession {
         currentRoom: "intro-room",
         lastRoom: "",
         inCombat: false,
+        image: "",
 
         //Inventory session
         inventory: [],

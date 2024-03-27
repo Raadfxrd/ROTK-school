@@ -21,7 +21,7 @@ export class ChurchTorch extends Item implements Examine, Pickup {
                 "It is shimmering with a bright light and a holy feeling around it.",
                 "It might resemble something from the sun and healing from Pelor.",
             ],
-            ["rooms/churchwolburg.png", "items/torch-church.png"]
+            ["items/torch-throne.png"]
         );
     }
 

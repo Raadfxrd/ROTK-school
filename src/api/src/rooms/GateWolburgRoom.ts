@@ -28,6 +28,8 @@ export class GateWolburgRoom extends Room {
     }
 
     public images(): string[] {
+        const playerSession: PlayerSession = getPlayerSession();
+        playerSession.image = "rooms/churchwolburg.png";
         return ["rooms/gate-wolburg.png"];
     }
 
