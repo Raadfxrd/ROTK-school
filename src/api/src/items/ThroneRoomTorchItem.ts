@@ -15,13 +15,14 @@ export class ChurchTorch extends Item implements Examine, Pickup {
     }
 
     public examine(): ActionResult | undefined {
+        const playerSession: PlayerSession = getPlayerSession();
         return new TextAndImageActionResult(
             [
                 "You see this torch in the corner behind the statue.",
                 "It is shimmering with a bright light and a holy feeling around it.",
                 "It might resemble something from the sun and healing from Pelor.",
             ],
-            ["items/torch-throne.png"]
+            [playerSession.image, "items/torch-throne.png"]
         );
     }
 
