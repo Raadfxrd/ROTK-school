@@ -11,6 +11,8 @@ import { Examine, ExamineAction, ExamineActionAlias } from "../base/actions/Exam
 import { SmaugCharacter, SmaugProperties } from "../characters/SmaugCharacter";
 import { princessCharacter } from "../characters/princessCharacter";
 import { deathRoom } from "../rooms/Deathroom";
+import { useItemAction } from "../actions/UseItemAction";
+import { HealingPotionItem } from "../items/HealingPotionItem";
 
 export const SmaugRoomAlias: string = "Smaug-room";
 let image: string = "rooms/smaug.png";
@@ -29,7 +31,7 @@ export class SmaugRoom extends Room implements Examine {
         return [image];
     }
     public objects(): GameObject[] {
-        return [new SmaugCharacter(), new princessCharacter()];
+        return [new SmaugCharacter(), new princessCharacter(), new HealingPotionItem()];
     }
     public actions(): Action[] {
         return [
@@ -37,6 +39,7 @@ export class SmaugRoom extends Room implements Examine {
             new CustomAction("fightSmaug", "fight Smaug", false),
             new TalkAction(),
             new ExamineAction(),
+            new useItemAction(),
         ];
     }
     public examine(): ActionResult | undefined {
@@ -45,6 +48,11 @@ export class SmaugRoom extends Room implements Examine {
 
     public custom(alias: string, _gameObjects?: GameObject[] | undefined): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
+        if (playerSession.smaugHP <= 0) {
+            image = "rooms/princess.png";
+
+            return new TextActionResult(["You have slain Smaug and freed the princess!"]);
+        }
         if (playerSession.healthPoints >= 1) {
             if (alias === "fightSmaug") {
                 function randomMove(): string {
@@ -73,11 +81,6 @@ export class SmaugRoom extends Room implements Examine {
                     playerSession.smaugHP -= 30;
                     playerSession.healthPoints -= SmaugProperties.Damage;
                     return new TextActionResult(["You have landed a attack but Smaug retaliated.>"]);
-                }
-                if (playerSession.smaugHP <= 0) {
-                    image = "rooms/princess.png";
-
-                    return new TextActionResult(["You have slain Smaug and freed the princess!"]);
                 }
             }
         } else {
