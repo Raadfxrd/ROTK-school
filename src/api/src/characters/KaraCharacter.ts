@@ -11,7 +11,7 @@ export const KaraCharacterAlias: string = "KaraCharacter";
 
 export class KaraCharacter extends Character implements Examine {
     public constructor() {
-        super(KaraCharacterAlias);
+        super(KaraCharacterAlias, ExamineActionAlias);
     }
 
     public playerSession: PlayerSession = getPlayerSession();
@@ -41,7 +41,6 @@ export class KaraCharacter extends Character implements Examine {
 
     public talk(choiceId?: number | undefined): ActionResult | undefined {
         if (choiceId === 1) {
-            console.log(this.finalRiddlesArray, "choiceid 1");
             return new TalkActionResult(
                 this,
                 [
@@ -65,7 +64,6 @@ export class KaraCharacter extends Character implements Examine {
         }
 
         if (choiceId === 3) {
-            console.log(this.finalRiddlesArray);
             return new TalkActionResult(
                 this,
                 [
@@ -262,7 +260,7 @@ export class KaraCharacter extends Character implements Examine {
                 ],
                 [
                     new TalkChoiceAction(50, "A city"),
-                    new TalkChoiceAction(40, "A mountain"),
+                    new TalkChoiceAction(40, "A mountain"), // correct answer
                     new TalkChoiceAction(50, "A forest"),
                 ]
             );
@@ -278,7 +276,7 @@ export class KaraCharacter extends Character implements Examine {
                     "Never empty sometimes full. Never pushes always pulls.",
                 ],
                 [
-                    new TalkChoiceAction(40, "The moon"),
+                    new TalkChoiceAction(40, "The moon"), // correct answer
                     new TalkChoiceAction(50, "The tide"),
                     new TalkChoiceAction(50, "The sky"),
                 ]
@@ -314,6 +312,7 @@ export class KaraCharacter extends Character implements Examine {
         }
 
         if (choiceId === 82) {
+            this.playerSession.firstMedallionHalf = true;
             return new TalkActionResult(
                 this,
                 [
@@ -371,15 +370,58 @@ export class KaraCharacter extends Character implements Examine {
                         "I grant you this torch.",
                         "*You gain a blue torch*",
                     ],
-                    [new TalkChoiceAction(89, "")]
+                    [new TalkChoiceAction(100, "Thank you")]
                 );
             } else {
                 return new TalkActionResult(
                     this,
-                    ["It seems you do not have the funds you need."],
-                    [new TalkChoiceAction(90, "")]
+                    [
+                        "It seems you do not have the funds you need. You will give me some of your life force then?",
+                    ],
+                    [new TalkChoiceAction(87, "Yes, take it."), new TalkChoiceAction(88, "I will not, die!")]
                 );
             }
+        }
+
+        if (choiceId === 87) {
+            this.playerSession.healthPoints -= 10;
+            return new TalkActionResult(
+                this,
+                [
+                    "Kara: Very well.",
+                    "*You fall to your knees as you feel the life force being drained from your body*",
+                    "Kara: Thank you for the meal. Now take this",
+                    "*You gain a blue torch*",
+                ],
+                [new TalkChoiceAction(100, "Alright")]
+            );
+        }
+
+        if (choiceId === 88) {
+            return new TalkActionResult(
+                this,
+                [
+                    "Kara: A most unwise choice.",
+                    "*In the midst of your charge at the crow you feel your body freeze*",
+                    "Kara: You have made a grave transgression, and as punishment you will pay the ultimate price",
+                ],
+                [new TalkChoiceAction(89, "Continue")]
+            );
+        }
+
+        if (choiceId === 89) {
+            return new TalkActionResult(
+                this,
+                [
+                    "*You can't move, but you can see the crows eyes begin to glow red*",
+                    "*A sharp pain shoots into your chest and you see a red beam flowing out of your body into the mouth of the crow*",
+                    "*And everything goes black*",
+                ],
+                [new TalkChoiceAction(90, "Continue")]
+            );
+        }
+
+        if (choiceId === 90) {
         }
         if (choiceId === 91) {
             return new TalkActionResult(
