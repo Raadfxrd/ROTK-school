@@ -68,15 +68,15 @@ export class TunnelWall extends Room implements Examine {
     public objectActions(): string[] {
         return [ExamineActionAlias];
     }
-
-    // if (playerSession.inventory.includes(ShadowbeakTorchAlias)) {
-    //     return new TextAndImageActionResult(
-    //         [
-    //             "You place in the torch that belongs to the Shadowbeak Wilds.",
-    //             "The torch flickers, casting shadows on the wall of the tunnel.",
-    //             "You hear a strange noise...",
-    //         ],
-    //         ["rooms/tunnel-wall.png", "items/TorchPlainsOnWall.png"]
-    //     );
-    // }
 }
+
+// if (playerSession.inventory.includes(ShadowbeakTorchAlias)) {
+//     return new TextAndImageActionResult(
+//         [
+//             "You place in the torch that belongs to the Shadowbeak Wilds.",
+//             "The torch flickers, casting shadows on the wall of the tunnel.",
+//             "You hear a strange noise...",
+//         ],
+//         ["rooms/tunnel-wall.png", "items/TorchPlainsOnWall.png"]
+//     );
+// }
