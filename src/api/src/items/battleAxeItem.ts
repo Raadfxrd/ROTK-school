@@ -11,6 +11,9 @@ export class battleAxeItem extends Item implements Examine {
     public objectActions(): string[] {
         return [PickupActionAlias];
     }
+    public Attack(): number {
+        return 12;
+    }
     public name(): string {
         return "battleAxe";
     }

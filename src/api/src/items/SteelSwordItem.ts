@@ -1,3 +1,4 @@
+import { Attack, AttackActionAlias } from "../actions/AttackAction";
 import { Pickup, PickupActionAlias } from "../actions/PickupAction";
 import { UseItemActionAlias, useItem } from "../actions/UseItemAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
@@ -9,9 +10,15 @@ import { PlayerSession } from "../types";
 
 export const SteelSwordItemAlias: string = "steel-sword";
 
-export class SteelSwordItem extends Item implements Examine, Pickup, useItem {
+export class SteelSwordItem extends Item implements Examine, Pickup, useItem, Attack {
     public constructor() {
-        super(SteelSwordItemAlias, ExamineActionAlias, PickupActionAlias, UseItemActionAlias);
+        super(
+            SteelSwordItemAlias,
+            ExamineActionAlias,
+            PickupActionAlias,
+            UseItemActionAlias,
+            AttackActionAlias
+        );
     }
 
     public name(): string {
@@ -23,6 +30,10 @@ export class SteelSwordItem extends Item implements Examine, Pickup, useItem {
             "This sword is made of steel, it is a lot stronger than a normal blade",
             "Equipping it will give you an extra bonus to your Damage. (+1)",
         ]);
+    }
+
+    public Attack(): number {
+        return 8;
     }
 
     public pickup(): ActionResult | undefined {

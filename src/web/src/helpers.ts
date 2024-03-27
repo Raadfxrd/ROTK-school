@@ -47,6 +47,6 @@ function getPlayerSessionId(): string {
 
         localStorage.setItem("playerSessionId", playerSessionId);
     }
-
+    console.log(playerSessionId);
     return playerSessionId;
 }

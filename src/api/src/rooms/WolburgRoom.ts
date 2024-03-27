@@ -1,4 +1,3 @@
-import { NavigateBlacksmithAlias, NavigateShopRoomAlias } from "../actions/NavigateAction";
 import { NavigationAction } from "../actions/NavigationAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
@@ -102,26 +101,6 @@ export class WolburgRoom extends Room {
             }
             gameObjectArray.push("Gold amount: " + playerSession.gold);
             return new TextActionResult(gameObjectArray);
-        }
-        if (alias === NavigateShopRoomAlias) {
-            const room: ShopRoom = new ShopRoom();
-            const lastRoom: WolburgRoom = new WolburgRoom();
-
-            //Set the current room to the example room
-            getPlayerSession().lastRoom = lastRoom.alias;
-            getPlayerSession().currentRoom = room.alias;
-
-            return room.examine();
-        }
-        if (alias === NavigateBlacksmithAlias) {
-            const room: BlackSmithRoom = new BlackSmithRoom();
-            const lastRoom: WolburgRoom = new WolburgRoom();
-
-            //Set the current room to the example room
-            getPlayerSession().currentRoom = room.alias;
-            getPlayerSession().lastRoom = lastRoom.alias;
-
-            return room.examine();
         }
         return undefined;
     }
