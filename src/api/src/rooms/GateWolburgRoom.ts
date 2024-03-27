@@ -56,6 +56,12 @@ export class GateWolburgRoom extends Room {
     public examine(): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
 
+        if (playerSession.vladimirGone === true) {
+            return new TextActionResult([
+                "You are standing at the southern gate, you see really fresh horse marks in the dirt.",
+                "If you look further into the forest you see some people on horses run away.",
+            ]);
+        }
         if (
             playerSession.knowLocationLowlands === false ||
             playerSession.horseMission10 === false ||
@@ -69,7 +75,7 @@ export class GateWolburgRoom extends Room {
         }
 
         return new TextActionResult([
-            "You are at the souther gate of the city, passing the gate means the adventure is truly going to start",
+            "You are at the southern gate of the city, passing the gate means the adventure is truly going to start",
             "You feel ready to go on this adventure and rescue the princess.",
         ]);
     }

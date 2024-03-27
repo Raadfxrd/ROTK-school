@@ -93,6 +93,7 @@ export class VladimirCharacter extends Character implements Examine, Attack {
             ]);
         }
         if (_choiceId === 1) {
+            playerSession.knowNameLowlands = true;
             return new TalkActionResult(
                 this,
                 ["Vladimir: I was heading towards the lowlands, it's my hometown."],
@@ -139,11 +140,16 @@ export class VladimirCharacter extends Character implements Examine, Attack {
                 ]
             );
         } else if (_choiceId === 96) {
+            playerSession.inCombat = false;
+            playerSession.vladimirTaken = true;
             return new TextActionResult([
                 "You must hurry, they are going to give the princess to a big dragon who wants her.",
                 "If we didn't hand her over to the dragon he would destroy the Lowlands",
             ]);
         } else if (_choiceId === 97) {
+            playerSession.inCombat = false;
+            playerSession.vladimirTaken = true;
+
             return new TextActionResult(["*You start dragging vladimir back to the throne room.*"]);
         } else if (_choiceId === 98) {
             return new TalkActionResult(
@@ -159,6 +165,7 @@ export class VladimirCharacter extends Character implements Examine, Attack {
             );
         } else if (_choiceId === 99) {
             playerSession.vladimirGone = true;
+            playerSession.inCombat = false;
             return new TextActionResult(["You wave him goodbye and he runs away"]);
         }
 
@@ -177,7 +184,7 @@ export class VladimirCharacter extends Character implements Examine, Attack {
     public objectActions(): string[] {
         const playerSession: PlayerSession = getPlayerSession();
 
-        if (playerSession.vladimirGone === true) {
+        if (playerSession.vladimirGone === true || playerSession.vladimirTaken === true) {
             return [ExamineActionAlias];
         }
         return [ExamineActionAlias, AttackActionAlias, TalkActionAlias];

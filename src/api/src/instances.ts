@@ -96,6 +96,8 @@ export function createNewPlayerSession(): PlayerSession {
 
         //Booleans
         knowWhereMapIs: false,
+        knowNameLowlands: false,
+        vladimirTaken: false,
         wentNorth: false,
         knowsOfKara: false,
         summonedKara: false,
