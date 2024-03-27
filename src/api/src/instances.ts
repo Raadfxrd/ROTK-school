@@ -23,7 +23,6 @@ import { KarasValeForestRoom, KarasValeForestRoomAlias } from "./rooms/KarasVale
 import { KVFallenTreesItem, KVFallenTreesItemAlias } from "./items/KVFallenTreeItem";
 import { KVForestItem, KVForestItemAlias } from "./items/KVForestItem";
 import { KaraWhistleItem, KaraWhistleItemAlias } from "./items/KaraWhistleItem";
-import { MapItem, MapItemAlias } from "./items/MapItem";
 import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
 import { RichardCharacter, RichardCharacterAlias } from "./characters/RichardCharacter";
 import { BlackSmithRoom, BlacksmithAlias } from "./rooms/BlacksmithRoom";
@@ -68,6 +67,18 @@ import { StablesWolburgRoom, StablesWolburgRoomAlias } from "./rooms/StablesWolb
 import { GateWolburgRoom, GateWolburgRoomAlias } from "./rooms/GateWolburgRoom";
 import { VladimirCharacter, VladimirCharacterAlias } from "./characters/VladimirCharacter";
 import { ShopTorch, ShopTorchAlias } from "./items/ShopTorchItem";
+import { WolburgMapItem, WolburgMapItemAlias } from "./items/WolburgMapItem";
+import { MapRoom, MapRoomAlias } from "./rooms/MapRoom";
+import { KarasValeMapItem, KarasValeMapItemAlias } from "./items/KarasValeMapItem";
+import { WindHollowMapItem, WindHollowMapItemAlias } from "./items/WindHollowMapItem";
+import { WildeWoodMapItem, WildeWoodMapItemAlias } from "./items/WildeWoodMapItem";
+import { LowLandsMapItemAlias, LowlandsMapItem } from "./items/LowLandsMapItem";
+import { VolosVillageMapItem, VolosVillageMapItemAlias } from "./items/VolosVillageMapItem";
+import { SilverCoastMapItem, SilverCoastMapItemAlias } from "./items/SilverCoastMapItem";
+import { MountainsMapItem, MountainsMapItemAlias } from "./items/MountainsMapItem";
+import { RavensRestMapItem, RavensRestMapItemAlias } from "./items/RavensRestMapItem";
+import { QuickPassMapItem, QuickpassMapItemAlias } from "./items/QuickpassMapItem";
+import { LowLandsNoNameMapItemAlias, LowlandsNoNameMapItem } from "./items/LowLandsNoNameMapItem";
 
 /**
  * Create a new player session object
@@ -97,6 +108,8 @@ export function createNewPlayerSession(): PlayerSession {
 
         //Booleans
         knowWhereMapIs: false,
+        knowNameLowlands: false,
+        vladimirTaken: false,
         wentNorth: false,
         knowsOfKara: false,
         summonedKara: false,
@@ -207,6 +220,9 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case GateWolburgRoomAlias:
             return new GateWolburgRoom();
+
+        case MapRoomAlias:
+            return new MapRoom();
     }
 
     return undefined;
@@ -247,9 +263,6 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case RingItemAlias:
             return new RingItem();
-
-        case MapItemAlias:
-            return new MapItem();
 
         case AlexandraAlias:
             return new AlexandraCharacter();
@@ -346,8 +359,10 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case SmaugAlias:
             return new SmaugCharacter();
+
         case princessAlias:
             return new princessCharacter();
+
         case ShopTorchAlias:
             return new ShopTorch();
 
@@ -356,6 +371,43 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case JainaCharacterAlias:
             return new JainaCharacter();
+
+        case WolburgMapItemAlias:
+            return new WolburgMapItem();
+
+        case KarasValeMapItemAlias:
+            return new KarasValeMapItem();
+
+        case WindHollowMapItemAlias:
+            return new WindHollowMapItem();
+
+        case WildeWoodMapItemAlias:
+            return new WildeWoodMapItem();
+
+        case LowLandsMapItemAlias:
+            return new LowlandsMapItem();
+
+        case VolosVillageMapItemAlias:
+            return new VolosVillageMapItem();
+
+        case SilverCoastMapItemAlias:
+            return new SilverCoastMapItem();
+
+        case MountainsMapItemAlias:
+            return new MountainsMapItem();
+
+        case RavensRestMapItemAlias:
+            return new RavensRestMapItem();
+
+        case LowLandsMapItemAlias:
+            return new LowlandsMapItem();
+
+        case LowLandsNoNameMapItemAlias:
+            return new LowlandsNoNameMapItem();
+
+        case QuickpassMapItemAlias:
+            return new QuickPassMapItem();
+
         case EdwinCharacterAlias:
             return new EdwinCharacter();
 

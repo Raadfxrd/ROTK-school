@@ -7,6 +7,8 @@ import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
 import { RingItemAlias } from "../items/RingItem";
 import { ChurchWolburgRoomAlias } from "../rooms/ChurchWolburgRoom";
+import { GateWolburgRoomAlias } from "../rooms/GateWolburgRoom";
+import { StablesWolburgRoomAlias } from "../rooms/StablesWolburgRoom";
 import { ThroneRoomAlias } from "../rooms/ThroneRoom";
 import { WolburgRoomAlias } from "../rooms/WolburgRoom";
 import { PlayerSession } from "../types";
@@ -35,6 +37,12 @@ export class AlexandraCharacter extends Character implements Examine {
             return new TextActionResult([
                 "She looks worried about the commotion happening at the stable.",
                 "Besides that she looks worried, she also has a look of relief, the bandits are probably closeby...",
+            ]);
+        }
+
+        if (playerSession.currentRoom === GateWolburgRoomAlias) {
+            return new TextActionResult([
+                "She is ready to go on this adventure with you, her eyes and her armour are shining in the sun.",
             ]);
         }
 
@@ -155,7 +163,7 @@ export class AlexandraCharacter extends Character implements Examine {
         // check to see if the current room is wolburg for the dialogues
 
         if (playerSession.currentRoom === WolburgRoomAlias) {
-            if (playerSession.inGate === true) {
+            if (playerSession.currentRoom === GateWolburgRoomAlias) {
                 if (_choiceId === 1) {
                     return new TextActionResult(["Alright lets go."]);
                 } else if (_choiceId === 2) {
@@ -181,7 +189,7 @@ export class AlexandraCharacter extends Character implements Examine {
                 );
             }
 
-            if (playerSession.inStables === true) {
+            if (playerSession.currentRoom === StablesWolburgRoomAlias) {
                 if (
                     playerSession.horseMission10 === true ||
                     playerSession.horseMission20 === true ||
@@ -260,6 +268,8 @@ export class AlexandraCharacter extends Character implements Examine {
                     new TalkChoiceAction(99, "Bye!"),
                 ]
             );
+        }
+        if (playerSession.currentRoom === GateWolburgRoomAlias) {
         }
         if (playerSession.currentRoom === ChurchWolburgRoomAlias) {
             if (_choiceId === 1) {

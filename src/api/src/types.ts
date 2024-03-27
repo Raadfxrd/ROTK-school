@@ -11,6 +11,8 @@ export type PlayerSession = {
     secondMedalionHalf: boolean;
     leftVolo: boolean;
     knowLocationLowlands: boolean;
+    knowNameLowlands: boolean;
+    vladimirTaken: boolean;
     horseMission30: boolean;
     horseMission20: boolean;
     horseMission10: boolean;
