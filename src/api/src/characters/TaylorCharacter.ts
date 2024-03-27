@@ -16,44 +16,96 @@ export class Taylorcharacter extends Character implements Examine {
         if (choiceId === 1) {
             return new TalkActionResult(
                 this,
-                ["I do know him. I wonder if he has a private jet.."],
-                [new TalkChoiceAction(4, "He has actually")]
+                ["What is it?"],
+                [new TalkChoiceAction(4, "Its about Edwin, I hope u know what he is doing in this village.")]
             );
         }
+        if (choiceId === 100) {
+            return new TextActionResult([""]);
+        }
         if (choiceId === 2) {
-            playerSession.taylorlikesRonaldo = true;
-            new TalkActionResult(
+            new TextActionResult(["Okay... Il talk to him one last time"]);
+        }
+        if (choiceId === 4 && playerSession.edwinBusted === true) {
+            return new TalkActionResult(
                 this,
-                ["No way!! I want to date him <3"],
-                [new TalkChoiceAction(1, "yeah his jet go sui!")]
+                ["Do you have proof? He is super nice to me.. i cant believe it."],
+                [new TalkChoiceAction(20, "I actually have. He is busted as an illegal weapontrader")]
             );
         }
         if (choiceId === 4) {
-            playerSession.taylorlikesRonaldo = true;
             return new TalkActionResult(
                 this,
-                ["omg really!? I want to date him!!"],
-                [new TalkChoiceAction(5, "yeah he likes u too apperantly. Nice!")]
+                ["Do you have proof? He is super nice to me.. i cant believe it."],
+                [new TalkChoiceAction(5, "I will get you proof. But trust me")]
             );
         }
+
+        if (choiceId === 20) {
+            return new TalkActionResult(
+                this,
+                ["Oh gosh... was he lying to me all this time."],
+                [new TalkChoiceAction(21, "Yeah he actually was! Ronaldo knew what bad person he was..")]
+            );
+        }
+        if (choiceId === 21) {
+            playerSession.taylorlikesRonaldo = true;
+            return new TextActionResult([
+                "Oh gosh... that means he also lied about Ronaldo! I have to talk to him..",
+            ]);
+        }
         if (choiceId === 3) {
+            //if statement voor gold
             playerSession.taylorlikesRonaldo = true;
             return new TextActionResult(["Deal"]);
+        }
+        if (playerSession.edwinHint === true) {
+            return new TalkActionResult(
+                this,
+                ["Hi there, how can i help you"],
+                [
+                    new TalkChoiceAction(1, "Hello, I have to talk about something with you"),
+                    new TalkChoiceAction(
+                        3,
+                        "I have a proposal...U made ronaldo really sad.. Can u date him, I'll pay you.(50 gold) "
+                    ),
+                    new TalkChoiceAction(100, "bye"),
+                ]
+            );
+        }
+        if (playerSession.ronaldoGotRose === true) {
+            return new TalkActionResult(
+                this,
+                ["Hi there, how can i help you"],
+                [
+                    new TalkChoiceAction(
+                        2,
+                        "I want you to talk to ronaldo again, he wants to give u something"
+                    ),
+                    new TalkChoiceAction(
+                        3,
+                        "I have a proposal...U made ronaldo really sad.. Can u date him, I'll pay you.(50 gold) "
+                    ),
+                    new TalkChoiceAction(100, "bye"),
+                ]
+            );
         }
 
         return new TalkActionResult(
             this,
-            ["Hi there. u look baked. how can i help you? "],
+            ["Hi there, how can i help you"],
             [
-                new TalkChoiceAction(1, "Do u know ronaldo?"),
-                new TalkChoiceAction(2, "Did u know ronaldo has a private jet?"),
-                new TalkChoiceAction(3, "If u date ronaldo, i will give u money to fly"),
+                new TalkChoiceAction(
+                    3,
+                    "I have a proposal...U made ronaldo really sad.. Can u date him, I'll pay you. (50 gold)"
+                ),
+                new TalkChoiceAction(100, "bye"),
             ]
         );
     }
 
     public name(): string {
-        return "taylorswift";
+        return "taylor";
     }
     public examine(): ActionResult | undefined {
         return new TextActionResult(["U see a woman who looks like she likes to fly inside airplanes"]);

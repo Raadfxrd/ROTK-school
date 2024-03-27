@@ -47,6 +47,7 @@ import { TunnelRoomAlias, TunnelRoom } from "./rooms/TunnelRoom";
 import { RonaldoCharacter, RonaldoCharacteralias } from "./characters/RonaldoCharacter";
 import { Taylorcharacter, Taylorcharacteralias } from "./characters/TaylorCharacter";
 import { secondMedalionHalfItem, secondMedalionHalfItemAlias } from "./items/SecondMedalionHalfItem";
+import { EdwinCharacter, EdwinCharacterAlias } from "./characters/EdwinCharacter";
 import { HealingPotionAlias, HealingPotionItem } from "./items/HealingPotionItem";
 import { HolyBibleAlias, HolyBibleItem } from "./items/HolyBibleItem";
 import { SpiderEyeAlias, SpiderEyeItem } from "./items/SpiderEyeItem";
@@ -123,6 +124,10 @@ export function createNewPlayerSession(): PlayerSession {
         correctAnswers: [],
         wrongAnswers: [],
         allRiddles: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+        edwinHint: false,
+        edwinBusted: false,
+        roseAcquired: false,
+        ronaldoGotRose: false,
     };
 }
 
@@ -352,6 +357,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case JainaCharacterAlias:
             return new JainaCharacter();
+        case EdwinCharacterAlias:
+            return new EdwinCharacter();
+
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
             return getRoomByAlias(alias);

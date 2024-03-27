@@ -25,31 +25,35 @@ export class Drakecharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 ["The princess is kidnapped?! NO... How did it happen?? "],
-                [new TalkChoiceAction(3, "There were some bandits! And they just took the princess. :(")]
+                [new TalkChoiceAction(3, "There were some bandits! And they just took the princess.")]
             );
         } else if (choiceId === 2) {
             return new TalkActionResult(
                 this,
                 [
-                    "Pipe down sussy bakka, that aint so max wyn of u.If u want to enter the lowlands u shall first do something for me, ul be awarded with the half of some random medalion. Go to ronaldo. Trust",
+                    "Not so fast! If u want to enter the lowlands u shall first do something for me.",
+                    "The guardian of the village Ronaldo, He is struggling with his love and wont listen untl he is happy again. Can you help him?",
                 ],
-                [new TalkChoiceAction(7, "Alright dazeling looking chief.. PIPE DOWN.")]
+                [new TalkChoiceAction(7, "Alright..")]
             );
         } else if (choiceId === 3) {
             return new TalkActionResult(
                 this,
                 [
-                    "This is tragic... She was a baddie tho.. If u want to enter the lowlands u shall first do something for me, ul be awarded with the half of some random medalion. Go to ronaldo. Trust.",
+                    "This is tragic... If u want to enter the lowlands u shall first do something for me.",
+                    "The guardian of the village Ronaldo, He has a problem with his lover and wont cooperate untl he is happy again. Can you talk to him?",
                 ],
-                [new TalkChoiceAction(7, "Thank you drake...")]
+                [new TalkChoiceAction(7, "Yeah sure, I will see what i can do.")]
             );
         } else if (choiceId === 7) {
             playerSession.drakeIntro = true;
-            return new TextActionResult(["Alright, i need ta max wynnnn"]);
+            return new TextActionResult([
+                "Alright, Ronaldo is a generous man when he is happy. He will reward u with the same kindness for helping him",
+            ]);
         }
         return new TalkActionResult(
             this,
-            ["Greetings handsome traveler.. What brings u to Volo's village?"],
+            ["Greetings traveler.. What brings u to Volo's village?"],
             [
                 new TalkChoiceAction(1, "Im here on a journey to save the princess"),
                 new TalkChoiceAction(2, "leave the smalltalk for later, im here on my way to the lowlands"),
@@ -65,9 +69,7 @@ export class Drakecharacter extends Character implements Examine {
     }
 
     public examine(): ActionResult | undefined {
-        return new TextActionResult([
-            "There is a somewhat zasty looking fella infront of u. It appears he is the village chief",
-        ]);
+        return new TextActionResult(["There is a person near the gate. It appears he is the village chief"]);
     }
     public objectActions(): string[] {
         return [ExamineActionAlias, TalkActionAlias];

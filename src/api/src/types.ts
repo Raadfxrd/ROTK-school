@@ -36,4 +36,8 @@ export type PlayerSession = {
     correctAnswers: string[];
     wrongAnswers: string[];
     death: boolean;
+    edwinHint: boolean;
+    edwinBusted: boolean;
+    roseAcquired: boolean;
+    ronaldoGotRose: boolean;
 };

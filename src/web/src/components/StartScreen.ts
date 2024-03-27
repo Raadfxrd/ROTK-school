@@ -8,7 +8,7 @@ export class StartScreen extends LitElement {
         .start {
             margin-top: 20px;
             height: calc(
-                100vh - 40px
+                100% - 30px
             ); /** Limiteren van display van website door viewheight - 40px doen, zorgt voor "claustrofobische" retro vibe **/
             width: calc(100% - 20px);
             display: grid;
@@ -16,6 +16,7 @@ export class StartScreen extends LitElement {
             grid-template-rows: 1fr 1fr 1fr;
             gap: 0px 0px;
         }
+
         .start-buttons {
             overflow: hidden;
             content: "";
@@ -74,7 +75,8 @@ export class StartScreen extends LitElement {
             content: "";
             -webkit-animation: imgSlideInFromRight 1.3s cubic-bezier(0.23, 1, 0.32, 1) both;
             animation: imgSlideInFromRight 1.3s cubic-bezier(0.23, 1, 0.32, 1) both;
-            height: calc(11vh - 50px);
+            height: 60px;
+            width: 101%;
             align-self: flex-end;
             text-align: center;
             grid-area: 3 / 3 / 4 / 4;
@@ -232,21 +234,27 @@ export class StartScreen extends LitElement {
     `;
 
     @state() private typewriterLines: string[] = []; // Bevat regels voor het typemachine-effect
-    private showHowToPlay: boolean = false;
-    private instructions: string[] = [];
-    @state() private typewriterStarted: boolean = false;
     @state() private isTyping: boolean = false;
 
-    private startGame(): void {
+    private showHowToPlay: boolean = false;
+    private instructions: string[] = [];
+
+    // Lifecycle method for handling property changes
+    protected updated(changedProperties: PropertyValues): void {
+        super.updated(changedProperties);
+        if (changedProperties.has("showHowToPlay") && this.showHowToPlay) {
+            const sidebar: any = this.shadowRoot?.querySelector(".instructions-content");
+            if (sidebar) {
+                sidebar.innerHTML = "";
+                void this.typewriter(this.instructions);
+            }
+        }
+    }
+
+    private loadGame(): void {
         console.log("Game started!");
-
-        // Maak een nieuwe instantie van de game-canvas
         const gameCanvas: GameCanvas = document.createElement("game-canvas") as GameCanvas;
-
-        // Voeg de game-canvas toe aan de body van de pagina
         document.body.appendChild(gameCanvas);
-
-        // Verwijder dit element uit de DOM
         this.remove();
     }
 
@@ -256,9 +264,9 @@ export class StartScreen extends LitElement {
         charIndex: number = 0,
         speed: number = 20
     ): Promise<void> {
-        this.isTyping = true; // Begin van de typemachine-animatie
+        this.isTyping = true;
         while (index < text.length) {
-            if (!this.isTyping) break; // Stop de animatie als isTyping op false wordt gezet
+            if (!this.isTyping) break;
             if (charIndex <= text[index].length) {
                 this.typewriterLines[index] = text[index].substring(0, charIndex);
                 this.requestUpdate("typewriterLines", [...this.typewriterLines]);
@@ -267,16 +275,14 @@ export class StartScreen extends LitElement {
             } else {
                 index++;
                 charIndex = 0;
-                await new Promise((resolve) => setTimeout(resolve, 600)); // Wacht tussen regels
+                await new Promise((resolve) => setTimeout(resolve, 600));
             }
         }
-        this.isTyping = false; // Einde van de typemachine-animatie
+        this.isTyping = false;
     }
 
-    // Methode om instructies te tonen
     private async howToPlay(): Promise<void> {
         if (!this.isTyping) {
-            // Reset de typewriterLines en start de animatie als deze niet al bezig is
             this.typewriterLines = [];
             this.showHowToPlay = true;
             this.instructions = [
@@ -288,33 +294,23 @@ export class StartScreen extends LitElement {
             ];
             await this.typewriter(this.instructions).catch((error) => {
                 console.error("Er is een fout opgetreden tijdens de typemachine-animatie:", error);
-                this.isTyping = false; // Zorg ervoor dat de animatie is gemarkeerd als niet bezig bij een fout
+                this.isTyping = false;
             });
-            // Zet isTyping op false nadat de animatie succesvol is voltooid
             this.isTyping = false;
             this.requestUpdate();
         }
     }
 
-    // Lifecycle methode voor het afhandelen van eigenschapswijzigingen
-    protected updated(changedProperties: PropertyValues): void {
-        super.updated(changedProperties);
-        if (changedProperties.has("showHowToPlay") && this.showHowToPlay) {
-            // Maak de inhoud van de sidebar leeg en start het typemachine-effect opnieuw
-            const sidebar: any = this.shadowRoot?.querySelector(".instructions-content");
-            if (sidebar) {
-                sidebar.innerHTML = "";
-                void this.typewriter(this.instructions);
-            }
+    private backToStart(): void {
+        if (this.isTyping) {
+            this.isTyping = false;
+            this.typewriterLines = [];
+            this.requestUpdate();
         }
+        this.showHowToPlay = false;
+        this.requestUpdate();
     }
 
-    // Methode om het spel te laden
-    private loadGame(): void {
-        console.log("Game loaded");
-    }
-
-    // Methode om de startpagina te renderen
     protected render(): TemplateResult {
         return html`
             <div class="start">
@@ -324,35 +320,21 @@ export class StartScreen extends LitElement {
         `;
     }
 
-    // Methode om de startknoppen te renderen
     private renderButtons(): TemplateResult {
         return html`
             <div class="start-buttons">
-                <a @click=${this.startGame} class="button">Start new game</a>
+                <a @click=${this.loadGame} class="button">Load last game</a>
                 ${!this.showHowToPlay ? html`<a @click=${this.howToPlay} class="button">How to play</a>` : ""}
-                <a @click=${this.loadGame} class="button">Load game</a>
             </div>
         `;
     }
 
-    // Methode om terug te gaan naar de startpagina
-    private backToStart(): void {
-        if (this.isTyping) {
-            this.isTyping = false; // Dit zal de typemachine-animatie stoppen
-            this.typewriterLines = [];
-            this.requestUpdate();
-        }
-        this.showHowToPlay = false;
-        this.requestUpdate();
-    }
-
-    // Methode om de instructiesidebar te renderen
     protected renderInstructionsSidebar(): TemplateResult {
         return html`
             <div class="instructions-sidebar">
                 <p>Here are the instructions on how to play our game:</p>
                 <div class="instructions-content">
-                    ${this.typewriterLines.map((line) => html`<div>${line}</div> `)}
+                    ${this.typewriterLines.map((line) => html`<div>${line}</div>`)}
                 </div>
                 <a @click=${this.backToStart} class="back-button">Back</a>
             </div>
@@ -360,6 +342,6 @@ export class StartScreen extends LitElement {
     }
 
     private renderFooter(): TemplateResult {
-        return html` <p>© 2024 - Made by: Borys, Jay, Joas, Mathijs and Salim.</p> `;
+        return html`<p>© 2024 - Made by: Borys, Jay, Joas, Mathijs, and Salim</p>`;
     }
 }
