@@ -10,7 +10,7 @@ import { RingItem, RingItemAlias } from "./items/RingItem";
 import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./rooms/KarasValeTownSquareRoom";
 import { StartupRoom, StartupRoomAlias } from "./rooms/StartupRoom";
 import { LowLandsRoom, LowLandsRoomAlias } from "./rooms/LowLandsRoom";
-import { TunnelWallItem, TunnelWallItemAlias } from "./items/TunnelWallItem";
+import { TunnelWall, TunnelWallAlias } from "./rooms/TunnelWall";
 import { ThroneRoom, ThroneRoomAlias } from "./rooms/ThroneRoom";
 import { HenryAlias, HenryCharacter } from "./characters/HenryCharacter";
 import { LowlandsTorch, LowlandsTorchAlias } from "./items/LowlandsTorchItem";
@@ -67,6 +67,7 @@ import { StablesWolburgRoom, StablesWolburgRoomAlias } from "./rooms/StablesWolb
 import { GateWolburgRoom, GateWolburgRoomAlias } from "./rooms/GateWolburgRoom";
 import { VladimirCharacter, VladimirCharacterAlias } from "./characters/VladimirCharacter";
 import { ShopTorch, ShopTorchAlias } from "./items/ShopTorchItem";
+import { TunnelWallSwitcher, TunnelWallSwitcherAlias } from "./items/TunnelWallSwitcher";
 
 /**
  * Create a new player session object
@@ -84,6 +85,7 @@ export function createNewPlayerSession(): PlayerSession {
         inventory: [],
         equipment: [],
         gold: 0,
+        torchesGathered: ["rooms/tunnel-wall.png"],
 
         //Stats
         healthPoints: 100,
@@ -202,6 +204,9 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case GateWolburgRoomAlias:
             return new GateWolburgRoom();
+
+        case TunnelWallAlias:
+            return new TunnelWall();
     }
 
     return undefined;
@@ -224,9 +229,6 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case DarkTreesSwitcherAlias:
             return new DarkTreesSwitcher();
-
-        case TunnelWallItemAlias:
-            return new TunnelWallItem();
 
         case secondMedalionHalfItemAlias:
             return new secondMedalionHalfItem();
@@ -329,6 +331,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case TunnelSwitcherAlias:
             return new TunnelSwitcher();
+
+        case TunnelWallSwitcherAlias:
+            return new TunnelWallSwitcher();
 
         case ChainmailArmourOfTheGreatItemAlias:
             return new ChainmailArmourOfTheGreatItem();

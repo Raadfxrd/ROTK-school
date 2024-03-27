@@ -1,17 +1,19 @@
 import { Pickup, PickupActionAlias } from "../actions/PickupAction";
+import { UseItemActionAlias, useItem } from "../actions/UseItemAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { TextAndImageActionResult } from "../base/actionResults/TextAndImageActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { Item } from "../base/gameObjects/Item";
 import { getPlayerSession } from "../instances";
+import { TunnelWallAlias } from "../rooms/TunnelWall";
 import { PlayerSession } from "../types";
 
 export const ShopTorchAlias: string = "ShopTorch";
 
-export class ShopTorch extends Item implements Examine, Pickup {
+export class ShopTorch extends Item implements Examine, Pickup, useItem {
     public constructor() {
-        super(ShopTorchAlias, ExamineActionAlias, PickupActionAlias);
+        super(ShopTorchAlias, ExamineActionAlias, PickupActionAlias, UseItemActionAlias);
     }
 
     public examine(): ActionResult | undefined {
@@ -40,11 +42,29 @@ export class ShopTorch extends Item implements Examine, Pickup {
         }
     }
 
+    public useItem(): ActionResult | undefined {
+        if (getPlayerSession().currentRoom === TunnelWallAlias) {
+            const playerSession: PlayerSession = getPlayerSession();
+            playerSession.torchesGathered.push("items/TorchShopOnWall.png");
+
+            return new TextAndImageActionResult(
+                [
+                    "You place in the torch that belongs to the Shop.",
+                    "The torch flickers, casting shadows on the wall of the tunnel.",
+                    "You hear a strange noise...",
+                ],
+                ["rooms/tunnel-wall.png", "items/TorchShopOnWall.png"]
+            );
+        } else {
+            return undefined;
+        }
+    }
+
     public name(): string {
         return "A bright, flaming torch.";
     }
 
     public objectActions(): string[] {
-        return [ExamineActionAlias, PickupActionAlias];
+        return [ExamineActionAlias, PickupActionAlias, UseItemActionAlias];
     }
 }

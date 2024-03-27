@@ -15,7 +15,7 @@ import { PlayerSession } from "../types";
 import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./KarasValeTownSquareRoom";
 import { WolburgRoom, WolburgRoomAlias } from "./WolburgRoom";
 
-export const ShopAlias: string = "Shop-room";
+export const TunnelWallAliasShopAlias: string = "Shop-room";
 export class ShopRoom extends Room implements Navigation {
     public constructor() {
         super(ShopAlias, NavigationActionAlias);

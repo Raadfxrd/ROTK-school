@@ -35,4 +35,5 @@ export type PlayerSession = {
     correctAnswers: string[];
     wrongAnswers: string[];
     death: boolean;
+    torchesGathered: string[];
 };
