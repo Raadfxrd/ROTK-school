@@ -28,18 +28,6 @@ export class SmaugProperties {
         this._damage = value;
     }
 }
-function randomMove(): string {
-    const damage: string = "i did damage";
-    const evade: string = "i evaded";
-    const evadeAndDamage: string = "i evaded and did damage";
-    const getHit: string = "i got hit";
-    const getHitAndDamage: string = "i got hit and did damage";
-    const results: Array<string> = [damage, evade, evadeAndDamage, getHit, getHitAndDamage];
-    const randomIndex: any = Math.floor(Math.random() * results.length);
-    return results[randomIndex];
-}
-const move: string = randomMove();
-console.log(move);
 
 export class SmaugCharacter extends Character implements Examine {
     public constructor() {
@@ -49,8 +37,11 @@ export class SmaugCharacter extends Character implements Examine {
         return "Smaug";
     }
     public examine(): ActionResult | undefined {
+        const playerSession: PlayerSession = getPlayerSession();
         return new TextActionResult([
-            "Smaug: Ancient and formidable, this colossal dragon is a sight to behold. With scales gleaming like molten gold and eyes that burn with intelligence, he guards his vast treasure hoard within the Lonely Mountain. Cunning and ruthless, he speaks with a sly tongue, toying with those who dare to challenge him. Beware, for crossing paths with Smaug is to face the epitome of greed and power.",
+            "Smaug: A colossal dragon with gleaming gold scales and piercing eyes, guarding his treasure within the Lonely Mountain. Cunning and ruthless, he toys with challengers, embodying greed and power. " +
+                "Smaug's HP = " +
+                playerSession.smaugHP,
         ]);
     }
     public talk(_choiceId?: number | undefined): ActionResult | undefined {
