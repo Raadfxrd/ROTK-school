@@ -284,14 +284,27 @@ export class KaraCharacter extends Character implements Examine {
                 ]
             );
         }
-        if (choiceId === 90) {
+
+        if (choiceId === 80) {
+            if (getPlayerSession().correctAnswers.filter((x) => x === "correct-answer").length >= 3) {
+                return new TalkActionResult(this, ["Interesting"], [new TalkChoiceAction(81, "What is it?")]);
+            } else if (getPlayerSession().correctAnswers.filter((x) => x === "correct-answer").length >= 2) {
+                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(82, "Alright")]);
+            } else if (getPlayerSession().correctAnswers.filter((x) => x === "correct-answer").length >= 1) {
+                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(83, "Alright")]);
+            } else if (getPlayerSession().correctAnswers.filter((x) => x === "correct-answer").length >= 0) {
+                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(84, "Alright")]);
+            }
+        }
+
+        if (choiceId === 81) {
             this.playerSession.firstMedallionHalf = true;
             return new TalkActionResult(
                 this,
                 [
                     "You have succeeded in answering my riddles human, a most impressive feat.",
                     "Here, take these as a reward for your wit and tenacity.",
-                    "*You are gain one half of a medaillion and a blue torch*",
+                    "*You gain one half of a medaillion and a blue torch*",
                 ],
                 [
                     new TalkChoiceAction(91, "Where can i find the other medallion"),
@@ -300,6 +313,32 @@ export class KaraCharacter extends Character implements Examine {
             );
         }
 
+        if (choiceId === 82) {
+            return new TalkActionResult(
+                this,
+                [
+                    "You managed to answer most of my riddles human.",
+                    "I grant you these items as a reward, where and how to use them shall be up to you.",
+                    "*You gain one half of a medaillion and a blue torch*",
+                ],
+                [new TalkChoiceAction(100, "Thank you")]
+            );
+        }
+
+        if (choiceId === 83) {
+            return new TalkActionResult(
+                this,
+                [
+                    "You only managed to correctly answer one of my riddles. A dissapointing score to be sure",
+                    "Still I grant you this item, you will have to figure out when you need to use it yourself",
+                ],
+                [new TalkChoiceAction(100, "Thank you")]
+            );
+        }
+
+        if (choiceId === 84) {
+            return new TalkActionResult(this, ["You stupid bitch"], [new TalkChoiceAction(100, "dayum")]);
+        }
         if (choiceId === 91) {
             return new TalkActionResult(
                 this,
@@ -313,7 +352,7 @@ export class KaraCharacter extends Character implements Examine {
             getPlayerSession().correctAnswers.push("correct-answer");
 
             if (getPlayerSession().riddlesAnswered.filter((x) => x === "riddle-answered").length >= 3) {
-                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(100, "Alright")]);
+                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(80, "Alright")]);
             }
             return new TalkActionResult(
                 this,
@@ -327,7 +366,7 @@ export class KaraCharacter extends Character implements Examine {
             getPlayerSession().wrongAnswers.push("wrong-answer");
 
             if (getPlayerSession().riddlesAnswered.filter((x) => x === "riddle-answered").length >= 3) {
-                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(100, "Alright")]);
+                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(80, "Alright")]);
             }
 
             return new TalkActionResult(
