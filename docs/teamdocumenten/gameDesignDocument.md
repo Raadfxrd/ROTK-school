@@ -115,6 +115,20 @@ never empty, but sometimes full; never pushes, always pulls
 
 ## Scene 4: Volo's Village
 
+Je komt volo's village in en wordt gevraagd een zielige ridder te helpen met zijn liefdes verdriet. Indien je het romance puzzel hebt opgelost krijg je een helft van de medalion in bemachtiging.
+Je hebt 5 karakters:
+
+Drake: Heeft eigenlijk weinig te maken met de puzzel anders dan het verwelkomen en het geven van informatie.
+
+Ronaldo: Hij gaat je uitleggen wat hem zo verdrietig maakt en zal uitleggen wat zijn verloren liefde in belang had. kortom clues!
+
+Taylor:Zei is degene die het uit heeft gemaakt met ronaldo. Zij vond bepaalde dingen van ronaldo niks en de grootste redenering is dat ronaldo niet genoeg gaf aan taylor. De key item hier is rode rozen.
+
+Edwin: Edwin is de competitie van Ronaldo. Alleen is Edwin een heel slecht persoon, hij smokkelt wapens illegaal uit het dorpje. . Hij liegt tegenover Taylor en verteld allerlij leugens om Taylor de zijne te maken. Jij moet Edwin exposen op watvoor persoon hij is en zijn foute intenties bij Taylor.
+
+Bran: Hij is de shopkeeper, en hij heeft rozen die je kan kopen.
+(HINT)
+
 ## Scene 5: LowLands
 
 Welkom in het mysterieuze en onheilspellende oude bos, waar elke schaduw geheimen verbergt en elke stap je dichter bij het ontrafelen van zijn raadselachtige puzzels brengt. Terwijl je dieper het sombere duister van het bos in trekt, zul je een reeks uitdagende puzzels tegenkomen die de geheimen van dit troosteloze rijk bewaken. Hier is wat een speler kan verwachten en doen:
