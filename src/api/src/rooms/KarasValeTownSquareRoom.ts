@@ -81,7 +81,7 @@ export class KarasValeTownSquareRoom extends Room {
             this.playerSession.wentNorth = true;
 
             return new TextActionResult([
-                "You move to the center of the town, and see there is a small tavern and a blacksmith.",
+                "You move to the center of the town, and see there is a small shop and a blacksmith.",
                 "There is also someone sitting on a bench.",
             ]);
         }

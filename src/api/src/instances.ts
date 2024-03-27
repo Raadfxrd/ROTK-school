@@ -61,7 +61,7 @@ import { SteelSwordItem, SteelSwordItemAlias } from "./items/SteelSwordItem";
 import { SwordOfGoodFortuneItem, SwordOfGoodFortuneItemAlias } from "./items/SwordOfGoodFortuneItem";
 import { SmaugRoomAlias, SmaugRoom } from "./rooms/SmaugRoom";
 import { SmaugAlias, SmaugCharacter } from "./characters/SmaugCharacter";
-import { DeathAlias, deathRoom } from "./rooms/Deathroom";
+import { DeathAlias, deathRoom } from "./rooms/deathRoom";
 import { princessAlias, princessCharacter } from "./characters/princessCharacter";
 import { StablesWolburgRoom, StablesWolburgRoomAlias } from "./rooms/StablesWolburgRoom";
 import { GateWolburgRoom, GateWolburgRoomAlias } from "./rooms/GateWolburgRoom";
@@ -79,6 +79,7 @@ import { MountainsMapItem, MountainsMapItemAlias } from "./items/MountainsMapIte
 import { RavensRestMapItem, RavensRestMapItemAlias } from "./items/RavensRestMapItem";
 import { QuickPassMapItem, QuickpassMapItemAlias } from "./items/QuickpassMapItem";
 import { LowLandsNoNameMapItemAlias, LowlandsNoNameMapItem } from "./items/LowLandsNoNameMapItem";
+import { KarasTorch, KarasTorchAlias } from "./items/KarasValeTorchItem";
 
 /**
  * Create a new player session object
@@ -411,6 +412,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case EdwinCharacterAlias:
             return new EdwinCharacter();
+
+        case KarasTorchAlias:
+            return new KarasTorch();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:

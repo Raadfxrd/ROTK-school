@@ -5,6 +5,7 @@ import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
+import { deathRoom } from "../rooms/deathRoom";
 import { PlayerSession } from "../types";
 
 export const KaraCharacterAlias: string = "KaraCharacter";
@@ -178,9 +179,9 @@ export class KaraCharacter extends Character implements Examine {
                     "Has a head but never weeps. Has a bed but never sleeps.",
                 ],
                 [
-                    new TalkChoiceAction(40, "A chariot"),
-                    new TalkChoiceAction(40, "A child"),
-                    new TalkChoiceAction(50, "A river"), // correct answer
+                    new TalkChoiceAction(50, "A chariot"),
+                    new TalkChoiceAction(50, "A child"),
+                    new TalkChoiceAction(40, "A river"), // correct answer
                 ]
             );
         }
@@ -297,6 +298,7 @@ export class KaraCharacter extends Character implements Examine {
 
         if (choiceId === 81) {
             this.playerSession.firstMedallionHalf = true;
+
             return new TalkActionResult(
                 this,
                 [
@@ -422,6 +424,10 @@ export class KaraCharacter extends Character implements Examine {
         }
 
         if (choiceId === 90) {
+            const room: deathRoom = new deathRoom();
+
+            this.playerSession.currentRoom = room.alias;
+            return room.examine();
         }
         if (choiceId === 91) {
             return new TalkActionResult(

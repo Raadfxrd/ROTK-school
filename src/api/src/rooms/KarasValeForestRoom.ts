@@ -1,4 +1,5 @@
 import { NavigationAction, NavigationActionAlias } from "../actions/NavigationAction";
+import { PickupAction } from "../actions/PickupAction";
 import { useItemAction } from "../actions/UseItemAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
@@ -12,6 +13,7 @@ import { getPlayerSession } from "../instances";
 import { KVFallenTreesItem } from "../items/KVFallenTreeItem";
 import { KVForestItem } from "../items/KVForestItem";
 import { KaraWhistleItem } from "../items/KaraWhistleItem";
+import { KarasTorch, KarasTorchAlias } from "../items/KarasValeTorchItem";
 import { PlayerSession } from "../types";
 import { KarasValeTownSquareRoom } from "./KarasValeTownSquareRoom";
 import { VolosVillageRoom } from "./VolosVillageRoom";
@@ -37,7 +39,13 @@ export class KarasValeForestRoom extends Room {
     }
 
     public actions(): Action[] {
-        return [new ExamineAction(), new useItemAction(), new TalkAction(), new NavigationAction()];
+        return [
+            new ExamineAction(),
+            new useItemAction(),
+            new TalkAction(),
+            new NavigationAction(),
+            new PickupAction(),
+        ];
     }
 
     public navigation(): ActionResult | undefined {
@@ -56,6 +64,20 @@ export class KarasValeForestRoom extends Room {
     }
 
     public objects(): GameObject[] {
+        if (
+            !this.PlayerSession.inventory.includes(KarasTorchAlias) &&
+            this.PlayerSession.summonedKara === true
+        ) {
+            return [
+                new KVFallenTreesItem(),
+                new KVForestItem(),
+                new KaraWhistleItem(),
+                new KaraCharacter(),
+                new KarasValeTownSquareRoom(),
+                new VolosVillageRoom(),
+                new KarasTorch(),
+            ];
+        }
         if (this.PlayerSession.summonedKara === true) {
             return [
                 new KVFallenTreesItem(),
@@ -66,6 +88,7 @@ export class KarasValeForestRoom extends Room {
                 new VolosVillageRoom(),
             ];
         }
+
         return [
             new KVFallenTreesItem(),
             new KVForestItem(),
