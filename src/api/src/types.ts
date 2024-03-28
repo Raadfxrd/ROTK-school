@@ -38,6 +38,7 @@ export type PlayerSession = {
     correctAnswers: string[];
     wrongAnswers: string[];
     death: boolean;
+    torchesGathered: string[];
     edwinHint: boolean;
     edwinBusted: boolean;
     roseAcquired: boolean;

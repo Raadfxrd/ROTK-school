@@ -1,30 +1,29 @@
+import { useItemAction } from "../actions/UseItemAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
 import { CustomAction } from "../base/actions/CustomAction";
-import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
+import { Examine, ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
-import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
+import { getPlayerSession, getGameObjectsFromInventory } from "../instances";
 import { PlayerSession } from "../types";
-import { LowLandsRoom } from "./LowLandsRoom";
-import { TunnelWallSwitcher } from "../items/TunnelWallSwitcher";
-import { useItemAction } from "../actions/UseItemAction";
+import { TunnelRoom } from "./TunnelRoom";
 
-export const TunnelRoomAlias: string = "tunnel-room";
-let picture: string = "tunnel";
+export const TunnelWallAlias: string = "tunnel-wall";
 
-export class TunnelRoom extends Room {
+export class TunnelWall extends Room implements Examine {
     public constructor() {
-        super("tunnel-room");
+        super(TunnelWallAlias, ExamineActionAlias);
     }
 
     public name(): string {
-        return "A dark tunnel";
+        return "The wall of the tunnel";
     }
 
     public images(): string[] {
-        return [picture];
+        const pictures: string[] = getPlayerSession().torchesGathered;
+        return pictures;
     }
 
     public actions(): Action[] {
@@ -37,17 +36,11 @@ export class TunnelRoom extends Room {
     }
 
     public objects(): GameObject[] {
-        return [this, new TunnelWallSwitcher()];
+        return [this, ...getGameObjectsFromInventory()];
     }
 
     public examine(): ActionResult | undefined {
-        picture = "rooms/tunnel.png";
-        return new TextActionResult([
-            "The tunnel stretches into darkness, promising neither safety nor comfort.",
-            "It is a place of mystery and danger.",
-            "You try going inside the tunnel, but there is a mysterious force stopping you.",
-            "You should try finding a light source before venturing into the unknown.",
-        ]);
+        return undefined;
     }
 
     public custom(alias: string, _gameObjects?: GameObject[]): ActionResult | undefined {
@@ -62,8 +55,8 @@ export class TunnelRoom extends Room {
             return new TextActionResult(gameObjectArray);
         }
         if (alias === "go-back") {
-            const lastroom: TunnelRoom = new TunnelRoom();
-            const room: LowLandsRoom = new LowLandsRoom();
+            const lastroom: TunnelWall = new TunnelWall();
+            const room: TunnelRoom = new TunnelRoom();
 
             //Set the current room to the example room
             getPlayerSession().lastRoom = lastroom.alias;
@@ -76,3 +69,14 @@ export class TunnelRoom extends Room {
         return [ExamineActionAlias];
     }
 }
+
+// if (playerSession.inventory.includes(ShadowbeakTorchAlias)) {
+//     return new TextAndImageActionResult(
+//         [
+//             "You place in the torch that belongs to the Shadowbeak Wilds.",
+//             "The torch flickers, casting shadows on the wall of the tunnel.",
+//             "You hear a strange noise...",
+//         ],
+//         ["rooms/tunnel-wall.png", "items/TorchPlainsOnWall.png"]
+//     );
+// }
