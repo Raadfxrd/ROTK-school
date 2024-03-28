@@ -1,7 +1,6 @@
 import { Pickup, PickupActionAlias } from "../actions/PickupAction";
 import { UseItemActionAlias, useItem } from "../actions/UseItemAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
-import { TalkActionResult } from "../base/actionResults/TalkActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { Item } from "../base/gameObjects/Item";

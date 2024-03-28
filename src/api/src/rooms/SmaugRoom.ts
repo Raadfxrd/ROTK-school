@@ -50,6 +50,7 @@ export class SmaugRoom extends Room implements Examine {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.smaugHP <= 0) {
             image = "rooms/princess.png";
+            //setTimeout(iets, 2000);
 
             return new TextActionResult(["You have slain Smaug and freed the princess!"]);
         }
