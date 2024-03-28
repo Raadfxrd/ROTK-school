@@ -142,6 +142,7 @@ export function createNewPlayerSession(): PlayerSession {
         edwinBusted: false,
         roseAcquired: false,
         ronaldoGotRose: false,
+        earnedBlueTorch: false,
     };
 }
 

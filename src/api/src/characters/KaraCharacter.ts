@@ -298,7 +298,7 @@ export class KaraCharacter extends Character implements Examine {
 
         if (choiceId === 81) {
             this.playerSession.firstMedallionHalf = true;
-
+            this.playerSession.earnedBlueTorch = true;
             return new TalkActionResult(
                 this,
                 [
@@ -315,6 +315,7 @@ export class KaraCharacter extends Character implements Examine {
 
         if (choiceId === 82) {
             this.playerSession.firstMedallionHalf = true;
+            this.playerSession.earnedBlueTorch = true;
             return new TalkActionResult(
                 this,
                 [
@@ -327,6 +328,7 @@ export class KaraCharacter extends Character implements Examine {
         }
 
         if (choiceId === 83) {
+            this.playerSession.earnedBlueTorch = true;
             return new TalkActionResult(
                 this,
                 [
@@ -364,13 +366,14 @@ export class KaraCharacter extends Character implements Examine {
         if (choiceId === 86) {
             if (this.playerSession.gold >= 15) {
                 this.playerSession.gold -= 15;
+                this.playerSession.earnedBlueTorch = true;
                 return new TalkActionResult(
                     this,
                     [
                         "Very well.",
                         "*A handfull of gold floats out of your pouch and moves towards the crow.",
                         "I grant you this torch.",
-                        "*You gain a blue torch*",
+                        "*A blue torch floats through the air and lands in front of you*",
                     ],
                     [new TalkChoiceAction(100, "Thank you")]
                 );
@@ -387,6 +390,7 @@ export class KaraCharacter extends Character implements Examine {
 
         if (choiceId === 87) {
             this.playerSession.healthPoints -= 10;
+            this.playerSession.earnedBlueTorch = true;
             return new TalkActionResult(
                 this,
                 [
@@ -417,7 +421,7 @@ export class KaraCharacter extends Character implements Examine {
                 [
                     "*You can't move, but you can see the crows eyes begin to glow red*",
                     "*A sharp pain shoots into your chest and you see a red beam flowing out of your body into the mouth of the crow*",
-                    "*And everything goes black*",
+                    "*Then, everything goes black*",
                 ],
                 [new TalkChoiceAction(90, "Continue")]
             );

@@ -42,4 +42,5 @@ export type PlayerSession = {
     edwinBusted: boolean;
     roseAcquired: boolean;
     ronaldoGotRose: boolean;
+    earnedBlueTorch: boolean;
 };
