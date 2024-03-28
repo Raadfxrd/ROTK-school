@@ -304,7 +304,7 @@ export class KaraCharacter extends Character implements Examine {
                 [
                     "You have succeeded in answering my riddles human, a most impressive feat.",
                     "Here, take these as a reward for your wit and tenacity.",
-                    "*You gain one half of a medaillion and a blue torch*",
+                    "*A blue torch and one half of a medallion float through the air and lands in front of you*",
                 ],
                 [
                     new TalkChoiceAction(91, "Where can i find the other medallion"),
@@ -321,7 +321,7 @@ export class KaraCharacter extends Character implements Examine {
                 [
                     "You managed to answer most of my riddles human.",
                     "I grant you these items as a reward, where and how to use them shall be up to you.",
-                    "*You gain one half of a medaillion and a blue torch*",
+                    "*A blue torch and one half of a medallion float through the air and lands in front of you*",
                 ],
                 [new TalkChoiceAction(100, "Thank you")]
             );
@@ -334,7 +334,7 @@ export class KaraCharacter extends Character implements Examine {
                 [
                     "You only managed to correctly answer one of my riddles. A dissapointing score to be sure",
                     "Still I grant you this item, you will have to figure out when you need to use it yourself",
-                    "*You gain a blue torch*",
+                    "*A blue torch floats through the air and lands in front of you*",
                 ],
                 [new TalkChoiceAction(100, "Thank you")]
             );
@@ -397,7 +397,7 @@ export class KaraCharacter extends Character implements Examine {
                     "Kara: Very well.",
                     "*You fall to your knees as you feel the life force being drained from your body*",
                     "Kara: Thank you for the meal. Now take this",
-                    "*You gain a blue torch*",
+                    "*A blue torch floats through the air and lands in front of you*",
                 ],
                 [new TalkChoiceAction(100, "Alright")]
             );

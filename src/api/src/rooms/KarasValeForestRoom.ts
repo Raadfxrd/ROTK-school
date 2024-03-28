@@ -10,6 +10,7 @@ import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { KaraCharacter } from "../characters/KaraCharacter";
 import { getPlayerSession } from "../instances";
+import { firstMedallionHalf } from "../items/FirstMedallionHalfItem";
 import { KVFallenTreesItem } from "../items/KVFallenTreeItem";
 import { KVForestItem } from "../items/KVForestItem";
 import { KaraWhistleItem } from "../items/KaraWhistleItem";
@@ -64,6 +65,23 @@ export class KarasValeForestRoom extends Room {
     }
 
     public objects(): GameObject[] {
+        if (
+            this.PlayerSession.earnedBlueTorch === true &&
+            this.PlayerSession.summonedKara === true &&
+            this.PlayerSession.firstMedallionHalf === true
+        ) {
+            return [
+                new KVFallenTreesItem(),
+                new KVForestItem(),
+                new KaraWhistleItem(),
+                new KaraCharacter(),
+                new KarasValeTownSquareRoom(),
+                new VolosVillageRoom(),
+                new KarasTorch(),
+                new firstMedallionHalf(),
+            ];
+        }
+
         if (this.PlayerSession.earnedBlueTorch === true && this.PlayerSession.summonedKara === true) {
             return [
                 new KVFallenTreesItem(),

@@ -80,6 +80,7 @@ import { RavensRestMapItem, RavensRestMapItemAlias } from "./items/RavensRestMap
 import { QuickPassMapItem, QuickpassMapItemAlias } from "./items/QuickpassMapItem";
 import { LowLandsNoNameMapItemAlias, LowlandsNoNameMapItem } from "./items/LowLandsNoNameMapItem";
 import { KarasTorch, KarasTorchAlias } from "./items/KarasValeTorchItem";
+import { firstMedallionHalf, firstMedallionHalfAlias } from "./items/FirstMedallionHalfItem";
 
 /**
  * Create a new player session object
@@ -416,6 +417,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case KarasTorchAlias:
             return new KarasTorch();
+
+        case firstMedallionHalfAlias:
+            return new firstMedallionHalf();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
