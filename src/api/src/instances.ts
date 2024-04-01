@@ -82,6 +82,7 @@ import { QuickPassMapItem, QuickpassMapItemAlias } from "./items/QuickpassMapIte
 import { LowLandsNoNameMapItemAlias, LowlandsNoNameMapItem } from "./items/LowLandsNoNameMapItem";
 import { KarasTorch, KarasTorchAlias } from "./items/KarasValeTorchItem";
 import { firstMedallionHalf, firstMedallionHalfAlias } from "./items/FirstMedallionHalfItem";
+import { ShadowBeakTorch, ShadowbeakTorchAlias } from "./items/ShadowBeakTorch";
 
 /**
  * Create a new player session object
@@ -425,6 +426,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case firstMedallionHalfAlias:
             return new firstMedallionHalf();
+
+        case ShadowbeakTorchAlias:
+            return new ShadowBeakTorch();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:
