@@ -80,6 +80,7 @@ import { MountainsMapItem, MountainsMapItemAlias } from "./items/MountainsMapIte
 import { RavensRestMapItem, RavensRestMapItemAlias } from "./items/RavensRestMapItem";
 import { QuickPassMapItem, QuickpassMapItemAlias } from "./items/QuickpassMapItem";
 import { LowLandsNoNameMapItemAlias, LowlandsNoNameMapItem } from "./items/LowLandsNoNameMapItem";
+import { ShadowBeakTorch, ShadowbeakTorchAlias } from "./items/ShadowBeakTorch";
 
 /**
  * Create a new player session object
@@ -416,6 +417,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case EdwinCharacterAlias:
             return new EdwinCharacter();
+
+        case ShadowbeakTorchAlias:
+            return new ShadowBeakTorch();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:

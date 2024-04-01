@@ -1,6 +1,7 @@
 import { useItemAction } from "../actions/UseItemAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
+import { TextAndImageActionResult } from "../base/actionResults/TextAndImageActionResult";
 import { Action } from "../base/actions/Action";
 import { CustomAction } from "../base/actions/CustomAction";
 import { Examine, ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
@@ -8,6 +9,7 @@ import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
 import { getPlayerSession, getGameObjectsFromInventory } from "../instances";
 import { PlayerSession } from "../types";
+import { SmaugRoom } from "./SmaugRoom";
 import { TunnelRoom } from "./TunnelRoom";
 
 export const TunnelWallAlias: string = "tunnel-wall";
@@ -32,6 +34,7 @@ export class TunnelWall extends Room implements Examine {
             new ExamineAction(),
             new useItemAction(),
             new CustomAction("go-back", "Go back", false),
+            new CustomAction("final", "Final challenge", false),
         ];
     }
 
@@ -40,7 +43,24 @@ export class TunnelWall extends Room implements Examine {
     }
 
     public examine(): ActionResult | undefined {
-        return undefined;
+        if (
+            getPlayerSession().torchesGathered.includes("items/TorchLowlandsOnWall.png") &&
+            getPlayerSession().torchesGathered.includes("items/TorchShadowBeakOnWall.png") &&
+            getPlayerSession().torchesGathered.includes("items/TorchKarasValeOnWall.png") &&
+            getPlayerSession().torchesGathered.includes("items/TorchShopOnWall.png") &&
+            getPlayerSession().torchesGathered.includes("items/TorchVolosVillageOnWall.png") &&
+            getPlayerSession().torchesGathered.includes("items/TorchThroneOnWall.png")
+        ) {
+            return new TextAndImageActionResult(
+                ["You placed all torches on the wall. You can continue to the your final challenge."],
+                ["items/tunnel-wall-complete.png"]
+            );
+        } else {
+            return new TextActionResult([
+                "You see a wall in the tunnel. It is made of stone and looks very sturdy.",
+                "You can see some holsters on the wall.",
+            ]);
+        }
     }
 
     public custom(alias: string, _gameObjects?: GameObject[]): ActionResult | undefined {
@@ -58,25 +78,35 @@ export class TunnelWall extends Room implements Examine {
             const lastroom: TunnelWall = new TunnelWall();
             const room: TunnelRoom = new TunnelRoom();
 
-            //Set the current room to the example room
             getPlayerSession().lastRoom = lastroom.alias;
             getPlayerSession().currentRoom = room.alias;
             return room.examine();
         }
+        if (
+            getPlayerSession().torchesGathered.includes("items/TorchLowlandsOnWall.png") &&
+            getPlayerSession().torchesGathered.includes("items/TorchShadowBeakOnWall.png") &&
+            getPlayerSession().torchesGathered.includes("items/TorchKarasValeOnWall.png") &&
+            getPlayerSession().torchesGathered.includes("items/TorchShopOnWall.png") &&
+            getPlayerSession().torchesGathered.includes("items/TorchVolosVillageOnWall.png") &&
+            getPlayerSession().torchesGathered.includes("items/TorchThroneOnWall.png") &&
+            alias === "final"
+        ) {
+            const lastroom: TunnelWall = new TunnelWall();
+            const room: SmaugRoom = new SmaugRoom();
+
+            getPlayerSession().lastRoom = lastroom.alias;
+            getPlayerSession().currentRoom = room.alias;
+            return room.examine();
+        } else {
+            return new TextActionResult([
+                "You can't go there yet.",
+                "You need to place all torches on the wall first.",
+            ]);
+        }
         return undefined;
     }
+
     public objectActions(): string[] {
         return [ExamineActionAlias];
     }
 }
-
-// if (playerSession.inventory.includes(ShadowbeakTorchAlias)) {
-//     return new TextAndImageActionResult(
-//         [
-//             "You place in the torch that belongs to the Shadowbeak Wilds.",
-//             "The torch flickers, casting shadows on the wall of the tunnel.",
-//             "You hear a strange noise...",
-//         ],
-//         ["rooms/tunnel-wall.png", "items/TorchPlainsOnWall.png"]
-//     );
-// }

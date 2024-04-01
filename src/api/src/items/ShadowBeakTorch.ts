@@ -11,7 +11,7 @@ import { PlayerSession } from "../types";
 
 export const ShadowbeakTorchAlias: string = "ShadowbeakTorch";
 
-export class ShopTorch extends Item implements Examine, Pickup, useItem {
+export class ShadowBeakTorch extends Item implements Examine, Pickup, useItem {
     public constructor() {
         super(ShadowbeakTorchAlias, ExamineActionAlias, PickupActionAlias, UseItemActionAlias);
     }
@@ -49,7 +49,7 @@ export class ShopTorch extends Item implements Examine, Pickup, useItem {
 
             return new TextAndImageActionResult(
                 [
-                    "You place in the torch that belongs to the Shop.",
+                    "You place in the torch that belongs to the Wilds.",
                     "The torch flickers, casting shadows on the wall of the tunnel.",
                     "You hear a strange noise...",
                 ],
@@ -61,7 +61,7 @@ export class ShopTorch extends Item implements Examine, Pickup, useItem {
     }
 
     public name(): string {
-        return "A bright, flaming torch.";
+        return "A funny looking, flaming torch.";
     }
 
     public objectActions(): string[] {
