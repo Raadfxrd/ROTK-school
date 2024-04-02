@@ -303,8 +303,8 @@ export class KaraCharacter extends Character implements Examine {
                 this,
                 [
                     "You have succeeded in answering my riddles human, a most impressive feat.",
-                    "Here, take these as a reward for your wit and tenacity.",
-                    "*A blue torch and one half of a medallion float through the air and lands in front of you*",
+                    "Here, take this as a reward for your wit and tenacity.",
+                    "*A blue torch floats through the air and lands in front of you*",
                 ],
                 [
                     new TalkChoiceAction(91, "Where can i find the other medallion"),
@@ -320,8 +320,8 @@ export class KaraCharacter extends Character implements Examine {
                 this,
                 [
                     "You managed to answer most of my riddles human.",
-                    "I grant you these items as a reward, where and how to use them shall be up to you.",
-                    "*A blue torch and one half of a medallion float through the air and lands in front of you*",
+                    "I grant you this item as a reward, where and how to use it shall be up to you.",
+                    "*A blue torch floats through the air and lands in front of you*",
                 ],
                 [new TalkChoiceAction(100, "Thank you")]
             );
