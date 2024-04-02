@@ -9,6 +9,7 @@ import { getPlayerSession } from "../instances";
 import { RingItemAlias } from "../items/RingItem";
 import { ChurchWolburgRoomAlias } from "../rooms/ChurchWolburgRoom";
 import { GateWolburgRoomAlias } from "../rooms/GateWolburgRoom";
+import { KarasValeTownSquareRoomAlias } from "../rooms/KarasValeTownSquareRoom";
 import { StablesWolburgRoomAlias } from "../rooms/StablesWolburgRoom";
 import { ThroneRoomAlias } from "../rooms/ThroneRoom";
 import { WolburgRoomAlias } from "../rooms/WolburgRoom";
@@ -491,6 +492,15 @@ export class AlexandraCharacter extends Character implements Examine {
                     new TalkChoiceAction(3, "There are gods?"),
                     new TalkChoiceAction(99, "Bye!"),
                 ]
+            );
+        }
+
+        if (playerSession.currentRoom === KarasValeTownSquareRoomAlias) {
+            return new TalkAndImageActionResult(
+                this,
+                ["Alexandra: What a nice town."],
+                [playerSession.image, alexandraImage],
+                [new TalkChoiceAction(1, "")]
             );
         }
         return undefined;
