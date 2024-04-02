@@ -25,8 +25,9 @@ export class ChurchWolburgRoom extends Room implements Examine {
 
     public images(): string[] {
         const playerSession: PlayerSession = getPlayerSession();
-        playerSession.image = "rooms/churchwolburg.png";
-        return ["rooms/churchwolburg.png"];
+        const churchWolburg: string = "rooms/churchwolburg.png";
+        playerSession.image = churchWolburg;
+        return [churchWolburg];
     }
 
     public navigation(): ActionResult | undefined {
