@@ -25,6 +25,7 @@ import { CheckInventoryAction } from "./actions/CheckInventoryAction";
 import { UseItemActionAlias, useItemAction } from "./actions/UseItemAction";
 import { AttackAction, AttackActionAlias } from "./actions/AttackAction";
 import { NavigationAction, NavigationActionAlias } from "./actions/NavigationAction";
+import { TalkAndImageActionResult } from "./base/actionResults/TalkAndImageActionResult";
 
 export const router: Router = Router();
 
@@ -167,7 +168,10 @@ function convertActionResultToGameState(actionResult?: ActionResult): GameState 
         playerHP: playerSession.healthPoints,
         roomAlias: room.alias,
         roomTitle: room.name(),
-        roomImages: (actionResult as TextAndImageActionResult)?.images || room.images(),
+        roomImages:
+            (actionResult as TextAndImageActionResult)?.images ||
+            (actionResult as TalkAndImageActionResult)?.images ||
+            room.images(),
         text: (actionResult as TextActionResult)?.text || ["You have no interest in that."],
         actions: actions,
         objects: room.objects().map((e) => e.toReference()),
