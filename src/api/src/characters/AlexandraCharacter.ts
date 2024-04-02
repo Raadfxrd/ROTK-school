@@ -209,116 +209,113 @@ export class AlexandraCharacter extends Character implements Examine {
 
         // check to see if the current room is wolburg for the dialogues
 
-        if (playerSession.currentRoom === WolburgRoomAlias) {
-            if (playerSession.currentRoom === GateWolburgRoomAlias) {
-                if (_choiceId === 1) {
-                    return new TextAndImageActionResult(
-                        ["Alright lets go."],
-                        [playerSession.image, alexandraImage]
-                    );
-                } else if (_choiceId === 2) {
-                    return new TextAndImageActionResult(
-                        [
-                            "That's fine, take your time",
-                            "If we don't get the princess back we are dead, just to give you a heads up boss.",
-                        ],
-                        [playerSession.image, alexandraImage]
-                    );
-                } else if (_choiceId === 99) {
-                    return new TextActionResult(["Oh alright, Bye!"]);
-                }
-                return new TalkAndImageActionResult(
-                    this,
-                    [
-                        "This is it, the end of Wolburg,",
-                        "Are you ready to save the princess?",
-                        "Maybe if you forgot anything you can go back to the shop and buy something",
-                    ],
-                    [playerSession.image, alexandraImage],
-                    [
-                        new TalkChoiceAction(1, "I'm fine, lets go!"),
-                        new TalkChoiceAction(2, "I totally forgot something."),
-                        new TalkChoiceAction(99, "Bye!"),
-                    ]
+        if (playerSession.currentRoom === GateWolburgRoomAlias) {
+            if (_choiceId === 1) {
+                return new TextAndImageActionResult(
+                    ["Alright lets go."],
+                    [playerSession.image, alexandraImage]
                 );
+            } else if (_choiceId === 2) {
+                return new TextAndImageActionResult(
+                    [
+                        "That's fine, take your time",
+                        "If we don't get the princess back we are dead, just to give you a heads up boss.",
+                    ],
+                    [playerSession.image, alexandraImage]
+                );
+            } else if (_choiceId === 99) {
+                return new TextActionResult(["Oh alright, Bye!"]);
             }
-
-            if (playerSession.currentRoom === StablesWolburgRoomAlias) {
-                if (
-                    playerSession.horseMission10 === true ||
-                    playerSession.horseMission20 === true ||
-                    playerSession.horseMission30 === true
-                ) {
-                    if (_choiceId === 1) {
-                        return new TextAndImageActionResult(
-                            [
-                                "Alexandra: We indeed do, you should take a closer look next time we are in Wolburg.",
-                            ],
-                            [playerSession.image, alexandraImage]
-                        );
-                    } else if (_choiceId === 2) {
-                        return new TextAndImageActionResult(
-                            ["Alexandra: You are right, we need to save the princess!"],
-                            [playerSession.image, alexandraImage]
-                        );
-                    }
-
-                    return new TalkAndImageActionResult(
-                        this,
-                        [
-                            "Alexandra: At least Richard is getting back up again. It even looks like people are helping him.",
-                            "The more I see these people work together the more I love this city.",
-                        ],
-                        [playerSession.image, alexandraImage],
-                        [
-                            new TalkChoiceAction(1, "What a great folk we have"),
-                            new TalkChoiceAction(2, "We need to go further"),
-                            new TalkChoiceAction(99, "Bye!"),
-                        ]
-                    );
-                }
+            return new TalkAndImageActionResult(
+                this,
+                [
+                    "This is it, the end of Wolburg,",
+                    "Are you ready to save the princess?",
+                    "Maybe if you forgot anything you can go back to the shop and buy something",
+                ],
+                [playerSession.image, alexandraImage],
+                [
+                    new TalkChoiceAction(1, "I'm fine, lets go!"),
+                    new TalkChoiceAction(2, "I totally forgot something."),
+                    new TalkChoiceAction(99, "Bye!"),
+                ]
+            );
+        }
+        if (playerSession.currentRoom === StablesWolburgRoomAlias) {
+            if (
+                playerSession.horseMission10 === true ||
+                playerSession.horseMission20 === true ||
+                playerSession.horseMission30 === true
+            ) {
                 if (_choiceId === 1) {
                     return new TextAndImageActionResult(
-                        ["Alexandra: You should talk to him, I think that would cheer him up"],
+                        [
+                            "Alexandra: We indeed do, you should take a closer look next time we are in Wolburg.",
+                        ],
                         [playerSession.image, alexandraImage]
                     );
                 } else if (_choiceId === 2) {
-                    return new TalkAndImageActionResult(
-                        this,
-                        ["Alexandra: Are you sure, I think he needs help"],
-                        [playerSession.image, alexandraImage],
-                        [
-                            new TalkChoiceAction(3, "I'm sure, lets go"),
-                            new TalkChoiceAction(4, "Alright, lets check him out"),
-                        ]
-                    );
-                } else if (_choiceId === 3) {
                     return new TextAndImageActionResult(
-                        ["Alexandra: Sure thing boss"],
+                        ["Alexandra: You are right, we need to save the princess!"],
                         [playerSession.image, alexandraImage]
                     );
-                } else if (_choiceId === 4) {
-                    return new TextAndImageActionResult(
-                        ["Alexandra: Yess nice! You are the best"],
-                        [playerSession.image, alexandraImage]
-                    );
-                } else if (_choiceId === 99) {
-                    return new TextActionResult(["Alexandra: Oh alright, Bye!"]);
                 }
+
                 return new TalkAndImageActionResult(
                     this,
                     [
-                        "Alexandra: Look at that poor man, he is even crying, I'm wondering whats happened to him",
+                        "Alexandra: At least Richard is getting back up again. It even looks like people are helping him.",
+                        "The more I see these people work together the more I love this city.",
                     ],
                     [playerSession.image, alexandraImage],
                     [
-                        new TalkChoiceAction(1, "Lets check him out!"),
+                        new TalkChoiceAction(1, "What a great folk we have"),
                         new TalkChoiceAction(2, "We need to go further"),
                         new TalkChoiceAction(99, "Bye!"),
                     ]
                 );
             }
+            if (_choiceId === 1) {
+                return new TextAndImageActionResult(
+                    ["Alexandra: You should talk to him, I think that would cheer him up"],
+                    [playerSession.image, alexandraImage]
+                );
+            } else if (_choiceId === 2) {
+                return new TalkAndImageActionResult(
+                    this,
+                    ["Alexandra: Are you sure, I think he needs help"],
+                    [playerSession.image, alexandraImage],
+                    [
+                        new TalkChoiceAction(3, "I'm sure, lets go"),
+                        new TalkChoiceAction(4, "Alright, lets check him out"),
+                    ]
+                );
+            } else if (_choiceId === 3) {
+                return new TextAndImageActionResult(
+                    ["Alexandra: Sure thing boss"],
+                    [playerSession.image, alexandraImage]
+                );
+            } else if (_choiceId === 4) {
+                return new TextAndImageActionResult(
+                    ["Alexandra: Yess nice! You are the best"],
+                    [playerSession.image, alexandraImage]
+                );
+            } else if (_choiceId === 99) {
+                return new TextActionResult(["Alexandra: Oh alright, Bye!"]);
+            }
+            return new TalkAndImageActionResult(
+                this,
+                ["Alexandra: Look at that poor man, he is even crying, I'm wondering whats happened to him"],
+                [playerSession.image, alexandraImage],
+                [
+                    new TalkChoiceAction(1, "Lets check him out!"),
+                    new TalkChoiceAction(2, "We need to go further"),
+                    new TalkChoiceAction(99, "Bye!"),
+                ]
+            );
+        }
 
+        if (playerSession.currentRoom === WolburgRoomAlias) {
             if (_choiceId === 1) {
                 return new TextAndImageActionResult(
                     ["Alexandra: Alright lets go."],
@@ -344,8 +341,7 @@ export class AlexandraCharacter extends Character implements Examine {
                 ]
             );
         }
-        if (playerSession.currentRoom === GateWolburgRoomAlias) {
-        }
+
         if (playerSession.currentRoom === ChurchWolburgRoomAlias) {
             if (_choiceId === 1) {
                 return new TalkAndImageActionResult(

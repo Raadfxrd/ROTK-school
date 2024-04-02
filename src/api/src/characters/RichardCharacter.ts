@@ -34,7 +34,7 @@ export class RichardCharacter extends Character implements Examine {
 
     public talk(_choiceId?: number): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
-        const richardImage: string = "characters/Image.png";
+        const richardImage: string = "characters/Richard.png";
         if (_choiceId === 1) {
             return new TalkAndImageActionResult(
                 this,
