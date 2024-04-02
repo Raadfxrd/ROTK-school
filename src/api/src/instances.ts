@@ -92,7 +92,7 @@ import { ShadowBeakTorch, ShadowbeakTorchAlias } from "./items/ShadowBeakTorch";
 export function createNewPlayerSession(): PlayerSession {
     return {
         //Room session
-        currentRoom: "KVTownSquare",
+        currentRoom: "intro-room",
         lastRoom: "",
         inCombat: false,
         image: "",
@@ -111,6 +111,7 @@ export function createNewPlayerSession(): PlayerSession {
         //enemy stats
         vladimirHP: 20,
         vladimirGone: false,
+        smaugHP: 150,
 
         //Booleans
         knowWhereMapIs: false,
