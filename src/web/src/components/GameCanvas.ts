@@ -6,6 +6,7 @@ import { getState, performAction } from "../services/routeService";
 @customElement("game-canvas")
 export class GameCanvas extends LitElement {
     private playerHP: number = 100;
+    private smaugHP: number = 150;
 
     public static styles = css`
         /** Maken van nieuwe grid layout voor nieuwe custom layout **/
@@ -195,6 +196,7 @@ export class GameCanvas extends LitElement {
         this.actionButtons = state.actions;
         this.gameObjectButtons = state.objects;
         this.playerHP = state.playerHP;
+        this.smaugHP = state.smaugHP;
 
         // Reset geselecteerde acties en objecten.
         this.selectedActionButton = undefined;
@@ -283,6 +285,14 @@ export class GameCanvas extends LitElement {
                 <!-- Toont de actie- en objectknoppen -->
                 <div>
                     HP:${this.playerHP}<progress id="healthbar" max="100" value=${this.playerHP}></progress>
+                    <div>
+                        <progress
+                            class="smaugHPbar"
+                            style="display: none"
+                            max="150"
+                            value=${this.smaugHP}
+                        ></progress>
+                    </div>
                     <!-- Toont de speler zijn gezondheid -->
                 </div>
             </div>

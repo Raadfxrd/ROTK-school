@@ -1,4 +1,5 @@
 export type GameState = {
+    smaugHP: number;
     playerHP: number;
     roomAlias: string;
     roomTitle: string;

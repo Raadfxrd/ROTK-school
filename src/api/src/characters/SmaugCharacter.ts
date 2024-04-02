@@ -9,6 +9,26 @@ import { deathRoom } from "../rooms/deathRoom";
 import { PlayerSession } from "../types";
 
 export const SmaugAlias: string = "Smaug";
+export class SmaugProperties {
+    private static _healthPoints: number = 150;
+    private static _damage: number = 25;
+
+    //health
+    public static get healthPoints(): number {
+        return this._healthPoints;
+    }
+    public static set healthPoints(value: number) {
+        this._healthPoints = value;
+    }
+    //damage
+    public static get Damage(): number {
+        return this._damage;
+    }
+    public static set damage(value: number) {
+        this._damage = value;
+    }
+}
+
 export class SmaugCharacter extends Character implements Examine {
     public constructor() {
         super(SmaugAlias, ExamineActionAlias);
@@ -17,8 +37,11 @@ export class SmaugCharacter extends Character implements Examine {
         return "Smaug";
     }
     public examine(): ActionResult | undefined {
+        const playerSession: PlayerSession = getPlayerSession();
         return new TextActionResult([
-            "Smaug: Ancient and formidable, this colossal dragon is a sight to behold. With scales gleaming like molten gold and eyes that burn with intelligence, he guards his vast treasure hoard within the Lonely Mountain. Cunning and ruthless, he speaks with a sly tongue, toying with those who dare to challenge him. Beware, for crossing paths with Smaug is to face the epitome of greed and power.",
+            "Smaug: A colossal dragon with gleaming gold scales and piercing eyes, guarding his treasure within the Lonely Mountain. Cunning and ruthless, he toys with challengers, embodying greed and power. " +
+                "Smaug's HP = " +
+                playerSession.smaugHP,
         ]);
     }
     public talk(_choiceId?: number | undefined): ActionResult | undefined {

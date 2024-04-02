@@ -164,6 +164,7 @@ function convertActionResultToGameState(actionResult?: ActionResult): GameState 
     }
 
     return {
+        smaugHP: playerSession.smaugHP,
         playerHP: playerSession.healthPoints,
         roomAlias: room.alias,
         roomTitle: room.name(),
