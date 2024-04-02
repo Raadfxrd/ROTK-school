@@ -1,3 +1,5 @@
+import { getPlayerSession } from "../../instances";
+import { PlayerSession } from "../../types";
 import { TextActionResult } from "./TextActionResult";
 
 /**
@@ -14,10 +16,13 @@ export class RandomDiceResult extends TextActionResult {
      */
     public constructor(text: string[], dice: number) {
         super(text);
+        const playerSession: PlayerSession = getPlayerSession();
 
         const number: number = Math.floor(Math.random() * dice) + 1;
 
-        const numberString: string = number.toString();
+        const damage: number = (playerSession.strength - 10) / 2 + number;
+
+        const numberString: string = damage.toString();
 
         text.push(numberString);
 

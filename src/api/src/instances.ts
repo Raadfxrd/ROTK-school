@@ -10,7 +10,7 @@ import { RingItem, RingItemAlias } from "./items/RingItem";
 import { KarasValeTownSquareRoom, KarasValeTownSquareRoomAlias } from "./rooms/KarasValeTownSquareRoom";
 import { StartupRoom, StartupRoomAlias } from "./rooms/StartupRoom";
 import { LowLandsRoom, LowLandsRoomAlias } from "./rooms/LowLandsRoom";
-import { TunnelWallItem, TunnelWallItemAlias } from "./items/TunnelWallItem";
+import { TunnelWall, TunnelWallAlias } from "./rooms/TunnelWall";
 import { ThroneRoom, ThroneRoomAlias } from "./rooms/ThroneRoom";
 import { HenryAlias, HenryCharacter } from "./characters/HenryCharacter";
 import { LowlandsTorch, LowlandsTorchAlias } from "./items/LowlandsTorchItem";
@@ -23,7 +23,6 @@ import { KarasValeForestRoom, KarasValeForestRoomAlias } from "./rooms/KarasVale
 import { KVFallenTreesItem, KVFallenTreesItemAlias } from "./items/KVFallenTreeItem";
 import { KVForestItem, KVForestItemAlias } from "./items/KVForestItem";
 import { KaraWhistleItem, KaraWhistleItemAlias } from "./items/KaraWhistleItem";
-import { MapItem, MapItemAlias } from "./items/MapItem";
 import { WolburgRoom, WolburgRoomAlias } from "./rooms/WolburgRoom";
 import { RichardCharacter, RichardCharacterAlias } from "./characters/RichardCharacter";
 import { BlackSmithRoom, BlacksmithAlias } from "./rooms/BlacksmithRoom";
@@ -62,12 +61,28 @@ import { SteelSwordItem, SteelSwordItemAlias } from "./items/SteelSwordItem";
 import { SwordOfGoodFortuneItem, SwordOfGoodFortuneItemAlias } from "./items/SwordOfGoodFortuneItem";
 import { SmaugRoomAlias, SmaugRoom } from "./rooms/SmaugRoom";
 import { SmaugAlias, SmaugCharacter } from "./characters/SmaugCharacter";
-import { DeathAlias, deathRoom } from "./rooms/Deathroom";
+import { DeathAlias, deathRoom } from "./rooms/deathRoom";
 import { princessAlias, princessCharacter } from "./characters/princessCharacter";
 import { StablesWolburgRoom, StablesWolburgRoomAlias } from "./rooms/StablesWolburgRoom";
 import { GateWolburgRoom, GateWolburgRoomAlias } from "./rooms/GateWolburgRoom";
 import { VladimirCharacter, VladimirCharacterAlias } from "./characters/VladimirCharacter";
 import { ShopTorch, ShopTorchAlias } from "./items/ShopTorchItem";
+import { TunnelWallSwitcher, TunnelWallSwitcherAlias } from "./items/TunnelWallSwitcher";
+import { WolburgMapItem, WolburgMapItemAlias } from "./items/WolburgMapItem";
+import { MapRoom, MapRoomAlias } from "./rooms/MapRoom";
+import { KarasValeMapItem, KarasValeMapItemAlias } from "./items/KarasValeMapItem";
+import { WindHollowMapItem, WindHollowMapItemAlias } from "./items/WindHollowMapItem";
+import { WildeWoodMapItem, WildeWoodMapItemAlias } from "./items/WildeWoodMapItem";
+import { LowLandsMapItemAlias, LowlandsMapItem } from "./items/LowLandsMapItem";
+import { VolosVillageMapItem, VolosVillageMapItemAlias } from "./items/VolosVillageMapItem";
+import { SilverCoastMapItem, SilverCoastMapItemAlias } from "./items/SilverCoastMapItem";
+import { MountainsMapItem, MountainsMapItemAlias } from "./items/MountainsMapItem";
+import { RavensRestMapItem, RavensRestMapItemAlias } from "./items/RavensRestMapItem";
+import { QuickPassMapItem, QuickpassMapItemAlias } from "./items/QuickpassMapItem";
+import { LowLandsNoNameMapItemAlias, LowlandsNoNameMapItem } from "./items/LowLandsNoNameMapItem";
+import { KarasTorch, KarasTorchAlias } from "./items/KarasValeTorchItem";
+import { firstMedallionHalf, firstMedallionHalfAlias } from "./items/FirstMedallionHalfItem";
+import { ShadowBeakTorch, ShadowbeakTorchAlias } from "./items/ShadowBeakTorch";
 
 /**
  * Create a new player session object
@@ -77,14 +92,16 @@ import { ShopTorch, ShopTorchAlias } from "./items/ShopTorchItem";
 export function createNewPlayerSession(): PlayerSession {
     return {
         //Room session
-        currentRoom: "Smaug-room",
+        currentRoom: "intro-room",
         lastRoom: "",
         inCombat: false,
+        image: "",
 
         //Inventory session
         inventory: [],
         equipment: [],
         gold: 0,
+        torchesGathered: ["rooms/tunnel-wall.png"],
 
         //Stats
         healthPoints: 100,
@@ -98,6 +115,8 @@ export function createNewPlayerSession(): PlayerSession {
 
         //Booleans
         knowWhereMapIs: false,
+        knowNameLowlands: false,
+        vladimirTaken: false,
         wentNorth: false,
         knowsOfKara: false,
         summonedKara: false,
@@ -128,6 +147,7 @@ export function createNewPlayerSession(): PlayerSession {
         edwinBusted: false,
         roseAcquired: false,
         ronaldoGotRose: false,
+        earnedBlueTorch: false,
     };
 }
 
@@ -208,6 +228,12 @@ export function getRoomByAlias(alias: string): Room | undefined {
 
         case GateWolburgRoomAlias:
             return new GateWolburgRoom();
+
+        case TunnelWallAlias:
+            return new TunnelWall();
+
+        case MapRoomAlias:
+            return new MapRoom();
     }
 
     return undefined;
@@ -231,9 +257,6 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
         case DarkTreesSwitcherAlias:
             return new DarkTreesSwitcher();
 
-        case TunnelWallItemAlias:
-            return new TunnelWallItem();
-
         case secondMedalionHalfItemAlias:
             return new secondMedalionHalfItem();
 
@@ -248,9 +271,6 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case RingItemAlias:
             return new RingItem();
-
-        case MapItemAlias:
-            return new MapItem();
 
         case AlexandraAlias:
             return new AlexandraCharacter();
@@ -336,6 +356,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
         case TunnelSwitcherAlias:
             return new TunnelSwitcher();
 
+        case TunnelWallSwitcherAlias:
+            return new TunnelWallSwitcher();
+
         case ChainmailArmourOfTheGreatItemAlias:
             return new ChainmailArmourOfTheGreatItem();
 
@@ -347,8 +370,10 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case SmaugAlias:
             return new SmaugCharacter();
+
         case princessAlias:
             return new princessCharacter();
+
         case ShopTorchAlias:
             return new ShopTorch();
 
@@ -357,8 +382,54 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case JainaCharacterAlias:
             return new JainaCharacter();
+
+        case WolburgMapItemAlias:
+            return new WolburgMapItem();
+
+        case KarasValeMapItemAlias:
+            return new KarasValeMapItem();
+
+        case WindHollowMapItemAlias:
+            return new WindHollowMapItem();
+
+        case WildeWoodMapItemAlias:
+            return new WildeWoodMapItem();
+
+        case LowLandsMapItemAlias:
+            return new LowlandsMapItem();
+
+        case VolosVillageMapItemAlias:
+            return new VolosVillageMapItem();
+
+        case SilverCoastMapItemAlias:
+            return new SilverCoastMapItem();
+
+        case MountainsMapItemAlias:
+            return new MountainsMapItem();
+
+        case RavensRestMapItemAlias:
+            return new RavensRestMapItem();
+
+        case LowLandsMapItemAlias:
+            return new LowlandsMapItem();
+
+        case LowLandsNoNameMapItemAlias:
+            return new LowlandsNoNameMapItem();
+
+        case QuickpassMapItemAlias:
+            return new QuickPassMapItem();
+
         case EdwinCharacterAlias:
             return new EdwinCharacter();
+
+        case KarasTorchAlias:
+            return new KarasTorch();
+
+        case firstMedallionHalfAlias:
+            return new firstMedallionHalf();
+
+        case ShadowbeakTorchAlias:
+            return new ShadowBeakTorch();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:

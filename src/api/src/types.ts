@@ -11,10 +11,13 @@ export type PlayerSession = {
     secondMedalionHalf: boolean;
     leftVolo: boolean;
     knowLocationLowlands: boolean;
+    knowNameLowlands: boolean;
+    vladimirTaken: boolean;
     horseMission30: boolean;
     horseMission20: boolean;
     horseMission10: boolean;
     inCombat: boolean;
+    image: string;
     vladimirHP: number;
     smaugHP: number;
     vladimirGone: boolean;
@@ -36,8 +39,10 @@ export type PlayerSession = {
     correctAnswers: string[];
     wrongAnswers: string[];
     death: boolean;
+    torchesGathered: string[];
     edwinHint: boolean;
     edwinBusted: boolean;
     roseAcquired: boolean;
     ronaldoGotRose: boolean;
+    earnedBlueTorch: boolean;
 };

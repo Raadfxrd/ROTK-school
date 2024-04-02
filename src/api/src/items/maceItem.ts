@@ -11,6 +11,9 @@ export class maceItem extends Item implements Examine {
     public objectActions(): string[] {
         return [PickupActionAlias];
     }
+    public Attack(): number {
+        return 10;
+    }
     public name(): string {
         return "Mace";
     }

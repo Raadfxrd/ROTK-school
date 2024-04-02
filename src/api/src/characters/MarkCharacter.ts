@@ -172,6 +172,80 @@ export class MarkCharacter extends Character {
                         new TalkChoiceAction(9, "Thanks, I'll go on my way"),
                     ]
                 );
+            } else if (_choiceId === 15) {
+                return new TalkActionResult(
+                    this,
+                    [
+                        "Mark: And I'm Mark. We are all equal here in the church so don't tell me you are one of the higher ups who need this might.",
+                        "So Arthur tell me again, why do you want the information of this ring",
+                    ],
+                    [
+                        new TalkChoiceAction(16, "We got a quest"),
+                        new TalkChoiceAction(17, "I'll pay you 5 gold"),
+                    ]
+                );
+            } else if (_choiceId === 16) {
+                return new TalkActionResult(
+                    this,
+                    ["Mark: What kind of quest? Is is really important?"],
+                    [
+                        new TalkChoiceAction(18, "We have to save someone"),
+                        new TalkChoiceAction(4, "It's REALLY important"),
+                        new TalkChoiceAction(10, "We have to save the princess!"),
+                    ]
+                );
+            } else if (_choiceId === 17) {
+                playerSession.gold -= 5;
+                return new TalkActionResult(
+                    this,
+                    ["Mark: Thanks for your money, Now what do you want to know about this ring..."],
+                    [
+                        new TalkChoiceAction(4, "Everything there is to know about it"),
+                        new TalkChoiceAction(20, "Just tell me already"),
+                    ]
+                );
+            } else if (_choiceId === 18) {
+                return new TalkActionResult(
+                    this,
+                    ["Mark: And who is this someone?"],
+                    [
+                        new TalkChoiceAction(10, "It is the princess"),
+                        new TalkChoiceAction(21, "I can't tell you"),
+                        new TalkChoiceAction(20, "Just tell me already"),
+                    ]
+                );
+            } else if (_choiceId === 19) {
+                return new TalkActionResult(
+                    this,
+                    ["Mark: Thanks for your money, Now what do you want to know about this ring..."],
+                    [
+                        new TalkChoiceAction(16, "We got a quest"),
+                        new TalkChoiceAction(17, "I'll pay you 5 gold"),
+                    ]
+                );
+            } else if (_choiceId === 20) {
+                return new TalkActionResult(
+                    this,
+                    [
+                        "Mark: Calm down, I'm going to tell you about this ring...",
+                        "This ring is a legend from the Changeling people. They live deep underground but nobody has seen them because they can change their appearance.",
+                        "The difficult part is to spot a changeling because they are always someone else. When they die they will form back to their old selves...",
+                    ],
+                    [
+                        new TalkChoiceAction(7, "Interesting, do you know more about this?"),
+                        new TalkChoiceAction(8, "Where do they live underground"),
+                        new TalkChoiceAction(9, "Thanks, I'll go on my way"),
+                    ]
+                );
+            } else if (_choiceId === 21) {
+                return new TalkActionResult(
+                    this,
+                    ["Mark: If you can't tell me I can't help you"],
+                    [
+                        new TalkChoiceAction(10, "It is the princess"),
+                        new TalkChoiceAction(19, "I'll pay you 5 gold"),
+                    ]
+                );
             } else if (_choiceId === 99) {
                 return new TextActionResult(["Mark: Bye! good luck on your adventure."]);
             }
