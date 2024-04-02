@@ -1,9 +1,12 @@
 import { ActionResult } from "../base/actionResults/ActionResult";
-import { TalkActionResult } from "../base/actionResults/TalkActionResult";
+import { TalkAndImageActionResult } from "../base/actionResults/TalkAndImageActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
+import { TextAndImageActionResult } from "../base/actionResults/TextAndImageActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
+import { getPlayerSession } from "../instances";
+import { PlayerSession } from "../types";
 
 export const RichardCharacterAlias: string = "richard-character";
 
@@ -17,27 +20,36 @@ export class RichardCharacter extends Character implements Examine {
     }
 
     public examine(): ActionResult | undefined {
-        return new TextActionResult([
-            "Richard looks like a man that is in total shock. Why is he in shock?",
-            "Maybe the bandits just came through and pushed him aside.",
-            "He looks like a normal person thats just living a normal life.",
-        ]);
+        const playerSession: PlayerSession = getPlayerSession();
+        const richardImage: string = "characters/Richard.png";
+        return new TextAndImageActionResult(
+            [
+                "Richard looks like a man that is in total shock. Why is he in shock?",
+                "Maybe the bandits just came through and pushed him aside.",
+                "He looks like a normal person thats just living a normal life.",
+            ],
+            [playerSession.image, richardImage]
+        );
     }
 
     public talk(_choiceId?: number): ActionResult | undefined {
+        const playerSession: PlayerSession = getPlayerSession();
+        const richardImage: string = "characters/Image.png";
         if (_choiceId === 1) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Richard: Those maggots, they were running away and pushed me aside."],
+                [playerSession.image, richardImage],
                 [
                     new TalkChoiceAction(3, "What do they look like"),
                     new TalkChoiceAction(4, "Did they have someone with them?"),
                 ]
             );
         } else if (_choiceId === 2) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Richard: The princess? what happened to her? She was going to be Queen innit?"],
+                [playerSession.image, richardImage],
                 [
                     new TalkChoiceAction(9, "She just got kidnapped from her crowning"),
                     new TalkChoiceAction(7, "She dissapeared"),
@@ -45,38 +57,42 @@ export class RichardCharacter extends Character implements Examine {
                 ]
             );
         } else if (_choiceId === 3) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 [
                     "Richard: Couldn't really take a good look, they were just really fast and hasty.",
                     "for me they just looked like normal peasants",
                 ],
+                [playerSession.image, richardImage],
                 [
                     new TalkChoiceAction(5, "Where were they headed?"),
                     new TalkChoiceAction(6, "Thanks, i'll go look further"),
                 ]
             );
         } else if (_choiceId === 4) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Richard: I indeed saw someone taken but didn't think much of it"],
+                [playerSession.image, richardImage],
                 [
                     new TalkChoiceAction(5, "Where were they headed"),
                     new TalkChoiceAction(6, "Thanks i'll go look further"),
                 ]
             );
         } else if (_choiceId === 5) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Richard: They were going to the stables where all the commotion is now."],
+                [playerSession.image, richardImage],
                 [new TalkChoiceAction(6, "Thanks, that's all i needed")]
             );
         } else if (_choiceId === 6) {
             return new TextActionResult(["Good luck going after them."]);
         } else if (_choiceId === 7) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Richard: How? She can't just have dissapeared."],
+                [playerSession.image, richardImage],
                 [
                     new TalkChoiceAction(8, "I can't give you more information"),
                     new TalkChoiceAction(9, "She got kidnapped"),
@@ -85,9 +101,10 @@ export class RichardCharacter extends Character implements Examine {
         } else if (_choiceId === 8) {
             return new TextActionResult(["Alright lad, good look finding her."]);
         } else if (_choiceId === 9) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Richard: By who?"],
+                [playerSession.image, richardImage],
                 [
                     new TalkChoiceAction(10, "We are trying to figure that out"),
                     new TalkChoiceAction(11, "By some bandits"),
@@ -95,9 +112,10 @@ export class RichardCharacter extends Character implements Examine {
                 ]
             );
         } else if (_choiceId === 10) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Richard: Figure it out quickly because she is our queen!"],
+                [playerSession.image, richardImage],
                 [
                     new TalkChoiceAction(5, "We think the people running away were it"),
                     new TalkChoiceAction(14, "Can you help me then?"),
@@ -105,36 +123,40 @@ export class RichardCharacter extends Character implements Examine {
                 ]
             );
         } else if (_choiceId === 11) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Richard: Bandits? They are here in town?"],
+                [playerSession.image, richardImage],
                 [
                     new TalkChoiceAction(12, "Apparently yeah"),
                     new TalkChoiceAction(5, "I think it were the people running"),
                 ]
             );
         } else if (_choiceId === 12) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Richard: Thats not great, take them down will ya"],
+                [playerSession.image, richardImage],
                 [
                     new TalkChoiceAction(13, "have you seen something strange lately?"),
                     new TalkChoiceAction(6, "I will!"),
                 ]
             );
         } else if (_choiceId === 13) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Richard: Well besides those people running not much"],
+                [playerSession.image, richardImage],
                 [
                     new TalkChoiceAction(5, "Where were they headed?"),
                     new TalkChoiceAction(6, "We'll go after them"),
                 ]
             );
         } else if (_choiceId === 14) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Richard: Alrighty son, What can i do?"],
+                [playerSession.image, richardImage],
                 [
                     new TalkChoiceAction(5, "Where did the people go to?"),
                     new TalkChoiceAction(3, "What do the people look like?"),
@@ -145,12 +167,13 @@ export class RichardCharacter extends Character implements Examine {
             return new TextActionResult(["Richard: Bye stranger."]);
         }
 
-        return new TalkActionResult(
+        return new TalkAndImageActionResult(
             this,
             [
                 "Richard: Those bloody maggots, what are they on about...",
                 "Top o' the morning to ya, didn't see ya standing there.",
             ],
+            [playerSession.image, richardImage],
             [
                 new TalkChoiceAction(1, "Who were you talking about?"),
                 new TalkChoiceAction(2, "Have you seen the princess?"),

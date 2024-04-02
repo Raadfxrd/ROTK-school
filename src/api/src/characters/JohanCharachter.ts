@@ -1,6 +1,7 @@
 import { ActionResult } from "../base/actionResults/ActionResult";
-import { TalkActionResult } from "../base/actionResults/TalkActionResult";
+import { TalkAndImageActionResult } from "../base/actionResults/TalkAndImageActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
+import { TextAndImageActionResult } from "../base/actionResults/TextAndImageActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
@@ -19,20 +20,28 @@ export class JohanCharacter extends Character implements Examine {
     }
 
     public examine(): ActionResult | undefined {
-        return new TextActionResult([
-            "This is Johan, he looks like an adult in his 30s.",
-            "Besides that he looks like in his 30s, he has some short pointy ears.",
-            "You know that the pointy ears means that he is at least an half elf or an elf.",
-            "He looks like he is hurt, maybe those people that were running away did something to him.",
-        ]);
+        const playerSession: PlayerSession = getPlayerSession();
+        const johanImage: string = "characters/Johan.png";
+        return new TextAndImageActionResult(
+            [
+                "This is Johan, he looks like an adult in his 30s.",
+                "Besides that he looks like in his 30s, he has some short pointy ears.",
+                "You know that the pointy ears means that he is at least an half elf or an elf.",
+                "He looks like he is hurt, maybe those people that were running away did something to him.",
+            ],
+            [playerSession.image, johanImage]
+        );
     }
 
     public talk(_choiceId?: number): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
+        const johanImage: string = "characters/Johan.png";
+
         if (_choiceId === 1) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Johan: I'm ok, it's just dat mij horses are all gone."],
+                [playerSession.image, johanImage],
                 [
                     new TalkChoiceAction(2, "Where did they go to?"),
                     new TalkChoiceAction(3, "How many horses have they stolen?"),
@@ -41,9 +50,10 @@ export class JohanCharacter extends Character implements Examine {
                 ]
             );
         } else if (_choiceId === 2) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Johan: They went to the zuider gate.", "Can you alstjeblieft take mij horses back?"],
+                [playerSession.image, johanImage],
                 [
                     new TalkChoiceAction(5, "If there is a reward..."),
                     new TalkChoiceAction(6, "Of course, I'll get them back"),
@@ -51,9 +61,10 @@ export class JohanCharacter extends Character implements Examine {
                 ]
             );
         } else if (_choiceId === 3) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Johan: They stole 5 horses from mij."],
+                [playerSession.image, johanImage],
                 [
                     new TalkChoiceAction(5, "I'll get them back if there is a reward..."),
                     new TalkChoiceAction(6, "Of course, I'll get them back"),
@@ -61,13 +72,14 @@ export class JohanCharacter extends Character implements Examine {
                 ]
             );
         } else if (_choiceId === 4) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 [
                     "Ik saw a woman with them, but dat was de princess?",
                     "Man, this is another cookie...",
                     "If ik had any more horses you could have taken een with you",
                 ],
+                [playerSession.image, johanImage],
                 [
                     new TalkChoiceAction(8, "Yeah they were quick!"),
                     new TalkChoiceAction(2, "Thanks for your help, where did they go to?"),
@@ -75,9 +87,10 @@ export class JohanCharacter extends Character implements Examine {
                 ]
             );
         } else if (_choiceId === 5) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Johan: Ok, is goed. I'll give you 20 gold als jij my horses bring back."],
+                [playerSession.image, johanImage],
                 [
                     new TalkChoiceAction(10, "I want 10 gold now and 10 gold when I'm back"),
                     new TalkChoiceAction(6, "Of course, I'll get them back"),
@@ -92,20 +105,22 @@ export class JohanCharacter extends Character implements Examine {
                 "Johan: Oh ok. Succes verder, I will zoek verder for someone who will help me take mij horses back!",
             ]);
         } else if (_choiceId === 8) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 [
                     "Johan: They indeed were, They had some kind of magie. I don't know veel about magie but it looked like their leader.",
                 ],
+                [playerSession.image, johanImage],
                 [
                     new TalkChoiceAction(12, "Interesting, thanks for the information."),
                     new TalkChoiceAction(5, "I'll take your horses back"),
                 ]
             );
         } else if (_choiceId === 9) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Johan: Succes, take them down and give mij horses back!"],
+                [playerSession.image, johanImage],
                 [
                     new TalkChoiceAction(6, "Of course, I'll get them back"),
                     new TalkChoiceAction(13, "I need to go, I can't help further"),
@@ -120,9 +135,10 @@ export class JohanCharacter extends Character implements Examine {
                 "Succes en be save",
             ]);
         } else if (_choiceId === 11) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Johan: Final offer, 30 gold totaal, 15 now, 15 when jij are back."],
+                [playerSession.image, johanImage],
                 [
                     new TalkChoiceAction(13, "I need to go, I can't help further"),
                     new TalkChoiceAction(14, "I want more, this is not worth it."),
@@ -146,13 +162,14 @@ export class JohanCharacter extends Character implements Examine {
             return new TextActionResult(["Doei doei."]);
         }
 
-        return new TalkActionResult(
+        return new TalkAndImageActionResult(
             this,
             [
                 "Johan: Waarom, waarom gebeurt dit mij altijd...",
                 "Oh, hallo. Sorry that jij see mij this way. I just got robbed by die people.",
                 "They stole all my horses en fled.",
             ],
+            [playerSession.image, johanImage],
             [
                 new TalkChoiceAction(1, "Are you alright?"),
                 new TalkChoiceAction(2, "Where did they go to?"),
