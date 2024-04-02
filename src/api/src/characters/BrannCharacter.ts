@@ -8,6 +8,7 @@ import { getPlayerSession } from "../instances";
 import { HealingPotionAlias } from "../items/HealingPotionItem";
 import { HolyBibleAlias } from "../items/HolyBibleItem";
 import { MysteriousPaintingAlias } from "../items/MysteriousPaintingItem";
+import { ShopTorchAlias } from "../items/ShopTorchItem";
 import { SpiderEyeAlias } from "../items/SpiderEyeItem";
 import { PlayerSession } from "../types";
 
@@ -27,6 +28,31 @@ export class BrannCharacter extends Character implements Examine {
     }
     public talk(_choiceId?: number | undefined): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
+        if (_choiceId === 50) {
+            return new TalkActionResult(
+                this,
+                ["I do infact know about him, he sells herbs in this village."],
+                [new TalkChoiceAction(51, "Can u check those HERBS?")]
+            );
+        }
+        if (_choiceId === 51) {
+            //Brann wordt opgepakt--ending :)
+            playerSession.edwinBusted = true;
+            return new TextActionResult([
+                "Oh lord.. These are all illegal weapons! Il report this. Thank you",
+            ]);
+        }
+        if (_choiceId === 60) {
+            if (playerSession.gold >= 15) {
+                playerSession.gold -= 15;
+                playerSession.inventory.push();
+                playerSession.roseAcquired = true;
+                return new TextActionResult([
+                    "<hands over roses> There you go, no clue why u should need them but they look nice",
+                ]);
+            }
+        }
+
         if (_choiceId === 5) {
             if (playerSession.gold >= 12) {
                 playerSession.gold -= 12;
@@ -80,7 +106,8 @@ export class BrannCharacter extends Character implements Examine {
                     new TalkChoiceAction(5, "Healing potion(12G)"),
                     new TalkChoiceAction(6, "Holy bible(8G)"),
                     new TalkChoiceAction(7, "Spider eye(2G)"),
-                    new TalkChoiceAction(8, "Mysterious painting(6G)"), // schrijf code maake daadwerkelijke items.
+                    new TalkChoiceAction(8, "Mysterious painting(6G)"),
+                    new TalkChoiceAction(60, "Red roses(15G)"),
                 ]
             );
         }
@@ -135,8 +162,9 @@ export class BrannCharacter extends Character implements Examine {
         if (_choiceId === 12) {
             if (playerSession.gold >= 5) {
                 playerSession.gold -= 5;
+                playerSession.inventory.push(ShopTorchAlias);
                 return new TextActionResult([
-                    "Take a look inside that barrel over there. It contains the torch you are looking for.",
+                    "THere, take this torch, adventurer. It may seem like a simple flame, but it carries ancient fire within. Let its light guide you through the darkest paths of your journey. May it be your beacon of hope and protection. Go forth now, and let its flame illuminate your way.",
                 ]); //maak code met een barrel die je kan inspecten.
             } else if (playerSession.gold <= 5) {
                 return new TextActionResult(["You dont have enough money..."]);
@@ -150,6 +178,32 @@ export class BrannCharacter extends Character implements Examine {
         }
         if (_choiceId === 15) {
             return new TextActionResult(["Fine... I dint want it anyways."]);
+        }
+        if (playerSession.edwinHint === true) {
+            return new TalkActionResult(
+                this,
+                ["Greetings Stranger, we have all the items you need."],
+                [
+                    new TalkChoiceAction(1, "What items do you sell?"),
+                    new TalkChoiceAction(2, "Ask about Ignis."),
+                    new TalkChoiceAction(3, "Show Ring to Brann"),
+                    new TalkChoiceAction(4, "Do you know where I can find a torch?"),
+                    new TalkChoiceAction(50, "Do u know about this Edwin fella?"),
+                ]
+            );
+        }
+        if (playerSession.edwinHint === true) {
+            return new TalkActionResult(
+                this,
+                ["Greetings Stranger, we have all the items you need."],
+                [
+                    new TalkChoiceAction(1, "What items do you sell?"),
+                    new TalkChoiceAction(2, "Ask about Ignis."),
+                    new TalkChoiceAction(3, "Show Ring to Brann"),
+                    new TalkChoiceAction(4, "Do you know where I can find a torch?"),
+                    new TalkChoiceAction(50, "Do u know about this Edwin fella?"),
+                ]
+            );
         }
 
         return new TalkActionResult(

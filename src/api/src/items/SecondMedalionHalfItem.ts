@@ -11,11 +11,11 @@ export class secondMedalionHalfItem extends Item implements Examine {
     }
 
     public name(): string {
-        return "Second half of a medalion";
+        return "Second half of a medallion";
     }
 
     public examine(): ActionResult | undefined {
-        return new TextActionResult(["It's half of a medalion. This may be useful in the LowLands."]);
+        return new TextActionResult(["It's the half of a medallion. This may be usefull in the lowlands"]);
     }
     public objectActions(): string[] {
         return [ExamineActionAlias];

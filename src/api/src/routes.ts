@@ -23,6 +23,9 @@ import { PickupAction, PickupActionAlias } from "./actions/PickupAction";
 import { CheckInventoryActionAlias } from "./actions/CheckInventoryAction";
 import { CheckInventoryAction } from "./actions/CheckInventoryAction";
 import { UseItemActionAlias, useItemAction } from "./actions/UseItemAction";
+import { AttackAction, AttackActionAlias } from "./actions/AttackAction";
+import { NavigationAction, NavigationActionAlias } from "./actions/NavigationAction";
+import { TalkAndImageActionResult } from "./base/actionResults/TalkAndImageActionResult";
 
 export const router: Router = Router();
 
@@ -126,11 +129,18 @@ function handleActionInRoom(room: Room, alias: string, objectAliases?: string[])
 
         case PickupActionAlias:
             return PickupAction.handle(gameObjects[0]);
+
         case CheckInventoryActionAlias:
             return CheckInventoryAction.handle(gameObjects[0]);
 
         case UseItemActionAlias:
             return useItemAction.handle(gameObjects[0]);
+
+        case AttackActionAlias:
+            return AttackAction.handle(gameObjects[0]);
+
+        case NavigationActionAlias:
+            return NavigationAction.handle(gameObjects[0]);
     }
 
     return CustomAction.handle(alias, gameObjects);
@@ -148,17 +158,23 @@ function convertActionResultToGameState(actionResult?: ActionResult): GameState 
 
     let actions: ActionReference[];
 
-    if (actionResult instanceof TalkActionResult) {
+    if (actionResult instanceof TalkActionResult || actionResult instanceof TalkAndImageActionResult) {
         actions = actionResult.choices.map((e) => e.toReference(actionResult.character));
     } else {
         actions = room.actions().map((e) => e.toReference());
     }
 
     return {
+        smaugHP: playerSession.smaugHP,
+        playerHP: playerSession.healthPoints,
         roomAlias: room.alias,
         roomTitle: room.name(),
-        roomImages: (actionResult as TextAndImageActionResult)?.images || room.images(),
-        text: (actionResult as TextActionResult)?.text || ["You have no interest in that."],
+        roomImages:
+            (actionResult as TextAndImageActionResult)?.images ||
+            (actionResult as TalkAndImageActionResult)?.images ||
+            room.images(),
+        text: (actionResult as TextActionResult)?.text ||
+            (actionResult as TalkActionResult)?.text || ["You have no interest in that."],
         actions: actions,
         objects: room.objects().map((e) => e.toReference()),
     };

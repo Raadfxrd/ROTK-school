@@ -8,7 +8,8 @@ import { Room } from "../base/gameObjects/Room";
 import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { PlayerSession } from "../types";
 import { LowLandsRoom } from "./LowLandsRoom";
-import { TunnelWallItem } from "../items/TunnelWallItem";
+import { TunnelWallSwitcher } from "../items/TunnelWallSwitcher";
+import { useItemAction } from "../actions/UseItemAction";
 
 export const TunnelRoomAlias: string = "tunnel-room";
 let picture: string = "tunnel";
@@ -30,12 +31,13 @@ export class TunnelRoom extends Room {
         return [
             new CustomAction("inventory", "Inventory", false),
             new ExamineAction(),
+            new useItemAction(),
             new CustomAction("go-back", "Go back", false),
         ];
     }
 
     public objects(): GameObject[] {
-        return [this, new TunnelWallItem()];
+        return [this, new TunnelWallSwitcher()];
     }
 
     public examine(): ActionResult | undefined {

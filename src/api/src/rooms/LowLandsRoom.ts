@@ -13,13 +13,14 @@ import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { PlayerSession } from "../types";
 
 import { KarasValeTownSquareRoom } from "./KarasValeTownSquareRoom";
+import { NavigationActionAlias } from "../actions/NavigationAction";
 
 export const LowLandsRoomAlias: string = "lowlands-room";
 let picture: string = "lowlands";
 
 export class LowLandsRoom extends Room {
     public constructor() {
-        super("lowlands-room");
+        super("lowlands-room", NavigationActionAlias);
     }
 
     public name(): string {
@@ -73,7 +74,20 @@ export class LowLandsRoom extends Room {
         return room.examine();
     }
 
+    public navigation(): ActionResult | undefined {
+        const room: LowLandsRoom = new LowLandsRoom();
+        const lastroom: string = getPlayerSession().currentRoom;
+
+        //Set the current room to the example room
+        getPlayerSession().currentRoom = room.alias;
+        getPlayerSession().lastRoom = lastroom;
+
+        return room.examine();
+    }
     public objectActions(): string[] {
-        return [ExamineActionAlias];
+        if (getPlayerSession().currentRoom === LowLandsRoomAlias) {
+            return [ExamineActionAlias];
+        }
+        return [NavigationActionAlias];
     }
 }

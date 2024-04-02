@@ -1,10 +1,12 @@
 import { ActionResult } from "../base/actionResults/ActionResult";
-import { TalkActionResult } from "../base/actionResults/TalkActionResult";
+import { TalkAndImageActionResult } from "../base/actionResults/TalkAndImageActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
+import { TextAndImageActionResult } from "../base/actionResults/TextAndImageActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
+import { ChainmailArmourOfTheGreatItemAlias } from "../items/ChainmailArmourOfTheGreatItem";
 import { RingItemAlias } from "../items/RingItem";
 import { PlayerSession } from "../types";
 
@@ -20,13 +22,19 @@ export class HenryCharacter extends Character implements Examine {
     }
 
     public examine(): ActionResult | undefined {
-        return new TextActionResult([
-            "This is Henry, Henry just got into the Kingsguard. He comes from the noble family Bourbon",
-            "He looks like a really genuine guy that can take a hit. He is wearing some nice knight armour. Doesn't look that scary though.",
-        ]);
+        const playerSession: PlayerSession = getPlayerSession();
+        const henryImage: string = "characters/Henry.png";
+        return new TextAndImageActionResult(
+            [
+                "This is Henry, Henry Just got into the kingsguard. He comes from the noble family 'Bourbon'",
+                "He looks like a really genuine guy that can take a hit. He is wearing some nice knight armour. He doesn't look that scary though.",
+            ],
+            [playerSession.image, henryImage]
+        );
     }
 
     public talk(_choiceId?: number): ActionResult | undefined {
+        const henryImage: string = "characters/Henry.png";
         if (_choiceId === 1) {
             return new TextActionResult([
                 "Henry: She was last seen in the entrance of the room, maybe there is a clue there?",
@@ -52,6 +60,9 @@ export class HenryCharacter extends Character implements Examine {
                 "Henry: No problem kiddo, Good luck on your adventure and your mission.",
             ]);
         } else if (_choiceId === 7) {
+            const playerSession: PlayerSession = getPlayerSession();
+
+            playerSession.inventory.push(ChainmailArmourOfTheGreatItemAlias);
             return new TextActionResult([
                 "Henry: I got you a set of armour laying in the dust.",
                 "Take it with you on your adventure. Good luck kiddo.",
@@ -79,7 +90,12 @@ export class HenryCharacter extends Character implements Examine {
             ];
         }
 
-        return new TalkActionResult(this, ["Henry: What happend?"], choiceActions);
+        return new TalkAndImageActionResult(
+            this,
+            ["Henry: What happend?"],
+            [playerSession.image, henryImage],
+            choiceActions
+        );
     }
 
     public objectActions(): string[] {

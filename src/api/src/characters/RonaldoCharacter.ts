@@ -16,33 +16,51 @@ export class RonaldoCharacter extends Character implements Examine {
     public talk(choiceId?: number | undefined): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.taylorlikesRonaldo === true) {
-            return new TextActionResult(["SUIIII taylor likes me now! Il tell drake to give u the award."]);
+            return new TextActionResult([
+                "Ronaldo: I have no clue how u did it but i think Taylor see's me standing again!",
+                "I want to pay u for all ur troubles... But i dont have the gold! I have an interesting item that may be of some worth! Drake has it now. he will give it to u",
+            ]);
+        }
+        if (playerSession.roseAcquired === true) {
+            playerSession.ronaldoGotRose = true;
+            return new TalkActionResult(
+                this,
+                ["Ronaldo: A red rose? How did u get this? either way with this i can win taylor back!!!"],
+                [new TalkChoiceAction(40, "No worrys! I'l tell Taylor to see u.")]
+            );
         }
         if (choiceId === 1) {
             return new TalkActionResult(
                 this,
                 [
-                    "Yeah lil susybakka. listen, i want taylor swift to like me. But everytime i suii she flys away.",
-                    "If u make her like me, then i shall see what i can do for u",
+                    "Drake told u? Well.. i long for this girl named Taylor. unknowingly recently she doesnt like me... She took an interest in Edwin! From all people...",
                 ],
                 [
-                    new TalkChoiceAction(
-                        2,
-                        "Bro why taylor. anyways its yo life. sure, do u know what she likes?"
-                    ),
-                    new TalkChoiceAction(3, "I think i know how to get taylor to like u. Il be back at ya"),
+                    new TalkChoiceAction(2, "Let me see what i can do for you. Do u know what Taylor likes?"),
+                    new TalkChoiceAction(3, "This Edwin fella, do u know more about him?"),
                 ]
             );
         } else if (choiceId === 3) {
-            playerSession.ronaldoIntro = true;
-            return new TextActionResult(["I trust you"]);
+            return new TalkActionResult(
+                this,
+                [
+                    "Yeah, he is an infamous person. We assume he does illegal trading in our village. He is also very rude.",
+                    "I have no clue why Taylor likes him... He must be lying to her in some way?",
+                ],
+                [new TalkChoiceAction(4, "I see... Il try to see what he is plotting. ")]
+            );
         } else if (choiceId === 2) {
             return new TalkActionResult(
                 this,
                 [
-                    "Yeah, i think she likes aviation. she always talks about flying here and there. even when a short distance",
+                    "Yeah, she always talks about how beautifull red roses are!. These roses are really expensive... And the only place they grow, is full of monsters!",
                 ],
-                [new TalkChoiceAction(4, "thanks! I think i know how to make taylor like u!")]
+                [
+                    new TalkChoiceAction(
+                        4,
+                        "I see... I will try to give u what it takes to make Taylor yours again!"
+                    ),
+                ]
             );
         } else if (choiceId === 4) {
             playerSession.ronaldoIntro = true;
@@ -50,8 +68,8 @@ export class RonaldoCharacter extends Character implements Examine {
         }
         return new TalkActionResult(
             this,
-            ["SUIIIIIIIII, may i ask who u are? Did drake let u in? Such a sussy baka..."],
-            [new TalkChoiceAction(1, "Yeah, he sent me. He said u need some sort of help correct? ")]
+            ["I assume drake let u in? What do u want..."],
+            [new TalkChoiceAction(1, "Yeah, he sent me. And i am going to help you heal your heart ")]
         );
     }
 
@@ -59,7 +77,7 @@ export class RonaldoCharacter extends Character implements Examine {
         return "ronaldo";
     }
     public examine(): ActionResult | undefined {
-        return new TextActionResult(["He is indeed very aerodynamic. Interesting."]);
+        return new TextActionResult(["There seems to be a sad warrior."]);
     }
     public objectActions(): string[] {
         return [ExamineActionAlias, TalkActionAlias];

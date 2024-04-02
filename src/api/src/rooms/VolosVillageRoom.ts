@@ -6,6 +6,7 @@ import {
     NavigateNorthAlias,
     NavigationNorth,
 } from "../actions/NavigateAction";
+import { NavigationActionAlias } from "../actions/NavigationAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { TextAndImageActionResult } from "../base/actionResults/TextAndImageActionResult";
@@ -15,7 +16,9 @@ import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction
 import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
+import { BrannCharacter } from "../characters/BrannCharacter";
 import { Drakecharacter } from "../characters/DrakeCharacter";
+import { EdwinCharacter } from "../characters/EdwinCharacter";
 import { RonaldoCharacter } from "../characters/RonaldoCharacter";
 import { Taylorcharacter } from "../characters/TaylorCharacter";
 import { getPlayerSession } from "../instances";
@@ -36,7 +39,7 @@ export class VolosVillageRoom extends Room {
     }
 
     public constructor() {
-        super(VolosVillageRoomAlias);
+        super(VolosVillageRoomAlias, NavigationActionAlias);
     }
 
     public playerSession: PlayerSession = getPlayerSession();
@@ -58,7 +61,6 @@ export class VolosVillageRoom extends Room {
 
     public actions(): Action[] {
         const playerSession: PlayerSession = getPlayerSession();
-        console.log(playerSession);
         if (playerSession.leftVolo === true) {
             return [new ExamineAction(), new CustomAction("back-karas", "Back", false)];
         }
@@ -78,19 +80,30 @@ export class VolosVillageRoom extends Room {
         return [new NavigationNorth(), new CustomAction("back-karas", "Back", false)];
     }
 
+    public navigation(): ActionResult | undefined {
+        const room: VolosVillageRoom = new VolosVillageRoom();
+        const lastroom: string = getPlayerSession().currentRoom;
+
+        //Set the current room to the example room
+        getPlayerSession().currentRoom = room.alias;
+        getPlayerSession().lastRoom = lastroom;
+
+        return room.examine();
+    }
+
     public objects(): GameObject[] {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.leftVolo === true) {
             return [new secondMedalionHalfItem()];
         }
         if (playerSession.taylorlikesRonaldo === true) {
-            return [new RonaldoCharacter(), new Drakecharacter()];
+            return [new RonaldoCharacter(), new Drakecharacter(), new BrannCharacter()];
         }
         if (playerSession.ronaldoIntro === true) {
-            return [new RonaldoCharacter(), new Taylorcharacter()];
+            return [new Taylorcharacter(), new EdwinCharacter(), new BrannCharacter()];
         }
         if (wentVolo === true) {
-            return [new RonaldoCharacter()];
+            return [new RonaldoCharacter(), new BrannCharacter()];
         }
         return [new Drakecharacter()];
     }
@@ -117,24 +130,22 @@ export class VolosVillageRoom extends Room {
         }
         if (alias === NavigateNorthAlias) {
             wentGate = true;
-            console.log(wentGate);
-            return new TextActionResult([
-                "There is a somewhat zasty looking fella infront of u. It appears he is the village chief",
-            ]);
+            return new TextActionResult(["There seems to be a person infront of a gate"]);
         }
         if (alias === EnterVoloAlias) {
             wentVolo = true;
             wentGate = false;
             return new TextAndImageActionResult(
-                [
-                    "The air feels cool, it makes u feel a lil zasty. U see a somewhat aerodynamic person. The name Ronaldo with a 7 is written on his back.",
-                ],
+                ["The air feels cool. U see a sad knight sitting in the village center."],
                 ["rooms/volovillage.png"]
             );
         }
         return undefined;
     }
     public objectActions(): string[] {
-        return [ExamineActionAlias];
+        if (this.playerSession.currentRoom === VolosVillageRoomAlias) {
+            return [ExamineActionAlias];
+        }
+        return [NavigationActionAlias];
     }
 }

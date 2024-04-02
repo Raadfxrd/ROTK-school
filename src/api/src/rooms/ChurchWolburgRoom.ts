@@ -1,3 +1,4 @@
+import { NavigationActionAlias } from "../actions/NavigationAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Action } from "../base/actions/Action";
@@ -6,15 +7,17 @@ import { Examine, ExamineAction, ExamineActionAlias } from "../base/actions/Exam
 import { TalkAction } from "../base/actions/TalkAction";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Room } from "../base/gameObjects/Room";
+import { AlexandraCharacter } from "../characters/AlexandraCharacter";
 import { MarkCharacter } from "../characters/MarkCharacter";
 import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
+import { PlayerSession } from "../types";
 import { WolburgRoom } from "./WolburgRoom";
 
 export const ChurchWolburgRoomAlias: string = "church-wolburg-room";
 
 export class ChurchWolburgRoom extends Room implements Examine {
     public constructor() {
-        super(ChurchWolburgRoomAlias);
+        super(ChurchWolburgRoomAlias, NavigationActionAlias);
     }
 
     public name(): string {
@@ -22,17 +25,31 @@ export class ChurchWolburgRoom extends Room implements Examine {
     }
 
     public images(): string[] {
-        return ["rooms/churchwolburg.png"];
+        const playerSession: PlayerSession = getPlayerSession();
+        const churchWolburg: string = "rooms/churchwolburg.png";
+        playerSession.image = churchWolburg;
+        return [churchWolburg];
+    }
+
+    public navigation(): ActionResult | undefined {
+        const room: ChurchWolburgRoom = new ChurchWolburgRoom();
+        const lastroom: string = getPlayerSession().currentRoom;
+
+        //Set the current room to the example room
+        getPlayerSession().currentRoom = room.alias;
+        getPlayerSession().lastRoom = lastroom;
+
+        return room.examine();
     }
 
     public actions(): Action[] {
-        return [new ExamineAction(), new TalkAction(), new CustomAction("go-back", "Go Back", false)];
+        return [new ExamineAction(), new TalkAction(), new CustomAction("go-back", "Back", false)];
     }
 
     public objects(): GameObject[] {
         const inventoryItems: GameObject[] = getGameObjectsFromInventory();
 
-        return [this, ...inventoryItems, new MarkCharacter()];
+        return [this, ...inventoryItems, new MarkCharacter(), new AlexandraCharacter()];
     }
 
     public examine(): ActionResult | undefined {
@@ -57,6 +74,10 @@ export class ChurchWolburgRoom extends Room implements Examine {
         return undefined;
     }
     public objectActions(): string[] {
-        return [ExamineActionAlias];
+        const playerSession: PlayerSession = getPlayerSession();
+        if (playerSession.currentRoom === ChurchWolburgRoomAlias) {
+            return [ExamineActionAlias];
+        }
+        return [NavigationActionAlias];
     }
 }

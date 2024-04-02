@@ -24,7 +24,7 @@ export class MapItem extends Item implements Examine, Pickup {
                 "This looks like the map of Kaseon, you see all the different cities and towns in the region.",
                 "You see that some towns don't have a name included on them.",
             ],
-            ["rooms/Kaseon.png"]
+            ["rooms/KaseonNoLowlands.jpg"]
         );
     }
 

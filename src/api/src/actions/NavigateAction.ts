@@ -69,9 +69,10 @@ export class NavigateBackToWolburg extends Action {
 }
 export class NavigationShop extends Action {
     public constructor() {
-        super(NavigateShopRoomAlias, "ShopRoom", false);
+        super(NavigateShopRoomAlias, "Shop", false);
     }
 }
+
 export class Back extends Action {
     public constructor() {
         super(NavigateBackAlias, "Back", false);
