@@ -192,19 +192,6 @@ export class BrannCharacter extends Character implements Examine {
                 ]
             );
         }
-        if (playerSession.edwinHint === true) {
-            return new TalkActionResult(
-                this,
-                ["Greetings Stranger, we have all the items you need."],
-                [
-                    new TalkChoiceAction(1, "What items do you sell?"),
-                    new TalkChoiceAction(2, "Ask about Ignis."),
-                    new TalkChoiceAction(3, "Show Ring to Brann"),
-                    new TalkChoiceAction(4, "Do you know where I can find a torch?"),
-                    new TalkChoiceAction(50, "Do u know about this Edwin fella?"),
-                ]
-            );
-        }
 
         return new TalkActionResult(
             this,
