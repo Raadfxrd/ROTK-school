@@ -70,44 +70,6 @@ export class StartScreen extends LitElement {
             bottom: 20px;
         }
 
-        .speedrun-enabled {
-            background-color: #1a882c;
-            border: none;
-            color: white;
-            padding: var(--button-padding);
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            transition-duration: 0.4s;
-            border-radius: var(--button-radius);
-            cursor: vertical-text(--button-cursor);
-        }
-
-        .speedrun-enabled:hover {
-            background-color: #0e6012;
-        }
-
-        .speedrun-disabled {
-            background-color: #9b2c24;
-            border: none;
-            color: white;
-            padding: var(--button-padding);
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            transition-duration: 0.4s;
-            border-radius: var(--button-radius);
-            cursor: vertical-text(--button-cursor);
-        }
-
-        .speedrun-disabled:hover {
-            background-color: #631818;
-        }
-
         .made-by {
             overflow: hidden;
             content: "";
@@ -418,10 +380,7 @@ export class StartScreen extends LitElement {
             <div class="start-buttons">
                 <a @click=${this.loadGame} class="button">Load last game</a>
                 ${!this.showHowToPlay ? html`<a @click=${this.howToPlay} class="button">How to play</a>` : ""}
-                <a
-                    @click="${this.toggleSpeedrunMode}"
-                    class="button ${this.speedrunMode ? "speedrun-enabled" : "speedrun-disabled"}"
-                >
+                <a @click="${this.toggleSpeedrunMode}" class="button ">
                     ${this.speedrunMode ? "Disable Speedrun Mode" : "Enable Speedrun Mode"}
                 </a>
             </div>

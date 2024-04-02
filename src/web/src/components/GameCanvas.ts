@@ -144,8 +144,8 @@ export class GameCanvas extends LitElement {
 
         .timer-box {
             position: absolute;
-            bottom: 10px;
-            left: 10px;
+            bottom: 40px;
+            right: 40px;
             background-color: rgba(0, 0, 0, 0.5);
             color: white;
             padding: 5px 10px;
@@ -175,6 +175,8 @@ export class GameCanvas extends LitElement {
     @state() private timerMilliseconds: number = 0;
     @state() public speedrunMode: boolean = false;
 
+    private timerInterval: NodeJS.Timeout | undefined;
+    private timerId: number | null = null;
     private playerHP: number = 100;
     private smaugHP: number = 150;
     private typewriterTimeouts: NodeJS.Timeout[] = [];
@@ -207,6 +209,13 @@ export class GameCanvas extends LitElement {
         this.startTimer();
 
         void this.refreshState(); // Asynchroon de huidige spelstaat verversen.
+    }
+
+    // Lifecycle method for stopping the timer when the component is disconnected from the DOM
+    public disconnectedCallback(): void {
+        super.disconnectedCallback();
+        // Stop the timer when the component is disconnected from the DOM
+        this.stopTimer();
     }
 
     // Asynchrone functie om de huidige spelstaat te verversen.
@@ -284,7 +293,29 @@ export class GameCanvas extends LitElement {
         this.requestUpdate(); // Verzoek om de component te herrenderen.
     }
 
-    private startTimer(): void {}
+    private startTimer(): void {
+        this.timerInterval = setInterval(() => {
+            this.timerMilliseconds += 10; // Increment milliseconds by 10
+            if (this.timerMilliseconds >= 1000) {
+                this.timerSeconds++; // Increment seconds when milliseconds reach 1000
+                this.timerMilliseconds = 0; // Reset milliseconds
+            }
+            this.requestUpdate(); // Update the UI
+        }, 10); // Update every millisecond
+    }
+
+    private stopTimer(): void {
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+        }
+
+        // Check if the timer is running and clear it if it is
+        if (this.timerId !== null) {
+            clearInterval(this.timerId);
+            this.timerId = null;
+            console.log("Timer stopped manually.");
+        }
+    }
 
     private renderTimer(): TemplateResult | typeof nothing {
         if (this.speedrunMode) {
@@ -348,7 +379,10 @@ export class GameCanvas extends LitElement {
                 <!-- Toont de titel van de kamer -->
                 <div class="header">${this.renderHeader()}</div>
                 <!-- Toont afbeeldingen van de kamer -->
-                <div class="sidebar">${this.renderSidebar()}</div>
+                <div class="sidebar">
+                    ${this.renderSidebar()}
+                    <div class="timer-box">${this.renderTimer()}</div>
+                </div>
                 <!-- Toont de inhoudstekst van de kamer -->
                 <div class="buttons">${this.renderFooter()}</div>
                 <!-- Toont de actie- en objectknoppen -->
@@ -363,7 +397,6 @@ export class GameCanvas extends LitElement {
                         ></progress>
                     </div>
                 </div>
-                <div class="timer-box">${this.renderTimer()}</div>
             </div>
         `;
     }
