@@ -92,7 +92,7 @@ import { DeathAlias, deathRoom } from "./rooms/deathRoom";
 export function createNewPlayerSession(): PlayerSession {
     return {
         //Room session
-        currentRoom: "intro-room",
+        currentRoom: "KVTownSquare",
         lastRoom: "",
         inCombat: false,
         image: "",
