@@ -5,7 +5,7 @@ import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
-import { deathRoom } from "../rooms/Deathroom";
+import { deathRoom } from "../rooms/deathRoom";
 import { PlayerSession } from "../types";
 
 export const SmaugAlias: string = "Smaug";
