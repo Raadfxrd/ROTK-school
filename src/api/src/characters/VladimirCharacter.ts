@@ -1,8 +1,9 @@
 import { Attack, AttackActionAlias } from "../actions/AttackAction";
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { RandomDiceResult } from "../base/actionResults/RandomDiceResult";
-import { TalkActionResult } from "../base/actionResults/TalkActionResult";
+import { TalkAndImageActionResult } from "../base/actionResults/TalkAndImageActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
+import { TextAndImageActionResult } from "../base/actionResults/TextAndImageActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
@@ -21,17 +22,25 @@ export class VladimirCharacter extends Character implements Examine, Attack {
 
     public examine(): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
+        const vladimirImage: string = "characters/Vladimir.png";
 
         if (playerSession.inCombat === true) {
-            return new TextActionResult([
-                "A healthbar pops up above Vladimir. He has * " +
-                    playerSession.vladimirHP +
-                    " * Health left.",
-            ]);
+            return new TextAndImageActionResult(
+                [
+                    "A healthbar pops up above Vladimir. He has * " +
+                        playerSession.vladimirHP +
+                        " * Health left.",
+                ],
+                [playerSession.image, vladimirImage]
+            );
         }
 
         if (playerSession.vladimirHP === 0) {
-            ("");
+            return new TextActionResult([
+                "You look at the dead body on the ground",
+                "Vladimir starts to become much paler than before, his whole appearance seems to change.",
+                "From what you have heard, this must be a changeling!",
+            ]);
         }
 
         if (playerSession.vladimirGone === true) {
@@ -40,10 +49,13 @@ export class VladimirCharacter extends Character implements Examine, Attack {
                 "This wasn't the wisest thing to do...",
             ]);
         }
-        return new TextActionResult([
-            "Vladimir looks like a normal civilion in your city.",
-            "As of this moment he is readying is horse to get away with the princess.",
-        ]);
+        return new TextAndImageActionResult(
+            [
+                "Vladimir looks like a normal civilion in your city.",
+                "As of this moment he is readying is horse to get away with the princess.",
+            ],
+            [playerSession.image, vladimirImage]
+        );
     }
 
     public Attack(): ActionResult | undefined {
@@ -86,6 +98,7 @@ export class VladimirCharacter extends Character implements Examine, Attack {
 
     public talk(_choiceId?: number | undefined): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
+        const vladimirImage: string = "characters/Vladimir.png";
 
         if (playerSession.vladimirHP === 0) {
             return new TextActionResult([
@@ -94,9 +107,11 @@ export class VladimirCharacter extends Character implements Examine, Attack {
         }
         if (_choiceId === 1) {
             playerSession.knowNameLowlands = true;
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Vladimir: I was heading towards the lowlands, it's my hometown."],
+                [playerSession.image, vladimirImage],
+
                 [
                     new TalkChoiceAction(5, "Where is the princess?"),
                     new TalkChoiceAction(6, "Who is your leader"),
@@ -105,9 +120,10 @@ export class VladimirCharacter extends Character implements Examine, Attack {
                 ]
             );
         } else if (_choiceId === 2) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Vladimir: We took her with us, she is going to my home."],
+                [playerSession.image, vladimirImage],
                 [
                     new TalkChoiceAction(1, "Tell me where you're headed"),
                     new TalkChoiceAction(3, "Who is your leader"),
@@ -116,9 +132,10 @@ export class VladimirCharacter extends Character implements Examine, Attack {
                 ]
             );
         } else if (_choiceId === 3) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Vladimir: We serve Antrax, he is our leader of the colony where my home is."],
+                [playerSession.image, vladimirImage],
                 [
                     new TalkChoiceAction(1, "Tell me where you're headed"),
                     new TalkChoiceAction(2, "Where is the princess?"),
@@ -127,11 +144,12 @@ export class VladimirCharacter extends Character implements Examine, Attack {
                 ]
             );
         } else if (_choiceId === 4) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 [
                     "Vladimir: I am a changeling, we can change into other creatures and take over their shape and what they look like.",
                 ],
+                [playerSession.image, vladimirImage],
                 [
                     new TalkChoiceAction(1, "Tell me where you're headed"),
                     new TalkChoiceAction(2, "Where is the princess?"),
@@ -152,12 +170,13 @@ export class VladimirCharacter extends Character implements Examine, Attack {
 
             return new TextActionResult(["*You start dragging vladimir back to the throne room.*"]);
         } else if (_choiceId === 98) {
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 [
                     "*You drag vladimir back to the throne room where the king is.*",
                     "Vladimir: Please I can give you more information.",
                 ],
+                [playerSession.image, vladimirImage],
                 [
                     new TalkChoiceAction(97, "I already know enough"),
                     new TalkChoiceAction(96, "What more do you know?"),
@@ -169,9 +188,10 @@ export class VladimirCharacter extends Character implements Examine, Attack {
             return new TextActionResult(["You wave him goodbye and he runs away"]);
         }
 
-        return new TalkActionResult(
+        return new TalkAndImageActionResult(
             this,
             ["Vladimir: Please don't kill me, I have a wife and kids at home"],
+            [playerSession.image, vladimirImage],
             [
                 new TalkChoiceAction(1, "Tell me where you're headed"),
                 new TalkChoiceAction(2, "Where is the princess?"),
