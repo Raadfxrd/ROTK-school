@@ -72,6 +72,7 @@ export class NavigationShop extends Action {
         super(NavigateShopRoomAlias, "Shop", false);
     }
 }
+
 export class Back extends Action {
     public constructor() {
         super(NavigateBackAlias, "Back", false);

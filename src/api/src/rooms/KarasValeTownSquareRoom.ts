@@ -3,7 +3,7 @@ import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Room } from "../base/gameObjects/Room";
 import { GameObject } from "../base/gameObjects/GameObject";
 import { Action } from "../base/actions/Action";
-import { NavigateBackToWolburg, NavigationNorth } from "../actions/NavigateAction";
+import { Back, NavigateBackToWolburg, NavigationNorth } from "../actions/NavigateAction";
 import { getPlayerSession } from "../instances";
 import { ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { PlayerSession } from "../types";
@@ -37,7 +37,13 @@ export class KarasValeTownSquareRoom extends Room {
 
     public actions(): Action[] {
         if (this.playerSession.knowsOfKara === true && this.playerSession.wentNorth === true) {
-            return [new ExamineAction(), new TalkAction(), new useItemAction(), new NavigationAction()];
+            return [
+                new ExamineAction(),
+                new TalkAction(),
+                new useItemAction(),
+                new NavigationAction(),
+                new Back(),
+            ];
         }
         if (this.playerSession.wentNorth === true) {
             return [new ExamineAction(), new TalkAction(), new NavigationAction()];
@@ -86,7 +92,7 @@ export class KarasValeTownSquareRoom extends Room {
             ]);
         }
 
-        if (alias === "NavigateSouth") {
+        if (alias === "Back") {
             this.playerSession.wentNorth = false;
             return new TextActionResult(["In front of you is a small town named Kara's Vale."]);
         }
