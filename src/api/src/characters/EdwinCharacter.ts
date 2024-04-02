@@ -1,5 +1,5 @@
 import { ActionResult } from "../base/actionResults/ActionResult";
-import { TalkActionResult } from "../base/actionResults/TalkActionResult";
+import { TalkAndImageActionResult } from "../base/actionResults/TalkAndImageActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
@@ -18,9 +18,10 @@ export class EdwinCharacter extends Character implements Examine {
 
         if (_choiceId === 1) {
             //boolean voor leugen
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Ah it was easy!, I just tell her a bunch of lies about hero story's"],
+                [playerSession.image, "character/edwinn.png"],
                 [new TalkChoiceAction(3, "Ah u a sneaky one haha.")]
             );
         } else if (playerSession.edwinBusted === true) {
@@ -28,20 +29,22 @@ export class EdwinCharacter extends Character implements Examine {
             return new TextActionResult(["How dare u betray me!.. I wont forget this!"]);
         } else if (_choiceId === 2) {
             playerSession.edwinHint = true;
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 [
                     "Ah i see you are interested.. Go to the shop. I trade under herbs but they are actually illegal weapons.",
                 ],
+                [playerSession.image, "character/edwinn.png"],
                 [new TalkChoiceAction(4, "I see, il go there!")]
             );
         } else if (_choiceId === 4) {
             return new TextActionResult(["Tell Brann u came from me, u'l get a discount hehe."]);
         }
 
-        return new TalkActionResult(
+        return new TalkAndImageActionResult(
             this,
             ["U look new here, what u want?"],
+            [playerSession.image, "character/edwinn.png"],
             [
                 new TalkChoiceAction(1, "I see u got Taylor as yours! How did u do it hehe?"),
                 new TalkChoiceAction(2, "I heared u deal inside illegal trading? Im interested"),

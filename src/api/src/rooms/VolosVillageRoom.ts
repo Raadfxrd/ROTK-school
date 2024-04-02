@@ -22,7 +22,7 @@ import { EdwinCharacter } from "../characters/EdwinCharacter";
 import { RonaldoCharacter } from "../characters/RonaldoCharacter";
 import { Taylorcharacter } from "../characters/TaylorCharacter";
 import { getPlayerSession } from "../instances";
-import { secondMedalionHalfItem } from "../items/SecondMedalionHalfItem";
+import { VolosTorch } from "../items/VolosVillageTorchItem";
 import { PlayerSession } from "../types";
 import { KarasValeTownSquareRoom } from "./KarasValeTownSquareRoom";
 export let wentGate: boolean = false;
@@ -48,11 +48,14 @@ export class VolosVillageRoom extends Room {
     public images(): string[] {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.leftVolo === true) {
+            playerSession.image = "rooms/vologate.png";
             return ["rooms/vologate.png"];
         }
         if (wentVolo === true) {
+            playerSession.image = "rooms/volovillage.png";
             return ["rooms/volovillage.png"];
         }
+        playerSession.image = "rooms/vologate.png";
         return ["rooms/vologate.png"];
     }
 
@@ -91,7 +94,7 @@ export class VolosVillageRoom extends Room {
     public objects(): GameObject[] {
         const playerSession: PlayerSession = getPlayerSession();
         if (playerSession.leftVolo === true) {
-            return [new secondMedalionHalfItem()];
+            return [new VolosTorch()];
         }
         if (playerSession.taylorlikesRonaldo === true) {
             return [new RonaldoCharacter(), new Drakecharacter(), new BrannCharacter()];
@@ -112,8 +115,9 @@ export class VolosVillageRoom extends Room {
             playerSession.leftVolo = true;
             wentGate = false;
             wentVolo = false;
+
             return new TextActionResult([
-                "I have 2 pieces of the medalion now, i assume this will come in handy when ariving at the lowlands...",
+                "I have some sort of weird torch, i assume this will come in handy when ariving in the lowlands...",
             ]);
         }
         if (alias === "back-karas") {

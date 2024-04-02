@@ -17,10 +17,7 @@ export class VolosTorch extends Item implements Examine, Pickup, useItem {
     }
 
     public examine(): ActionResult | undefined {
-        return new TextAndImageActionResult(
-            ["Salim moet invoegen."],
-            ["rooms/churchwolburg.png", "items/torch-church.png"]
-        );
+        return new TextActionResult(["A really mystical torch..."]);
     }
 
     public pickup(): ActionResult | undefined {
@@ -56,7 +53,7 @@ export class VolosTorch extends Item implements Examine, Pickup, useItem {
     }
 
     public name(): string {
-        return "The fire of zesty Volo";
+        return "The fire of Volo";
     }
 
     public objectActions(): string[] {
