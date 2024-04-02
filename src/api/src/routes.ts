@@ -158,7 +158,7 @@ function convertActionResultToGameState(actionResult?: ActionResult): GameState 
 
     let actions: ActionReference[];
 
-    if (actionResult instanceof TalkActionResult) {
+    if (actionResult instanceof TalkActionResult || actionResult instanceof TalkAndImageActionResult) {
         actions = actionResult.choices.map((e) => e.toReference(actionResult.character));
     } else {
         actions = room.actions().map((e) => e.toReference());
@@ -172,7 +172,8 @@ function convertActionResultToGameState(actionResult?: ActionResult): GameState 
             (actionResult as TextAndImageActionResult)?.images ||
             (actionResult as TalkAndImageActionResult)?.images ||
             room.images(),
-        text: (actionResult as TextActionResult)?.text || ["You have no interest in that."],
+        text: (actionResult as TextActionResult)?.text ||
+            (actionResult as TalkActionResult)?.text || ["You have no interest in that."],
         actions: actions,
         objects: room.objects().map((e) => e.toReference()),
     };
