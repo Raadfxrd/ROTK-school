@@ -82,7 +82,7 @@ import { LowLandsNoNameMapItemAlias, LowlandsNoNameMapItem } from "./items/LowLa
 import { KarasTorch, KarasTorchAlias } from "./items/KarasValeTorchItem";
 import { firstMedallionHalf, firstMedallionHalfAlias } from "./items/FirstMedallionHalfItem";
 import { ShadowBeakTorch, ShadowbeakTorchAlias } from "./items/ShadowBeakTorch";
-import { DeathAlias, deathRoom } from "./rooms/Deathroom";
+import { DeathAlias, deathRoom } from "./rooms/deathRoom";
 
 /**
  * Create a new player session object

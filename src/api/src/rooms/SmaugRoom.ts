@@ -10,7 +10,7 @@ import { PlayerSession } from "../types";
 import { Examine, ExamineAction, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { SmaugCharacter, SmaugProperties } from "../characters/SmaugCharacter";
 import { princessCharacter } from "../characters/princessCharacter";
-import { deathRoom } from "../rooms/Deathroom";
+import { deathRoom } from "../rooms/deathRoom";
 import { useItemAction } from "../actions/UseItemAction";
 import { HealingPotionItem } from "../items/HealingPotionItem";
 
