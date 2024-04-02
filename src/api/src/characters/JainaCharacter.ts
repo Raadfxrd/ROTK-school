@@ -95,10 +95,7 @@ export class JainaCharacter extends Character implements Examine {
                     "Jaina: Yes, they were changelings, creatures capable of completely changing their appearance.",
                 ],
                 [
-                    new TalkChoiceAction(
-                        8,
-                        "That will prove difficult if we have to identify them out of a group."
-                    ),
+                    new TalkChoiceAction(8, "That will prove difficult if we have to identify them."),
                     new TalkChoiceAction(99, "Thank you for this information."),
                 ]
             );

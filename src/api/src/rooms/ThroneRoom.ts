@@ -13,10 +13,10 @@ import { EleonorCharacter } from "../characters/EleonorCharacter";
 import { HenryCharacter } from "../characters/HenryCharacter";
 import { getGameObjectsFromInventory, getPlayerSession } from "../instances";
 import { RingItem, RingItemAlias } from "../items/RingItem";
-import { MapItem, MapItemAlias } from "../items/MapItem";
 import { PlayerSession } from "../types";
 import { WolburgRoom } from "./WolburgRoom";
 import { useItemAction } from "../actions/UseItemAction";
+import { MapRoom, MapRoomAlias } from "./MapRoom";
 
 export const ThroneRoomAlias: string = "throne-room";
 
@@ -31,7 +31,10 @@ export class ThroneRoom extends Room {
     }
 
     public images(): string[] {
-        return ["rooms/throneroomentrance.png"];
+        const playerSession: PlayerSession = getPlayerSession();
+        const throneRoomImage: string = "rooms/throneroomentrance.png";
+        playerSession.image = throneRoomImage;
+        return [throneRoomImage];
     }
 
     public actions(): Action[] {
@@ -56,8 +59,8 @@ export class ThroneRoom extends Room {
             objects.push(new RingItem());
         }
 
-        if (!playerSession.inventory.includes(MapItemAlias) && playerSession.knowWhereMapIs === true) {
-            objects.push(new MapItem());
+        if (!playerSession.inventory.includes(MapRoomAlias) && playerSession.knowWhereMapIs === true) {
+            objects.push(new MapRoom());
         }
 
         objects.push(

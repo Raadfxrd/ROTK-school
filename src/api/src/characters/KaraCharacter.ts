@@ -5,13 +5,14 @@ import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
+import { deathRoom } from "../rooms/deathRoom";
 import { PlayerSession } from "../types";
 
 export const KaraCharacterAlias: string = "KaraCharacter";
 
 export class KaraCharacter extends Character implements Examine {
     public constructor() {
-        super(KaraCharacterAlias);
+        super(KaraCharacterAlias, ExamineActionAlias);
     }
 
     public playerSession: PlayerSession = getPlayerSession();
@@ -28,6 +29,7 @@ export class KaraCharacter extends Character implements Examine {
 
     public riddlesArray: number[] = this.playerSession.allRiddles;
 
+    // functie om riddlesArray te shuffelen zodat je een random volgorde krijgt
     public shuffleArray(riddlesArray: number[]): number[] {
         for (let i: number = riddlesArray.length - 1; i > 0; i--) {
             const j: number = Math.floor(Math.random() * (i + 1));
@@ -40,7 +42,6 @@ export class KaraCharacter extends Character implements Examine {
 
     public talk(choiceId?: number | undefined): ActionResult | undefined {
         if (choiceId === 1) {
-            console.log(this.finalRiddlesArray, "choiceid 1");
             return new TalkActionResult(
                 this,
                 [
@@ -64,7 +65,6 @@ export class KaraCharacter extends Character implements Examine {
         }
 
         if (choiceId === 3) {
-            console.log(this.finalRiddlesArray);
             return new TalkActionResult(
                 this,
                 [
@@ -179,9 +179,9 @@ export class KaraCharacter extends Character implements Examine {
                     "Has a head but never weeps. Has a bed but never sleeps.",
                 ],
                 [
-                    new TalkChoiceAction(40, "A chariot"),
-                    new TalkChoiceAction(40, "A child"),
-                    new TalkChoiceAction(50, "A river"), // correct answer
+                    new TalkChoiceAction(50, "A chariot"),
+                    new TalkChoiceAction(50, "A child"),
+                    new TalkChoiceAction(40, "A river"), // correct answer
                 ]
             );
         }
@@ -261,7 +261,7 @@ export class KaraCharacter extends Character implements Examine {
                 ],
                 [
                     new TalkChoiceAction(50, "A city"),
-                    new TalkChoiceAction(40, "A mountain"),
+                    new TalkChoiceAction(40, "A mountain"), // correct answer
                     new TalkChoiceAction(50, "A forest"),
                 ]
             );
@@ -277,20 +277,34 @@ export class KaraCharacter extends Character implements Examine {
                     "Never empty sometimes full. Never pushes always pulls.",
                 ],
                 [
-                    new TalkChoiceAction(40, "The moon"),
+                    new TalkChoiceAction(40, "The moon"), // correct answer
                     new TalkChoiceAction(50, "The tide"),
                     new TalkChoiceAction(50, "The sky"),
                 ]
             );
         }
-        if (choiceId === 90) {
+
+        if (choiceId === 80) {
+            if (getPlayerSession().correctAnswers.filter((x) => x === "correct-answer").length >= 3) {
+                return new TalkActionResult(this, ["Interesting"], [new TalkChoiceAction(81, "What is it?")]);
+            } else if (getPlayerSession().correctAnswers.filter((x) => x === "correct-answer").length >= 2) {
+                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(82, "Alright")]);
+            } else if (getPlayerSession().correctAnswers.filter((x) => x === "correct-answer").length >= 1) {
+                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(83, "Alright")]);
+            } else if (getPlayerSession().correctAnswers.filter((x) => x === "correct-answer").length >= 0) {
+                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(84, "Alright")]);
+            }
+        }
+
+        if (choiceId === 81) {
             this.playerSession.firstMedallionHalf = true;
+            this.playerSession.earnedBlueTorch = true;
             return new TalkActionResult(
                 this,
                 [
                     "You have succeeded in answering my riddles human, a most impressive feat.",
                     "Here, take these as a reward for your wit and tenacity.",
-                    "*You are gain one half of a medaillion and a blue torch*",
+                    "*A blue torch and one half of a medallion float through the air and lands in front of you*",
                 ],
                 [
                     new TalkChoiceAction(91, "Where can i find the other medallion"),
@@ -299,6 +313,126 @@ export class KaraCharacter extends Character implements Examine {
             );
         }
 
+        if (choiceId === 82) {
+            this.playerSession.firstMedallionHalf = true;
+            this.playerSession.earnedBlueTorch = true;
+            return new TalkActionResult(
+                this,
+                [
+                    "You managed to answer most of my riddles human.",
+                    "I grant you these items as a reward, where and how to use them shall be up to you.",
+                    "*A blue torch and one half of a medallion float through the air and lands in front of you*",
+                ],
+                [new TalkChoiceAction(100, "Thank you")]
+            );
+        }
+
+        if (choiceId === 83) {
+            this.playerSession.earnedBlueTorch = true;
+            return new TalkActionResult(
+                this,
+                [
+                    "You only managed to correctly answer one of my riddles. A dissapointing score to be sure",
+                    "Still I grant you this item, you will have to figure out when you need to use it yourself",
+                    "*A blue torch floats through the air and lands in front of you*",
+                ],
+                [new TalkChoiceAction(100, "Thank you")]
+            );
+        }
+
+        if (choiceId === 84) {
+            return new TalkActionResult(
+                this,
+                [
+                    "You have failed to answer my riddles correctly human, you do not meet my expectations.",
+                    "If it is your wish to save the princess I can give you what you need, but at a price.",
+                ],
+                [new TalkChoiceAction(85, "What kind of price?")]
+            );
+        }
+
+        if (choiceId === 85) {
+            return new TalkActionResult(
+                this,
+                ["Either you pay with your life force, or your gold. I do like shiny things after all."],
+                [
+                    new TalkChoiceAction(86, "I choose the gold"),
+                    new TalkChoiceAction(87, "I choose my life force"),
+                    new TalkChoiceAction(88, "I choose neither, die!"),
+                ]
+            );
+        }
+
+        if (choiceId === 86) {
+            if (this.playerSession.gold >= 15) {
+                this.playerSession.gold -= 15;
+                this.playerSession.earnedBlueTorch = true;
+                return new TalkActionResult(
+                    this,
+                    [
+                        "Very well.",
+                        "*A handfull of gold floats out of your pouch and moves towards the crow.",
+                        "I grant you this torch.",
+                        "*A blue torch floats through the air and lands in front of you*",
+                    ],
+                    [new TalkChoiceAction(100, "Thank you")]
+                );
+            } else {
+                return new TalkActionResult(
+                    this,
+                    [
+                        "It seems you do not have the funds you need. You will give me some of your life force then?",
+                    ],
+                    [new TalkChoiceAction(87, "Yes, take it."), new TalkChoiceAction(88, "I will not, die!")]
+                );
+            }
+        }
+
+        if (choiceId === 87) {
+            this.playerSession.healthPoints -= 10;
+            this.playerSession.earnedBlueTorch = true;
+            return new TalkActionResult(
+                this,
+                [
+                    "Kara: Very well.",
+                    "*You fall to your knees as you feel the life force being drained from your body*",
+                    "Kara: Thank you for the meal. Now take this",
+                    "*A blue torch floats through the air and lands in front of you*",
+                ],
+                [new TalkChoiceAction(100, "Alright")]
+            );
+        }
+
+        if (choiceId === 88) {
+            return new TalkActionResult(
+                this,
+                [
+                    "Kara: A most unwise choice.",
+                    "*In the midst of your charge at the crow you feel your body freeze*",
+                    "Kara: You have made a grave transgression, and as punishment you will pay the ultimate price",
+                ],
+                [new TalkChoiceAction(89, "Continue")]
+            );
+        }
+
+        if (choiceId === 89) {
+            return new TalkActionResult(
+                this,
+                [
+                    "*You can't move, but you can see the crows eyes begin to glow red*",
+                    "*A sharp pain shoots into your chest and you see a red beam flowing out of your body into the mouth of the crow*",
+                    "*Then, everything goes black*",
+                ],
+                [new TalkChoiceAction(90, "Continue")]
+            );
+        }
+
+        if (choiceId === 90) {
+            const room: deathRoom = new deathRoom();
+
+            this.playerSession.currentRoom = room.alias;
+            return room.examine();
+        }
         if (choiceId === 91) {
             return new TalkActionResult(
                 this,
@@ -312,7 +446,7 @@ export class KaraCharacter extends Character implements Examine {
             getPlayerSession().correctAnswers.push("correct-answer");
 
             if (getPlayerSession().riddlesAnswered.filter((x) => x === "riddle-answered").length >= 3) {
-                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(100, "Alright")]);
+                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(80, "Alright")]);
             }
             return new TalkActionResult(
                 this,
@@ -326,7 +460,7 @@ export class KaraCharacter extends Character implements Examine {
             getPlayerSession().wrongAnswers.push("wrong-answer");
 
             if (getPlayerSession().riddlesAnswered.filter((x) => x === "riddle-answered").length >= 3) {
-                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(100, "Alright")]);
+                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(80, "Alright")]);
             }
 
             return new TalkActionResult(
