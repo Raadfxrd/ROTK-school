@@ -32,7 +32,10 @@ export class KarasValeTownSquareRoom extends Room {
     }
 
     public images(): string[] {
-        return ["rooms/KVTownSquare.png"];
+        const playerSession: PlayerSession = getPlayerSession();
+        const karasValeTownSquareRoomImage: string = "rooms/KVTownSquare.png";
+        playerSession.image = karasValeTownSquareRoomImage;
+        return [karasValeTownSquareRoomImage];
     }
 
     public actions(): Action[] {
