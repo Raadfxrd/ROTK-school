@@ -1,6 +1,8 @@
 import { ActionResult } from "../base/actionResults/ActionResult";
 import { TalkActionResult } from "../base/actionResults/TalkActionResult";
+import { TalkAndImageActionResult } from "../base/actionResults/TalkAndImageActionResult";
 import { TextActionResult } from "../base/actionResults/TextActionResult";
+import { TextAndImageActionResult } from "../base/actionResults/TextAndImageActionResult";
 import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
@@ -51,17 +53,21 @@ export class AlexandraCharacter extends Character implements Examine {
 
     public talk(_choiceId?: number): ActionResult | undefined {
         const playerSession: PlayerSession = getPlayerSession();
+        const alexandraImage: string = "characters/Alexandra.png";
 
         //Check to see if current room is throneroom for the dialogues
 
         if (playerSession.currentRoom === ThroneRoomAlias) {
             if (_choiceId === 1) {
-                return new TextActionResult([
-                    "Alexandra: Those bandits are the worst. I heard some rumours about them being here and took caution.",
-                    "The first thing I have seen was some people in the crowd making hand signals to eachother.",
-                    "I took some time and remembered what there code meant. 'she is coming, we need to go now'",
-                    "Hope we can find the princess soon...",
-                ]);
+                return new TextAndImageActionResult(
+                    [
+                        "Alexandra: Those bandits are the worst. I heard some rumours about them being here and took caution.",
+                        "The first thing I have seen was some people in the crowd making hand signals to eachother.",
+                        "I took some time and remembered what there code meant. 'she is coming, we need to go now'",
+                        "Hope we can find the princess soon...",
+                    ],
+                    [playerSession.image, alexandraImage]
+                );
             } else if (_choiceId === 2) {
                 return new TextActionResult([
                     "Alexandra: If you find something interesting let us know, we keep the crowd in check for now and keep the rest save.",
@@ -153,9 +159,10 @@ export class AlexandraCharacter extends Character implements Examine {
                 );
             }
 
-            return new TalkActionResult(
+            return new TalkAndImageActionResult(
                 this,
                 ["Alexandra: Hey you there, you found something?"],
+                [playerSession.image, alexandraImage],
                 choiceActions
             );
         }
