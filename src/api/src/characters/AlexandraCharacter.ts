@@ -9,6 +9,7 @@ import { getPlayerSession } from "../instances";
 import { RingItemAlias } from "../items/RingItem";
 import { ChurchWolburgRoomAlias } from "../rooms/ChurchWolburgRoom";
 import { GateWolburgRoomAlias } from "../rooms/GateWolburgRoom";
+import { KarasValeForestRoomAlias } from "../rooms/KarasValeForestRoom";
 import { KarasValeTownSquareRoomAlias } from "../rooms/KarasValeTownSquareRoom";
 import { StablesWolburgRoomAlias } from "../rooms/StablesWolburgRoom";
 import { ThroneRoomAlias } from "../rooms/ThroneRoom";
@@ -529,6 +530,42 @@ export class AlexandraCharacter extends Character implements Examine {
                 ]
             );
         }
+
+        if (playerSession.currentRoom === KarasValeForestRoomAlias) {
+            return new TalkAndImageActionResult(
+                this,
+                ["Alexandra: This place has a weird feeling to it."],
+                [playerSession.image, alexandraImage],
+                [
+                    new TalkChoiceAction(1, "It does feel weird."),
+                    new TalkChoiceAction(2, "Let's get out of here."),
+                    new TalkChoiceAction(3, "Tough it out, we have to find whoever Kara is."),
+                    new TalkChoiceAction(99, "Bye"),
+                ]
+            );
+        }
+        if (_choiceId === 1) {
+            return new TalkAndImageActionResult(
+                this,
+                [
+                    "Alexandra: Are we even sure this is the right place? There doesn't seem to be anyone living besides some animals",
+                ],
+                [playerSession.image, alexandraImage],
+                [
+                    new TalkChoiceAction(4, "That old man seemed trustworthy, I believe him."),
+                    new TalkChoiceAction(5, "We just need to look better."),
+                ]
+            );
+        } else if (_choiceId === 2) {
+            return new TextActionResult(["Alexandra: Good idea."]);
+        } else if (_choiceId === 3) {
+            return new TextActionResult(["Alexandra: Alright"]);
+        } else if (_choiceId === 4) {
+            return new TextActionResult(["Alexandra: If you believe him then I do too."]);
+        } else if (_choiceId === 5) {
+            return new TextActionResult(["Alexandra: Alright, lets do our best."]);
+        }
+
         return undefined;
     }
 
