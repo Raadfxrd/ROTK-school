@@ -61,7 +61,6 @@ import { SteelSwordItem, SteelSwordItemAlias } from "./items/SteelSwordItem";
 import { SwordOfGoodFortuneItem, SwordOfGoodFortuneItemAlias } from "./items/SwordOfGoodFortuneItem";
 import { SmaugRoomAlias, SmaugRoom } from "./rooms/SmaugRoom";
 import { SmaugAlias, SmaugCharacter } from "./characters/SmaugCharacter";
-import { DeathAlias, deathRoom } from "./rooms/deathRoom";
 import { princessAlias, princessCharacter } from "./characters/princessCharacter";
 import { StablesWolburgRoom, StablesWolburgRoomAlias } from "./rooms/StablesWolburgRoom";
 import { GateWolburgRoom, GateWolburgRoomAlias } from "./rooms/GateWolburgRoom";
@@ -82,6 +81,8 @@ import { QuickPassMapItem, QuickpassMapItemAlias } from "./items/QuickpassMapIte
 import { LowLandsNoNameMapItemAlias, LowlandsNoNameMapItem } from "./items/LowLandsNoNameMapItem";
 import { KarasTorch, KarasTorchAlias } from "./items/KarasValeTorchItem";
 import { firstMedallionHalf, firstMedallionHalfAlias } from "./items/FirstMedallionHalfItem";
+import { ShadowBeakTorch, ShadowbeakTorchAlias } from "./items/ShadowBeakTorch";
+import { DeathAlias, deathRoom } from "./rooms/deathRoom";
 
 /**
  * Create a new player session object
@@ -91,7 +92,7 @@ import { firstMedallionHalf, firstMedallionHalfAlias } from "./items/FirstMedall
 export function createNewPlayerSession(): PlayerSession {
     return {
         //Room session
-        currentRoom: "KVTownSquare",
+        currentRoom: "intro-room",
         lastRoom: "",
         inCombat: false,
         image: "",
@@ -110,6 +111,7 @@ export function createNewPlayerSession(): PlayerSession {
         //enemy stats
         vladimirHP: 20,
         vladimirGone: false,
+        smaugHP: 150,
 
         //Booleans
         knowWhereMapIs: false,
@@ -425,6 +427,9 @@ export function getGameObjectByAlias(alias: string): GameObject | undefined {
 
         case firstMedallionHalfAlias:
             return new firstMedallionHalf();
+
+        case ShadowbeakTorchAlias:
+            return new ShadowBeakTorch();
 
         //NOTE: Fall back to rooms, since those are game objects too.
         default:

@@ -31,7 +31,10 @@ export class ThroneRoom extends Room {
     }
 
     public images(): string[] {
-        return ["rooms/throneroomentrance.png"];
+        const playerSession: PlayerSession = getPlayerSession();
+        const throneRoomImage: string = "rooms/throneroomentrance.png";
+        playerSession.image = throneRoomImage;
+        return [throneRoomImage];
     }
 
     public actions(): Action[] {

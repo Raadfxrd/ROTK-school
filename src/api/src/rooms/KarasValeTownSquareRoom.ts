@@ -32,12 +32,21 @@ export class KarasValeTownSquareRoom extends Room {
     }
 
     public images(): string[] {
-        return ["rooms/KVTownSquare.png"];
+        const playerSession: PlayerSession = getPlayerSession();
+        const karasValeTownSquareRoomImage: string = "rooms/KVTownSquare.png";
+        playerSession.image = karasValeTownSquareRoomImage;
+        return [karasValeTownSquareRoomImage];
     }
 
     public actions(): Action[] {
         if (this.playerSession.knowsOfKara === true && this.playerSession.wentNorth === true) {
-            return [new ExamineAction(), new TalkAction(), new useItemAction(), new NavigationAction()];
+            return [
+                new ExamineAction(),
+                new TalkAction(),
+                new useItemAction(),
+                new NavigationAction(),
+                new Back(),
+            ];
         }
         if (this.playerSession.wentNorth === true) {
             return [new ExamineAction(), new TalkAction(), new NavigationAction(), new Back()];

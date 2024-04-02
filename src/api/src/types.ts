@@ -19,6 +19,7 @@ export type PlayerSession = {
     inCombat: boolean;
     image: string;
     vladimirHP: number;
+    smaugHP: number;
     vladimirGone: boolean;
     gold: number;
     healthPoints: number;
