@@ -1,19 +1,39 @@
 ```mermaid
 sequenceDiagram
-actor Gamer (Browser)
-participant Frontend
-participant Backend
-Gamer (Browser)->>Frontend: GET request (URL)
-activate Frontend
-Frontend->>Gamer (Browser): HTML, CSS, JavaScript Files
-deactivate Frontend
-activate Backend
-Gamer (Browser)->>Backend: API State Call
-Backend->> Gamer (Browser): State
-deactivate Backend
-Gamer (Browser)->>Backend: API Call
-activate Backend
-Backend->>Gamer (Browser): Data
-deactivate Backend
-activate Frontend
+  actor User (web)
+  participant Frontend
+  participant Backend
+
+  User (web)->>Frontend: (HTTP GET) HTML"Lit"
+  activate Frontend
+  Frontend->>User (web): HTML
+  deactivate Frontend
+  User (web)->>Frontend: (HTTP GET) CSS"Lit"
+  activate Frontend
+  Frontend->>User (web): CSS
+  deactivate Frontend
+  User (web)->>Frontend: (HTTP GET) JavaScript"Lit"
+  activate Frontend
+  Frontend->>User (web): JavaScript
+  deactivate Frontend
+  User (web)->>Frontend: (HTTP GET) Images
+  activate Frontend
+  Frontend->>User (web): Images
+  deactivate Frontend
+
+
+
+  User (web)->>Backend: (HTTP GET) API state call
+  activate Backend
+
+  Backend->>User (web): Game state
+  deactivate Backend
+
+  User (web)->>Backend: (HTTP POST) API action call
+  activate Backend
+
+  Backend->>User (web): Game state (includes string that specifies images)
+  deactivate Backend
+
+
 ```
