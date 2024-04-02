@@ -1,11 +1,12 @@
 import { ActionReference, GameObjectReference, GameState } from "@shared/types";
 import { LitElement, TemplateResult, css, html, nothing } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, state } from "lit/decorators.js";
 import { getState, performAction } from "../services/routeService";
 
 @customElement("game-canvas")
 export class GameCanvas extends LitElement {
     private playerHP: number = 100;
+    @state() public speedrunMode: boolean = false;
 
     public static styles = css`
         /** Maken van nieuwe grid layout voor nieuwe custom layout **/
@@ -172,9 +173,17 @@ export class GameCanvas extends LitElement {
     private selectedActionButton?: ActionReference;
     private selectedGameObjectButtons: Set<GameObjectReference> = new Set<GameObjectReference>();
 
+    private typewriterTimeouts: NodeJS.Timeout[] = [];
+
     // Functie die wordt aangeroepen wanneer het component met het DOM verbindt.
     public connectedCallback(): void {
         super.connectedCallback();
+
+        // Retrieve the speedrun mode state from browser storage
+        const savedSpeedrunMode: string | null = localStorage.getItem("speedrunMode");
+        if (savedSpeedrunMode !== null) {
+            this.speedrunMode = JSON.parse(savedSpeedrunMode);
+        }
 
         void this.refreshState(); // Asynchroon de huidige spelstaat verversen.
     }
@@ -202,6 +211,7 @@ export class GameCanvas extends LitElement {
 
         // Als er tekst is, gebruik de typemachine functie om het te tonen.
         if (state.text) {
+            this.typewriterTimeouts.forEach(clearTimeout);
             this.typewriter(state.text);
         }
         this.requestUpdate(); // Verzoek om de component te herrenderen.
@@ -252,18 +262,42 @@ export class GameCanvas extends LitElement {
         this.requestUpdate(); // Verzoek om de component te herrenderen.
     }
 
+    public toggleSpeedrunMode(): void {
+        this.speedrunMode = !this.speedrunMode;
+        this.dispatchEvent(
+            new CustomEvent("speedrun-mode-toggled", {
+                detail: { speedrunMode: this.speedrunMode },
+                bubbles: true,
+                composed: true,
+            })
+        );
+    }
+
+    public isSpeedrunModeOn(): boolean {
+        return this.speedrunMode;
+    }
+
     // Typemachine functie om tekst te animeren.
-    private typewriter(text: string[], index: number = 0, charIndex: number = 0, speed: number = 20): void {
+    private typewriter(
+        text: string[],
+        index: number = 0,
+        charIndex: number = 0,
+        speed: number = this.speedrunMode ? 1 : 20
+    ): void {
         if (index < text.length) {
             const line: string = text[index];
             if (charIndex < line.length) {
                 // Toon tekst één karakter per keer.
-                this.contentText = [...text.slice(0, index), line.substr(0, charIndex + 1)];
+                this.contentText = [...text.slice(0, index), line.slice(0, charIndex + 1)];
                 this.requestUpdate();
-                setTimeout(() => this.typewriter(text, index, charIndex + 1, speed), speed);
+                this.typewriterTimeouts.push(
+                    setTimeout(() => this.typewriter(text, index, charIndex + 1, speed), speed)
+                );
             } else {
                 // Ga naar de volgende regel als de huidige voltooid is.
-                setTimeout(() => this.typewriter(text, index + 1, 0, speed), speed);
+                this.typewriterTimeouts.push(
+                    setTimeout(() => this.typewriter(text, index + 1, 0, speed), speed)
+                );
             }
         }
     }

@@ -98,7 +98,7 @@ export function createNewPlayerSession(): PlayerSession {
         image: "",
 
         //Inventory session
-        inventory: [],
+        inventory: ["ShadowbeakTorch"],
         equipment: [],
         gold: 0,
         torchesGathered: ["rooms/tunnel-wall.png"],
