@@ -425,6 +425,7 @@ export class AlexandraCharacter extends Character implements Examine {
                     [
                         "Alexandra: I mean kind of, they just believe these thing really quickly but that doesn't make them necessarily stupid.",
                     ],
+                    [playerSession.image, alexandraImage],
                     [new TalkChoiceAction(13, "That's true"), new TalkChoiceAction(8, "Alright thanks")]
                 );
             } else if (_choiceId === 8) {
@@ -441,6 +442,7 @@ export class AlexandraCharacter extends Character implements Examine {
                         "These gods are the creating of good and bad, there are also gods that are neutral.",
                         "But I don't really believe in the gods so you should ask someone here about it more if you are interested.",
                     ],
+                    [playerSession.image, alexandraImage],
                     [
                         new TalkChoiceAction(11, "Let's ask him"),
                         new TalkChoiceAction(12, "I'm not THAT interested"),
@@ -482,6 +484,7 @@ export class AlexandraCharacter extends Character implements Examine {
                     "Alexandra: Just so that you know, I don't believe in any of the 9 gods there are.",
                     "I just believe in what is happening at the moment and what's going to happen with the actions I take.",
                 ],
+                [playerSession.image, alexandraImage],
                 [
                     new TalkChoiceAction(1, "Why don't you believe in the gods?"),
                     new TalkChoiceAction(2, "I don't believe in the gods"),
