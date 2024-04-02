@@ -6,6 +6,7 @@ import { Examine, ExamineActionAlias } from "../base/actions/ExamineAction";
 import { TalkActionAlias, TalkChoiceAction } from "../base/actions/TalkAction";
 import { Character } from "../base/gameObjects/Character";
 import { getPlayerSession } from "../instances";
+import { RingItemAlias } from "../items/RingItem";
 import { ChurchTorchAlias } from "../items/ThroneRoomTorchItem";
 import { PlayerSession } from "../types";
 
@@ -37,6 +38,51 @@ export class MarkCharacter extends Character implements Examine {
         const playerSession: PlayerSession = getPlayerSession();
         const markImage: string = "characters/Mark.png";
 
+        if (!playerSession.inventory.includes(RingItemAlias)) {
+            if (_choiceId === 1) {
+                return new TalkAndImageActionResult(
+                    this,
+                    ["Mark: Hi, how can I help you?"],
+                    [playerSession.image, markImage],
+                    [new TalkChoiceAction(3, "I would like to pray."), new TalkChoiceAction(99, "Bye!")]
+                );
+            } else if (_choiceId === 3) {
+                playerSession.blessing = true;
+                return new TalkAndImageActionResult(
+                    this,
+                    [
+                        "Lets pray together",
+                        "*While praying you feel that you gain the blessing from the god Pelor*",
+                        "Thank you for praying with me for our god. Can I help you with anything else?",
+                    ],
+                    [playerSession.image, markImage],
+                    [new TalkChoiceAction(4, "Oh, hi Mark"), new TalkChoiceAction(99, "Bye!")]
+                );
+            } else if (_choiceId === 4) {
+                return new TalkAndImageActionResult(
+                    this,
+                    ["Mark: Hi, how can I help you?"],
+                    [playerSession.image, markImage],
+                    [new TalkChoiceAction(99, "Bye!")]
+                );
+            } else if (_choiceId === 99) {
+                return new TextActionResult(["Mark: Bye! good luck on your adventure."]);
+            }
+            return new TalkAndImageActionResult(
+                this,
+                [
+                    "Mark: Hello, I'm Mark and I'm the priest of Wolburg.",
+                    "We follow the god of the sun and healing, Pelor.",
+                    "Would you like to pray to our god?",
+                ],
+                [playerSession.image, markImage],
+                [
+                    new TalkChoiceAction(1, "Oh, hi Mark"),
+                    new TalkChoiceAction(3, "I would like to pray"),
+                    new TalkChoiceAction(99, "Bye!"),
+                ]
+            );
+        }
         if (playerSession.shownRing === false && playerSession.shownRingBadEnding === false) {
             if (_choiceId === 1) {
                 return new TalkAndImageActionResult(
