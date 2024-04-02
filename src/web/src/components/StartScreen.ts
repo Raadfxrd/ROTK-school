@@ -70,6 +70,44 @@ export class StartScreen extends LitElement {
             bottom: 20px;
         }
 
+        .speedrun-enabled {
+            background-color: #1a882c;
+            border: none;
+            color: white;
+            padding: var(--button-padding);
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            border-radius: var(--button-radius);
+            cursor: vertical-text(--button-cursor);
+        }
+
+        .speedrun-enabled:hover {
+            background-color: #0e6012;
+        }
+
+        .speedrun-disabled {
+            background-color: #9b2c24;
+            border: none;
+            color: white;
+            padding: var(--button-padding);
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            border-radius: var(--button-radius);
+            cursor: vertical-text(--button-cursor);
+        }
+
+        .speedrun-disabled:hover {
+            background-color: #631818;
+        }
+
         .made-by {
             overflow: hidden;
             content: "";
@@ -235,10 +273,20 @@ export class StartScreen extends LitElement {
 
     @state() private typewriterLines: string[] = [];
     @state() private isTyping: boolean = false;
+    @state() private notification: TemplateResult | null = null;
 
     private showHowToPlay: boolean = false;
     private instructions: string[] = [];
     private speedrunMode: boolean = false;
+
+    public constructor() {
+        super();
+        // Retrieve speedrun mode state from local storage
+        const savedSpeedrunMode: string | null = localStorage.getItem("speedrunMode");
+        if (savedSpeedrunMode !== null) {
+            this.speedrunMode = JSON.parse(savedSpeedrunMode);
+        }
+    }
 
     // Lifecycle method for handling property changes
     protected updated(changedProperties: PropertyValues): void {
@@ -251,8 +299,6 @@ export class StartScreen extends LitElement {
             }
         }
     }
-
-    @state() private notification: TemplateResult | null = null;
 
     public toggleSpeedrunMode(): void {
         // Toggle the speedrun mode
@@ -270,14 +316,19 @@ export class StartScreen extends LitElement {
             })
         );
 
-        // Create notification element
+        // Update the notification message based on the speedrun mode state
+        const notificationMessage: string = this.speedrunMode
+            ? "Speedrun mode turned on!"
+            : "Speedrun mode turned off!";
+
+        // Create notification element with updated message and style
         this.notification = html`
             <div
                 class="notification"
                 style="position: fixed; bottom: 20px; right: 20px; padding: 10px; border-radius: 5px;
-            background-color: ${this.speedrunMode ? "#7f68c1" : "#ff6347"}; color: #fff;"
+        background-color: ${this.speedrunMode ? "#7f68c1" : "#ff6347"}; color: #fff;"
             >
-                ${this.speedrunMode ? "Speedrun mode turned on!" : "Speedrun mode turned off!"}
+                ${notificationMessage}
             </div>
         `;
 
@@ -362,13 +413,17 @@ export class StartScreen extends LitElement {
         `;
     }
 
-    private renderButtons(): TemplateResult {
+    protected renderButtons(): TemplateResult {
         return html`
             <div class="start-buttons">
                 <a @click=${this.loadGame} class="button">Load last game</a>
                 ${!this.showHowToPlay ? html`<a @click=${this.howToPlay} class="button">How to play</a>` : ""}
-                 <a @click="${this.toggleSpeedrunMode}" class="button">Toggle Speedrun Mode</a> 
-            </div>
+                <a
+                    @click="${this.toggleSpeedrunMode}"
+                    class="button ${this.speedrunMode ? "speedrun-enabled" : "speedrun-disabled"}"
+                >
+                    ${this.speedrunMode ? "Disable Speedrun Mode" : "Enable Speedrun Mode"}
+                </a>
             </div>
         `;
     }
