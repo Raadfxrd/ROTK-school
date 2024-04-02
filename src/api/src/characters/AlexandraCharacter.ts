@@ -496,11 +496,37 @@ export class AlexandraCharacter extends Character implements Examine {
         }
 
         if (playerSession.currentRoom === KarasValeTownSquareRoomAlias) {
+            if (_choiceId === 1) {
+                return new TalkAndImageActionResult(
+                    this,
+                    [
+                        "Alexandra: We should ask around and see if anybody in this town knows something of the bandits",
+                    ],
+                    [playerSession.image, alexandraImage],
+                    [
+                        new TalkChoiceAction(3, "Good idea"),
+                        new TalkChoiceAction(4, "I'd rather press on to the LowLands"),
+                    ]
+                );
+            } else if (_choiceId === 2) {
+                return new TextActionResult(["Alexandra: To each their own."]);
+            } else if (_choiceId === 3) {
+                return new TextActionResult(["Alexandra: Let's ask that old man over there."]);
+            } else if (_choiceId === 4) {
+                return new TextActionResult(["Alexandra: Sounds good."]);
+            } else if (_choiceId === 99) {
+                return new TextActionResult([""]);
+            }
+
             return new TalkAndImageActionResult(
                 this,
                 ["Alexandra: What a nice town."],
                 [playerSession.image, alexandraImage],
-                [new TalkChoiceAction(1, "")]
+                [
+                    new TalkChoiceAction(1, "What do you think we should do?"),
+                    new TalkChoiceAction(2, "I prefer the capital"),
+                    new TalkChoiceAction(99, "Bye!"),
+                ]
             );
         }
         return undefined;

@@ -45,7 +45,7 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "Ah, Aurelius must have told you of my existence.",
+                    "Kara: Ah, Aurelius must have told you of my existence.",
                     "Very well, I know of your cause and shall help you.",
                     "But before I give you what you need I will judge you myself.",
                 ],
@@ -59,7 +59,7 @@ export class KaraCharacter extends Character implements Examine {
         if (choiceId === 2) {
             return new TalkActionResult(
                 this,
-                ["Many do, but i deem very few worthy enough to receive it."],
+                ["Kara: Many do, but i deem very few worthy enough to receive it."],
                 [new TalkChoiceAction(3, "I am ready for your challenge.")]
             );
         }
@@ -68,7 +68,7 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "You will answer my riddles.",
+                    "Kara: You will answer my riddles.",
                     "If your mind is capable enough i shall share with you what i know of the whereabouts of the princess.",
                 ],
                 [new TalkChoiceAction(this.finalRiddlesArray[0], "Very well.")]
@@ -78,7 +78,7 @@ export class KaraCharacter extends Character implements Examine {
         if (choiceId === 4) {
             return new TalkActionResult(
                 this,
-                ["Word spreads quick and I have ears and eyes in many places."],
+                ["Kara: Word spreads quick and I have ears and eyes in many places."],
                 [new TalkChoiceAction(this.finalRiddlesArray[0], "Very well.")]
             );
         }
@@ -89,7 +89,7 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "In Spring I am gay in handsome array in summer more clothing I wear when colder it grows.",
+                    "Kara: In Spring I am gay in handsome array in summer more clothing I wear when colder it grows.",
                     "I fling off my clothes and in winter quite naked appear.",
                     "What am I.",
                 ],
@@ -107,7 +107,7 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "Some try to hide, some try to cheat, but time will show, we always will meet.",
+                    "Kara: Some try to hide, some try to cheat, but time will show, we always will meet.",
                     "Try as you might to guess my name, I promise you'll know when you I do claim",
                 ],
                 [
@@ -124,7 +124,7 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "As small as your thumb, I am light in the air.",
+                    "Kara: As small as your thumb, I am light in the air.",
                     "You may hear me before you see me, but trust that I'm there",
                 ],
                 [
@@ -141,7 +141,7 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "Never resting, never still, moving silently from hill to hill.",
+                    "Kara: Never resting, never still, moving silently from hill to hill.",
                     "it does not walk, run, or trot; all is cool where it is not.",
                 ],
                 [
@@ -158,7 +158,7 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "What can bring back the dead, make you cry make you laugh, make you young.",
+                    "Kara: What can bring back the dead, make you cry make you laugh, make you young.",
                     "Is born in an instant, yet lasts a lifetime.",
                 ],
                 [
@@ -175,7 +175,7 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "What can run but never walks. Has a mouth but never talks",
+                    "Kara: What can run but never walks. Has a mouth but never talks",
                     "Has a head but never weeps. Has a bed but never sleeps.",
                 ],
                 [
@@ -192,7 +192,7 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "This thing all things devours: birds, beasts, trees, flowers.",
+                    "Kara: This thing all things devours: birds, beasts, trees, flowers.",
                     "Gnaws iron, bites steel, grinds hard stones to meal.",
                     "Slays kings, ruins towns and beats high mountains down",
                 ],
@@ -209,7 +209,10 @@ export class KaraCharacter extends Character implements Examine {
             this.finalRiddlesArray.splice(index, 1);
             return new TalkActionResult(
                 this,
-                ["At night they come without being fetched.", "At night they are lost without being stolen"],
+                [
+                    "Kara: At night they come without being fetched.",
+                    "At night they are lost without being stolen",
+                ],
                 [
                     new TalkChoiceAction(50, "The sun"),
                     new TalkChoiceAction(50, "The moon"),
@@ -223,7 +226,7 @@ export class KaraCharacter extends Character implements Examine {
             this.finalRiddlesArray.splice(index, 1);
             return new TalkActionResult(
                 this,
-                ["I create my lair with earthen string, and dispatch my prey with a biting sting"],
+                ["Kara: I create my lair with earthen string, and dispatch my prey with a biting sting"],
                 [
                     new TalkChoiceAction(50, "A snake"),
                     new TalkChoiceAction(50, "A wasp"),
@@ -238,7 +241,7 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "I'm alive, but without breath.",
+                    "Kara: I'm alive, but without breath.",
                     "I'm as cold in life, as in death",
                     "I'm never thirsty, though I always drink",
                 ],
@@ -256,7 +259,7 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "What has roots that no one sees. Grows taller than trees.",
+                    "Kara: What has roots that no one sees. Grows taller than trees.",
                     "Up, up, up it goes, and yet never grows",
                 ],
                 [
@@ -273,7 +276,7 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "What is always old and sometimes new. Never sad sometimes blue",
+                    "Kara: What is always old and sometimes new. Never sad sometimes blue",
                     "Never empty sometimes full. Never pushes always pulls.",
                 ],
                 [
@@ -286,13 +289,17 @@ export class KaraCharacter extends Character implements Examine {
 
         if (choiceId === 80) {
             if (getPlayerSession().correctAnswers.filter((x) => x === "correct-answer").length >= 3) {
-                return new TalkActionResult(this, ["Interesting"], [new TalkChoiceAction(81, "What is it?")]);
+                return new TalkActionResult(
+                    this,
+                    ["Kara: Interesting"],
+                    [new TalkChoiceAction(81, "What is it?")]
+                );
             } else if (getPlayerSession().correctAnswers.filter((x) => x === "correct-answer").length >= 2) {
-                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(82, "Alright")]);
+                return new TalkActionResult(this, ["Kara: Enough"], [new TalkChoiceAction(82, "Alright")]);
             } else if (getPlayerSession().correctAnswers.filter((x) => x === "correct-answer").length >= 1) {
-                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(83, "Alright")]);
+                return new TalkActionResult(this, ["Kara: Enough"], [new TalkChoiceAction(83, "Alright")]);
             } else if (getPlayerSession().correctAnswers.filter((x) => x === "correct-answer").length >= 0) {
-                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(84, "Alright")]);
+                return new TalkActionResult(this, ["Kara: Enough"], [new TalkChoiceAction(84, "Alright")]);
             }
         }
 
@@ -302,14 +309,11 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "You have succeeded in answering my riddles human, a most impressive feat.",
+                    "Kara: You have succeeded in answering my riddles human, a most impressive feat.",
                     "Here, take this as a reward for your wit and tenacity.",
                     "*A blue torch floats through the air and lands in front of you*",
                 ],
-                [
-                    new TalkChoiceAction(91, "Where can i find the other medallion"),
-                    new TalkChoiceAction(100, "Thank you"),
-                ]
+                [new TalkChoiceAction(91, "Where must I go next?"), new TalkChoiceAction(100, "Thank you")]
             );
         }
 
@@ -319,7 +323,7 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "You managed to answer most of my riddles human.",
+                    "Kara: You managed to answer most of my riddles human.",
                     "I grant you this item as a reward, where and how to use it shall be up to you.",
                     "*A blue torch floats through the air and lands in front of you*",
                 ],
@@ -332,7 +336,7 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "You only managed to correctly answer one of my riddles. A dissapointing score to be sure",
+                    "Kara: You only managed to correctly answer one of my riddles. A dissapointing score to be sure",
                     "Still I grant you this item, you will have to figure out when you need to use it yourself",
                     "*A blue torch floats through the air and lands in front of you*",
                 ],
@@ -344,7 +348,7 @@ export class KaraCharacter extends Character implements Examine {
             return new TalkActionResult(
                 this,
                 [
-                    "You have failed to answer my riddles correctly human, you do not meet my expectations.",
+                    "Kara: You have failed to answer my riddles correctly human, you do not meet my expectations.",
                     "If it is your wish to save the princess I can give you what you need, but at a price.",
                 ],
                 [new TalkChoiceAction(85, "What kind of price?")]
@@ -354,7 +358,9 @@ export class KaraCharacter extends Character implements Examine {
         if (choiceId === 85) {
             return new TalkActionResult(
                 this,
-                ["Either you pay with your life force, or your gold. I do like shiny things after all."],
+                [
+                    "Kara: Either you pay with your life force, or your gold. I do like shiny things after all.",
+                ],
                 [
                     new TalkChoiceAction(86, "I choose the gold"),
                     new TalkChoiceAction(87, "I choose my life force"),
@@ -370,9 +376,9 @@ export class KaraCharacter extends Character implements Examine {
                 return new TalkActionResult(
                     this,
                     [
-                        "Very well.",
+                        "Kara: Very well.",
                         "*A handfull of gold floats out of your pouch and moves towards the crow.",
-                        "I grant you this torch.",
+                        "Kara: I grant you this torch.",
                         "*A blue torch floats through the air and lands in front of you*",
                     ],
                     [new TalkChoiceAction(100, "Thank you")]
@@ -381,7 +387,7 @@ export class KaraCharacter extends Character implements Examine {
                 return new TalkActionResult(
                     this,
                     [
-                        "It seems you do not have the funds you need. You will give me some of your life force then?",
+                        "Kara: It seems you do not have the funds you need. You will give me some of your life force then?",
                     ],
                     [new TalkChoiceAction(87, "Yes, take it."), new TalkChoiceAction(88, "I will not, die!")]
                 );
@@ -436,7 +442,9 @@ export class KaraCharacter extends Character implements Examine {
         if (choiceId === 91) {
             return new TalkActionResult(
                 this,
-                ["You must seek out Volo's village, there you will find the other half of the medallion"],
+                [
+                    "Kara: You must seek out Volo's village, there you will find the means to continue your quest",
+                ],
                 [new TalkChoiceAction(100, "Thank you")]
             );
         }
@@ -446,11 +454,11 @@ export class KaraCharacter extends Character implements Examine {
             getPlayerSession().correctAnswers.push("correct-answer");
 
             if (getPlayerSession().riddlesAnswered.filter((x) => x === "riddle-answered").length >= 3) {
-                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(80, "Alright")]);
+                return new TalkActionResult(this, ["Kara: Enough"], [new TalkChoiceAction(80, "Alright")]);
             }
             return new TalkActionResult(
                 this,
-                ["You are correct human, another"],
+                ["Kara: You are correct human, another"],
                 [new TalkChoiceAction(this.finalRiddlesArray[0], "Alright")]
             );
         }
@@ -460,12 +468,12 @@ export class KaraCharacter extends Character implements Examine {
             getPlayerSession().wrongAnswers.push("wrong-answer");
 
             if (getPlayerSession().riddlesAnswered.filter((x) => x === "riddle-answered").length >= 3) {
-                return new TalkActionResult(this, ["Enough"], [new TalkChoiceAction(80, "Alright")]);
+                return new TalkActionResult(this, ["Kara: Enough"], [new TalkChoiceAction(80, "Alright")]);
             }
 
             return new TalkActionResult(
                 this,
-                ["Incorrect, another"],
+                ["Kara: Incorrect, another"],
                 [new TalkChoiceAction(this.finalRiddlesArray[0], "Very well")]
             );
         }
@@ -475,7 +483,7 @@ export class KaraCharacter extends Character implements Examine {
         }
         return new TalkActionResult(
             this,
-            ["For what purpose have you summoned me human?"],
+            ["Kara: For what purpose have you summoned me human?"],
             [
                 new TalkChoiceAction(1, "I am on a mission of great importance."),
 
