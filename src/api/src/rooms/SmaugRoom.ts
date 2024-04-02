@@ -28,6 +28,8 @@ export class SmaugRoom extends Room implements Examine {
         return "Smaug Chamber";
     }
     public images(): string[] {
+        const playerSession: PlayerSession = getPlayerSession();
+        playerSession.image = image;
         return [image];
     }
     public objects(): GameObject[] {
