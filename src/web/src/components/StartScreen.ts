@@ -49,7 +49,7 @@ export class StartScreen extends LitElement {
             display: inline-block;
             margin-bottom: 20px;
             max-height: 1.5rem;
-            width: calc(30% - 10px);
+            width: 45%;
         }
 
         .button:hover,
@@ -233,11 +233,12 @@ export class StartScreen extends LitElement {
         }
     `;
 
-    @state() private typewriterLines: string[] = []; // Bevat regels voor het typemachine-effect
+    @state() private typewriterLines: string[] = [];
     @state() private isTyping: boolean = false;
 
     private showHowToPlay: boolean = false;
     private instructions: string[] = [];
+    private speedrunMode: boolean = false;
 
     // Lifecycle method for handling property changes
     protected updated(changedProperties: PropertyValues): void {
@@ -251,6 +252,42 @@ export class StartScreen extends LitElement {
         }
     }
 
+    @state() private notification: TemplateResult | null = null;
+
+    public toggleSpeedrunMode(): void {
+        // Toggle the speedrun mode
+        this.speedrunMode = !this.speedrunMode;
+
+        // Save the speedrun mode state into browser storage
+        localStorage.setItem("speedrunMode", JSON.stringify(this.speedrunMode));
+
+        // Dispatch a custom event with the speedrun mode state
+        this.dispatchEvent(
+            new CustomEvent("speedrun-mode-toggled", {
+                detail: { speedrunMode: this.speedrunMode },
+                bubbles: true,
+                composed: true,
+            })
+        );
+
+        // Create notification element
+        this.notification = html`
+            <div
+                class="notification"
+                style="position: fixed; bottom: 20px; right: 20px; padding: 10px; border-radius: 5px;
+            background-color: ${this.speedrunMode ? "#7f68c1" : "#ff6347"}; color: #fff;"
+            >
+                ${this.speedrunMode ? "Speedrun mode turned on!" : "Speedrun mode turned off!"}
+            </div>
+        `;
+
+        // Remove notification after a short delay
+        setTimeout(() => {
+            this.notification = null;
+            this.requestUpdate();
+        }, 1000); // Adjust delay duration as needed
+    }
+
     private loadGame(): void {
         console.log("Game started!");
         const gameCanvas: GameCanvas = document.createElement("game-canvas") as GameCanvas;
@@ -262,14 +299,16 @@ export class StartScreen extends LitElement {
         text: string[],
         index: number = 0,
         charIndex: number = 0,
-        speed: number = 20
+        speed: number = this.speedrunMode ? 1 : 20
     ): Promise<void> {
         this.isTyping = true;
         while (index < text.length) {
             if (!this.isTyping) break;
             if (charIndex <= text[index].length) {
                 this.typewriterLines[index] = text[index].substring(0, charIndex);
-                this.requestUpdate("typewriterLines", [...this.typewriterLines]);
+                if (this.isConnected) {
+                    this.requestUpdate("typewriterLines", [...this.typewriterLines]);
+                }
                 await new Promise((resolve) => setTimeout(resolve, speed));
                 charIndex++;
             } else {
@@ -297,7 +336,9 @@ export class StartScreen extends LitElement {
                 this.isTyping = false;
             });
             this.isTyping = false;
-            this.requestUpdate();
+            if (this.isConnected) {
+                this.requestUpdate();
+            }
         }
     }
 
@@ -316,6 +357,7 @@ export class StartScreen extends LitElement {
             <div class="start">
                 ${this.showHowToPlay ? this.renderInstructionsSidebar() : this.renderButtons()}
                 <div class="made-by">${this.renderFooter()}</div>
+                ${this.notification}
             </div>
         `;
     }
@@ -325,6 +367,8 @@ export class StartScreen extends LitElement {
             <div class="start-buttons">
                 <a @click=${this.loadGame} class="button">Load last game</a>
                 ${!this.showHowToPlay ? html`<a @click=${this.howToPlay} class="button">How to play</a>` : ""}
+                 <a @click="${this.toggleSpeedrunMode}" class="button">Toggle Speedrun Mode</a> 
+            </div>
             </div>
         `;
     }
