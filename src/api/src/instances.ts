@@ -77,7 +77,7 @@ import { ShopTorch, ShopTorchAlias } from "./items/ShopTorchItem";
 export function createNewPlayerSession(): PlayerSession {
     return {
         //Room session
-        currentRoom: "intro-room",
+        currentRoom: "Volo's-Village",
         lastRoom: "",
         inCombat: false,
 

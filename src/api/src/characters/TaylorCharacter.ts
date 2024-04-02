@@ -113,4 +113,7 @@ export class Taylorcharacter extends Character implements Examine {
     public objectActions(): string[] {
         return [ExamineActionAlias, TalkActionAlias];
     }
+    public image(): string[] {
+        return [""];
+    }
 }
