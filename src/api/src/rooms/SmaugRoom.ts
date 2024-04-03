@@ -28,6 +28,8 @@ export class SmaugRoom extends Room implements Examine {
         return "Smaug Chamber";
     }
     public images(): string[] {
+        const playerSession: PlayerSession = getPlayerSession();
+        playerSession.image = image;
         return [image];
     }
     public objects(): GameObject[] {
@@ -52,7 +54,9 @@ export class SmaugRoom extends Room implements Examine {
             image = "rooms/princess.png";
             //setTimeout(iets, 2000);
 
-            return new TextActionResult(["You have slain Smaug and freed the princess!"]);
+            return new TextActionResult([
+                "You have slain Smaug and freed the princess! You have beaten the game.",
+            ]);
         }
         if (playerSession.healthPoints >= 1) {
             if (alias === "fightSmaug") {

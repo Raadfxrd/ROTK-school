@@ -29,8 +29,9 @@ export class GateWolburgRoom extends Room {
 
     public images(): string[] {
         const playerSession: PlayerSession = getPlayerSession();
-        playerSession.image = "rooms/gate-wolburg.png";
-        return ["rooms/gate-wolburg.png"];
+        const gateWolburg: string = "rooms/gate-wolburg.png";
+        playerSession.image = gateWolburg;
+        return [gateWolburg];
     }
 
     public actions(): Action[] {

@@ -1,13 +1,10 @@
 import { ActionReference, GameObjectReference, GameState } from "@shared/types";
 import { LitElement, TemplateResult, css, html, nothing } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, state } from "lit/decorators.js";
 import { getState, performAction } from "../services/routeService";
 
 @customElement("game-canvas")
 export class GameCanvas extends LitElement {
-    private playerHP: number = 100;
-    private smaugHP: number = 150;
-
     public static styles = css`
         /** Maken van nieuwe grid layout voor nieuwe custom layout **/
         .game {
@@ -140,8 +137,20 @@ export class GameCanvas extends LitElement {
             align-items: flex-end;
             justify-content: flex-end;
         }
+
         #healthbar {
             background-color: green;
+        }
+
+        .timer-box {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 2.5rem;
         }
 
         /** Animation keyframes voor ".action-buttons" **/
@@ -162,14 +171,22 @@ export class GameCanvas extends LitElement {
         }
     `;
 
-    // Optionele variabelen voor het opslaan van de huidige staat van de kamer.
+    @state() private timerSeconds: number = 0;
+    @state() private timerMilliseconds: number = 0;
+    @state() public speedrunMode: boolean = false;
+
+    private timerInterval: NodeJS.Timeout | undefined;
+    private timerId: number | null = null;
+    private playerHP: number = 100;
+    private smaugHP: number = 150;
+    private typewriterTimeouts: NodeJS.Timeout[] = [];
+
     private roomTitle?: string;
     private roomImages?: string[];
+
     private contentText?: string[];
     private actionButtons?: ActionReference[];
     private gameObjectButtons?: GameObjectReference[];
-
-    // Variabelen voor het opslaan van geselecteerde acties en game object knoppen.
     private selectedActionButton?: ActionReference;
     private selectedGameObjectButtons: Set<GameObjectReference> = new Set<GameObjectReference>();
 
@@ -177,7 +194,28 @@ export class GameCanvas extends LitElement {
     public connectedCallback(): void {
         super.connectedCallback();
 
+        const savedSpeedrunMode: string | null = localStorage.getItem("speedrunMode");
+
+        if (savedSpeedrunMode !== null) {
+            try {
+                this.speedrunMode = JSON.parse(savedSpeedrunMode);
+            } catch (error) {
+                console.error("Error parsing saved speedrun mode state:", error);
+            }
+        } else {
+            this.speedrunMode = false;
+        }
+
+        this.startTimer();
+
         void this.refreshState(); // Asynchroon de huidige spelstaat verversen.
+    }
+
+    // Lifecycle method for stopping the timer when the component is disconnected from the DOM
+    public disconnectedCallback(): void {
+        super.disconnectedCallback();
+        // Stop the timer when the component is disconnected from the DOM
+        this.stopTimer();
     }
 
     // Asynchrone functie om de huidige spelstaat te verversen.
@@ -204,6 +242,7 @@ export class GameCanvas extends LitElement {
 
         // Als er tekst is, gebruik de typemachine functie om het te tonen.
         if (state.text) {
+            this.typewriterTimeouts.forEach(clearTimeout);
             this.typewriter(state.text);
         }
         this.requestUpdate(); // Verzoek om de component te herrenderen.
@@ -254,18 +293,79 @@ export class GameCanvas extends LitElement {
         this.requestUpdate(); // Verzoek om de component te herrenderen.
     }
 
+    private startTimer(): void {
+        this.timerInterval = setInterval(() => {
+            this.timerMilliseconds += 10; // Increment milliseconds by 10
+            if (this.timerMilliseconds >= 1000) {
+                this.timerSeconds++; // Increment seconds when milliseconds reach 1000
+                this.timerMilliseconds = 0; // Reset milliseconds
+            }
+            this.requestUpdate(); // Update the UI
+        }, 10); // Update every millisecond
+    }
+
+    private stopTimer(): void {
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+        }
+
+        // Check if the timer is running and clear it if it is
+        if (this.timerId !== null) {
+            clearInterval(this.timerId);
+            this.timerId = null;
+            console.log("Timer stopped manually.");
+        }
+    }
+
+    private renderTimer(): TemplateResult | typeof nothing {
+        if (this.speedrunMode) {
+            const minutes: number = Math.floor(this.timerSeconds / 60);
+            const seconds: number = Math.floor(this.timerSeconds % 60);
+            const milliseconds: number = Math.floor(this.timerMilliseconds);
+            return html`${minutes}:${seconds < 10 ? "0" : ""}${seconds}.${milliseconds < 100
+                ? "0"
+                : ""}${milliseconds < 10 ? "0" : ""}${milliseconds}`;
+        } else {
+            return nothing; // Render nothing if speedrunMode is false
+        }
+    }
+
+    public toggleSpeedrunMode(): void {
+        this.speedrunMode = !this.speedrunMode;
+        this.dispatchEvent(
+            new CustomEvent("speedrun-mode-toggled", {
+                detail: { speedrunMode: this.speedrunMode },
+                bubbles: true,
+                composed: true,
+            })
+        );
+    }
+
+    public isSpeedrunModeOn(): boolean {
+        return this.speedrunMode;
+    }
+
     // Typemachine functie om tekst te animeren.
-    private typewriter(text: string[], index: number = 0, charIndex: number = 0, speed: number = 20): void {
+    private typewriter(
+        text: string[],
+        index: number = 0,
+        charIndex: number = 0,
+        speed: number = this.speedrunMode ? 1 : 20
+    ): void {
         if (index < text.length) {
             const line: string = text[index];
             if (charIndex < line.length) {
                 // Toon tekst één karakter per keer.
-                this.contentText = [...text.slice(0, index), line.substr(0, charIndex + 1)];
+                this.contentText = [...text.slice(0, index), line.slice(0, charIndex + 1)];
                 this.requestUpdate();
-                setTimeout(() => this.typewriter(text, index, charIndex + 1, speed), speed);
+                this.typewriterTimeouts.push(
+                    setTimeout(() => this.typewriter(text, index, charIndex + 1, speed), speed)
+                );
             } else {
                 // Ga naar de volgende regel als de huidige voltooid is.
-                setTimeout(() => this.typewriter(text, index + 1, 0, speed), speed);
+                this.typewriterTimeouts.push(
+                    setTimeout(() => this.typewriter(text, index + 1, 0, speed), speed)
+                );
             }
         }
     }
@@ -279,7 +379,10 @@ export class GameCanvas extends LitElement {
                 <!-- Toont de titel van de kamer -->
                 <div class="header">${this.renderHeader()}</div>
                 <!-- Toont afbeeldingen van de kamer -->
-                <div class="sidebar">${this.renderSidebar()}</div>
+                <div class="sidebar">
+                    ${this.renderSidebar()}
+                    <div class="timer-box">${this.renderTimer()}</div>
+                </div>
                 <!-- Toont de inhoudstekst van de kamer -->
                 <div class="buttons">${this.renderFooter()}</div>
                 <!-- Toont de actie- en objectknoppen -->
@@ -293,7 +396,6 @@ export class GameCanvas extends LitElement {
                             value=${this.smaugHP}
                         ></progress>
                     </div>
-                    <!-- Toont de speler zijn gezondheid -->
                 </div>
             </div>
         `;

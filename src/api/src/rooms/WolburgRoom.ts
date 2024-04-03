@@ -30,8 +30,9 @@ export class WolburgRoom extends Room {
 
     public images(): string[] {
         const playerSession: PlayerSession = getPlayerSession();
-        playerSession.image = "rooms/WolburgCity.png";
-        return ["rooms/WolburgCity.png"];
+        const Wolburg: string = "rooms/WolburgCity.png";
+        playerSession.image = Wolburg;
+        return [Wolburg];
     }
 
     public actions(): Action[] {
